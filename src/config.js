@@ -6,32 +6,32 @@ import grants from './grants'
 
 const config = {
   firebase_config: {
-    apiKey: 'AIzaSyBQAmNJ2DbRyw8PqdmNWlePYtMP0hUcjpY',
-    authDomain: 'react-most-wanted-3b1b2.firebaseapp.com',
-    databaseURL: 'https://react-most-wanted-3b1b2.firebaseio.com',
-    projectId: 'react-most-wanted-3b1b2',
-    storageBucket: 'react-most-wanted-3b1b2.appspot.com',
-    messagingSenderId: '258373383650'
+    apiKey: "AIzaSyDmxBiBBSM8_lmZniNyVXoLEu9fcX5Z904",
+    authDomain: "react-bolao-firebase.firebaseapp.com",
+    databaseURL: "https://react-bolao-firebase.firebaseio.com",
+    projectId: "react-bolao-firebase",
+    storageBucket: "react-bolao-firebase.appspot.com",
+    messagingSenderId: "513926736091"
   },
   firebase_config_dev: {
-    apiKey: 'AIzaSyB31cMH9nJnERC1WCWA7lQHnY08voLs-Z0',
-    authDomain: 'react-most-wanted-dev.firebaseapp.com',
-    databaseURL: 'https://react-most-wanted-dev.firebaseio.com',
-    projectId: 'react-most-wanted-dev',
-    storageBucket: 'react-most-wanted-dev.appspot.com',
-    messagingSenderId: '70650394824'
+    apiKey: "AIzaSyDmxBiBBSM8_lmZniNyVXoLEu9fcX5Z904",
+    authDomain: "react-bolao-firebase.firebaseapp.com",
+    databaseURL: "https://react-bolao-firebase.firebaseio.com",
+    projectId: "react-bolao-firebase",
+    storageBucket: "react-bolao-firebase.appspot.com",
+    messagingSenderId: "513926736091"
   },
   firebase_providers: [
-    'google.com',
-    'facebook.com',
-    'twitter.com',
-    'github.com',
-    'password',
-    'phone'
+    'google.com'
+    // 'facebook.com',
+    // 'twitter.com',
+    // 'github.com',
+    // 'password',
+    // 'phone'
   ],
   initial_state: {
-    theme: 'dark',
-    locale: 'en'
+    theme: 'light',
+    locale: 'br'
   },
   drawer_width: 256,
   locales,
