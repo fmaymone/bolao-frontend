@@ -19,6 +19,7 @@ const getMenuItems = (props) => {
   } = props
 
   const isAuthorised = auth.isAuthorised
+  //const isAuthorised = true
 
   const themeItems = allThemes.map((t) => {
     return {

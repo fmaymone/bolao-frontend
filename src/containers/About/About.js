@@ -6,6 +6,7 @@ import { Activity } from 'rmw-shell'
 import ReactMarkdown from 'react-markdown'
 import Scrollbar from 'rmw-shell/lib/components/Scrollbar/Scrollbar'
 import README from './README.md'
+import WorldCup from '../../world-cup'
 
 require('github-markdown-css')
 
@@ -25,6 +26,10 @@ class About extends Component {
     .then(text => {
       this.setState({text: text})
     })
+    console.log('World Cup ---------------------');
+    console.log(WorldCup);
+    console.log('World Cup ---------------------');
+    
   }
 
   render () {
@@ -33,14 +38,15 @@ class About extends Component {
     return (
       <Activity
         iconElementRight={
-          <FlatButton
-            style={{marginTop: 4}}
-            href='https://github.com/TarikHuber/react-most-wanted'
-            target='_blank'
-            rel='noopener'
-            secondary
-            icon={<GitHubIcon />}
-          />
+          // <FlatButton
+          //   style={{marginTop: 4}}
+          //   href='https://github.com/TarikHuber/react-most-wanted'
+          //   target='_blank'
+          //   rel='noopener'
+          //   secondary
+          //   icon={<GitHubIcon />}
+          // />
+          <div></div>
         }
         title={intl.formatMessage({id: 'about'})}>
 
