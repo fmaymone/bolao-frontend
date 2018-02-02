@@ -26,10 +26,10 @@ exports = module.exports = functions.auth.user().onCreate( event => {
 
   if(email){
     const mailOptions = {
-      from: '"Tarik Huber" <huber.tarik@gmail.com>',
+      from: '"Fernando Maymone" <fmaymone@gmail.com>',
       to: email,
-      subject: `Welcome to React Most Wanted!`,
-      text: `Hey ${displayName}!, Welcome to React Most Wanted. I hope you will enjoy the demo application.`
+      subject: `Bem-Vindo ao Bolão dos Bêbados!`,
+      text: `Fala ${displayName}!, Bem-Vindo ao Bolão dos Bêbados!. Esperamos que você curta a aplicação.`
     }
 
     promises.push(mailTransport.sendMail(mailOptions))
