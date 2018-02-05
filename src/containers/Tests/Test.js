@@ -28,6 +28,11 @@ class Test extends Component {
         bets: ''
      }
     
+     componentWillMount() {
+      console.log('------------------CONSOLE STATE---') 
+      console.log(this.props)
+      console.log('------------------CONSOLE STATE---') 
+     }
 
     handleButton = () => {
     
@@ -87,6 +92,10 @@ class Test extends Component {
 
 const mapStateToProps = (state) => {
   const { intl, dialogs } = state;
+
+  console.log('----------------------state---------------------')
+  console.log(state)
+  console.log('----------------------state---------------------')
 
   return {
     intl,

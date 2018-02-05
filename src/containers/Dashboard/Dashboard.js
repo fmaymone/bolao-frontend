@@ -151,14 +151,15 @@ class Dashboard extends Component {
     return (
       <Activity
         iconElementRight={
-          <FlatButton
-            style={{ marginTop: 4 }}
-            href='https://github.com/TarikHuber/react-most-wanted'
-            target='_blank'
-            rel='noopener'
-            secondary
-            icon={<GitHubIcon />}
-          />
+          <div></div>
+          // <FlatButton
+          //   style={{ marginTop: 4 }}
+          //   href='https://github.com/TarikHuber/react-most-wanted'
+          //   target='_blank'
+          //   rel='noopener'
+          //   secondary
+          //   icon={<GitHubIcon />}
+          // />
         }
         title={intl.formatMessage({ id: 'dashboard' })} >
 

@@ -6,6 +6,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/es/storage' // default: localStorage if web, AsyncStorage if react-native
 import { responsiveStoreEnhancer } from 'redux-responsive'
 import initState from './init'
+import worldCupReducer from './worldcupreducer'
 
 export default function configureStore() {
   let store
@@ -38,7 +39,7 @@ export default function configureStore() {
 
   const reducer = persistReducer(persistorConfig, reducers)
 
-  store = createStore(reducer, initState, enhancer)
+  store = createStore(reducer, initState, enhancer, worldCupReducer)
 
   try {
     persistStore(store)
