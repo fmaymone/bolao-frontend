@@ -14,6 +14,8 @@ const AsyncTasks = MyLoadable({ loader: () => import('./containers/Tasks/Tasks')
 const AsyncCompany = MyLoadable({ loader: () => import('./containers/Companies/Company') });
 const AsyncCompanies = MyLoadable({ loader: () => import('./containers/Companies/Companies') }, [AsyncCompany]);
 const AsyncTest = MyLoadable({ loader: () => import('./containers/Tests/Test') });
+const AsyncPool = MyLoadable({ loader: () => import('./containers/Pools/Pool') });
+const AsyncPools = MyLoadable({ loader: () => import('./containers/Pools/Pools') }, [AsyncPool]);
 
 
 const Routes = [
@@ -29,6 +31,9 @@ const Routes = [
     <RestrictedRoute type='private' path="/document" exact component={AsyncDocument} />,
     <RestrictedRoute type='private' path="/collection" exact component={AsyncCollection} />,
     <RestrictedRoute type='private' path="/test" exact component={AsyncTest} />,
+    <RestrictedRoute type='private' path="/pools" exact component={AsyncPools} />,
+    <RestrictedRoute type='private' path="/pools/edit/:uid" exact component={AsyncPool} />,
+    <RestrictedRoute type='private' path="/pools/create" exact component={AsyncPool} />
 ]
 
 export default Routes;

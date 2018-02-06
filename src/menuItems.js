@@ -52,12 +52,12 @@ const getMenuItems = (props) => {
   return [
     {
       value: '/dashboard',
-      visible: isGranted('administration'),
+      visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'dashboard' }),
       leftIcon: <FontIcon className='material-icons' >dashboard</FontIcon>
     },
     {
-      visible: isGranted('administration'),
+      visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'chats' }),
       primaryTogglesNestedList: true,
       leftIcon: <FontIcon className='material-icons' >chats</FontIcon>,
@@ -84,18 +84,18 @@ const getMenuItems = (props) => {
     },
     {
       value: '/companies',
-      visible: isGranted('administration'),
+      visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'companies' }),
       leftIcon: <FontIcon className='material-icons' >business</FontIcon>
     },
     {
       value: '/tasks',
-      visible: isGranted('administration'),
+      visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'tasks' }),
       leftIcon: <FontIcon className='material-icons' >list</FontIcon>
     },
     {
-      visible: isGranted('administration'),
+      visible: isAuthorised,
       primaryTogglesNestedList: true,
       primaryText: intl.formatMessage({ id: 'firestore' }),
       leftIcon: <FontIcon className='material-icons' >flash_on</FontIcon>,
@@ -119,19 +119,19 @@ const getMenuItems = (props) => {
       leftIcon: <FontIcon className='material-icons' >info_outline</FontIcon>
     },
     {
-      visible: isGranted('administration'), // In prod: isGranted('administration'),
+      visible: isAuthorised, // In prod: isGranted('administration'),
       primaryTogglesNestedList: true,
       primaryText: intl.formatMessage({ id: 'administration' }),
       leftIcon: <FontIcon className='material-icons' >security</FontIcon>,
       nestedItems: [
           {
             value: '/users',
-            visible: isGranted('read_users'), // In prod: isGranted('read_users'),
+            visible: isAuthorised,  // In prod: isGranted('read_users'),
             primaryText: intl.formatMessage({ id: 'users' }),
             leftIcon: <FontIcon className='material-icons' >group</FontIcon>
           },
           {
-            value: '/roles',
+            visible: isAuthorised, 
             visible: isGranted('read_roles'),
             primaryText: intl.formatMessage({ id: 'roles' }),
             leftIcon: <FontIcon className='material-icons' >account_box</FontIcon>

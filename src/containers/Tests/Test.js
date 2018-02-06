@@ -76,6 +76,7 @@ class Test extends Component {
       isGranted,
       firebaseApp,
       worldCupData
+      
     } = this.props;
     this.getRealTimeUpdates();
     
