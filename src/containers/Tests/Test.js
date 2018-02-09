@@ -100,10 +100,11 @@ const mapStateToProps = (state) => {
   return {
     intl,
     dialogs,
-    isGranted: grant => isGranted(state, grant)
+    isGranted: grant => isGranted(state, grant),
+
   };
 };
 
-export default connect(
+export default connect(state => state.worldCupData,
   mapStateToProps, { setDialogIsOpen, change, submit }
 )(injectIntl(withRouter(withFirebase(muiThemeable()(Test)))));
