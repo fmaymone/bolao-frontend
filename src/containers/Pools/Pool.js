@@ -6,7 +6,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import { Activity } from 'rmw-shell'
 import { ResponsiveMenu } from 'material-ui-responsive-menu';
 import { setDialogIsOpen } from 'rmw-shell/lib/store/dialogs/actions';
-import CompanyForm from '../../components/Forms/CompanyForm';
+import PoolForm from '../../components/Forms/PoolForm';
 import { withRouter } from 'react-router-dom';
 import firebase from 'firebase';
 import FontIcon from 'material-ui/FontIcon';
@@ -22,15 +22,15 @@ const path = '/pools/';
 const form_name = 'pool';
 
 
-class Company extends Component {
+class Pool extends Component {
 
   validate = (values) => {
     const { intl } = this.props;
     const errors = {}
 
     errors.name = !values.name ? intl.formatMessage({ id: 'error_required_field' }) : '';
-    errors.full_name = !values.full_name ? intl.formatMessage({ id: 'error_required_field' }) : '';
-    errors.vat = !values.vat ? intl.formatMessage({ id: 'error_required_field' }) : '';
+   // errors.full_name = !values.full_name ? intl.formatMessage({ id: 'error_required_field' }) : '';
+   // errors.vat = !values.vat ? intl.formatMessage({ id: 'error_required_field' }) : '';
 
     return errors
   }
@@ -46,7 +46,7 @@ class Company extends Component {
   handleClose = () => {
     const { setDialogIsOpen } = this.props;
 
-    setDialogIsOpen('delete_company', false);
+    setDialogIsOpen('delete_pool', false);
 
   }
 
@@ -100,14 +100,14 @@ class Company extends Component {
         text: intl.formatMessage({ id: 'save' }),
         icon: <FontIcon className="material-icons" color={muiTheme.palette.canvasColor}>save</FontIcon>,
         tooltip: intl.formatMessage({ id: 'save' }),
-        onClick: () => { submit('company') }
+        onClick: () => { submit('pool') }
       },
       {
         hidden: uid === undefined || !isGranted(`delete_${form_name}`),
         text: intl.formatMessage({ id: 'delete' }),
         icon: <FontIcon className="material-icons" color={muiTheme.palette.canvasColor}>delete</FontIcon>,
         tooltip: intl.formatMessage({ id: 'delete' }),
-        onClick: () => { setDialogIsOpen('delete_company', true); }
+        onClick: () => { setDialogIsOpen('delete_pool', true); }
       }
     ]
 
@@ -124,28 +124,28 @@ class Company extends Component {
         }
 
         onBackClick={() => { history.goBack() }}
-        title={intl.formatMessage({ id: match.params.uid ? 'edit_company' : 'create_company' })}>
+        title={intl.formatMessage({ id: match.params.uid ? 'edit_pool' : 'create_pool' })}>
 
         <div style={{ margin: 15, display: 'flex' }}>
 
           <FireForm
             firebaseApp={firebaseApp}
-            name={'company'}
+            name={'pool'}
             path={`${path}`}
             validate={this.validate}
             onSubmitSuccess={(values) => { history.push('/pools'); }}
             onDelete={(values) => { history.push('/pools'); }}
             uid={match.params.uid}>
-            <CompanyForm />
+            <PoolForm />
           </FireForm>
         </div>
         <Dialog
-          title={intl.formatMessage({ id: 'delete_company_title' })}
+          title={intl.formatMessage({ id: 'delete_pool_title' })}
           actions={actions}
           modal={false}
-          open={dialogs.delete_company === true}
+          open={dialogs.delete_pool === true}
           onRequestClose={this.handleClose}>
-          {intl.formatMessage({ id: 'delete_company_message' })}
+          {intl.formatMessage({ id: 'delete_pool_message' })}
         </Dialog>
 
       </Activity>
@@ -153,7 +153,7 @@ class Company extends Component {
   }
 }
 
-Company.propTypes = {
+Pool.propTypes = {
   history: PropTypes.object,
   intl: intlShape.isRequired,
   setDialogIsOpen: PropTypes.func.isRequired,
@@ -177,4 +177,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps, { setDialogIsOpen, change, submit }
-)(injectIntl(withRouter(withFirebase(muiThemeable()(Company)))));
+)(injectIntl(withRouter(withFirebase(muiThemeable()(Pool)))));

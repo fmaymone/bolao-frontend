@@ -75,6 +75,16 @@ const messages=defineMessages({
   edit_company: 'Edit company',
   delete_company_title: 'Delete company?',
   delete_company_message: 'The company will be deleted!',
+
+  pools: 'Pools',
+  create_pool: 'Criar Pool',
+  edit_pool: 'Editar Pool',
+  delete_pool_title: 'Apagar pool?',
+  delete_pool_message: 'O Pool será removido',
+
+
+
+
   full_name_label: 'Full name',
   full_name_hint: 'Enter full name',
   vat_label: 'UID',
