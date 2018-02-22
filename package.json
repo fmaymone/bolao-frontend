@@ -64,12 +64,14 @@
     "standard": "standard src/**/*.js ",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
-  "author": "Tarik Huber",
-  "homepage": "https://www.react-most-wanted.com/",
+  "author": "Fernando Maymone",
+  "homepage": "https://fmaymone.github.io/bolao-frontend",
   "license": "MIT",
-  "repository": "https://github.com/TarikHuber/react-most-wanted",
+  "repository": "https://github.com/fmaymone/bolao-frontend",
   "keywords": [
     "react-most-wanted",
     "react",

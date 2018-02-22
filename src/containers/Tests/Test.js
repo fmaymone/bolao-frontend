@@ -74,9 +74,14 @@ class Test extends Component {
       submit,
       muiTheme,
       isGranted,
-      firebaseApp
+      firebaseApp,
+      worldCupData
     } = this.props;
     this.getRealTimeUpdates();
+    
+    console.log('-----------------worldCupData----------------');
+    console.log(worldCupData);
+    console.log('-----------------worldCupData----------------');
 
     return (
       <Activity>
@@ -91,7 +96,7 @@ class Test extends Component {
 
 
 const mapStateToProps = (state) => {
-  const { intl, dialogs } = state;
+  const { intl, dialogs, worldCupData } = state;
 
   console.log('----------------------state---------------------')
   console.log(state)
@@ -101,6 +106,10 @@ const mapStateToProps = (state) => {
     intl,
     dialogs,
     isGranted: grant => isGranted(state, grant),
+<<<<<<< HEAD
+=======
+    worldCupData
+>>>>>>> 1914f93c7baee3434c39e25a0060a535d1f52891
 
   };
 };
