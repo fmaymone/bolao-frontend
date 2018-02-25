@@ -17,8 +17,7 @@ import FireForm from 'fireform'
 import { change, submit } from 'redux-form';
 import isGranted from 'rmw-shell/lib/utils/auth';
 import firestore from 'firebase/firestore'
-import Bets from '../Bet/Bets'
-
+import BetsList from '../Bet/BetsList'
 const path = '/companies/';
 const form_name = 'company';
 
@@ -28,90 +27,15 @@ class Test extends Component {
         bets: ''
      }
     
-     componentWillMount() {
-      console.log('------------------CONSOLE STATE---') 
-      console.log(this.props)
-      console.log('------------------CONSOLE STATE---') 
-     }
-
-    handleButton = () => {
-    
-        const { firebaseApp }= this.props
-        let firestore=firebaseApp.firestore()
-        const docRef=firestore.collection('bets')
-        console.log(docRef)
-
-        docRef.add({
-            title: 'lindo match'
-        })
-    }
-
-    getRealTimeUpdates = () =>{
-
-        const { firebaseApp }= this.props
-        let firestore=firebaseApp.firestore()
-        const docRef=firestore.collection('bets')
-
-        docRef.onSnapshot(function(doc) {
-            if(doc && doc.exists){
-                console.log("Current bets: ", doc && doc.data());
-            }
-            
-        });
-
-
-    }
-
-
   render() {
-
-    const {
-      history,
-      intl,
-      setDialogIsOpen,
-      dialogs,
-      match,
-      submit,
-      muiTheme,
-      isGranted,
-      firebaseApp,
-      worldCupData
-      
-    } = this.props;
-    this.getRealTimeUpdates();
-    
-    console.log('-----------------worldCupData----------------');
-    console.log(worldCupData);
-    console.log('-----------------worldCupData----------------');
 
     return (
       
-        <Bets />
+        <BetsList />
       
     );
   }
 }
 
+export default Test
 
-const mapStateToProps = (state) => {
-  const { intl, dialogs, worldCupData } = state;
-
-  console.log('----------------------state---------------------')
-  console.log(state)
-  console.log('----------------------state---------------------')
-
-  return {
-    intl,
-    dialogs,
-    isGranted: grant => isGranted(state, grant),
-<<<<<<< HEAD
-=======
-    worldCupData
->>>>>>> 1914f93c7baee3434c39e25a0060a535d1f52891
-
-  };
-};
-
-export default connect(state => state.worldCupData,
-  mapStateToProps, { setDialogIsOpen, change, submit }
-)(injectIntl(withRouter(withFirebase(muiThemeable()(Test)))));
