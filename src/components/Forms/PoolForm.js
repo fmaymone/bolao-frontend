@@ -30,9 +30,19 @@ class Form extends Component {
       setDialogIsOpen,
       dialogs,
       match,
+      users
     } = this.props;
 
     const uid = match.params.uid;
+    let userSource = []
+
+    if (users) {
+      userSource = users.map(user => {
+        return { id: user.key, name: user.val.displayName }
+      })
+    }
+    
+    
 
     return (
       <form onSubmit={handleSubmit} style={{
@@ -161,9 +171,10 @@ Form = reduxForm({ form: 'pool' })(Form);
 const selector = formValueSelector('pool')
 
 const mapStateToProps = state => {
-  const { intl, vehicleTypes, users, dialogs } = state;
+  const { intl, vehicleTypes, users, dialogs, auth } = state;
 
   return {
+    auth,
     intl,
     vehicleTypes,
     users,

@@ -57,6 +57,12 @@ const getMenuItems = (props) => {
       leftIcon: <FontIcon className='material-icons' >dashboard</FontIcon>
     },
     {
+      value: '/pools',
+      visible: isAuthorised,
+      primaryText: intl.formatMessage({ id: 'pools' }),
+      leftIcon: <FontIcon className='material-icons' >Pools</FontIcon>
+    },
+    {
       visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'chats' }),
       primaryTogglesNestedList: true,

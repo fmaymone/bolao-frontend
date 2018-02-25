@@ -36,8 +36,12 @@ class Pool extends Component {
   }
 
   handleUpdateValues = (values) => {
+    const { auth } = this.props;
 
     return {
+      userName: auth.displayName,
+      userPhotoURL: auth.photoURL,
+      userId: auth.uid,
       updated: firebase.database.ServerValue.TIMESTAMP,
       ...values
     }
@@ -60,6 +64,19 @@ class Pool extends Component {
         this.handleClose();
         history.goBack();
       })
+    }
+  }
+  handleCreateValues = (values) => {
+
+    const { auth } = this.props;
+
+    return {
+      created: firebase.database.ServerValue.TIMESTAMP,
+      userName: auth.displayName,
+      userPhotoURL: auth.photoURL,
+      userId: auth.uid,
+      completed: false,
+      ...values
     }
   }
 
@@ -133,9 +150,13 @@ class Pool extends Component {
             name={'pool'}
             path={`${path}`}
             validate={this.validate}
+            handleCreateValues={this.handleCreateValues}
             onSubmitSuccess={(values) => { history.push('/pools'); }}
             onDelete={(values) => { history.push('/pools'); }}
-            uid={match.params.uid}>
+            uid={match.params.uid}
+           
+            >
+            
             <PoolForm />
           </FireForm>
         </div>
@@ -166,11 +187,12 @@ Pool.propTypes = {
 
 
 const mapStateToProps = (state) => {
-  const { intl, dialogs } = state;
+  const { intl, dialogs, auth } = state;
 
   return {
     intl,
     dialogs,
+    auth,
     isGranted: grant => isGranted(state, grant)
   };
 };

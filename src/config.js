@@ -22,8 +22,8 @@ const config = {
     messagingSenderId: "513926736091"
   },
   firebase_providers: [
-    'google.com'
-    // 'facebook.com',
+    'google.com',
+    'facebook.com',
     // 'twitter.com',
     // 'github.com',
     // 'password',
