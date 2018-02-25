@@ -17,7 +17,7 @@ import FireForm from 'fireform'
 import { change, submit } from 'redux-form';
 import isGranted from 'rmw-shell/lib/utils/auth';
 import firestore from 'firebase/firestore'
-
+import Bets from '../Bet/Bets'
 
 const path = '/companies/';
 const form_name = 'company';
@@ -76,6 +76,7 @@ class Test extends Component {
       isGranted,
       firebaseApp,
       worldCupData
+      
     } = this.props;
     this.getRealTimeUpdates();
     
@@ -84,12 +85,9 @@ class Test extends Component {
     console.log('-----------------worldCupData----------------');
 
     return (
-      <Activity>
-        <h1>Teste</h1>
-        <div style={{ margin: 15, display: 'flex' }}>
-            <FlatButton label='botao foda'  onClick={this.handleButton} />
-        </div>
-      </Activity>
+      
+        <Bets />
+      
     );
   }
 }
