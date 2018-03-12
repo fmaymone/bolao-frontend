@@ -19,12 +19,15 @@ class BetsList extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
   }
 
   handleInsertBet = matchId => {
+
+
     this.props.firebaseApp
       .database()
-      .ref("bets/" + matchId)
+      .ref("bets/" + this.props.auth.uid + matchId)
       .set({
         username: "name",
         email: "emailasdasd",
@@ -41,9 +44,11 @@ class BetsList extends Component {
       submit,
       muiTheme,
       isGranted,
-      firebaseApp
+      firebaseApp,
+      auth
     } = this.props;
     const uid = match.params.uid;
+    
     const actions = [
       <FlatButton
         label={intl.formatMessage({ id: "cancel" })}

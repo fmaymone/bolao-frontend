@@ -10,23 +10,20 @@ class Match extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
   }
 
-
   render() {
-    
-      
-    
-    
+
     return (
-      
+
       <Grid fluid>
         <Row>
           <Col xs={6} md={3}>
-              <Team team={this.props.home} home={true} />
+            <Team team={this.props.home} home={true} />
           </Col>
           <Col xs={6} md={3}>
-           <div><Team team={this.props.away} home={false} /></div> 
+            <div><Team team={this.props.away} home={false} /></div>
           </Col>
         </Row>
       </Grid>
@@ -36,12 +33,12 @@ class Match extends Component {
 
 const styles = {
   matchContainer: {
-    
+
     flexDirection: 'column',
     backgroundColor: "green"
-    
+
   },
-  
+
 };
 
 export default Match;
