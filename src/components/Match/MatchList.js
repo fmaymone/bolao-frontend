@@ -7,6 +7,8 @@ import { Activity } from 'rmw-shell'
 import { List, ListItem } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
 import FontIcon from 'material-ui/FontIcon'
+import IconButton from 'material-ui/IconButton';
+import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import { withRouter } from 'react-router-dom'
 import Avatar from 'material-ui/Avatar'
@@ -14,34 +16,14 @@ import { withFirebase } from 'firekit-provider'
 import isGranted from 'rmw-shell/lib/utils/auth'
 import Scrollbar from 'rmw-shell/lib/components/Scrollbar/Scrollbar'
 import FlatButton from "material-ui/FlatButton";
+import FireForm from 'fireform'
+import BetForm from '../../components/Forms/BetForm';
+
+
+const path = '/bets/';
+const form_name = 'bets';
 
 class MatchList extends Component {
-
-    componentWillMount() {
-        const { watchList, firebaseApp } = this.props
-
-    }
-
-    handleInsertBet = data => {
-
-
-        this.props.firebaseApp
-            .database()
-            .ref("bets/" + this.props.auth.uid)
-            .set({
-                data
-            });
-    };
-    handleGetBets = data => {
-
-
-        this.props.firebaseApp
-            .database()
-            .ref("bets/" + this.props.auth.uid)
-            .set({
-                data
-            });
-    };
 
     data = {
         matches: [
@@ -119,44 +101,50 @@ class MatchList extends Component {
             }
         ]
     }
-    componentDidMount() {
-        const { watchList, firebaseApp } = this.props
 
-        let ref = firebaseApp.database().ref('bets').limitToFirst(20)
-
-        watchList(ref)
-    }
     constructor(props) {
         super(props);
         this.state = {}
     }
     render() {
-        const { intl, firebaseApp, companies, muiTheme, history, isGranted, auth } = this.props
-
-        let ref = firebaseApp.database().ref('bets' + this.props.auth.uid).limitToFirst(20)
-        ref.on('value', function (snapshot) {
-           console.log(snapshot.val())
-        });
+        const {
+            history,
+            intl,
+            setDialogIsOpen,
+            dialogs,
+            match,
+            submit,
+            muiTheme,
+            isGranted,
+            firebaseApp
+          } = this.props;
+        const uid = match.params.uid;
         return (
-            <Activity
-                //isLoading={companies === undefined}
-                containerStyle={{ overflow: 'hidden' }}
-                title={intl.formatMessage({ id: 'bets' })}>
-                <h1>Olar</h1>
-                <FlatButton
-                    label={'Oi'}
-                    secondary={true}
-                    onClick={() => this.handleInsertBet(this.data)}
-                />
+            <Activity>
+                <FireForm
+                    firebaseApp={firebaseApp}
+                    name={'bets'}
+                    path={`${path}`}
+                    //validate={this.validate}
+                    //handleCreateValues={this.handleCreateValues}
+                    onSubmitSuccess={(values) => { history.push('/bets'); }}
+                    onDelete={(values) => { history.push('/bets'); }}
+                    uid={match.params.uid}
+
+                >
+                    <BetForm />
+                </FireForm>
+
+
             </Activity>
+
         )
     }
 }
 const mapStateToProps = (state) => {
-    const { auth, browser } = state
+    const { auth, browser, lists } = state
 
     return {
-
         auth,
         browser,
         isGranted: grant => isGranted(state, grant)
