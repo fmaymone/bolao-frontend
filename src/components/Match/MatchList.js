@@ -18,6 +18,7 @@ import Scrollbar from 'rmw-shell/lib/components/Scrollbar/Scrollbar'
 import FlatButton from "material-ui/FlatButton";
 import FireForm from 'fireform'
 import BetForm from '../../components/Forms/BetForm';
+import firebase from 'firebase';
 
 
 const path = '/bets/';
@@ -101,7 +102,18 @@ class MatchList extends Component {
             }
         ]
     }
+    handleCreateValues = (values) => {
 
+        const { auth } = this.props;
+
+        return {
+            created: firebase.database.ServerValue.TIMESTAMP,
+            userName: auth.displayName,
+            userId: auth.uid,
+            completed: false,
+            ...values
+        }
+    }
     constructor(props) {
         super(props);
         this.state = {}
@@ -118,7 +130,8 @@ class MatchList extends Component {
             isGranted,
             firebaseApp
           } = this.props;
-        const uid = match.params.uid;
+        const uid = this.props.auth.uid;
+
         return (
             <Activity>
                 <FireForm
@@ -126,15 +139,15 @@ class MatchList extends Component {
                     name={'bets'}
                     path={`${path}`}
                     //validate={this.validate}
-                    //handleCreateValues={this.handleCreateValues}
-                    onSubmitSuccess={(values) => { history.push('/bets'); }}
+                    handleCreateValues={this.handleCreateValues}
+                    onSubmitSuccess={(values) => { history.push('/test'); }}
                     onDelete={(values) => { history.push('/bets'); }}
-                    uid={match.params.uid}
+                    uid={uid}
 
                 >
                     <BetForm />
                 </FireForm>
-
+    
 
             </Activity>
 

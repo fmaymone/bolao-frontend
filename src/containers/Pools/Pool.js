@@ -70,6 +70,8 @@ class Pool extends Component {
 
     const { auth } = this.props;
 
+    console.log('Passei no handle')
+
     return {
       created: firebase.database.ServerValue.TIMESTAMP,
       userName: auth.displayName,
