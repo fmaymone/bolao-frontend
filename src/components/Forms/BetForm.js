@@ -13,12 +13,16 @@ class BetForm extends Component {
   
   render() {
 
-    const { handleSubmit, intl } = this.props
+    const { handleSubmit, handleChange, intl } = this.props
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onChange={handleChange}>
         <div>
           <label htmlFor="firstName">First Name</label>
-          <Field name="firstName" component="input" type="text" />
+          <Field name="firstName"
+           component="input" type="text" 
+           ref='firstName'
+           withRef
+           />
         </div>
         <div>
           <label htmlFor="lastName">Last Name</label>
