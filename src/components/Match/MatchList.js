@@ -20,36 +20,84 @@ import FireForm from 'fireform'
 import BetForm from '../../components/Forms/BetForm';
 import firebase from 'firebase';
 import { change, submit } from 'redux-form';
+import Match from './Match'
 
 const path = '/bets/';
 const form_name = 'bets';
 
 class MatchList extends Component {
-   
-   
+
+    matches = [
+        {
+            name: 1,
+            type: "group",
+            home_team: 1,
+            away_team: 2,
+            home_result: null,
+            away_result: null,
+            date: "2018-06-14T18:00:00+03:00",
+            stadium: 1,
+            channels: [],
+            finished: false
+        },
+        {
+            name: 2,
+            type: "group",
+            home_team: 3,
+            away_team: 4,
+            home_result: null,
+            away_result: null,
+            date: "2018-06-15T17:00:00+05:00",
+            stadium: 12,
+            channels: [],
+            finished: false
+        }]
     handleCreateValues = (values) => {
 
         const { auth } = this.props;
         console.log('handleCreateValues')
         return {
-          created: firebase.database.ServerValue.TIMESTAMP,
-          completed: false,
-          ...values
+            created: firebase.database.ServerValue.TIMESTAMP,
+            completed: false,
+            ...values
         }
-      }
- 
+    }
+
     handleUpdateValues = (values) => {
 
         return {
-          updated: firebase.database.ServerValue.TIMESTAMP,
-          ...values
+            updated: firebase.database.ServerValue.TIMESTAMP,
+            ...values
         }
-      }
+    }
 
     handleChange = () => {
 
         console.log('Mudou o Form')
         submit('bets')
+    }
+
+    renderFireform = () => {
+
+        const { firebaseApp } = this.props
+        const uid = this.props.auth.uid;
+        <FireForm
+            firebaseApp={firebaseApp}
+            name={'bets'}
+            path={`${path}`}
+            matches={this.matches}
+            //validate={this.validate}
+            handleChange={this.handleChange}
+            handleCreateValues={this.handleCreateValues}
+            // onSubmitSuccess={(values) => { history.push('/test'); }}
+            //onDelete={(values) => { history.push('/bets'); }}
+            uid={uid}
+
+        >
+            <BetForm />
+        </FireForm>
+
+
     }
 
     constructor(props) {
@@ -69,31 +117,21 @@ class MatchList extends Component {
             firebaseApp
           } = this.props;
         const uid = this.props.auth.uid;
-        if(uid){
-        return (
-            <Activity>
-                <FireForm
-                    firebaseApp={firebaseApp}
-                    name={'bets'}
-                    path={`${path}`}
-                    //validate={this.validate}
-                    handleChange={this.handleChange}
-                    handleCreateValues={this.handleCreateValues}
-                    onSubmitSuccess={(values) => { history.push('/test'); }}
-                    onDelete={(values) => { history.push('/bets'); }}
-                    uid={uid}
+        if (uid) {
+            return (
+                <Activity>
 
-                >
-                    <BetForm />
-                </FireForm>
+                    {this.matches.map(match => (
+                        <div key={match.name}>
+                            <Match match={match} />
+                        </div>
+                    ))}
+                </Activity>
 
-
-            </Activity>
-
-        )
-    }else{
-        return 'Oi'
-    }
+            )
+        } else {
+            return 'Oi'
+        }
     }
 }
 const mapStateToProps = (state) => {

@@ -10,28 +10,14 @@ import FontIcon from 'material-ui/FontIcon'
 import FlatButton from 'material-ui/FlatButton'
 
 class BetForm extends Component {
-  
+
   render() {
 
-    const { handleSubmit, handleChange, intl } = this.props
+    const { handleSubmit, handleChange, intl , matches} = this.props
+    
     return (
       <form onSubmit={handleSubmit} onChange={handleChange}>
-        <div>
-          <label htmlFor="firstName">First Name</label>
-          <Field name="firstName"
-           component="input" type="text" 
-           ref='firstName'
-           withRef
-           />
-        </div>
-        <div>
-          <label htmlFor="lastName">Last Name</label>
-          <Field name="lastName" component="input" type="text" />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <Field name="email" component="input" type="email" />
-        </div>
+        
         <FlatButton
           label={intl.formatMessage({ id: 'submit' })}
           type='submit'
@@ -40,8 +26,9 @@ class BetForm extends Component {
         />
 
       </form>
+
     )
-  }
+  } 
 }
 const mapStateToProps = state => {
   const { intl, lists } = state
