@@ -1,11 +1,28 @@
 import React, { Component } from "react";
 import Paper from "material-ui/Paper";
 //import Flag from "react-flags";
+import { connect } from 'react-redux';
 import Team from "./Team";
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-
+import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from "prop-types";
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+import { Activity } from 'rmw-shell'
+import { ResponsiveMenu } from 'material-ui-responsive-menu';
+import { setDialogIsOpen } from 'rmw-shell/lib/store/dialogs/actions';
+import BetForm from '../../components/Forms/BetForm';
+import { withRouter } from 'react-router-dom';
+import firebase from 'firebase';
+import FontIcon from 'material-ui/FontIcon';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
+import { withFirebase } from 'firekit-provider'
+import FireForm from 'fireform'
+import { change, submit } from 'redux-form';
+import isGranted from 'rmw-shell/lib/utils/auth';
+
+const path = '/bets/';
 
 class Match extends Component {
   constructor(props) {
@@ -23,25 +40,38 @@ class Match extends Component {
     event.preventDefault();
   }
   render() {
+    const {
+      history,
+      intl,
+      setDialogIsOpen,
+      dialogs,
+      game,
+      submit,
+      muiTheme,
+      isGranted,
+      firebaseApp,
+      auth
+    } = this.props;
 
-    return (
-
-      <Grid fluid>
-        <form onSubmit={this.handleSubmit}>
-          <Col xs={6} md={3}>
-            <Team team={this.props.home} home={true} />
-          </Col>
-          <Col xs={6} md={3}>
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </Col>
-          <Col xs={6} md={3}>
-            <div><Team team={this.props.away} home={false} /></div>
-          </Col>
-          <input type="submit" value="Submit" />
-        </form>
-
-      </Grid>
-    );
+    
+    const uid = auth.uid+'/'+game.name;
+    if (auth) {
+      return (
+          <FireForm
+            form={'bet-' + this.props.game.name} 
+            firebaseApp={firebaseApp}
+            name={this.props.game.name}
+            path={path}
+            validate={this.validate}
+            onSubmitSuccess={(values) => { history.push('/test'); }}
+            onDelete={(values) => { history.push('/test'); }}
+            uid={uid}>
+            <BetForm />
+          </FireForm>
+      )
+    } else {
+      return (<h1>Carregando</h1>)
+    }
   }
 }
 
@@ -55,7 +85,20 @@ const styles = {
 
 };
 
-export default Match;
+const mapStateToProps = (state) => {
+  const { intl, dialogs, auth } = state;
+
+  return {
+    intl,
+    dialogs,
+    auth,
+    isGranted: grant => isGranted(state, grant)
+  };
+};
+
+export default connect(
+  mapStateToProps, { setDialogIsOpen, change, submit }
+)(injectIntl(withRouter(withFirebase(muiThemeable()(Match)))));
 
 Match.propTypes = {
   // name: PropTypes.string,

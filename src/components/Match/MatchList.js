@@ -27,6 +27,7 @@ const form_name = 'bets';
 
 class MatchList extends Component {
 
+
     matches = [
         {
             name: 1,
@@ -121,11 +122,12 @@ class MatchList extends Component {
             return (
                 <Activity>
 
-                    {this.matches.map(match => (
+                    {/* {this.matches.map(match => (
                         <div key={match.name}>
-                            <Match match={match} />
+                            <Match game={match} />
                         </div>
-                    ))}
+                    ))} */}
+                    <Match game={this.matches[0]} />
                 </Activity>
 
             )

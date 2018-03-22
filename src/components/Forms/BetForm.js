@@ -17,7 +17,17 @@ class BetForm extends Component {
     
     return (
       <form onSubmit={handleSubmit} onChange={handleChange}>
-        
+        <div>
+          <Field
+            name='title_name'
+            type='number'
+            component={TextField}
+            hintText={intl.formatMessage({ id: 'title_hint' })}
+            floatingLabelText={intl.formatMessage({ id: 'title_label' })}
+            ref='title_ref'
+            withRef
+          />
+        </div>
         <FlatButton
           label={intl.formatMessage({ id: 'submit' })}
           type='submit'
@@ -41,7 +51,7 @@ const mapStateToProps = state => {
 
 BetForm = reduxForm({
   // a unique name for the form
-  form: 'bets'
+  form: 'bet'
 })(BetForm)
 
 
