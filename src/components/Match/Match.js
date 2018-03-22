@@ -21,6 +21,8 @@ import { withFirebase } from 'firekit-provider'
 import FireForm from 'fireform'
 import { change, submit } from 'redux-form';
 import isGranted from 'rmw-shell/lib/utils/auth';
+import TestForm from '../../components/Forms/TestForm';
+import {betCreate } from '../../store/actions'
 
 const path = '/bets/';
 
@@ -35,9 +37,11 @@ class Match extends Component {
     };
 
   }
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
+
+  handlePress() {
+    const { auth, game } = this.props
+    this.props.betCreate({ auth, game} )
+    console.log("Alo mamae")
   }
   render() {
     const {
@@ -57,17 +61,15 @@ class Match extends Component {
     const uid = auth.uid+'/'+game.name;
     if (auth) {
       return (
-          <FireForm
-            form={'bet-' + this.props.game.name} 
-            firebaseApp={firebaseApp}
-            name={this.props.game.name}
-            path={path}
-            validate={this.validate}
-            onSubmitSuccess={(values) => { history.push('/test'); }}
-            onDelete={(values) => { history.push('/test'); }}
-            uid={uid}>
-            <BetForm />
-          </FireForm>
+        <div>
+          <h2>{game.name}</h2>
+          <Team team={game.home} />
+          <FlatButton
+              label={'enviar'}
+              primary={true}
+              onClick={this.handlePress.bind(this)}
+            />
+         </div>
       )
     } else {
       return (<h1>Carregando</h1>)
@@ -97,7 +99,7 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(
-  mapStateToProps, { setDialogIsOpen, change, submit }
+  mapStateToProps, { setDialogIsOpen, change, submit, betCreate }
 )(injectIntl(withRouter(withFirebase(muiThemeable()(Match)))));
 
 Match.propTypes = {

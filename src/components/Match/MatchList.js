@@ -122,12 +122,12 @@ class MatchList extends Component {
             return (
                 <Activity>
 
-                    {/* {this.matches.map(match => (
+                    {this.matches.map(match => (
                         <div key={match.name}>
                             <Match game={match} />
                         </div>
-                    ))} */}
-                    <Match game={this.matches[0]} />
+                    ))}
+                    {/* <Match game={this.matches[0]} /> */}
                 </Activity>
 
             )

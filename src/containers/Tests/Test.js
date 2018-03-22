@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TestList from '../../components/Match/TestList'
 import MatchList from '../../components/Match/MatchList'
 import BetForm from '../../components/Forms/BetForm'
 import { Activity } from 'rmw-shell'

@@ -23,7 +23,7 @@ class Task extends Component {
 
   handleCreateValues = (values) => {
 
-    console.log('handleCreateValues')
+    
     const { auth } = this.props;
 
     return {

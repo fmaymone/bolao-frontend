@@ -10,7 +10,7 @@ import FontIcon from 'material-ui/FontIcon'
 
 class TaskForm extends Component {
   componentDidMount () {
-    this.refs.title // the Field
+    this.refs.title
       .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
       .getRenderedComponent() // on ReduxFormMaterialUITextField, returns TextField
       .focus() // on TextField
