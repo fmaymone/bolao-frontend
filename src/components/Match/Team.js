@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import Paper from "material-ui/Paper";
 //import Flag from "react-flags";
 import Flag from "react-world-flags";
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import muiThemeable from 'material-ui/styles/muiThemeable'
-import { injectIntl } from 'react-intl'
-import { withRouter } from 'react-router-dom'
+import muiThemeable from "material-ui/styles/muiThemeable";
+import { injectIntl } from "react-intl";
+import { withRouter } from "react-router-dom";
+import { Container, Row, Col } from "react-grid-system";
 
 const style = {
   margin: 20,
@@ -20,51 +21,55 @@ class Team extends Component {
     super(props);
     this.state = {};
   }
-  renderHomeTeam = (team) => {
+  renderHomeTeam = team => {
+    return (
+      <Row>
+        
+        <Col>
+          <Flag code={team.iso2} height="16" />
+        </Col>
+        <Col> {team.name} </Col>
+      </Row>
+    );
+  };
 
-    return (<div >
-      
-      <Flag code={team.iso2} height="16" />
-      {team.name}
-    </div>)
-  }
-
-  renderAwayTeam = (team) => {
-
-    return (<div >
-      {team.name}
-      <Flag code={team.iso2} height="16" />
-    </div>)
-  }
+  renderAwayTeam = team => {
+    return (
+      <Row>
+        <Col> {team.name} </Col>
+        <Col>
+          <Flag code={team.iso2} height="16" />
+        </Col>
+      </Row>
+    );
+  };
   render() {
-    const isHomeTeam = this.props.home;
-    const teamEntity = this.props.worldCupData.teams[0]
+    const isHomeTeam = this.props.isHomeTeam;
+    const teamEntity = this.props.worldCupData.teams[this.props.id - 1];
     if (teamEntity) {
-      if (isHomeTeam) {
-        return this.renderHomeTeam(teamEntity)
+      if (isHomeTeam == "true") {
+        return this.renderHomeTeam(teamEntity);
       } else {
-        return this.renderAwayTeam(teamEntity)
+        return this.renderAwayTeam(teamEntity);
       }
     } else {
-      return ('Olar')
+      return "Olar";
     }
   }
 }
 
-const styles = {
-
-};
-const mapStateToProps = (state) => {
-  const { auth, browser, lists, worldCupData } = state
+const styles = {};
+const mapStateToProps = state => {
+  const { auth, browser, lists, worldCupData } = state;
 
   return {
     worldCupData: worldCupData
-  }
-}
+  };
+};
 
-export default connect(
-  mapStateToProps
-)(injectIntl(muiThemeable()(withRouter((Team)))))
+export default connect(mapStateToProps)(
+  injectIntl(muiThemeable()(withRouter(Team)))
+);
 
 Team.propTypes = {
   name: PropTypes.string,
