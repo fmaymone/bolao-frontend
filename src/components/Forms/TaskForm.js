@@ -18,6 +18,7 @@ class TaskForm extends Component {
 
   render () {
     const { handleSubmit, intl, users, initialized } = this.props
+    
 
     let userSource = []
 

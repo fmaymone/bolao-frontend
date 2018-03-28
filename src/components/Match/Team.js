@@ -22,32 +22,28 @@ class Team extends Component {
   }
   renderHomeTeam = (team) => {
 
-    return (<div style={styles.teamContainer}>
-      <div style={styles.teamFlag}>
-        <Flag code={team.iso2} height="16" />
-      </div>
-      <div style={styles.teamName}>{team.name}</div>
-
+    return (<div >
+      
+      <Flag code={team.iso2} height="16" />
+      {team.name}
     </div>)
   }
 
   renderAwayTeam = (team) => {
 
-    return (<div style={styles.teamContainer}>
-      <div style={styles.teamName}>{team.name}</div>
-      <div style={styles.teamFlag}>
-        <Flag code={team.iso2} height="16" />
-      </div>
+    return (<div >
+      {team.name}
+      <Flag code={team.iso2} height="16" />
     </div>)
   }
   render() {
     const isHomeTeam = this.props.home;
     const teamEntity = this.props.worldCupData.teams[0]
     if (teamEntity) {
-      if (isHomeTeam){
-      return this.renderHomeTeam(teamEntity)
-      }else{
-      return this.renderAwayTeam(teamEntity)
+      if (isHomeTeam) {
+        return this.renderHomeTeam(teamEntity)
+      } else {
+        return this.renderAwayTeam(teamEntity)
       }
     } else {
       return ('Olar')
@@ -56,27 +52,7 @@ class Team extends Component {
 }
 
 const styles = {
-  teamContainer: {
-    margin: 5,
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    textAlign: "center",
-    // display: "inline-block"
-    //backgroundColor: "yellow"
-  },
-  teamName: {
-    margin: 5,
-    //backgroundColor: "#FF0000"
-  },
-  teamFlag: {
-    alignItems: "center",
-    //backgroundColor: "blue",
-    textAlign: "center",
 
-  }
 };
 const mapStateToProps = (state) => {
   const { auth, browser, lists, worldCupData } = state

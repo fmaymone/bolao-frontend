@@ -28,6 +28,8 @@ const form_name = 'bets';
 class MatchList extends Component {
 
 
+
+
     matches = [
         {
             name: 1,
@@ -53,53 +55,8 @@ class MatchList extends Component {
             channels: [],
             finished: false
         }]
-    handleCreateValues = (values) => {
-
-        const { auth } = this.props;
-        console.log('handleCreateValues')
-        return {
-            created: firebase.database.ServerValue.TIMESTAMP,
-            completed: false,
-            ...values
-        }
-    }
-
-    handleUpdateValues = (values) => {
-
-        return {
-            updated: firebase.database.ServerValue.TIMESTAMP,
-            ...values
-        }
-    }
-
-    handleChange = () => {
-
-        console.log('Mudou o Form')
-        submit('bets')
-    }
-
-    renderFireform = () => {
-
-        const { firebaseApp } = this.props
-        const uid = this.props.auth.uid;
-        <FireForm
-            firebaseApp={firebaseApp}
-            name={'bets'}
-            path={`${path}`}
-            matches={this.matches}
-            //validate={this.validate}
-            handleChange={this.handleChange}
-            handleCreateValues={this.handleCreateValues}
-            // onSubmitSuccess={(values) => { history.push('/test'); }}
-            //onDelete={(values) => { history.push('/bets'); }}
-            uid={uid}
-
-        >
-            <BetForm />
-        </FireForm>
 
 
-    }
 
     constructor(props) {
         super(props);
@@ -120,14 +77,21 @@ class MatchList extends Component {
         const uid = this.props.auth.uid;
         if (uid) {
             return (
-                <Activity>
+                <Activity
+                    containerStyle={styles.matchesContainer}
+                    title={intl.formatMessage({ id: 'bets' })}>
+                    <Scrollbar>
+                        <List>
+                            {this.matches.map(match => (
+                                <div key={match.name}>
+                                    
+                                        <Match game={match} />
+                                    
+                                </div>
+                            ))}
+                        </List>
+                    </Scrollbar>
 
-                    {this.matches.map(match => (
-                        <div key={match.name}>
-                            <Match game={match} />
-                        </div>
-                    ))}
-                    {/* <Match game={this.matches[0]} /> */}
                 </Activity>
 
             )
@@ -149,3 +113,10 @@ const mapStateToProps = (state) => {
 export default connect(
     mapStateToProps, { change, submit }
 )(injectIntl(muiThemeable()(withRouter(withFirebase(MatchList)))))
+
+
+const styles = {
+    matchesContainer: {
+        overflow: 'hidden', display: 'flex', left: 20
+    }
+}

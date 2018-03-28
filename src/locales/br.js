@@ -77,7 +77,7 @@ const messages=defineMessages({
   delete_company_title: 'Delete company?',
   delete_company_message: 'The company will be deleted!',
 
-  bets: 'Bets',
+  bets: 'Apostas',
 
   pools: 'Pools',
   create_pool: 'Criar Pool',

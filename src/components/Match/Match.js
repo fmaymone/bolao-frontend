@@ -38,11 +38,6 @@ class Match extends Component {
 
   }
 
-  handlePress() {
-    const { auth, game } = this.props
-    this.props.betCreate({ auth, game} )
-    console.log("Alo mamae")
-  }
   render() {
     const {
       history,
@@ -56,36 +51,16 @@ class Match extends Component {
       firebaseApp,
       auth
     } = this.props;
+    return(
+      <Team />
 
+    )
     
-    const uid = auth.uid+'/'+game.name;
-    if (auth) {
-      return (
-        <div>
-          <h2>{game.name}</h2>
-          <Team team={game.home} />
-          <FlatButton
-              label={'enviar'}
-              primary={true}
-              onClick={this.handlePress.bind(this)}
-            />
-         </div>
-      )
-    } else {
-      return (<h1>Carregando</h1>)
-    }
+    
+   
   }
 }
 
-const styles = {
-  matchContainer: {
-
-    flexDirection: 'column',
-    backgroundColor: "green"
-
-  },
-
-};
 
 const mapStateToProps = (state) => {
   const { intl, dialogs, auth } = state;
