@@ -39,6 +39,30 @@ class Match extends Component {
     };
   }
 
+  componentDidMount(){
+    const { watchList, firebaseApp, auth, game } = this.props
+
+    let ref = firebaseApp.database().ref('/bets/' + auth.uid + '/' + game.name)
+    if(ref){
+      ref.on('value', snapshot => {
+        this.setState({ away_score: snapshot.val().away_score });
+        this.setState({ home_score: snapshot.val().home_score });
+      });
+    }
+    
+  }
+
+  handleSave = ( ) =>{
+    const {  firebaseApp, auth, game } = this.props
+    let ref = firebaseApp.database().ref(('/bets/' + auth.uid + '/' + game.name))
+    ref.set({
+      away_score: this.state.away_score,
+      home_score: this.state.home_score
+
+    })
+
+  }
+
   awayScoreChangedHandler = (event) =>{
     this.setState({away_score: event.target.value})
   }
@@ -60,24 +84,31 @@ class Match extends Component {
       auth
     } = this.props;
     return (
-      <Row>
-        <Col sm={3}>
+      <Container style={styles.match}>
+      <Row align="center">
+        <Col sm={4}>
           <Team id={this.props.game.home_team} isHomeTeam="true" />
         </Col>
         <Col sm={1}>
           <TextField value={this.state.home_score} onChange={this.homeScoreChangedHandler}/>
         </Col>
-        <Col sm={4}>
-        <div className="col-sm-3 center-xs start-md" ><center>X</center></div>
+        <Col sm={2}>
+        <center>X</center>
         
         </Col>
         <Col sm={1}>
           <TextField value={this.state.away_score} onChange={this.awayScoreChangedHandler}/>
         </Col>
-        <Col sm={3}>
+        <Col sm={4}>
           <Team id={this.props.game.away_team} isHomeTeam="false" />
         </Col>
       </Row>
+      <FlatButton
+        label={'Salvar'}
+        primary={true}
+        onClick={this.handleSave}
+      />,
+      </Container>
     );
   }
 }
@@ -104,4 +135,13 @@ Match.propTypes = {
   // name: PropTypes.string,
   // code: PropTypes.string,
   // home: PropTypes.boolean
+};
+const styles = {
+  match: {
+    overflow: "hidden",
+    display: "flex",
+    
+    flexDirection: "row",
+    justifyContent: 'center'
+  }
 };

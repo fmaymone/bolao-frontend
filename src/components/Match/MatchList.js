@@ -74,7 +74,7 @@ class MatchList extends Component {
     if (uid) {
       return (
         
-          <Container fluid>
+          <Container fluid style={styles.matchesContainer} >
             {this.matches.map(match => (
               <div key={match.name}>
                 
@@ -109,6 +109,7 @@ const styles = {
     overflow: "hidden",
     display: "flex",
     left: 20,
-    flexDirection: "row"
+    flexDirection: "column"
+   
   }
 };

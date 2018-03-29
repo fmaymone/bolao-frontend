@@ -23,7 +23,7 @@ class Team extends Component {
   }
   renderHomeTeam = team => {
     return (
-      <Row>
+      <Row align="center">
         
         <Col>
           <Flag code={team.iso2} height="16" />
