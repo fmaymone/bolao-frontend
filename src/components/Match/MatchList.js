@@ -31,8 +31,8 @@ class MatchList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      matches: {},
-      currentGroup: "a"
+       currentGroup: "a",
+       changes: true
     };
   }
 
@@ -111,6 +111,16 @@ class MatchList extends Component {
     }
   };
 
+  updateClassification = () => {
+
+    if(this.state.change === true){
+      this.setState({change:false})
+    }else{
+      this.setState({change:true})
+    }
+
+  }
+ 
   render() {
     const {
       history,
@@ -136,7 +146,7 @@ class MatchList extends Component {
 
           {matches.matches.map(match => (
             <div key={match.name}>
-              <Match game={match} />
+              <Match game={match} updateClassification={this.updateClassification}/>
             </div>
           ))}
           
@@ -150,7 +160,7 @@ class MatchList extends Component {
             primary={true}
             onClick={this.nextGroup.bind(this, this.state.currentGroup)}
           />
-          <Classification matches = {matches.matches}/>
+          <Classification matches = {matches.matches} changes={this.state.changes}/>
         </Container>
 
       );

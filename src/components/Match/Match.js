@@ -57,22 +57,23 @@ class Match extends Component {
     let  ref =  await firebaseApp.database().ref('/users/' + auth.uid + '/bets/' + game.name)
     await ref.set({
       away_score: this.state.away_score,
-      home_score: this.state.home_score
+      home_score: this.state.home_score,
+      away_team: this.props.game.away_team,
+      home_team: this.props.game.home_team,
 
     })
-
+ 
   }
 
    listenForMatch = async (matchRef) => {
    
     await matchRef.on('value', (dataSnapshot) => {
-      
-      console.log('Aaaaaaaaaaaaaaa')
-      console.log(dataSnapshot.val())
-      console.log('Aaaaaaaaaaaaaaa')
+
       if(dataSnapshot.val()){
         this.setState({ away_score: dataSnapshot.val().away_score });
         this.setState({ home_score: dataSnapshot.val().home_score });
+        this.setState({ home_team: dataSnapshot.val().home_team });
+        this.setState({ away_team: dataSnapshot.val().away_team });
       }
       
       
@@ -82,10 +83,12 @@ class Match extends Component {
   awayScoreChangedHandler = (event) =>{
     this.setState({away_score: event.target.value})
     this.handleSave()
+    //this.props.updateClassification();
   }
   homeScoreChangedHandler = (event) =>{
     this.setState({home_score: event.target.value})
     this.handleSave()
+    //this.props.updateClassification();
     
   }
 

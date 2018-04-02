@@ -4,7 +4,7 @@ import { appReducers } from 'rmw-shell/lib/store/reducers'
 import rootReducer from 'rmw-shell/lib/store/rootReducer'
 import * as actionsTypes from './actions'
 import worldcupreducer from './worldcupreducer'
-import selectionReducer from './SelectionReducer'
+import playerDataReducer from './PlayerDataReducer'
 
 
 
@@ -12,7 +12,7 @@ import selectionReducer from './SelectionReducer'
 const appReducer = combineReducers({
   ...appReducers, 
   worldCupData: worldcupreducer,
-  selectionReducer: selectionReducer
+  playerDataReducer: playerDataReducer
   
   
 })
