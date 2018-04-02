@@ -39,23 +39,23 @@ class Match extends Component {
     };
   }
 
-  componentDidMount(){
+  componentWillMount(){
     const { watchList, firebaseApp, auth, game } = this.props
-
-    let ref = firebaseApp.database().ref('/bets/' + auth.uid + '/' + game.name)
-    if(ref){
-      ref.on('value', snapshot => {
-        this.setState({ away_score: snapshot.val().away_score });
-        this.setState({ home_score: snapshot.val().home_score });
-      });
-    }
     
+    let ref = firebaseApp.database().ref('/users/' + auth.uid + '/bets/' + game.name)
+    // if(ref){
+    //   ref.on('value', snapshot => {
+    //     this.setState({ away_score: snapshot.val().away_score });
+    //     this.setState({ home_score: snapshot.val().home_score });
+    //   });
+    // }
+    this.listenForMatch(ref);
   }
 
-  handleSave = ( ) =>{
+  handleSave = async ( ) =>{
     const {  firebaseApp, auth, game } = this.props
-    let ref = firebaseApp.database().ref(('/bets/' + auth.uid + '/' + game.name))
-    ref.set({
+    let  ref =  await firebaseApp.database().ref('/users/' + auth.uid + '/bets/' + game.name)
+    await ref.set({
       away_score: this.state.away_score,
       home_score: this.state.home_score
 
@@ -63,11 +63,30 @@ class Match extends Component {
 
   }
 
+   listenForMatch = async (matchRef) => {
+   
+    await matchRef.on('value', (dataSnapshot) => {
+      
+      console.log('Aaaaaaaaaaaaaaa')
+      console.log(dataSnapshot.val())
+      console.log('Aaaaaaaaaaaaaaa')
+      if(dataSnapshot.val()){
+        this.setState({ away_score: dataSnapshot.val().away_score });
+        this.setState({ home_score: dataSnapshot.val().home_score });
+      }
+      
+      
+    });
+    }
+
   awayScoreChangedHandler = (event) =>{
     this.setState({away_score: event.target.value})
+    this.handleSave()
   }
   homeScoreChangedHandler = (event) =>{
     this.setState({home_score: event.target.value})
+    this.handleSave()
+    
   }
 
   render() {
@@ -103,11 +122,7 @@ class Match extends Component {
           <Team id={this.props.game.away_team} isHomeTeam="false" />
         </Col>
       </Row>
-      <FlatButton
-        label={'Salvar'}
-        primary={true}
-        onClick={this.handleSave}
-      />,
+      
       </Container>
     );
   }

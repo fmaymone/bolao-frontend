@@ -22,42 +22,95 @@ import firebase from "firebase";
 import { change, submit } from "redux-form";
 import Match from "./Match";
 import { Container, Row, Col } from "react-grid-system";
+import Classification from './Classification'
 
 const path = "/bets/";
 const form_name = "bets";
 
 class MatchList extends Component {
-  matches = [
-    {
-      name: 1,
-      type: "group",
-      home_team: 1,
-      away_team: 2,
-      home_result: null,
-      away_result: null,
-      date: "2018-06-14T18:00:00+03:00",
-      stadium: 1,
-      channels: [],
-      finished: false
-    },
-    {
-      name: 2,
-      type: "group",
-      home_team: 3,
-      away_team: 4,
-      home_result: null,
-      away_result: null,
-      date: "2018-06-15T17:00:00+05:00",
-      stadium: 12,
-      channels: [],
-      finished: false
-    }
-  ];
-
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      matches: {},
+      currentGroup: "a"
+    };
   }
+
+  // componentWillMount() {
+  //   console.log("oi");
+  //   this.setState({
+  //     matches: this.props.worldCupData.groups.find(
+  //       item => item.id === this.state.currentGroup
+  //     )
+  //   });
+  // }
+
+  nextGroup = currentGroup => {
+    switch (currentGroup) {
+      case "a":
+        this.setState({ currentGroup: "b" });
+        break;
+      case "b":
+        this.setState({ currentGroup: "c" });
+        break;
+      case "c":
+        this.setState({ currentGroup: "d" });
+        break;
+      case "d":
+        this.setState({ currentGroup: "e" });
+        break;
+      case "e":
+        this.setState({ currentGroup: "f" });
+        break;
+      case "f":
+        this.setState({ currentGroup: "g" });
+        break;
+        case "g":
+        this.setState({ currentGroup: "h" });
+        break;
+      case "h":
+        this.setState({ currentGroup: "h" });
+        break;
+
+      default:
+        this.setState({ currentGroup: "a" });
+        break;
+    }
+  };
+
+  prevGroup = currentGroup => {
+    switch (currentGroup) {
+      case "a":
+        this.setState({ currentGroup: "a" });
+        break;
+      case "b":
+        this.setState({ currentGroup: "a" });
+        break;
+      case "c":
+        this.setState({ currentGroup: "b" });
+        break;
+      case "d":
+        this.setState({ currentGroup: "c" });
+        break;
+      case "e":
+        this.setState({ currentGroup: "d" });
+        break;
+      case "f":
+        this.setState({ currentGroup: "e" });
+        break;
+      case "g":
+        this.setState({ currentGroup: "f" });
+        break;
+      case "h":
+        this.setState({ currentGroup: "g" });
+        break;
+
+      default:
+        this.setState({ currentGroup: "a" });
+        break;
+    }
+  };
+
   render() {
     const {
       history,
@@ -71,19 +124,35 @@ class MatchList extends Component {
       firebaseApp
     } = this.props;
     const uid = this.props.auth.uid;
+
+    const matches = this.props.worldCupData.groups.find(
+      item => item.id === this.state.currentGroup
+    );
+
     if (uid) {
       return (
-        
-          <Container fluid style={styles.matchesContainer} >
-            {this.matches.map(match => (
-              <div key={match.name}>
-                
-                  <Match game={match} />
-                
-              </div>
-            ))}
-          </Container>
-       
+        <Container fluid style={styles.matchesContainer}>
+          <h1>Grupo {this.state.currentGroup.toUpperCase()} </h1>
+
+          {matches.matches.map(match => (
+            <div key={match.name}>
+              <Match game={match} />
+            </div>
+          ))}
+          
+          <FlatButton
+            label={"< Anterior"}
+            primary={true}
+            onClick={this.prevGroup.bind(this, this.state.currentGroup)}
+          />
+          <FlatButton
+            label={"Proximo >"}
+            primary={true}
+            onClick={this.nextGroup.bind(this, this.state.currentGroup)}
+          />
+          <Classification matches = {matches.matches}/>
+        </Container>
+
       );
     } else {
       return "Oi";
@@ -91,12 +160,13 @@ class MatchList extends Component {
   }
 }
 const mapStateToProps = state => {
-  const { auth, browser, lists } = state;
+  const { auth, browser, lists, worldCupData } = state;
 
   return {
     auth,
     browser,
-    isGranted: grant => isGranted(state, grant)
+    isGranted: grant => isGranted(state, grant),
+    worldCupData: worldCupData
   };
 };
 
@@ -110,6 +180,5 @@ const styles = {
     display: "flex",
     left: 20,
     flexDirection: "column"
-   
   }
 };
