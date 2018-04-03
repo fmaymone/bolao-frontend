@@ -17,22 +17,29 @@ class Classification extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      classification: [{}]
+      classification: null,
+      alo:null
     };
   }
 
   componentDidMount() {
-    this.addMatchesToClassification();
+    this.addMatchesToClassification().bind(this);
   }
   addMatchesToClassification = () => {
     const matches = this.props.matches;
 
     for (let match of matches) {
-      this.addPointsToTeams(match);
+      this.addPointsToTeams(match).bind(this);
+      console.log('ooooooooooooooooooooooooooooooo');
+      console.log(this.state);
+      console.log('ooooooooooooooooooooooooooooooo');
     }
   }
-  addPointsToTeams(match) {
-
+  addPointsToTeams = (match) => {
+   //let classification = this.state.classification.slice()
+   let homeTeam = { id: match.home_team, handycap:{plays:1,wins:1,losts:0,draws:0,gp:match.home_score,gc:match.away_score} }
+   this.setState({classification:{homeTeam}});
+   this.setState({alo:'Olar'});
 
     switch (this.computeResult(match)) {
 
@@ -45,20 +52,12 @@ class Classification extends Component {
         //be the new one
         if (!this.isTeamOnState(match.home_team)) {
           homeTeam = { id: match.home_team, handycap:{plays:1,wins:1,losts:0,draws:0,gp:match.home_score,gc:match.away_score} }
-          let arrayvar = this.state.classification.slice()
-          arrayvar.push(homeTeam)
-          this.setState({ classification: arrayvar })
+          //let classification = this.state.classification.slice()
+          this.setState({classification:{homeTeam}});
+          this.setState({alo:'Olar'});
+          
+          
         }
-        // } else {
-        //   //slice from the state
-        //   homeTeam = this.getTeamFromState(match.home_team);
-        // }
-        // if (!this.isTeamOnState(match.away_team)) {
-        //   awayTeam = {}
-        // } else {
-        //   //slice from the state
-        //   awayTeam = {}
-        // }
 
         break
       case WIN_AWAY:
@@ -89,9 +88,11 @@ class Classification extends Component {
   }
 
   isTeamOnState(id) {
-    var json = this.state.classification;
-    id in json ? true : false
-
+    if(this.state.classification){
+      var json = this.state.classification;
+      id in json ? true : false
+    }
+    return false;
   }
   render() {
 
