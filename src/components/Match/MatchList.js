@@ -32,18 +32,14 @@ class MatchList extends Component {
     super(props);
     this.state = {
        currentGroup: "a",
-       changes: true
+       matches:{}
     };
   }
 
-  // componentWillMount() {
-  //   console.log("oi");
-  //   this.setState({
-  //     matches: this.props.worldCupData.groups.find(
-  //       item => item.id === this.state.currentGroup
-  //     )
-  //   });
-  // }
+  componentWillMount() {
+    console.log("oi");
+    this.handleUpdateMatch();
+  }
 
   nextGroup = currentGroup => {
     switch (currentGroup) {
@@ -111,14 +107,23 @@ class MatchList extends Component {
     }
   };
 
-  updateClassification = () => {
+  getMatchesFromDb = async (match) => {
 
-    if(this.state.change === true){
-      this.setState({change:false})
-    }else{
-      this.setState({change:true})
-    }
+   const {  firebaseApp, auth } = this.props
+   let  ref =  await firebaseApp.database().ref('/users/' + auth.uid + '/bets/'+ match)
+   await ref.on('value', (dataSnapshot) => {
 
+      if(dataSnapshot.val()){
+        console.log(dataSnapshot.val());
+        this.setState({matches:dataSnapshot.val().name, match:dataSnapshot.val()})
+      }
+      
+      
+    });
+  }
+
+  handleUpdateMatch = () =>{
+    this.getMatchesFromDb(1);
   }
  
   render() {
@@ -146,7 +151,7 @@ class MatchList extends Component {
 
           {matches.matches.map(match => (
             <div key={match.name}>
-              <Match game={match} updateClassification={this.updateClassification}/>
+              <Match game={match} />
             </div>
           ))}
           
@@ -160,7 +165,7 @@ class MatchList extends Component {
             primary={true}
             onClick={this.nextGroup.bind(this, this.state.currentGroup)}
           />
-          <Classification matches = {matches.matches} changes={this.state.changes}/>
+          {/* <Classification matches = {matches.matches} changes={this.state.changes}/> */}
         </Container>
 
       );
