@@ -6,7 +6,7 @@ import { Activity } from 'rmw-shell'
 
 
 
-class Test extends Component {
+class MatchesController extends Component {
     state = {
         bets: ''
     }
@@ -23,5 +23,5 @@ class Test extends Component {
     }
 }
 
-export default Test
+export default MatchesController
 
