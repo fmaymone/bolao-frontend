@@ -22,55 +22,8 @@ class Classification extends Component {
     };
   }
 
-  componentDidMount() {
-    this.addMatchesToClassification().bind(this);
-  }
-  addMatchesToClassification = () => {
-    const matches = this.props.matches;
-
-    for (let match of matches) {
-      this.addPointsToTeams(match).bind(this);
-      console.log('ooooooooooooooooooooooooooooooo');
-      console.log(this.state);
-      console.log('ooooooooooooooooooooooooooooooo');
-    }
-  }
-  addPointsToTeams = (match) => {
-   //let classification = this.state.classification.slice()
-   let homeTeam = { id: match.home_team, handycap:{plays:1,wins:1,losts:0,draws:0,gp:match.home_score,gc:match.away_score} }
-   this.setState({classification:{homeTeam}});
-   this.setState({alo:'Olar'});
-
-    switch (this.computeResult(match)) {
-
-
-
-      case WIN_HOME:
-        let homeTeam = {};
-        let awayTeam = {};
-        //if the team is not on state homeTeam will
-        //be the new one
-        if (!this.isTeamOnState(match.home_team)) {
-          homeTeam = { id: match.home_team, handycap:{plays:1,wins:1,losts:0,draws:0,gp:match.home_score,gc:match.away_score} }
-          //let classification = this.state.classification.slice()
-          this.setState({classification:{homeTeam}});
-          this.setState({alo:'Olar'});
-          
-          
-        }
-
-        break
-      case WIN_AWAY:
-
-        break
-      case DRAW:
-
-        break
-
-    }
-
-  }
-  computeResult(match){
+  
+  resultOfMatch = (match) =>{
 
     if(match.home_score > match.away_score){
       return WIN_HOME;
@@ -78,26 +31,42 @@ class Classification extends Component {
     if(match.home_score < match.away_score){
       return WIN_AWAY;
     }
-    
+    if(match.home_score > match.away_score){
       return DRAW;
-    
-  }
-  getTeamFromState(id) {
-    return this.state.classification.find(id);
-
-  }
-
-  isTeamOnState(id) {
-    if(this.state.classification){
-      var json = this.state.classification;
-      id in json ? true : false
     }
-    return false;
   }
+  renderTeams = () => {
+    const matches = this.props.matches;
+    let teams = [];
+    for(let match of matches){
+      
+      let home = teams.find(k => k.id ==match.home_team);
+      let away = teams.find(k => k.id ==match.away_team);
+      
+      if(home === undefined){
+        teams.push({id:match.home_team, handycap:{plays:1}})       
+      }else{
+        
+      }
+      if(away === undefined){
+        teams.push({id:match.away_team, handycap:{plays:1}}) 
+      }else{
+        
+      }
+
+     
+
+    }
+    console.log(teams);
+    
+
+
+    return (<h1>Olar</h1>)
+  }
+
+
   render() {
-
-
-    return <h1>Olar</h1>;
+    return this.renderTeams();
   }
 }
 const mapStateToProps = state => {
