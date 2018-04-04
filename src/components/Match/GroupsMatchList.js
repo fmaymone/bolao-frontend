@@ -192,7 +192,7 @@ render() {
           primary={true}
           onClick={this.nextGroup.bind(this, this.state.currentGroup)}
         />
-         <Classification matches = {this.groupMatchesTest} />
+         <Classification matches = {matches.matches} />
       </Container>
 
     );
