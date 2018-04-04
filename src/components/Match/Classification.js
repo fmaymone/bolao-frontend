@@ -16,16 +16,32 @@ class Classification extends Component {
 
   state = {
     test: 'initial value',
-    teams: []
+    teams: [],
+    matchesState:[]
   }
   componentDidMount() {
+    this.getActualValues();
     this.fillTeams();
     this.processResults();
+   
   }
+  getActualValues = async () =>{
 
+    const {  firebaseApp, auth } = this.props;
+    let  ref =  await firebaseApp.database().ref('/users/' + auth.uid + '/bets/');
+    await ref.on('value', (dataSnapshot) => {
+
+        if(dataSnapshot.val()){
+          console.log(dataSnapshot.val());
+          this.setState({matchesState:dataSnapshot.val()})
+        }
+
+
+      });
+  }
   fillTeams = () => {
 
-    const matches = this.props.matches;
+    const matches = this.state.matchesState;
     let teams = [];
     const handycapInitialValues = { plays: 0, wins: 0, losts: 0, draws: 0, gp: 0, gc: 0 };
     for (let match of matches) {
@@ -68,9 +84,9 @@ class Classification extends Component {
       }
 
 
-      console.log(teams);
+     
     }
-    console.log(teams);
+    
     this.setState({ teams: teams });
   }
 
@@ -136,8 +152,7 @@ class Classification extends Component {
 
 
     }
-    console.log(teams);
-    console.log(this.state);
+    
 
 
 
@@ -160,6 +175,6 @@ const mapStateToProps = state => {
     worldCupData: worldCupData
   };
 };
-export default connect(mapStateToProps)(
-  injectIntl(withRouter(muiThemeable()(Classification)))
-);
+export default connect(mapStateToProps, {
+
+})(injectIntl(withRouter(withFirebase(muiThemeable()(Classification)))));
