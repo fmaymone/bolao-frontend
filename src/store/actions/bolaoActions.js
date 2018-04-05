@@ -1,29 +1,20 @@
 import {
-  CHANGE_CURRENT_GROUP,
-  GET_CURRENT_GROUP,
-  COMPUTE_CLASSIFICATION
- 
+  CHANGE_CURRENT_STAGE,
+  GET_CURRENT_STAGE
 } from "./types"
 
-export const changeGroup = group => {
+export const changeStage = group => {
   return {
-    type: CHANGE_CURRENT_GROUP,
+    type: CHANGE_CURRENT_STAGE,
     payload: group
   }
 }
 
-export const getCurrentGroup = (group) => {
+export const getCurrentStage = () => {
   return {
-    type: CHANGE_CURRENT_GROUP,
-    payload: group
+    type: GET_CURRENT_STAGE,
+    
   }
 }
 
-export const computeClassification = (data) => {
-  return {
-    type: COMPUTE_CLASSIFICATION,
-    payload: data
-  }
-
-}
 

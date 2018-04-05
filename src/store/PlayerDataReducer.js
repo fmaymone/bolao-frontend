@@ -1,23 +1,16 @@
-import { CHANGE_CURRENT_GROUP, GET_CURRENT_GROUP } from './actions/types'
+import { CHANGE_CURRENT_STAGE, GET_CURRENT_STAGE } from './actions/types'
 
 const initialState = {
 
     currentGroup: 'a',
-    classification: {
-      id: 'a',
-      teams: 
-        {
-          id:'1', 
-          handycap:{wins:0,loses:0,draws:0,goals_for:0,goals_against:0}
-        }
-    }
+    currentPhase: 'groups'
 }
 
-export default (state = {currentGroup: 'a', classification:{}}, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
-      case CHANGE_CURRENT_GROUP:
+      case CHANGE_CURRENT_STAGE:
         return action.payload
-      case GET_CURRENT_GROUP:
+      case GET_CURRENT_STAGE:
         return state
       default:
         return state

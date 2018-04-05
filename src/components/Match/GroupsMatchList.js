@@ -23,6 +23,7 @@ import { change, submit } from "redux-form";
 import Match from "./Match";
 import { Container, Row, Col } from "react-grid-system";
 import Classification from './Classification'
+import * as playerActions from '../../store/actions/bolaoActions'
 
 const path = "/bets/";
 const form_name = "bets";
@@ -67,7 +68,17 @@ class GroupsMatchList extends Component {
 //   console.log("oi");
 //   this.handleUpdateMatch();
 // }
+handleChangeGroup = () => {
 
+  const payload = { currentGroup: 'b',
+  currentPhase: 'knockout'};
+  
+  this.props.changeStage(payload);
+  console.log(this.props.getCurrentStage());
+  console.log(this.props.getCurrentStage());
+
+
+}
 nextGroup = currentGroup => {
   switch (currentGroup) {
     case "a":
@@ -134,6 +145,7 @@ prevGroup = currentGroup => {
   }
 };
 
+handleChange
 // getMatchesFromDb = async (match) => {
 
 //  const {  firebaseApp, auth } = this.props
@@ -192,6 +204,11 @@ render() {
           primary={true}
           onClick={this.nextGroup.bind(this, this.state.currentGroup)}
         />
+        <FlatButton
+          label={"Testar Reducers >"}
+          primary={true}
+          onClick={this.handleChangeGroup.bind(this)}
+        />
          <Classification matches = {matches.matches} />
       </Container>
 
@@ -202,17 +219,18 @@ render() {
 }
 }
 const mapStateToProps = state => {
-  const { auth, browser, lists, worldCupData } = state;
+  const { auth, browser, lists, worldCupData, playerDataReducer } = state;
 
   return {
     auth,
     browser,
     isGranted: grant => isGranted(state, grant),
-    worldCupData: worldCupData
+    worldCupData: worldCupData,
+    playerDataReducer: playerDataReducer
   };
 };
 
-export default connect(mapStateToProps, { change, submit })(
+export default connect(mapStateToProps,playerActions)(
   injectIntl(muiThemeable()(withRouter(withFirebase(GroupsMatchList))))
 );
 

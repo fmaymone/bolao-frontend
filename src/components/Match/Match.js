@@ -22,7 +22,7 @@ import FireForm from "fireform";
 import { change, submit } from "redux-form";
 import isGranted from "rmw-shell/lib/utils/auth";
 import TestForm from "../../components/Forms/TestForm";
-import { betCreate } from "../../store/actions";
+
 import { Container, Row, Col } from "react-grid-system";
 import TextField from 'material-ui/TextField';
 
@@ -145,8 +145,8 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   setDialogIsOpen,
   change,
-  submit,
-  betCreate
+  submit
+  
 })(injectIntl(withRouter(withFirebase(muiThemeable()(Match)))));
 
 Match.propTypes = {
