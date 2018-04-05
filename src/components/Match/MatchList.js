@@ -28,7 +28,7 @@ import * as playerActions from '../../store/actions/bolaoActions'
 const path = "/bets/";
 const form_name = "bets";
 
-class GroupsMatchList extends Component {
+class MatchList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -70,8 +70,8 @@ class GroupsMatchList extends Component {
 // }
 handleChangeGroup = () => {
 
-  const payload = { currentGroup: 'b',
-  currentPhase: 'knockout'};
+  const payload = { currentGroup: 'a',
+  currentPhase: 'groups_stage'};
   
   this.props.changeStage(payload);
 
@@ -142,27 +142,15 @@ prevGroup = currentGroup => {
       break;
   }
 };
+renderMatches = (matches) =>{
 
-handleChange
-// getMatchesFromDb = async (match) => {
-
-//  const {  firebaseApp, auth } = this.props
-//  let  ref =  await firebaseApp.database().ref('/users/' + auth.uid + '/bets/'+ match)
-//  await ref.on('value', (dataSnapshot) => {
-
-//     if(dataSnapshot.val()){
-//       console.log(dataSnapshot.val());
-//       this.setState({matches:dataSnapshot.val().name, match:dataSnapshot.val()})
-//     }
+  for(let match in matches){
 
 
-//   });
-// }
+  }
 
-// handleUpdateMatch = () =>{
-//   this.getMatchesFromDb(1);
-// }
 
+}
 render() {
   const {
       history,
@@ -173,24 +161,27 @@ render() {
     submit,
     muiTheme,
     isGranted,
-    firebaseApp
+    firebaseApp,
+    matches
     } = this.props;
   const uid = this.props.auth.uid;
 
-  const matches = this.props.worldCupData.groups.find(
-    item => item.id === this.state.currentGroup
-  );
+  // const matches = this.props.worldCupData.groups.find(
+  //   item => item.id === this.state.currentGroup
+  // );
+  
 
   if (uid) {
     return (
       <Container fluid style={styles.matchesContainer}>
         <h1>Grupo {this.state.currentGroup.toUpperCase()} </h1>
 
-        {matches.matches.map(match => (
+        
+        {/* {matches.map(match => (
           <div key={match.name}>
             <Match game={match} />
           </div>
-        ))}
+        ))} */}
 
         <FlatButton
           label={"< Anterior"}
@@ -229,7 +220,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps,playerActions)(
-  injectIntl(muiThemeable()(withRouter(withFirebase(GroupsMatchList))))
+  injectIntl(muiThemeable()(withRouter(withFirebase(MatchList))))
 );
 
 const styles = {
