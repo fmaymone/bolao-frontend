@@ -17,8 +17,7 @@ class MatchesLoader extends Component {
     getActualValues =  () => {
 
         const { firebaseApp, auth } = this.props;
-        let ref = firebaseApp.database().ref('/users/' + auth.uid + '/bets/');
-        ref.on('value', (dataSnapshot) => {
+        let ref = firebaseApp.database().ref('/users/' + auth.uid + '/bets/').on('value', (dataSnapshot) => {
 
             if (dataSnapshot.val()) {
                 console.log(dataSnapshot.val());

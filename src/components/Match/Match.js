@@ -35,7 +35,8 @@ class Match extends Component {
       away_team: "0",
       home_team: "0",
       away_score: "0",
-      home_score: "0"
+      home_score: "0",
+      id:"0"
     };
   }
 
@@ -54,12 +55,13 @@ class Match extends Component {
 
   handleSave = async ( ) =>{
     const {  firebaseApp, auth, game } = this.props
-    let  ref =  await firebaseApp.database().ref('/users/' + auth.uid + '/bets/' + game.name)
+    let  ref =  await firebaseApp.database().ref('/users/' + auth.uid + '/bets/' + game.id)
     await ref.set({
       away_score: this.state.away_score,
       home_score: this.state.home_score,
       away_team: this.props.game.away_team,
       home_team: this.props.game.home_team,
+      id: this.props.game.id
 
     })
  
@@ -74,6 +76,7 @@ class Match extends Component {
         this.setState({ home_score: dataSnapshot.val().home_score });
         this.setState({ home_team: dataSnapshot.val().home_team });
         this.setState({ away_team: dataSnapshot.val().away_team });
+        this.setState({ id: dataSnapshot.val().id });
       }
       
       
@@ -112,14 +115,14 @@ class Match extends Component {
           <Team id={this.props.game.home_team} isHomeTeam="true" />
         </Col>
         <Col sm={1}>
-          <TextField value={this.state.home_score} onChange={this.homeScoreChangedHandler}/>
+          <TextField value={this.props.game.home_score} onChange={this.homeScoreChangedHandler}/>
         </Col>
         <Col sm={2}>
         <center>X</center>
         
         </Col>
         <Col sm={1}>
-          <TextField value={this.state.away_score} onChange={this.awayScoreChangedHandler}/>
+          <TextField value={this.props.game.away_score} onChange={this.awayScoreChangedHandler}/>
         </Col>
         <Col sm={4}>
           <Team id={this.props.game.away_team} isHomeTeam="false" />

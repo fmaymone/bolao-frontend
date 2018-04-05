@@ -16,26 +16,16 @@ class MatchesBuilder extends Component {
         matches: ''
     }
 
-    getActualValues = async () => {
 
-        const { firebaseApp, auth } = this.props;
-        let ref = await firebaseApp.database().ref('/users/' + auth.uid + '/bets/');
-        await ref.on('value', (dataSnapshot) => {
 
-            if (dataSnapshot.val()) {
-                console.log(dataSnapshot.val());
-                this.setState({ matches: dataSnapshot.val() })
-            }
-        });
-    }
 
     renderGroupsStage() {
         return (<GroupsBuilder stage={this.props.playerDataReducer} />)
 
     }
     renderKnockoutStage() {
-       // return (<h1>GroupsStage</h1>)
-       return (<MatchList />)
+         return (<h1>GroupsStage</h1>)
+        
 
     }
     render() {

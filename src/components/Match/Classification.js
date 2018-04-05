@@ -20,25 +20,9 @@ class Classification extends Component {
     matchesState:[]
   }
   componentDidMount() {
-    this.getActualValues();
-    this.fillTeams();
-    this.processResults();
    
   }
-  getActualValues = async () =>{
-
-    const {  firebaseApp, auth } = this.props;
-    let  ref =  await firebaseApp.database().ref('/users/' + auth.uid + '/bets/');
-    await ref.on('value', (dataSnapshot) => {
-
-        if(dataSnapshot.val()){
-          console.log(dataSnapshot.val());
-          this.setState({matchesState:dataSnapshot.val()})
-        }
-
-
-      });
-  }
+ 
   fillTeams = () => {
 
     const matches = this.state.matchesState;

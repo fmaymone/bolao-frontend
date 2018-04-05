@@ -169,7 +169,12 @@ render() {
   // const matches = this.props.worldCupData.groups.find(
   //   item => item.id === this.state.currentGroup
   // );
-  
+  let convertedMatches = [];
+  for (let game in matches){
+    console.log(game);
+    let temp = matches[game];
+    convertedMatches.push(temp);
+  }
 
   if (uid) {
     return (
@@ -177,11 +182,11 @@ render() {
         <h1>Grupo {this.state.currentGroup.toUpperCase()} </h1>
 
         
-        {/* {matches.map(match => (
+        {convertedMatches.map(match => (
           <div key={match.name}>
             <Match game={match} />
           </div>
-        ))} */}
+        ))}
 
         <FlatButton
           label={"< Anterior"}
@@ -198,7 +203,7 @@ render() {
           primary={true}
           onClick={this.handleChangeGroup.bind(this)}
         />
-         <Classification matches = {matches.matches} />
+         {/* <Classification matches = {matches.matches} /> */}
       </Container>
 
     );
