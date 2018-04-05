@@ -74,8 +74,6 @@ handleChangeGroup = () => {
   currentPhase: 'knockout'};
   
   this.props.changeStage(payload);
-  console.log(this.props.getCurrentStage());
-  console.log(this.props.getCurrentStage());
 
 
 }
