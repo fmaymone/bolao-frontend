@@ -24,7 +24,7 @@ class MatchesBuilder extends Component {
 
     }
     renderKnockoutStage() {
-         return (<h1>GroupsStage</h1>)
+         return (<h1>Knockout Stage</h1>)
         
 
     }

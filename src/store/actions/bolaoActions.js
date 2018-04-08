@@ -9,6 +9,8 @@ import {
 } from "./types"
 
 import {firebaseApp} from '../../firebase';
+import firebase from 'firebase';
+
 
 
 export const changeStage = group => {
@@ -31,33 +33,36 @@ export const matchUpdate = ({ prop, value }) => {
   };
 };
 
-export const matchesInitialCreate = (user, match) => {
-  const { currentUser } = firebaseApp.auth();
+export const matchesInitialCreate = ( matches ) => {
+  const { currentUser } = firebase.auth();
 
   return (dispatch) => {
-    firebaseApp.database().ref(`/users/${user}/matches`)
-      .push(match)
+    firebaseApp.database().ref(`/users/${currentUser.uid}/matches`)
+      .set(matches)
       .then(() => {
         dispatch({ type: MATCHES_INITIAL_CREATE });
         
       });
   };
 };
-const mapStateToProps = state => {
-  const { auth } = state;
 
-  return auth
-};
 
-export const matchesFetch = (user) => {
+
+
+export const matchesFetch = () => {
   
-  
+  const { currentUser } = firebase.auth();
+
   return (dispatch) => {
-    firebaseApp.database().ref(`/users/${user}/matches`)
-      .on('value', snapshot => {
-        dispatch({ type: MATCHES_FETCH_SUCCESS, payload: snapshot.val() });
-      });
+    if(currentUser){
+      firebase.database().ref(`/users/${currentUser.uid}/matches`)
+        .on('value', snapshot => {
+          dispatch({ type: MATCHES_FETCH_SUCCESS, payload: snapshot.val() });
+          console.log(snapshot.val().groups);
+        });
+    }
   };
+  
 };
 
 

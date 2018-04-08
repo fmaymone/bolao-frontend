@@ -1,4 +1,4 @@
-import { CHANGE_CURRENT_STAGE, GET_CURRENT_STAGE, MATCH_CREATE, } from './actions/types'
+import { CHANGE_CURRENT_STAGE, GET_CURRENT_STAGE, MATCHES_INITIAL_CREATE, MATCHES_FETCH_SUCCESS} from './actions/types'
 import data from '../world-cup';
 
 const initialState = {
@@ -17,8 +17,11 @@ export default (state = initialState, action) => {
         return action.payload
       case GET_CURRENT_STAGE:
         return state
-      case MATCH_CREATE:
+      case MATCHES_INITIAL_CREATE:
         return initialState
+      case MATCHES_FETCH_SUCCESS:
+        console.log(action)
+        return action.payload;
       default:
         return state
   }

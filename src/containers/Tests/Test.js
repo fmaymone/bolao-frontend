@@ -6,21 +6,44 @@ import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
 import {matchesFetch, matchesInitialCreate} from '../../store/actions/bolaoActions'
-
+import FlatButton from "material-ui/FlatButton";
+import data from '../../world-cup'
 
 
 class Test extends Component {
-    componentWillMount() {
-        this.props.matchesFetch();
+    componentDidMount() {
+        //this.props.matchesFetch(this.props.auth.uid);
     }
- 
+    
+    handlerInitialState = ( matches) =>{
+        const newMatches = {
+            
+            
+                groups:data.groups,
+                knockout:data.knockout
+            
+        }
+        this.props.matchesInitialCreate(newMatches);
+    }
+    handlerLoadState = (user) =>{
+        
+        this.props.matchesFetch(user);
+    }
  
     render() {
         return (
             <Activity
             ><h1>Testing</h1>
-            <div>{this.props.matchesInitialCreate(this.props.auth.uid, this.props.playerDataReducer.matches)}</div>
-            <div>{this.props.matchesFetch(this.props.auth.uid)}</div>
+        <FlatButton
+          label={"Test"}
+          primary={true}
+          onClick={this.handlerInitialState.bind(this, this.props.playerDataReducer.matches)}
+        />
+             <FlatButton
+          label={"Load"}
+          primary={true}
+          onClick={this.handlerLoadState.bind(this )}
+        />               
             </Activity>
         
         )
