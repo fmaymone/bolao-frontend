@@ -25,7 +25,11 @@ class MatchesBuilder extends Component {
 
     }
     renderKnockoutStage() {
+<<<<<<< HEAD
          return (<h1>Knockout</h1>)
+=======
+         return (<h1>Knockout Stage</h1>)
+>>>>>>> refactor
         
 
     }

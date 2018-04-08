@@ -1,27 +1,67 @@
 import React, { Component } from 'react';
-import TestList from '../../components/Match/TestList'
-
-import BetForm from '../../components/Forms/BetForm'
 import { Activity } from 'rmw-shell'
-
+import { injectIntl } from "react-intl";
+import { withRouter } from "react-router-dom";
+import { withFirebase } from "firekit-provider";
+import { connect } from "react-redux";
+import muiThemeable from "material-ui/styles/muiThemeable";
+import {matchesFetch, matchesInitialCreate} from '../../store/actions/bolaoActions'
+import FlatButton from "material-ui/FlatButton";
+import data from '../../world-cup'
 
 
 class Test extends Component {
-    state = {
-        bets: ''
+    componentDidMount() {
+        //this.props.matchesFetch(this.props.auth.uid);
     }
-
-    submit = values => {
-        // print the form values to the console
-        console.log(values)
+    
+    handlerInitialState = ( matches) =>{
+        const newMatches = {
+            
+            
+                groups:data.groups,
+                knockout:data.knockout
+            
+        }
+        this.props.matchesInitialCreate(newMatches);
     }
+    handlerLoadState = (user) =>{
+        
+        this.props.matchesFetch(user);
+    }
+ 
     render() {
         return (
-            <Activity></Activity>
+            <Activity
+            ><h1>Testing</h1>
+        <FlatButton
+          label={"Test"}
+          primary={true}
+          onClick={this.handlerInitialState.bind(this, this.props.playerDataReducer.matches)}
+        />
+             <FlatButton
+          label={"Load"}
+          primary={true}
+          onClick={this.handlerLoadState.bind(this )}
+        />               
+            </Activity>
         
         )
     }
 }
 
-export default Test
+const mapStateToProps = state => {
+    const { intl, dialogs, auth, playerDataReducer } = state;
+    
+    return {
+        intl,
+        dialogs,
+        auth,
+        playerDataReducer: playerDataReducer,
+    };
+};
+
+export default connect(mapStateToProps,{matchesFetch, matchesInitialCreate}
+
+)(injectIntl(withRouter(withFirebase(muiThemeable()(Test)))));
 

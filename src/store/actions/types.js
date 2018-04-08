@@ -10,5 +10,11 @@ export const PHASE_4 = 'phase_4'
 export const PHASE_FINALS = 'finals'
 export const PHASE_3x4 = '3x4'
 
+export const MATCH_UPDATE = 'match_update';
+export const MATCH_CREATE = 'match_create';
+export const MATCHES_FETCH_SUCCESS = 'matches_fetch_success';
+export const MATCH_SAVE_SUCCESS = 'match_save_success';
+export const MATCHES_INITIAL_CREATE = 'matches_initial_creation';
+
 
 
