@@ -5,9 +5,10 @@ import { withRouter } from "react-router-dom";
 import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
-import GroupsBuilder from './GroupsBuilder'
-import { GROUPS_STAGE, KNOCKOUT_STAGE } from '../../store/actions/types'
-import MatchList from '../../components/Match/MatchList'
+import GroupsBuilder from './GroupsBuilder';
+import { GROUPS_STAGE, KNOCKOUT_STAGE } from '../../store/actions/types';
+import MatchList from '../../components/Match/MatchList';
+
 
 
 
@@ -24,7 +25,7 @@ class MatchesBuilder extends Component {
 
     }
     renderKnockoutStage() {
-         return (<h1>GroupsStage</h1>)
+         return (<h1>Knockout</h1>)
         
 
     }

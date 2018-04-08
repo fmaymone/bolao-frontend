@@ -1,9 +1,9 @@
-import { CHANGE_CURRENT_STAGE, GET_CURRENT_STAGE } from './actions/types'
+import { CHANGE_CURRENT_STAGE, GET_CURRENT_STAGE, GROUPS_STAGE } from './actions/types'
 
 const initialState = {
 
     currentGroup: 'a',
-    currentPhase: 'groups'
+    currentPhase: GROUPS_STAGE
 }
 
 export default (state = initialState, action) => {
