@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
-import {matchesFetch, matchesInitialCreate} from '../../store/actions/bolaoActions'
+import {matchesFetch, matchesInitialCreate } from '../../store/actions/bolaoActions'
 import FlatButton from "material-ui/FlatButton";
 import data from '../../world-cup'
 
@@ -15,21 +15,25 @@ class Test extends Component {
         //this.props.matchesFetch(this.props.auth.uid);
     }
     
-    handlerInitialState = ( matches) =>{
-        const newMatches = {
+    handlerInitialState = ( ) =>{
+        const matches = [];
+        for(let match of data.matches){
             
-            
-                groups:data.groups,
-                knockout:data.knockout
-            
+            console.log(match);
+            matches.push(match);
         }
-        this.props.matchesInitialCreate(newMatches);
+
+                
+        this.props.matchesInitialCreate(matches);
     }
-    handlerLoadState = (user) =>{
+    handlerLoadState = () =>{
         
-        this.props.matchesFetch(user);
+        this.props.matchesFetch();
     }
- 
+    handlerGetMatchesFromGroup = (group) =>{
+
+        this.props.getMatchesFromGroup('a');
+    }
     render() {
         return (
             <Activity
@@ -61,7 +65,7 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps,{matchesFetch, matchesInitialCreate}
+export default connect(mapStateToProps,{matchesFetch, matchesInitialCreate }
 
 )(injectIntl(withRouter(withFirebase(muiThemeable()(Test)))));
 

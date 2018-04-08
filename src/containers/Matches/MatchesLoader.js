@@ -6,27 +6,12 @@ import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
 import MatchList from '../../components/Match/MatchList'
 class MatchesLoader extends Component {
-    state = {
-        matches: ''
-    }
+  
 
-    componentDidMount() {
-        this.getActualValues();
-    }
+    
+  
 
-    getActualValues =  () => {
-
-        const { firebaseApp, auth } = this.props;
-        let ref = firebaseApp.database().ref('/users/' + auth.uid + '/bets/').on('value', (dataSnapshot) => {
-
-            if (dataSnapshot.val()) {
-                console.log(dataSnapshot.val());
-                this.setState({ matches: dataSnapshot.val() })
-            }
-
-
-        });
-    }
+  
 
     render() {
         console.log(this.state);
