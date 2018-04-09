@@ -16,15 +16,8 @@ class Test extends Component {
     }
     
     handlerInitialState = ( ) =>{
-        const matches = [];
-        for(let match of data.matches){
-            
-            console.log(match);
-            matches.push(match);
-        }
-
                 
-        this.props.matchesInitialCreate(matches);
+        this.props.matchesInitialCreate(data.matches);
     }
     handlerLoadState = () =>{
         

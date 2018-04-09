@@ -46,6 +46,14 @@ export const matchesInitialCreate = ( matches ) => {
   };
 };
 
+export const updateMatch = (match) => {
+
+  return {
+    type: MATCH_UPDATE,
+    payload: match
+  };
+
+}
 export const updateGroupMatch = ( group, matches ) => {
   const { currentUser } = firebase.auth();
 

@@ -37,33 +37,7 @@ class MatchList extends Component {
     };
   }
   
-  groupMatchesTest = [
-    {id: 1,away_team: "1",
-      home_team: "2",
-      away_score: "1",
-      home_score: "2"},
-    
-    {id: 2, 
-      away_team: "3",
-      home_team: "4",
-      away_score: "1",
-      home_score: "1"
-    },
-    {id: 3, 
-      away_team: "1",
-      home_team: "3",
-      away_score: "3",
-      home_score: "2"
-    },
-    {id: 4,away_team: "2",
-      home_team: "4",
-      away_score: "1",
-      home_score: "2"
-    }
-  
-  
-  ]
-  
+   
 // componentWillMount() {
 //   console.log("oi");
 //   this.handleUpdateMatch();
@@ -74,7 +48,6 @@ handleChangeGroup = () => {
   currentPhase: 'groups_stage'};
   
   this.props.changeStage(payload);
-
 
 }
 nextGroup = currentGroup => {
@@ -142,15 +115,7 @@ prevGroup = currentGroup => {
       break;
   }
 };
-renderMatches = (matches) =>{
 
-  for(let match in matches){
-
-
-  }
-
-
-}
 render() {
   const {
       history,
@@ -165,16 +130,6 @@ render() {
     matches
     } = this.props;
   const uid = this.props.auth.uid;
-
-  // const matches = this.props.worldCupData.groups.find(
-  //   item => item.id === this.state.currentGroup
-  // );
-  // let convertedMatches = [];
-  // for (let game in matches.matches){
-  //   console.log(game);
-  //   let temp = matches.matches[game];
-  //   convertedMatches.push(temp);
-  // }
 
   if (uid) {
     return (
@@ -203,7 +158,7 @@ render() {
           primary={true}
           onClick={this.handleChangeGroup.bind(this)}
         />
-         {/* <Classification matches = {matches.matches} /> */}
+         
       </Container>
 
     );

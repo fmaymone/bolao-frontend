@@ -5,17 +5,10 @@ import { withRouter } from "react-router-dom";
 import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
-<<<<<<< HEAD
 import GroupsBuilder from './GroupsBuilder';
 import { GROUPS_STAGE, KNOCKOUT_STAGE } from '../../store/actions/types';
 import MatchList from '../../components/Match/MatchList';
-
-=======
-import GroupsBuilder from './GroupsBuilder'
-import { GROUPS_STAGE, KNOCKOUT_STAGE } from '../../store/actions/types'
-import MatchList from '../../components/Match/MatchList'
 import {matchesFetch} from '../../store/actions/bolaoActions'
->>>>>>> refactor
 
 
 
@@ -41,11 +34,7 @@ class MatchesBuilder extends Component {
 
     }
     renderKnockoutStage() {
-<<<<<<< HEAD
-         return (<h1>Knockout</h1>)
-=======
          return (<h1>Knockout Stage</h1>)
->>>>>>> refactor
         
 
     }

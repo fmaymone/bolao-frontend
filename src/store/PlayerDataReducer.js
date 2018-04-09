@@ -1,30 +1,13 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { CHANGE_CURRENT_STAGE, GET_CURRENT_STAGE, GROUPS_STAGE } from './actions/types'
-=======
-import { CHANGE_CURRENT_STAGE, GET_CURRENT_STAGE, MATCHES_INITIAL_CREATE, MATCHES_FETCH_SUCCESS} from './actions/types'
-=======
-import { CHANGE_CURRENT_STAGE, GET_CURRENT_STAGE, MATCHES_INITIAL_CREATE, MATCHES_FETCH_SUCCESS, GROUPS_STAGE} from './actions/types'
->>>>>>> refactor
+import { CHANGE_CURRENT_STAGE, GET_CURRENT_STAGE, MATCHES_INITIAL_CREATE, MATCH_UPDATE, MATCHES_FETCH_SUCCESS, GROUPS_STAGE} from './actions/types'
 import data from '../world-cup';
->>>>>>> refactor
+
 
 const initialState = {
 
     currentGroup: 'a',
-<<<<<<< HEAD
-<<<<<<< HEAD
-    currentPhase: GROUPS_STAGE
-=======
-    currentPhase: 'groups',
-=======
     currentPhase: GROUPS_STAGE,
->>>>>>> refactor
-    matches: {
-      groups:data.groups,
-      knockout:data.knockout
-    }
->>>>>>> refactor
+    matches: []
+
 }
 
 export default (state = initialState, action) => {
@@ -35,7 +18,12 @@ export default (state = initialState, action) => {
         return state
       case MATCHES_INITIAL_CREATE:
         return initialState
-      case MATCHES_FETCH_SUCCESS:
+      case MATCH_UPDATE:
+        const newState = {...state} 
+        const indexToUpdate = newState.matches.matches.findIndex(k=>k.name == action.payload.name)
+        newState.matches.matches[indexToUpdate] =  action.payload;
+        return newState
+              case MATCHES_FETCH_SUCCESS:
          return {...state, matches: action.payload };
       default:
         return state
