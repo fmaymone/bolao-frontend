@@ -46,6 +46,35 @@ export const matchesInitialCreate = ( matches ) => {
   };
 };
 
+export const updateGroupMatch = ( group, matches ) => {
+  const { currentUser } = firebase.auth();
+
+  return (dispatch) => {
+    firebaseApp.database().ref(`/users/${currentUser.uid}/matches/groups`)
+      .set(matches)
+      .then(() => {
+        dispatch({ type: MATCHES_INITIAL_CREATE });
+        
+      });
+  };
+};
+// export const getMatchesFromGroup = (group) => {
+
+//   const { currentUser } = firebase.auth();
+//   let returnValues;
+//   if(currentUser){
+//     firebase.database().ref(`/users/${currentUser.uid}/matches`)
+//       .on('value', snapshot => {
+//         console.log(snapshot.val().groups);
+//         returnValues = snapshot.val().groups.find(k => k.id===group);
+//       });
+//   }
+//   console.log(returnValues);
+//   return returnValues;
+  
+
+// }
+
 
 
 
@@ -57,7 +86,7 @@ export const matchesFetch = () => {
     if(currentUser){
       firebase.database().ref(`/users/${currentUser.uid}/matches`)
         .on('value', snapshot => {
-          dispatch({ type: MATCHES_FETCH_SUCCESS, payload: snapshot.val() });
+          dispatch({ type: MATCHES_FETCH_SUCCESS, payload: {matches: snapshot.val()} });
           console.log(snapshot.val().groups);
         });
     }

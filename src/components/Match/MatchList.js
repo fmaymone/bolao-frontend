@@ -169,12 +169,12 @@ render() {
   // const matches = this.props.worldCupData.groups.find(
   //   item => item.id === this.state.currentGroup
   // );
-  let convertedMatches = [];
-  for (let game in matches){
-    console.log(game);
-    let temp = matches[game];
-    convertedMatches.push(temp);
-  }
+  // let convertedMatches = [];
+  // for (let game in matches.matches){
+  //   console.log(game);
+  //   let temp = matches.matches[game];
+  //   convertedMatches.push(temp);
+  // }
 
   if (uid) {
     return (
@@ -182,7 +182,7 @@ render() {
         <h1>Grupo {this.state.currentGroup.toUpperCase()} </h1>
 
         
-        {convertedMatches.map(match => (
+        {matches.map(match => (
           <div key={match.name}>
             <Match game={match} />
           </div>

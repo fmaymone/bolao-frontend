@@ -43,7 +43,7 @@ class Match extends Component {
   componentWillMount(){
     const { watchList, firebaseApp, auth, game } = this.props
     
-    let ref = firebaseApp.database().ref('/users/' + auth.uid + '/bets/' + game.name)
+    let ref = firebaseApp.database().ref('/users/' + auth.uid + '/matches/' + game.name - 1)
     // if(ref){
     //   ref.on('value', snapshot => {
     //     this.setState({ away_score: snapshot.val().away_score });
@@ -55,13 +55,13 @@ class Match extends Component {
 
   handleSave = async ( ) =>{
     const {  firebaseApp, auth, game } = this.props
-    let  ref =  await firebaseApp.database().ref('/users/' + auth.uid + '/bets/' + game.id)
+    let  ref =  await firebaseApp.database().ref('/users/' + auth.uid + '/matches/' + game.name - 1)
     await ref.set({
       away_score: this.state.away_score,
       home_score: this.state.home_score,
       away_team: this.props.game.away_team,
       home_team: this.props.game.home_team,
-      id: this.props.game.id
+      
 
     })
  
@@ -72,11 +72,11 @@ class Match extends Component {
     await matchRef.on('value', (dataSnapshot) => {
 
       if(dataSnapshot.val()){
-        this.setState({ away_score: dataSnapshot.val().away_score });
-        this.setState({ home_score: dataSnapshot.val().home_score });
-        this.setState({ home_team: dataSnapshot.val().home_team });
-        this.setState({ away_team: dataSnapshot.val().away_team });
-        this.setState({ id: dataSnapshot.val().id });
+        this.setState({ away_score: dataSnapshot.val().find(k => k == (this.props.game.name -1).away_score) });
+        this.setState({ home_score: dataSnapshot.val().find(k => k == (this.props.game.name -1).home_score) });
+        this.setState({ away_team: dataSnapshot.val().find(k => k == (this.props.game.name -1).away_team) });
+        this.setState({ home_team: dataSnapshot.val().find(k => k == (this.props.game.name -1).home_team) });
+        
       }
       
       

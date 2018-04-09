@@ -235,9 +235,10 @@ const data = {
       iso2: "jp"
     }
   ],
-  matches: [
-    
-      
+  groups: [
+    {
+      id: "a",
+      matches: [
         {
           name: 1,
           type: "group",
@@ -248,8 +249,7 @@ const data = {
           date: "2018-06-14T18:00:00+03:00",
           stadium: 1,
           channels: [],
-          finished: false,
-          group:'a'
+          finished: false
         },
         {
           name: 2,
@@ -261,8 +261,7 @@ const data = {
           date: "2018-06-15T17:00:00+05:00",
           stadium: 12,
           channels: [],
-          finished: false,
-          group:'a'
+          finished: false
         },
         {
           name: 17,
@@ -274,8 +273,7 @@ const data = {
           date: "2018-06-19T21:00:00+03:00",
           stadium: 3,
           channels: [],
-          finished: false,
-          group:'a'
+          finished: false
         },
         {
           name: 18,
@@ -287,8 +285,7 @@ const data = {
           date: "2018-06-20T18:00:00+03:00",
           stadium: 10,
           channels: [],
-          finished: false,
-          group:'a'
+          finished: false
         },
         {
           name: 33,
@@ -300,8 +297,7 @@ const data = {
           date: "2018-06-25T18:00:00+04:00",
           stadium: 7,
           channels: [],
-          finished: false,
-          group:'a'
+          finished: false
         },
         {
           name: 34,
@@ -313,10 +309,13 @@ const data = {
           date: "2018-06-25T17:00:00+03:00",
           stadium: 8,
           channels: [],
-          finished: false,
-          group:'a'
+          finished: false
         }
-     ,
+      ]
+    },
+    {
+      id: "b",
+      matches: [
         {
           name: 3,
           type: "group",
@@ -327,8 +326,7 @@ const data = {
           date: "2018-06-15T21:00:00+03:00",
           stadium: 11,
           channels: [],
-          finished: false,
-          group:'b'
+          finished: false
         },
         {
           name: 4,
@@ -340,8 +338,7 @@ const data = {
           date: "2018-06-15T18:00:00+03:00",
           stadium: 3,
           channels: [],
-          finished: false,
-          group:'b'
+          finished: false
         },
         {
           name: 19,
@@ -353,8 +350,7 @@ const data = {
           date: "2018-06-20T15:00:00+03:00",
           stadium: 1,
           channels: [],
-          finished:false,
-          group:'b'
+          finished: false
         },
         {
           name: 20,
@@ -366,8 +362,7 @@ const data = {
           date: "2018-06-20T21:00:00+03:00",
           stadium: 5,
           channels: [],
-          finished: false,
-          group:'b'
+          finished: false
         },
         {
           name: 35,
@@ -379,8 +374,7 @@ const data = {
           date: "2018-06-25T21:00:00+03:00",
           stadium: 9,
           channels: [],
-          finished: false,
-          group:'b'
+          finished: false
         },
         {
           name: 36,
@@ -392,11 +386,14 @@ const data = {
           date: "2018-06-25T20:00:00+02:00",
           stadium: 4,
           channels: [],
-          finished: false,
-          group:'b'
+          finished: false
         }
+      ]
+    },
 
-,
+    {
+      id: "c",
+      matches: [
         {
           name: 5,
           type: "group",
@@ -407,8 +404,7 @@ const data = {
           date: "2018-06-16T13:00:00+03:00",
           stadium: 5,
           channels: [],
-          finished: false,
-          group:'c'
+          finished: false
         },
         {
           name: 6,
@@ -420,8 +416,7 @@ const data = {
           date: "2018-06-16T19:00:00+03:00",
           stadium: 9,
           channels: [],
-          finished: false,
-          group:'c'
+          finished: false
         },
         {
           name: 21,
@@ -433,8 +428,7 @@ const data = {
           date: "2018-06-21T20:00:00+05:00",
           stadium: 12,
           channels: [],
-          finished: false,
-          group:'c'
+          finished: false
         },
         {
           name: 22,
@@ -446,8 +440,7 @@ const data = {
           date: "2018-06-21T16:00:00+04:00",
           stadium: 7,
           channels: [],
-          finished: false,
-          group:'c'
+          finished: false
         },
         {
           name: 37,
@@ -459,8 +452,7 @@ const data = {
           date: "2018-06-26T17:00:00+03:00",
           stadium: 1,
           channels: [],
-          finished: false,
-          group:'c'
+          finished: false
         },
         {
           name: 38,
@@ -472,12 +464,14 @@ const data = {
           date: "2018-06-26T17:00:00+02:00",
           stadium: 11,
           channels: [],
-          finished: false,
-          group:'c'
+          finished: false
         }
+      ]
+    },
+    {
+      id: "d",
 
-
-,
+      matches: [
         {
           name: 7,
           type: "group",
@@ -488,8 +482,7 @@ const data = {
           date: "2018-06-16T16:00:00+03:00",
           stadium: 2,
           channels: [],
-          finished: false,
-          group:'d'
+          finished: false
         },
         {
           name: 8,
@@ -501,8 +494,7 @@ const data = {
           date: "2018-06-16T21:00:00+02:00",
           stadium: 4,
           channels: [],
-          finished: false,
-          group:'d'
+          finished: false
         },
         {
           name: 23,
@@ -514,8 +506,7 @@ const data = {
           date: "2018-06-21T21:00:00+03:00",
           stadium: 6,
           channels: [],
-          finished: false,
-          group:'d'
+          finished: false
         },
         {
           name: 24,
@@ -527,8 +518,7 @@ const data = {
           date: "2018-06-22T18:00:00+03:00",
           stadium: 8,
           channels: [],
-          finished: false,
-          group:'d'
+          finished: false
         },
         {
           name: 39,
@@ -540,8 +530,7 @@ const data = {
           date: "2018-06-26T21:00:00+03:00",
           stadium: 3,
           channels: [],
-          finished: false,
-          group:'d'
+          finished: false
         },
         {
           name: 40,
@@ -553,10 +542,14 @@ const data = {
           date: "2018-06-26T21:00:00+03:00",
           stadium: 10,
           channels: [],
-          finished: false,
-          group:'d'
+          finished: false
         }
-   ,
+      ]
+    },
+    {
+      id: "e",
+
+      matches: [
         {
           name: 9,
           type: "group",
@@ -567,8 +560,7 @@ const data = {
           date: "2018-06-17T21:00:00+03:00",
           stadium: 10,
           channels: [],
-          finished: false,
-          group:'e'
+          finished: false
         },
         {
           name: 10,
@@ -580,8 +572,7 @@ const data = {
           date: "2018-06-17T16:00:00+04:00",
           stadium: 7,
           channels: [],
-          finished: false,
-          group:'e'
+          finished: false
         },
         {
           name: 25,
@@ -593,8 +584,7 @@ const data = {
           date: "2018-06-22T15:00:00+03:00",
           stadium: 3,
           channels: [],
-          finished: false,
-          group:'e'
+          finished: false
         },
         {
           name: 26,
@@ -606,8 +596,7 @@ const data = {
           date: "2018-06-22T20:00:00+02:00",
           stadium: 4,
           channels: [],
-          finished: false,
-          group:'e'
+          finished: false
         },
         {
           name: 41,
@@ -619,8 +608,7 @@ const data = {
           date: "2018-06-27T21:00:00+03:00",
           stadium: 2,
           channels: [],
-          finished: false,
-          group:'e'
+          finished: false
         },
         {
           name: 42,
@@ -632,10 +620,14 @@ const data = {
           date: "2018-06-27T21:00:00+03:00",
           stadium: 6,
           channels: [],
-          finished: false,
-          group:'e'
+          finished: false
         }
-   ,
+      ]
+    },
+    {
+      id: "f",
+
+      matches: [
         {
           name: 11,
           type: "group",
@@ -646,8 +638,7 @@ const data = {
           date: "2018-06-17T18:00:00+03:00",
           stadium: 1,
           channels: [],
-          finished: false,
-          group:'f'
+          finished: false
         },
         {
           name: 12,
@@ -659,8 +650,7 @@ const data = {
           date: "2018-06-18T15:00:00+03:00",
           stadium: 6,
           channels: [],
-          finished: false,
-          group:'f'
+          finished: false
         },
         {
           name: 27,
@@ -672,8 +662,7 @@ const data = {
           date: "2018-06-23T21:00:00+03:00",
           stadium: 11,
           channels: [],
-          finished: false,
-          group:'f'
+          finished: false
         },
         {
           name: 28,
@@ -685,8 +674,7 @@ const data = {
           date: "2018-06-23T18:00:00+03:00",
           stadium: 10,
           channels: [],
-          finished: false,
-          group:'f'
+          finished: false
         },
         {
           name: 43,
@@ -698,8 +686,7 @@ const data = {
           date: "2018-06-27T17:00:00+03:00",
           stadium: 5,
           channels: [],
-          finished: false,
-          group:'f'
+          finished: false
         },
         {
           name: 44,
@@ -711,10 +698,13 @@ const data = {
           date: "2018-06-27T19:00:00+05:00",
           stadium: 12,
           channels: [],
-          finished: false,
-          group:'f'
+          finished: false
         }
-  ,
+      ]
+    },
+    {
+      id: "g",
+      matches: [
         {
           name: 13,
           type: "group",
@@ -725,8 +715,7 @@ const data = {
           date: "2018-06-18T18:00:00+03:00",
           stadium: 11,
           channels: [],
-          finished: false,
-          group:'g'
+          finished: false
         },
         {
           name: 14,
@@ -738,8 +727,7 @@ const data = {
           date: "2018-06-18T21:00:00+03:00",
           stadium: 8,
           channels: [],
-          finished: false,
-          group:'g'
+          finished: false
         },
         {
           name: 29,
@@ -751,8 +739,7 @@ const data = {
           date: "2018-06-23T15:00:00+03:00",
           stadium: 2,
           channels: [],
-          finished: false,
-          group:'g'
+          finished: false
         },
         {
           name: 30,
@@ -764,8 +751,7 @@ const data = {
           date: "2018-06-24T15:00:00+03:00",
           stadium: 6,
           channels: [],
-          finished: false,
-          group:'g'
+          finished: false
         },
         {
           name: 45,
@@ -777,8 +763,7 @@ const data = {
           date: "2018-06-28T20:00:00+02:00",
           stadium: 4,
           channels: [],
-          finished: false,
-          group:'g'
+          finished: false
         },
         {
           name: 46,
@@ -790,10 +775,13 @@ const data = {
           date: "2018-06-28T21:00:00+03:00",
           stadium: 9,
           channels: [],
-          finished: false,
-          group:'g'
+          finished: false
         }
- ,
+      ]
+    },
+    {
+      id: "h",
+      matches: [
         {
           name: 15,
           type: "group",
@@ -804,8 +792,7 @@ const data = {
           date: "2018-06-19T18:00:00+03:00",
           stadium: 2,
           channels: [],
-          finished: false,
-          group:'h'
+          finished: false
         },
         {
           name: 16,
@@ -817,8 +804,7 @@ const data = {
           date: "2018-06-19T15:00:00+03:00",
           stadium: 9,
           channels: [],
-          finished: false,
-          group:'h'
+          finished: false
         },
         {
           name: 31,
@@ -830,8 +816,7 @@ const data = {
           date: "2018-06-24T20:00:00+05:00",
           stadium: 5,
           channels: [],
-          finished: false,
-          group:'h'
+          finished: false
         },
         {
           name: 32,
@@ -843,8 +828,7 @@ const data = {
           date: "2018-06-24T21:00:00+03:00",
           stadium: 12,
           channels: [],
-          finished: false,
-          group:'h'
+          finished: false
         },
         {
           name: 47,
@@ -856,8 +840,7 @@ const data = {
           date: "2018-06-28T17:00:00+03:00",
           stadium: 8,
           channels: [],
-          finished: false,
-          group:'h'
+          finished: false
         },
         {
           name: 48,
@@ -869,12 +852,15 @@ const data = {
           date: "2018-06-28T18:00:00+04:00",
           stadium: 7,
           channels: [],
-          finished: false,
-          group:'h'
+          finished: false
         }
-      
-    ,
-
+      ]
+    }
+  ],
+  knockout: {
+    round_16: {
+      name: "Round of 16",
+      matches: [
         {
           name: 49,
           type: "qualified",
@@ -971,7 +957,11 @@ const data = {
           channels: [],
           finished: false
         }
-    ,
+      ]
+    },
+    round_8: {
+      name: "Quarter-finals",
+      matches: [
         {
           name: 57,
           type: "winner",
@@ -1020,7 +1010,11 @@ const data = {
           channels: [],
           finished: false
         }
-      ,
+      ]
+    },
+    round_4: {
+      name: "Semi-finals",
+      matches: [
         {
           name: 61,
           type: "winner",
@@ -1045,7 +1039,11 @@ const data = {
           channels: [],
           finished: false
         }
-      ,
+      ]
+    },
+    round_2_loser: {
+      name: "Third place play-off",
+      matches: [
         {
           name: 63,
           type: "loser",
@@ -1058,7 +1056,11 @@ const data = {
           channels: [],
           finished: false
         }
-      ,
+      ]
+    },
+    round_2: {
+      name: "Final",
+      matches: [
         {
           name: 64,
           type: "winner",
@@ -1072,8 +1074,8 @@ const data = {
           finished: false
         }
       ]
-    
-  
+    }
+  }
 };
 
 export default data;

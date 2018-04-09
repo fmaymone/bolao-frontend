@@ -1,7 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { CHANGE_CURRENT_STAGE, GET_CURRENT_STAGE, GROUPS_STAGE } from './actions/types'
 =======
 import { CHANGE_CURRENT_STAGE, GET_CURRENT_STAGE, MATCHES_INITIAL_CREATE, MATCHES_FETCH_SUCCESS} from './actions/types'
+=======
+import { CHANGE_CURRENT_STAGE, GET_CURRENT_STAGE, MATCHES_INITIAL_CREATE, MATCHES_FETCH_SUCCESS, GROUPS_STAGE} from './actions/types'
+>>>>>>> refactor
 import data from '../world-cup';
 >>>>>>> refactor
 
@@ -9,9 +13,13 @@ const initialState = {
 
     currentGroup: 'a',
 <<<<<<< HEAD
+<<<<<<< HEAD
     currentPhase: GROUPS_STAGE
 =======
     currentPhase: 'groups',
+=======
+    currentPhase: GROUPS_STAGE,
+>>>>>>> refactor
     matches: {
       groups:data.groups,
       knockout:data.knockout
@@ -28,8 +36,7 @@ export default (state = initialState, action) => {
       case MATCHES_INITIAL_CREATE:
         return initialState
       case MATCHES_FETCH_SUCCESS:
-        console.log(action)
-        return action.payload;
+         return {...state, matches: action.payload };
       default:
         return state
   }
