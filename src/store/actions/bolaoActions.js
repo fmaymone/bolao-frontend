@@ -44,31 +44,38 @@ export const matchesInitialCreate = matches => {
   };
 };
 
-export const updateMatch = match => {
-  const { currentUser } = firebase.auth();
-  if (currentUser) {
-    
-    const ref = `/users/${currentUser.uid}/matches`;
-    var list = [];
-    firebase.database().ref(ref).on('value', function (snap) { list = snap.val(); });
+ export const updateMatch =  match => {
+  try {
+    const { currentUser } = firebase.auth();
+    if (currentUser) {
 
-    
-    const indexToUpdate = list.findIndex(k => k.name == match.name)
-    if(indexToUpdate >= 0 ){
-    list[indexToUpdate] = match;
+      const ref = `/users/${currentUser.uid}/matches`;
+      var list = [];
+       firebase.database().ref(ref).on('value',  function (snap) { list = snap.val(); });
 
-    return dispatch => {
+      if (list.length > 0) {
+        const indexToUpdate = list.findIndex(k => k.name == match.name)
+        if (indexToUpdate >= 0) {
+          list[indexToUpdate] = match;
 
-      firebase
-        .database()
-        .ref(`/users/${currentUser.uid}/matches`)
-        .set(list)
-        .then(() => {
-          dispatch({ type: MATCH_UPDATE, payload: match });
-        });
+          return async dispatch => {
 
-    };
+             firebase
+              .database()
+              .ref(`/users/${currentUser.uid}/matches`)
+              .set(list)
+              .then(() => {
+                dispatch({ type: MATCH_UPDATE, payload: match });
+              });
+
+          };
+        }
+      }
+
+    }
   }
+  catch(e){
+    console.log('Error on updateMatch()')
   }
 };
 

@@ -45,7 +45,7 @@ class Match extends Component {
 
   }
 
-  awayScoreChangedHandler = (event) => {
+  awayScoreChangedHandler =  (event) => {
 
     console.log(event.target.value);
 
@@ -54,7 +54,7 @@ class Match extends Component {
     this.props.updateMatch(gameToBeUpdated);
 
   }
-  homeScoreChangedHandler = (event) => {
+  homeScoreChangedHandler =  (event) => {
 
     let gameToBeUpdated = this.props.game;
     gameToBeUpdated.home_result = event.target.value;

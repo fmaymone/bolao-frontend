@@ -8,7 +8,7 @@ import muiThemeable from "material-ui/styles/muiThemeable";
 import GroupsBuilder from './GroupsBuilder';
 import { GROUPS_STAGE, KNOCKOUT_STAGE } from '../../store/actions/types';
 import MatchList from '../../components/Match/MatchList';
-import {matchesFetch} from '../../store/actions/bolaoActions'
+import { matchesFetch } from '../../store/actions/bolaoActions'
 
 
 
@@ -16,12 +16,17 @@ class MatchesBuilder extends Component {
     state = {
         matches: ''
     }
-   filterFromGroup = (value) => {
-        
-    return value.group == this.props.playerDataReducer.currentGroup;
-   }
+
+    componentDidMount() {
+        const { firebaseApp, auth } = this.props;
+        firebaseApp.database().ref(`/users/${auth.uid}/matches`); 
+    }
+    filterFromGroup = (value) => {
+
+        return value.group == this.props.playerDataReducer.currentGroup;
+    }
     getMatchesFromGroup = () => {
-        
+
         const group = this.props.playerDataReducer.currentGroup;
         const matches = this.props.playerDataReducer.matches.matches.filter(this.filterFromGroup);
         return matches;
@@ -33,7 +38,7 @@ class MatchesBuilder extends Component {
     }
 
     renderKnockoutStage() {
-         return (<h1>Knockout Stage</h1>)
+        return (<h1>Knockout Stage</h1>)
     }
 
     render() {
@@ -57,7 +62,7 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, {matchesFetch}
+export default connect(mapStateToProps, { matchesFetch }
 
 )(injectIntl(withRouter(withFirebase(muiThemeable()(MatchesBuilder)))));
 
