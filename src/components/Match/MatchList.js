@@ -139,7 +139,7 @@ render() {
         
         {matches.map(match => (
           <div key={match.name}>
-            <Match game={match} />
+            <Match game={match.val} />
           </div>
         ))}
 

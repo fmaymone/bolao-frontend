@@ -1,68 +1,73 @@
-import React, { Component } from 'react';
-import { Activity } from 'rmw-shell'
+import React, { Component } from "react";
+import { Activity } from "rmw-shell";
 import { injectIntl } from "react-intl";
 import { withRouter } from "react-router-dom";
 import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
-import GroupsBuilder from './GroupsBuilder';
-import { GROUPS_STAGE, KNOCKOUT_STAGE } from '../../store/actions/types';
-import MatchList from '../../components/Match/MatchList';
-import { matchesFetch } from '../../store/actions/bolaoActions'
-
-
+import GroupsBuilder from "./GroupsBuilder";
+import { GROUPS_STAGE, KNOCKOUT_STAGE } from "../../store/actions/types";
+import MatchList from "../../components/Match/MatchList";
+import { matchesFetch } from "../../store/actions/bolaoActions";
 
 class MatchesBuilder extends Component {
-    state = {
-        matches: ''
-    }
+  state = {
+    matches: ""
+  };
 
-    componentDidMount() {
-        const { firebaseApp, auth } = this.props;
-        firebaseApp.database().ref(`/users/${auth.uid}/matches`); 
-    }
-    filterFromGroup = (value) => {
+  componentDidMount() {
+    const { firebaseApp, auth, watchList } = this.props;
+    //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
+    let ref = firebaseApp.database().ref(`/users/${auth.uid}/matches`);
+    watchList(ref, "listMatches"); //Here we started watching a list
+  }
 
-        return value.group == this.props.playerDataReducer.currentGroup;
-    }
-    getMatchesFromGroup = () => {
+  renderList(matches) {
+    const { history } = this.props;
 
-        const group = this.props.playerDataReducer.currentGroup;
-        const matches = this.props.playerDataReducer.matches.matches.filter(this.filterFromGroup);
-        return matches;
+    return;
+  }
 
-    }
+  filterFromGroup = value => {
+    return value.val.group == this.props.playerDataReducer.currentGroup;
+  };
+  getMatchesFromGroup = () => {
+    const matches = this.props.matches.filter(this.filterFromGroup);
+    return matches;
+  };
 
-    renderGroupsStage() {
-        return (<GroupsBuilder matches={this.getMatchesFromGroup()} />)
-    }
+  renderGroupsStage() {
+    if (this.props.matches === undefined) 
+      return <div />;
+      return <GroupsBuilder matches={this.getMatchesFromGroup()} />;
+  }
+  
+  renderKnockoutStage() {
+    return <h1>Knockout Stage</h1>;
+  }
 
-    renderKnockoutStage() {
-        return (<h1>Knockout Stage</h1>)
-    }
+  render() {
+    let type =
+      this.props.playerDataReducer.currentPhase === GROUPS_STAGE
+        ? this.renderGroupsStage()
+        : this.renderKnockoutStage();
 
-    render() {
-
-        let type = this.props.playerDataReducer.currentPhase === GROUPS_STAGE ? this.renderGroupsStage() : this.renderKnockoutStage()
-
-        return (
-            <Activity>{type}</Activity>
-        )
-    }
+    return <Activity>{type}</Activity>;
+  }
 }
 
 const mapStateToProps = state => {
-    const { intl, dialogs, auth, playerDataReducer } = state;
+  const { intl, dialogs, auth, playerDataReducer, lists } = state;
 
-    return {
-        intl,
-        dialogs,
-        auth,
-        playerDataReducer: playerDataReducer
-    };
+  return {
+    intl,
+    dialogs,
+    auth,
+    playerDataReducer: playerDataReducer,
+    matches: lists.listMatches
+  };
 };
 
-export default connect(mapStateToProps, { matchesFetch }
-
-)(injectIntl(withRouter(withFirebase(muiThemeable()(MatchesBuilder)))));
-
+export default connect(mapStateToProps, { matchesFetch })(
+  injectIntl(withRouter(withFirebase(muiThemeable()(MatchesBuilder))))
+);
