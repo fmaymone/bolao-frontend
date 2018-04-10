@@ -28,23 +28,20 @@ class MatchesBuilder extends Component {
 
     }
 
-
     renderGroupsStage() {
         return (<GroupsBuilder matches={this.getMatchesFromGroup()} />)
-
     }
+
     renderKnockoutStage() {
          return (<h1>Knockout Stage</h1>)
-        
-
     }
+
     render() {
 
         let type = this.props.playerDataReducer.currentPhase === GROUPS_STAGE ? this.renderGroupsStage() : this.renderKnockoutStage()
 
         return (
             <Activity>{type}</Activity>
-
         )
     }
 }

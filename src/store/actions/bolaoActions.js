@@ -46,43 +46,32 @@ export const matchesInitialCreate = matches => {
 
 export const updateMatch = match => {
   const { currentUser } = firebase.auth();
-  let newState = {};
+  if (currentUser) {
+    
+    const ref = `/users/${currentUser.uid}/matches`;
+    var list = [];
+    firebase.database().ref(ref).on('value', function (snap) { list = snap.val(); });
 
-  return dispatch => {
-    if (currentUser) {
+    
+    const indexToUpdate = list.findIndex(k => k.name == match.name)
+    if(indexToUpdate >= 0 ){
+    list[indexToUpdate] = match;
+
+    return dispatch => {
+
       firebase
         .database()
         .ref(`/users/${currentUser.uid}/matches`)
-        .on("value", snapshot => {
-          newState = { ...snapshot.val() };
-          const indexToUpdate = newState.findIndex(
-            k => k.name == match.payload.name
-          );
-          newState.matches.matches[indexToUpdate] = match;
-        });
-      firebaseApp
-        .database()
-        .ref(`/users/${currentUser.uid}/matches`)
-        .set(newState)
+        .set(list)
         .then(() => {
           dispatch({ type: MATCH_UPDATE, payload: match });
         });
-    }
-  };
-};
-export const updateGroupMatch = (group, matches) => {
-  const { currentUser } = firebase.auth();
 
-  return dispatch => {
-    firebaseApp
-      .database()
-      .ref(`/users/${currentUser.uid}/matches/groups`)
-      .set(matches)
-      .then(() => {
-        dispatch({ type: MATCHES_INITIAL_CREATE });
-      });
-  };
+    };
+  }
+  }
 };
+
 // export const getMatchesFromGroup = (group) => {
 
 //   const { currentUser } = firebase.auth();
@@ -112,7 +101,7 @@ export const matchesFetch = () => {
             type: MATCHES_FETCH_SUCCESS,
             payload: { matches: snapshot.val() }
           });
-         // console.log(snapshot.val().groups);
+          // console.log(snapshot.val().groups);
         });
     }
   };

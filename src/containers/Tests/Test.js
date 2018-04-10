@@ -9,7 +9,6 @@ import {matchesFetch, matchesInitialCreate } from '../../store/actions/bolaoActi
 import FlatButton from "material-ui/FlatButton";
 import data from '../../world-cup'
 
-
 class Test extends Component {
     componentDidMount() {
         //this.props.matchesFetch(this.props.auth.uid);

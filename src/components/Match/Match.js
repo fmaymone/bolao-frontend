@@ -25,7 +25,7 @@ import TestForm from "../../components/Forms/TestForm";
 
 import { Container, Row, Col } from "react-grid-system";
 import TextField from 'material-ui/TextField';
-import {updateMatch} from '../../store/actions/bolaoActions'
+import { updateMatch } from '../../store/actions/bolaoActions'
 
 const path = "/bets/";
 
@@ -37,78 +37,29 @@ class Match extends Component {
       home_team: "0",
       away_result: "0",
       home_result: "0",
-      id:"0"
+      id: "0"
     };
   }
 
-  componentWillMount(){
-    const { watchList, firebaseApp, auth, game } = this.props
-    
-    //let ref = firebaseApp.database().ref('/users/' + auth.uid + '/matches/' + game.name - 1)
-    // if(ref){
-    //   ref.on('value', snapshot => {
-    //     this.setState({ away_score: snapshot.val().away_score });
-    //     this.setState({ home_score: snapshot.val().home_score });
-    //   });
-    // }
-  //  this.listenForMatch(ref);
+  componentWillMount() {
+
   }
 
-  handleSave = async ( ) =>{
-    // const {  firebaseApp, auth, game } = this.props
-    // let  ref =  await firebaseApp.database().ref('/users/' + auth.uid + '/matches/' + game.name - 1)
-    // await ref.set({
-    //   away_score: this.state.away_score,
-    //   home_score: this.state.home_score,
-    //   away_team: this.props.game.away_team,
-    //   home_team: this.props.game.home_team,
-      
-
-    // })
- 
-  }
-
-   listenForMatch = async (matchRef) => {
-   
-    await matchRef.on('value', (dataSnapshot) => {
-
-      if(dataSnapshot.val()){
-        this.setState({ away_score: dataSnapshot.val().find(k => k == (this.props.game.name -1).away_score) });
-        this.setState({ home_score: dataSnapshot.val().find(k => k == (this.props.game.name -1).home_score) });
-        this.setState({ away_team: dataSnapshot.val().find(k => k == (this.props.game.name -1).away_team) });
-        this.setState({ home_team: dataSnapshot.val().find(k => k == (this.props.game.name -1).home_team) });
-        
-      }
-      
-      
-    });
-    }
-
-  awayScoreChangedHandler = (event) =>{
+  awayScoreChangedHandler = (event) => {
 
     console.log(event.target.value);
 
     let gameToBeUpdated = this.props.game;
     gameToBeUpdated.away_result = event.target.value;
     this.props.updateMatch(gameToBeUpdated);
-    
-    // this.props.updateMatch(this.props.game);
 
-    // this.setState({away_result: event.target.value})
-    //this.handleSave()
-    //this.props.updateClassification();
   }
-  homeScoreChangedHandler = (event) =>{
-    
+  homeScoreChangedHandler = (event) => {
+
     let gameToBeUpdated = this.props.game;
     gameToBeUpdated.home_result = event.target.value;
     this.props.updateMatch(gameToBeUpdated);
-    // this.props.game.home_result = event.targe.value;
-    // this.props.updateMatch(this.props.game);
-    //this.setState({home_result: event.target.value})
-    //this.handleSave()
-    //this.props.updateClassification();
-    
+
   }
 
   render() {
@@ -126,25 +77,25 @@ class Match extends Component {
     } = this.props;
     return (
       <Container style={styles.match}>
-      <Row align="center">
-        <Col sm={4}>
-          <Team id={this.props.game.home_team} isHomeTeam="true" />
-        </Col>
-        <Col sm={1}>
-          <TextField value={this.props.game.home_result} onChange={this.homeScoreChangedHandler.bind(this)}/>
-        </Col>
-        <Col sm={2}>
-        <center>X</center>
-        
-        </Col>
-        <Col sm={1}>
-          <TextField value={this.props.game.away_result} onChange={this.awayScoreChangedHandler.bind( this)}/>
-        </Col>
-        <Col sm={4}>
-          <Team id={this.props.game.away_team} isHomeTeam="false" />
-        </Col>
-      </Row>
-      
+        <Row align="center">
+          <Col sm={4}>
+            <Team id={this.props.game.home_team} isHomeTeam="true" />
+          </Col>
+          <Col sm={1}>
+            <TextField value={this.props.game.home_result} onChange={this.homeScoreChangedHandler.bind(this)} />
+          </Col>
+          <Col sm={2}>
+            <center>X</center>
+
+          </Col>
+          <Col sm={1}>
+            <TextField value={this.props.game.away_result} onChange={this.awayScoreChangedHandler.bind(this)} />
+          </Col>
+          <Col sm={4}>
+            <Team id={this.props.game.away_team} isHomeTeam="false" />
+          </Col>
+        </Row>
+
       </Container>
     );
   }
@@ -166,7 +117,7 @@ export default connect(mapStateToProps, {
   change,
   submit,
   updateMatch
-  
+
 })(injectIntl(withRouter(withFirebase(muiThemeable()(Match)))));
 
 Match.propTypes = {
@@ -178,7 +129,7 @@ const styles = {
   match: {
     overflow: "hidden",
     display: "flex",
-    
+
     flexDirection: "row",
     justifyContent: 'center'
   }
