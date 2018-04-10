@@ -21,6 +21,10 @@ class MatchesBuilder extends Component {
     let ref = firebaseApp.database().ref(`/users/${auth.uid}/matches`);
     watchList(ref, "listMatches"); //Here we started watching a list
   }
+  componentWillUnmount() {
+    const { unwatchList, auth}= this.props;
+    unwatchList(`/users/${auth.uid}/matches`); // To unwatch a watcher that is stored in a specific location we call the unwatchList with the path
+  }
 
   renderList(matches) {
     const { history } = this.props;

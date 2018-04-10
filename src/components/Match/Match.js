@@ -32,13 +32,8 @@ const path = "/bets/";
 class Match extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      away_team: "0",
-      home_team: "0",
-      away_result: "0",
-      home_result: "0",
-      id: "0"
-    };
+    this.awayScoreChangedHandler = this.awayScoreChangedHandler.bind(this);
+    this.homeScoreChangedHandler = this.homeScoreChangedHandler.bind(this);
   }
 
   componentWillMount() {
@@ -47,18 +42,21 @@ class Match extends Component {
 
   awayScoreChangedHandler =  (event) => {
 
-    console.log(event.target.value);
-
-    let gameToBeUpdated = this.props.game;
-    gameToBeUpdated.away_result = event.target.value;
-    this.props.updateMatch(gameToBeUpdated);
+    
+    if(this.props){
+      let gameToBeUpdated = {...this.props.game};
+      gameToBeUpdated.away_result = event.target.value;
+      this.props.updateMatch(gameToBeUpdated);
+    }
 
   }
   homeScoreChangedHandler =  (event) => {
 
-    let gameToBeUpdated = this.props.game;
-    gameToBeUpdated.home_result = event.target.value;
-    this.props.updateMatch(gameToBeUpdated);
+    if(this.props){
+      let gameToBeUpdated = {...this.props.game};
+      gameToBeUpdated.home_result = event.target.value;
+      this.props.updateMatch(gameToBeUpdated);
+    }
 
   }
 
@@ -82,14 +80,14 @@ class Match extends Component {
             <Team id={this.props.game.home_team} isHomeTeam="true" />
           </Col>
           <Col sm={1}>
-            <TextField value={this.props.game.home_result} onChange={this.homeScoreChangedHandler.bind(this)} />
+            <TextField id={this.props.game.name.home_team} value={this.props.game.home_result} onChange={this.homeScoreChangedHandler} />
           </Col>
           <Col sm={2}>
             <center>X</center>
 
           </Col>
           <Col sm={1}>
-            <TextField value={this.props.game.away_result} onChange={this.awayScoreChangedHandler.bind(this)} />
+            <TextField id={this.props.game.name.away_team} value={this.props.game.away_result} onChange={this.awayScoreChangedHandler} />
           </Col>
           <Col sm={4}>
             <Team id={this.props.game.away_team} isHomeTeam="false" />
