@@ -41,9 +41,10 @@ class MatchesBuilder extends Component {
   };
 
   renderGroupsStage() {
-    if (this.props.matches === undefined) 
-      return <div />;
-      return <GroupsBuilder matches={this.getMatchesFromGroup()} />;
+    // if (this.props.matches === undefined) 
+    //   return <div />;
+    //   return <GroupsBuilder matches={this.getMatchesFromGroup()} />;
+    return <div />
   }
   
   renderKnockoutStage() {

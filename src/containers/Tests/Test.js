@@ -16,7 +16,7 @@ class Test extends Component {
     
     handlerInitialState = ( ) =>{
                 
-        this.props.matchesInitialCreate(data.matches);
+        this.props.matchesInitialCreate(data);
     }
     handlerLoadState = () =>{
         
@@ -31,9 +31,9 @@ class Test extends Component {
             <Activity
             ><h1>Testing</h1>
         <FlatButton
-          label={"Test"}
+          label={"Load Data to Firebase"}
           primary={true}
-          onClick={this.handlerInitialState.bind(this, this.props.playerDataReducer.matches)}
+          onClick={this.handlerInitialState.bind(this)}
         />
              <FlatButton
           label={"Load"}

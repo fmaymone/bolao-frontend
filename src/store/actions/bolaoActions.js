@@ -30,9 +30,10 @@ export const matchUpdate = ({ prop, value }) => {
   };
 };
 
-export const matchesInitialCreate = matches => {
+export const matchesInitialCreate = data => {
   const { currentUser } = firebase.auth();
-
+  let matches = {groups:{...data.groups},knockout:{ ...data.knockout}};
+ 
   return dispatch => {
     firebaseApp
       .database()
@@ -46,9 +47,15 @@ export const matchesInitialCreate = matches => {
 
 export const updateMatch = match => {
   const { currentUser } = firebase.auth();
-  const id = match.name - 1;
+  const id = -1;
   if (currentUser && match) {
-
+    firebase
+    .database()
+    .ref(`/users/${currentUser.uid}/matches`)
+    .on("value", snapshot => {
+      
+      // console.log(snapshot.val().groups);
+    });
 
     return (dispatch) => {
       firebase.database().ref(`/users/${currentUser.uid}/matches/${id}`)
