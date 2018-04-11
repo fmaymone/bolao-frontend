@@ -8,13 +8,46 @@ import muiThemeable from "material-ui/styles/muiThemeable";
 import GroupsBuilder from "./GroupsBuilder";
 import { GROUPS_STAGE, KNOCKOUT_STAGE } from "../../store/actions/types";
 import MatchList from "../../components/Match/MatchList";
-import { matchesFetch } from "../../store/actions/bolaoActions";
+import { matchesFetch, changeStage } from "../../store/actions/bolaoActions";
+import FlatButton from "material-ui/FlatButton";
+
+const groups = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
 class MatchesBuilder extends Component {
   state = {
     matches: ""
   };
 
+  nextGroup = () => {
+    const { changeStage, playerDataReducer } = this.props;
+
+    let newGroupValue = { currentGroup: 'a', currentPhase: 'groups_stage' };
+    let tempGroup;
+    if (playerDataReducer.currentGroup === 'h') {
+      tempGroup = 'a';
+    } else {
+      tempGroup = groups[groups.indexOf(playerDataReducer.currentGroup) + 1];
+    }
+    newGroupValue.currentGroup = tempGroup;
+    changeStage(newGroupValue);
+
+
+  };
+
+  prevGroup = () => {
+    const { changeStage, playerDataReducer } = this.props;
+
+    let newGroupValue = { currentGroup: 'a', currentPhase: 'groups_stage' };
+    let tempGroup;
+    if (playerDataReducer.currentGroup === 'a') {
+      tempGroup = 'h';
+    } else {
+      tempGroup = groups[groups.indexOf(playerDataReducer.currentGroup) - 1];
+    }
+    newGroupValue.currentGroup = tempGroup;
+    changeStage(newGroupValue);
+
+  };
   componentDidMount() {
     const { firebaseApp, auth, watchList } = this.props;
     //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
@@ -22,7 +55,7 @@ class MatchesBuilder extends Component {
     watchList(ref, "listMatches"); //Here we started watching a list
   }
   componentWillUnmount() {
-    const { unwatchList, auth}= this.props;
+    const { unwatchList, auth } = this.props;
     unwatchList(`/users/${auth.uid}/matches`); // To unwatch a watcher that is stored in a specific location we call the unwatchList with the path
   }
 
@@ -41,12 +74,26 @@ class MatchesBuilder extends Component {
   };
 
   renderGroupsStage() {
-    // if (this.props.matches === undefined) 
-    //   return <div />;
-    //   return <GroupsBuilder matches={this.getMatchesFromGroup()} />;
-    return <div />
+    if (this.props.matches === undefined)
+      return <div />;
+    return (
+      <div>
+        <GroupsBuilder matches={this.getMatchesFromGroup()} />
+        <FlatButton
+          label={"< Anterior"}
+          primary={true}
+          onClick={this.prevGroup.bind(this)}
+        />
+        <FlatButton
+          label={"Proximo >"}
+          primary={true}
+          onClick={this.nextGroup.bind(this)}
+        />
+      </div>
+    );
+
   }
-  
+
   renderKnockoutStage() {
     return <h1>Knockout Stage</h1>;
   }
@@ -73,6 +120,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { matchesFetch })(
+export default connect(mapStateToProps, { matchesFetch, changeStage })(
   injectIntl(withRouter(withFirebase(muiThemeable()(MatchesBuilder))))
 );

@@ -23,98 +23,16 @@ import { change, submit } from "redux-form";
 import Match from "./Match";
 import { Container, Row, Col } from "react-grid-system";
 import Classification from './Classification'
-import * as playerActions from '../../store/actions/bolaoActions'
+import {changeStage}  from '../../store/actions/bolaoActions'
 
 const path = "/bets/";
 const form_name = "bets";
 
+
+
 class MatchList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentGroup: "a",
-      matches: {}
-    };
-  }
   
-   
-// componentWillMount() {
-//   console.log("oi");
-//   this.handleUpdateMatch();
-// }
-handleChangeGroup = () => {
 
-  const payload = { currentGroup: 'a',
-  currentPhase: 'groups_stage'};
-  
-  this.props.changeStage(payload);
-
-}
-nextGroup = currentGroup => {
-  switch (currentGroup) {
-    case "a":
-      this.setState({ currentGroup: "b" });
-      break;
-    case "b":
-      this.setState({ currentGroup: "c" });
-      break;
-    case "c":
-      this.setState({ currentGroup: "d" });
-      break;
-    case "d":
-      this.setState({ currentGroup: "e" });
-      break;
-    case "e":
-      this.setState({ currentGroup: "f" });
-      break;
-    case "f":
-      this.setState({ currentGroup: "g" });
-      break;
-    case "g":
-      this.setState({ currentGroup: "h" });
-      break;
-    case "h":
-      this.setState({ currentGroup: "h" });
-      break;
-
-    default:
-      this.setState({ currentGroup: "a" });
-      break;
-  }
-};
-
-prevGroup = currentGroup => {
-  switch (currentGroup) {
-    case "a":
-      this.setState({ currentGroup: "a" });
-      break;
-    case "b":
-      this.setState({ currentGroup: "a" });
-      break;
-    case "c":
-      this.setState({ currentGroup: "b" });
-      break;
-    case "d":
-      this.setState({ currentGroup: "c" });
-      break;
-    case "e":
-      this.setState({ currentGroup: "d" });
-      break;
-    case "f":
-      this.setState({ currentGroup: "e" });
-      break;
-    case "g":
-      this.setState({ currentGroup: "f" });
-      break;
-    case "h":
-      this.setState({ currentGroup: "g" });
-      break;
-
-    default:
-      this.setState({ currentGroup: "a" });
-      break;
-  }
-};
 
 render() {
   const {
@@ -127,14 +45,15 @@ render() {
     muiTheme,
     isGranted,
     firebaseApp,
-    matches
+    matches,
+    playerDataReducer
     } = this.props;
   const uid = this.props.auth.uid;
 
   if (uid) {
     return (
       <Container fluid style={styles.matchesContainer}>
-        <h1>Grupo {this.state.currentGroup.toUpperCase()} </h1>
+        <h1>Grupo {playerDataReducer.currentGroup.toUpperCase()} </h1>
 
         
         {matches.map(match => (
@@ -143,22 +62,7 @@ render() {
           </div>
         ))}
 
-        <FlatButton
-          label={"< Anterior"}
-          primary={true}
-          onClick={this.prevGroup.bind(this, this.state.currentGroup)}
-        />
-        <FlatButton
-          label={"Proximo >"}
-          primary={true}
-          onClick={this.nextGroup.bind(this, this.state.currentGroup)}
-        />
-        <FlatButton
-          label={"Testar Reducers >"}
-          primary={true}
-          onClick={this.handleChangeGroup.bind(this)}
-        />
-         
+       
       </Container>
 
     );
@@ -179,7 +83,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps,playerActions)(
+export default connect(mapStateToProps)(
   injectIntl(muiThemeable()(withRouter(withFirebase(MatchList))))
 );
 

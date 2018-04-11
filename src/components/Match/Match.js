@@ -32,8 +32,7 @@ const path = "/bets/";
 class Match extends Component {
   constructor(props) {
     super(props);
-    this.awayScoreChangedHandler = this.awayScoreChangedHandler.bind(this);
-    this.homeScoreChangedHandler = this.homeScoreChangedHandler.bind(this);
+   
   }
 
   componentWillMount() {
@@ -80,14 +79,14 @@ class Match extends Component {
             <Team id={this.props.game.home_team} isHomeTeam="true" />
           </Col>
           <Col sm={1}>
-            <TextField id={this.props.game.name.home_team} value={this.props.game.home_result} onChange={this.homeScoreChangedHandler} />
+            <TextField value={this.props.game.home_result} onChange={this.homeScoreChangedHandler.bind(this)} />
           </Col>
           <Col sm={2}>
             <center>X</center>
 
           </Col>
           <Col sm={1}>
-            <TextField id={this.props.game.name.away_team} value={this.props.game.away_result} onChange={this.awayScoreChangedHandler} />
+            <TextField  value={this.props.game.away_result} onChange={this.awayScoreChangedHandler.bind(this)} />
           </Col>
           <Col sm={4}>
             <Team id={this.props.game.away_team} isHomeTeam="false" />
