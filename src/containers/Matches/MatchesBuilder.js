@@ -10,6 +10,7 @@ import { GROUPS_STAGE, KNOCKOUT_STAGE } from "../../store/actions/types";
 import MatchList from "../../components/Match/MatchList";
 import { matchesFetch, changeStage } from "../../store/actions/bolaoActions";
 import FlatButton from "material-ui/FlatButton";
+import { Container, Row, Col } from "react-grid-system";
 
 const groups = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
@@ -18,36 +19,8 @@ class MatchesBuilder extends Component {
     matches: ""
   };
 
-  nextGroup = () => {
-    const { changeStage, playerDataReducer } = this.props;
-
-    let newGroupValue = { currentGroup: 'a', currentPhase: 'groups_stage' };
-    let tempGroup;
-    if (playerDataReducer.currentGroup === 'h') {
-      tempGroup = 'a';
-    } else {
-      tempGroup = groups[groups.indexOf(playerDataReducer.currentGroup) + 1];
-    }
-    newGroupValue.currentGroup = tempGroup;
-    changeStage(newGroupValue);
 
 
-  };
-
-  prevGroup = () => {
-    const { changeStage, playerDataReducer } = this.props;
-
-    let newGroupValue = { currentGroup: 'a', currentPhase: 'groups_stage' };
-    let tempGroup;
-    if (playerDataReducer.currentGroup === 'a') {
-      tempGroup = 'h';
-    } else {
-      tempGroup = groups[groups.indexOf(playerDataReducer.currentGroup) - 1];
-    }
-    newGroupValue.currentGroup = tempGroup;
-    changeStage(newGroupValue);
-
-  };
   componentDidMount() {
     const { firebaseApp, auth, watchList } = this.props;
     //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
@@ -77,19 +50,11 @@ class MatchesBuilder extends Component {
     if (this.props.matches === undefined)
       return <div />;
     return (
-      <div>
-        <GroupsBuilder matches={this.getMatchesFromGroup()} />
-        <FlatButton
-          label={"< Anterior"}
-          primary={true}
-          onClick={this.prevGroup.bind(this)}
-        />
-        <FlatButton
-          label={"Proximo >"}
-          primary={true}
-          onClick={this.nextGroup.bind(this)}
-        />
-      </div>
+
+
+      <GroupsBuilder matches={this.getMatchesFromGroup()} />
+
+
     );
 
   }
@@ -104,7 +69,25 @@ class MatchesBuilder extends Component {
         ? this.renderGroupsStage()
         : this.renderKnockoutStage();
 
-    return <Activity>{type}</Activity>;
+    // return <Activity>{type}</Activity>;
+    // return  <h1>Oi</h1></Activity>;
+    return (
+      <Activity>
+        <Container>
+          <Row>
+            <Col sm={2}>
+
+            </Col>
+            <Col sm={8}>
+              <center>{type}</center>
+            </Col>
+            <Col sm={2}>
+
+            </Col>
+          </Row>
+        </Container>
+      </Activity>
+    )
   }
 }
 

@@ -212,7 +212,7 @@ const data = {
     {
       id: 28,
       name: "Inglaterra",
-      iso2: "gb-eng"
+      iso2: "gb"
     },
     {
       id: 29,

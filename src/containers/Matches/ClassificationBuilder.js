@@ -8,6 +8,7 @@ import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import { injectIntl, intlShape } from "react-intl";
 
+
 class ClassificationBuilder extends Component {
 
   render() {
@@ -88,7 +89,7 @@ class ClassificationBuilder extends Component {
     console.log(sortedList);
     return (
       // <GroupsMatchList matches={this.props.matches} />
-      <div />
+      <Classification classification={sortedList}/>
     );
   }
 }

@@ -76,27 +76,26 @@ class Match extends Component {
       auth
     } = this.props;
     return (
-      <Container style={styles.match}>
+      
         <Row align="center">
           <Col sm={4}>
             <Team id={this.props.game.home_team} isHomeTeam="true" />
           </Col>
           <Col sm={1}>
-            <TextField value={this.props.game.home_result} onChange={this.homeScoreChangedHandler.bind(this)} />
+            <center><TextField type='number'  value={this.props.game.home_result} onChange={this.homeScoreChangedHandler.bind(this)} /></center>
           </Col>
           <Col sm={2}>
             <center>X</center>
-
           </Col>
           <Col sm={1}>
-            <TextField  value={this.props.game.away_result} onChange={this.awayScoreChangedHandler.bind(this)} />
+            <center><TextField type='number'  value={this.props.game.away_result} onChange={this.awayScoreChangedHandler.bind(this)} /></center>
           </Col>
           <Col sm={4}>
             <Team id={this.props.game.away_team} isHomeTeam="false" />
           </Col>
         </Row>
 
-      </Container>
+      
     );
   }
 }
