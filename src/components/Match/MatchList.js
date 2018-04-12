@@ -25,18 +25,13 @@ import { Container, Row, Col } from "react-grid-system";
 import Classification from './Classification'
 import {changeStage}  from '../../store/actions/bolaoActions'
 
-const path = "/bets/";
-const form_name = "bets";
-
-
-
 class MatchList extends Component {
-  
+
 
 
 render() {
   const {
-      history,
+    history,
     intl,
     setDialogIsOpen,
     dialogs,

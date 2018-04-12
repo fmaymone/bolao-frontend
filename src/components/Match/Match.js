@@ -39,25 +39,28 @@ class Match extends Component {
 
   }
 
-  awayScoreChangedHandler =  (event) => {
+  awayScoreChangedHandler = async  (event) => {
 
     
     if(this.props){
-      let gameToBeUpdated = {...this.props.game};
+      let gameToBeUpdated = {...this.props.game };
       gameToBeUpdated.away_result = event.target.value;
-      this.props.updateMatch(gameToBeUpdated);
+      await this.props.updateMatch(gameToBeUpdated);
+     
     }
 
   }
-  homeScoreChangedHandler =  (event) => {
+  homeScoreChangedHandler = async (event) => {
 
     if(this.props){
       let gameToBeUpdated = {...this.props.game};
       gameToBeUpdated.home_result = event.target.value;
-      this.props.updateMatch(gameToBeUpdated);
+      await this.props.updateMatch(gameToBeUpdated);
+     
     }
 
   }
+ 
 
   render() {
     const {
