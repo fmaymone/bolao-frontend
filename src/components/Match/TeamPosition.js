@@ -9,6 +9,14 @@ import muiThemeable from "material-ui/styles/muiThemeable";
 import { injectIntl } from "react-intl";
 import { withRouter } from "react-router-dom";
 import { Container, Row, Col } from "react-grid-system";
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
 
 const style = {
   margin: 20,
@@ -16,7 +24,7 @@ const style = {
   display: "inline-block"
 };
 
-class Team extends Component {
+class TeamPosition extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -33,25 +41,28 @@ class Team extends Component {
     );
   };
 
-  renderAwayTeam = team => {
+  renderTeam = team => {
+    const teamValues = this.props.team;
+    //id: match.val.home_team, points: 0, win: 0, lost: 0, draw: 0, gc: 0, gp: 0 }
     return (
-      <Row>
-        <Col> {team.name} </Col>
-        <Col>
-          <Flag code={team.iso2} height="16" />
-        </Col>
-      </Row>
+      <TableRow>
+        <TableRowColumn style={{width: '30%'}}>{team.name}</TableRowColumn>
+        <TableRowColumn>{teamValues.points}</TableRowColumn>
+        <TableRowColumn>{teamValues.win}</TableRowColumn>
+        <TableRowColumn>{teamValues.lost}</TableRowColumn>
+        <TableRowColumn>{teamValues.draw}</TableRowColumn>
+        <TableRowColumn>{teamValues.gp - teamValues.gc}</TableRowColumn>
+        <TableRowColumn>{teamValues.gp}</TableRowColumn>
+        <TableRowColumn>{teamValues.gc}</TableRowColumn>
+      </TableRow>
     );
   };
   render() {
     const isHomeTeam = this.props.isHomeTeam;
-    const teamEntity = this.props.worldCupData.teams.find(k=>k.id==this.props.id);
+    const teamEntity = this.props.worldCupData.teams.find(k=>k.id==this.props.team.id);
     if (teamEntity) {
-      if (isHomeTeam == "true") {
-        return this.renderHomeTeam(teamEntity);
-      } else {
-        return this.renderAwayTeam(teamEntity);
-      }
+      return(this.renderTeam(teamEntity));
+     
     } else {
       return "Olar";
     }
@@ -68,11 +79,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(
-  injectIntl(muiThemeable()(withRouter(Team)))
+  injectIntl(muiThemeable()(withRouter(TeamPosition)))
 );
 
-Team.propTypes = {
-  name: PropTypes.string,
-  code: PropTypes.string,
-  home: PropTypes.boolean
-};
+
