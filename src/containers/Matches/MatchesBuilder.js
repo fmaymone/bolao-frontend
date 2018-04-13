@@ -54,9 +54,13 @@ class MatchesBuilder extends Component {
       <KnockoutBuilder matches={this.getActualMatches()} />
     );
   }
-  handleChangeKnockout = () =>{
-    const data = {currentGroup:ROUND_16,
-      currentPhase:KNOCKOUT_STAGE}
+  handleChangeKnockout = (phase) =>{
+    let group='ROUND_16'
+    if(phase === GROUPS_STAGE){
+      group = 'a';
+    }
+    const data = {currentGroup:group,
+      currentPhase:phase}
     this.props.changeStage(data);
 
   }
@@ -75,7 +79,12 @@ class MatchesBuilder extends Component {
             <FlatButton
                     label={"Knockout >"}
                     primary={true}
-                    onClick={this.handleChangeKnockout.bind(this)}
+                    onClick={this.handleChangeKnockout.bind(this,KNOCKOUT_STAGE )}
+                />
+                <FlatButton
+                    label={"Groups >"}
+                    primary={true}
+                    onClick={this.handleChangeKnockout.bind(this,GROUPS_STAGE )}
                 />
             </Col>
             <Col sm={8}>

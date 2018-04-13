@@ -7,9 +7,42 @@ import firebase from "firebase";
 import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import { injectIntl, intlShape } from "react-intl";
+import { GROUPS_STAGE, KNOCKOUT_STAGE, ROUND_16 } from "../../store/actions/types";
 
 
 class ClassificationBuilder extends Component {
+
+  updateKnockoutStage = async (teams) => {
+    const stage = this.props.stage;
+    try {
+      if (stage.currentPhase === KNOCKOUT_STAGE) {
+        await this.updateKnockoutPhase(teams);
+      } else {
+        await this.updateGroupsPhase(teams);
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  updateGroupsPhase = async (teams) => {
+
+    
+    const group = this.props.stage.currentGroup;
+    console.log(teams);
+  }
+
+  updateGroupsPhase = async (teams) => {
+
+    
+    const group = this.props.stage.currentGroup;
+    console.log(teams);
+    let firstGroup = teams[0];
+    let secondGroup = teams[1];
+
+    
+
+  }
 
   render() {
     console.log(this.props.matches);
@@ -84,13 +117,16 @@ class ClassificationBuilder extends Component {
       }
       return 0;
     }
-    console.log(classification);
+    
     const sortedList = classification.sort(compare);
-    console.log(sortedList);
+    this.updateKnockoutStage(sortedList);
+    if(this.props.stage.currentPhase === KNOCKOUT_STAGE){
+      return <div />
+    }else{
     return (
-      // <GroupsMatchList matches={this.props.matches} />
-      <Classification classification={sortedList}/>
+      <Classification classification={sortedList} />
     );
+  }
   }
 }
 

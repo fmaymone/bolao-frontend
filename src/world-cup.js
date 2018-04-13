@@ -909,6 +909,7 @@ const data = {
       "channels": [],
       "finished": false,
       "group": "h"
+      
     },49:
     {
       "name": 49,
@@ -924,7 +925,8 @@ const data = {
       "stadium": 11,
       "channels": [],
       "finished": false,
-      "group": "round_16"
+      "group": "round_16",
+      "isKnockout": true
     },50:
     {
       "name": 50,
@@ -940,7 +942,8 @@ const data = {
       "stadium": 5,
       "channels": [],
       "finished": false,
-      "group": "round_16"
+      "group": "round_16",
+      "isKnockout": true
     },51:
     {
       "name": 51,
@@ -956,7 +959,8 @@ const data = {
       "stadium": 1,
       "channels": [],
       "finished": false,
-      "group": "round_16"
+      "group": "round_16",
+      "isKnockout": true
     },
     52:
     {
@@ -973,7 +977,8 @@ const data = {
       "stadium": 6,
       "channels": [],
       "finished": false,
-      "group": "round_16"
+      "group": "round_16",
+      "isKnockout": true
     },
     53:
     {
@@ -990,7 +995,8 @@ const data = {
       "stadium": 7,
       "channels": [],
       "finished": false,
-      "group": "round_16"
+      "group": "round_16",
+      "isKnockout": true
     },54:
     {
       "name": 54,
@@ -1006,7 +1012,8 @@ const data = {
       "stadium": 10,
       "channels": [],
       "finished": false,
-      "group": "round_16"
+      "group": "round_16",
+      "isKnockout": true
     },55:
     {
       "name": 55,
@@ -1022,7 +1029,8 @@ const data = {
       "stadium": 3,
       "channels": [],
       "finished": false,
-      "group": "round_16"
+      "group": "round_16",
+      "isKnockout": true
     },56:
     {
       "name": 56,
@@ -1038,7 +1046,8 @@ const data = {
       "stadium": 2,
       "channels": [],
       "finished": false,
-      "group": "round_16"
+      "group": "round_16",
+      "isKnockout": true
     },57:
     {
       "name": 57,
@@ -1054,7 +1063,8 @@ const data = {
       "stadium": 6,
       "channels": [],
       "finished": false,
-      "group": "round_8"
+      "group": "round_8",
+      "isKnockout": true
     },58:
     {
       "name": 58,
@@ -1070,7 +1080,8 @@ const data = {
       "stadium": 5,
       "channels": [],
       "finished": false,
-      "group": "round_8"
+      "group": "round_8",
+      "isKnockout": true
     },59:
     {
       "name": 59,
@@ -1086,7 +1097,8 @@ const data = {
       "stadium": 11,
       "channels": [],
       "finished": false,
-      "group": "round_8"
+      "group": "round_8",
+      "isKnockout": true
     },
     60:
     {
@@ -1103,7 +1115,8 @@ const data = {
       "stadium": 7,
       "channels": [],
       "finished": false,
-      "group": "round_8"
+      "group": "round_8",
+      "isKnockout": true
     },
     61:
     {
@@ -1120,7 +1133,8 @@ const data = {
       "stadium": 3,
       "channels": [],
       "finished": false,
-      "group": "round_4"
+      "group": "round_4",
+      "isKnockout": true
     },
     62:
     {
@@ -1137,7 +1151,8 @@ const data = {
       "stadium": 1,
       "channels": [],
       "finished": false,
-      "group": "round_4"
+      "group": "round_4",
+      "isKnockout": true
     },
     63:
     {
@@ -1154,7 +1169,8 @@ const data = {
       "stadium": 3,
       "channels": [],
       "finished": false,
-      "group": "round2_loser"
+      "group": "round2_loser",
+      "isKnockout": true
     },
     64:
     {
@@ -1171,7 +1187,8 @@ const data = {
       "stadium": 1,
       "channels": [],
       "finished": false,
-      "group": "round2_winner"
+      "group": "round2_winner",
+      "isKnockout": true
     }
   
 }
