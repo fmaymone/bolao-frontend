@@ -18,9 +18,6 @@ class MatchesBuilder extends Component {
   state = {
     matches: ""
   };
-
-
-
   componentDidMount() {
     const { firebaseApp, auth, watchList } = this.props;
     //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
@@ -30,12 +27,6 @@ class MatchesBuilder extends Component {
   componentWillUnmount() {
     const { unwatchList, auth } = this.props;
     unwatchList(`/users/${auth.uid}/matches`); // To unwatch a watcher that is stored in a specific location we call the unwatchList with the path
-  }
-
-  renderList(matches) {
-    const { history } = this.props;
-
-    return;
   }
 
   filterFromGroup = value => {
@@ -50,13 +41,8 @@ class MatchesBuilder extends Component {
     if (this.props.matches === undefined)
       return <div />;
     return (
-
-
       <GroupsBuilder matches={this.getMatchesFromGroup()} />
-
-
     );
-
   }
 
   renderKnockoutStage() {
@@ -69,20 +55,16 @@ class MatchesBuilder extends Component {
         ? this.renderGroupsStage()
         : this.renderKnockoutStage();
 
-    // return <Activity>{type}</Activity>;
-    // return  <h1>Oi</h1></Activity>;
-    return (
+        return (
       <Activity>
         <Container>
           <Row>
             <Col sm={2}>
-
             </Col>
             <Col sm={8}>
               <center>{type}</center>
             </Col>
             <Col sm={2}>
-
             </Col>
           </Row>
         </Container>

@@ -7,9 +7,47 @@ import firebase from "firebase";
 import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import { injectIntl, intlShape } from "react-intl";
-
+import { updateClassification } from '../../store/actions/bolaoActions'
 
 class ClassificationBuilder extends Component {
+
+
+  fill16round = (data) =>{
+    console.log(data);
+    const group = this.props.group;
+    let matchFirstPlaceTeam = 0;
+    let matchSecondPlaceTeam = 0;
+    
+    switch(group) {
+      case 'a':
+          matchFirstPlaceTeam = 48;
+          matchSecondPlaceTeam = 48;
+          break;
+      case 'b':
+          matchFirstPlaceTeam = 48;
+          matchSecondPlaceTeam = 48;
+          break;
+      case 'c':
+          matchFirstPlaceTeam = 48;
+          matchSecondPlaceTeam = 48;
+          break;
+      case 'd':
+          matchFirstPlaceTeam = 48;
+          matchSecondPlaceTeam = 48;
+          break;
+      case 'e':
+          matchFirstPlaceTeam = 48;
+          matchSecondPlaceTeam = 48;
+          break;
+      case 'f':
+          matchFirstPlaceTeam = 48;
+          matchSecondPlaceTeam = 48;
+          break;
+      
+      default:
+          
+  } 
+  }
 
   render() {
     console.log(this.props.matches);
@@ -87,6 +125,7 @@ class ClassificationBuilder extends Component {
     console.log(classification);
     const sortedList = classification.sort(compare);
     console.log(sortedList);
+    this.props.updateClassification(this.props.group, sortedList);
     return (
       // <GroupsMatchList matches={this.props.matches} />
       <Classification classification={sortedList}/>
@@ -105,4 +144,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(withFirebase(ClassificationBuilder));
+export default connect(mapStateToProps, {updateClassification} )(withFirebase(ClassificationBuilder));

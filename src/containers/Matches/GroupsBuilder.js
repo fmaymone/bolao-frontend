@@ -67,11 +67,14 @@ class GroupsBuilder extends Component {
     }
 
     render() {
+        const currentGroup = this.props.playerDataReducer.currentGroup;
         return (
             <div>
                <Row><Col  md={12}> <MatchList matches={this.props.matches} /></Col></Row>
                <Row><Col  md={8} offset={{ md: 2 }} ><div>{this.groupsControls()}</div></Col></Row>
-                <Row><Col  md={12}><ClassificationBuilder matches={this.props.matches} /></Col></Row>
+               <Row>
+                    <Col  md={8} offset={{ md: 2 }}><ClassificationBuilder matches={this.props.matches} group={currentGroup} /></Col>
+                </Row>
             </div>
         )
     }

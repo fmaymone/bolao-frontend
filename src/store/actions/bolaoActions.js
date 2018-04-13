@@ -5,7 +5,8 @@ import {
   MATCH_CREATE,
   MATCHES_FETCH_SUCCESS,
   MATCH_SAVE_SUCCESS,
-  MATCHES_INITIAL_CREATE
+  MATCHES_INITIAL_CREATE,
+  
 } from "./types";
 
 import { firebaseApp } from "../../firebase";
@@ -53,11 +54,10 @@ export const updateMatch = match => {
       firebase.database().ref(`/users/${currentUser.uid}/matches/${id}/`)
         .set(match)
         .then(() => {
-          console.log("writen match")
+          //console.log("writen match")
         });
     };
  }
-
 
 export const matchesFetch = () => {
   const { currentUser } = firebase.auth();
@@ -77,3 +77,16 @@ export const matchesFetch = () => {
     }
   };
 };
+
+export const updateClassification = (group, data) =>{
+  const { currentUser } = firebase.auth();
+  
+  return dispatch => {
+    if (currentUser) {
+      firebase
+        .database()
+        .ref(`/users/${currentUser.uid}/classification/${group}`)
+        .set(data);
+    }
+  };
+}
