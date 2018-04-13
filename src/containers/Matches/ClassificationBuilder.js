@@ -66,18 +66,18 @@ class ClassificationBuilder extends Component {
       //if number points is equal, go to the diference btw gp and gc
       if (a.points == b.points) {
         if ((a.gp - a.gc) > (b.gp - b.gc)) {
-          return 1;
+          return -1;
         }
         if ((a.gp - a.gc) < (b.gp - b.gc)) {
-          return -1;
+          return 1;
         }
         //if gp-gc its equal, check if gp its bigger
         if ((a.gp - a.gc) == (b.gp - b.gc)) {
           if (a.gp > b.gp) {
-            return 1
+            return -1
           }
           if (a.gp < b.gp) {
-            return -1
+            return 1
           }
         }
 
