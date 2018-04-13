@@ -158,6 +158,12 @@ const messages=defineMessages({
   document: 'Document',
   collection: 'Collection',
 
+  round_16: 'Oitavas de Final',
+  round_8: 'Quartas de Final',
+  round_4: 'Semi-Finais', 
+  round2_loser: 'Rubens Barrichello',
+  round2_winner: 'Final'
+
 });
 
 export default messages;

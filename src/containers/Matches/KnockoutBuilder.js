@@ -13,18 +13,19 @@ import ClassificationBuilder from './ClassificationBuilder';
 import FlatButton from "material-ui/FlatButton";
 import { matchesFetch, changeStage } from "../../store/actions/bolaoActions";
 import { Container, Row, Col } from "react-grid-system";
+import { GROUPS_STAGE, KNOCKOUT_STAGE } from "../../store/actions/types";
 
-const groups = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+const groups = ['round_16', 'round_8', 'round_4', 'round2_loser', 'round2_winner'];
 
-class GroupsBuilder extends Component {
+class KnockoutBuilder extends Component {
 
     nextGroup = () => {
         const { changeStage, playerDataReducer } = this.props;
 
-        let newGroupValue = { currentGroup: 'a', currentPhase: 'groups_stage' };
+        let newGroupValue = { currentGroup: 'round_16', currentPhase: KNOCKOUT_STAGE };
         let tempGroup;
-        if (playerDataReducer.currentGroup === 'h') {
-            tempGroup = 'a';
+        if (playerDataReducer.currentGroup === 'round2_winner') {
+            tempGroup = 'round_16';
         } else {
             tempGroup = groups[groups.indexOf(playerDataReducer.currentGroup) + 1];
         }
@@ -37,10 +38,10 @@ class GroupsBuilder extends Component {
     prevGroup = () => {
         const { changeStage, playerDataReducer } = this.props;
 
-        let newGroupValue = { currentGroup: 'a', currentPhase: 'groups_stage' };
+        let newGroupValue = { currentGroup: 'a', currentPhase: KNOCKOUT_STAGE };
         let tempGroup;
-        if (playerDataReducer.currentGroup === 'a') {
-            tempGroup = 'h';
+        if (playerDataReducer.currentGroup === 'round_16') {
+            tempGroup = 'round2_winner';
         } else {
             tempGroup = groups[groups.indexOf(playerDataReducer.currentGroup) - 1];
         }
@@ -68,13 +69,14 @@ class GroupsBuilder extends Component {
 
     render() {
         const currentGroup = this.props.playerDataReducer.currentGroup;
+        const { intl } = this.props
         return (
             <div>
-                <Row><Col md={12}> <MatchList matches={this.props.matches} title={'Grupo ' + currentGroup.toUpperCase()} /></Col></Row>
-                <Row><Col md={8} offset={{ md: 2 }} ><div>{this.groupsControls()}</div></Col></Row>
-                <Row>
-                    <Col md={8} offset={{ md: 2 }}><ClassificationBuilder matches={this.props.matches} group={currentGroup} /></Col>
-                </Row>
+               <Row><Col  md={12}> <MatchList matches={this.props.matches} stage={this.props.playerDataReducer} title={intl.formatMessage({ id: currentGroup })} /></Col></Row>
+               <Row><Col  md={8} offset={{ md: 2 }} ><div>{this.groupsControls()}</div></Col></Row>
+               {/* <Row>
+                    <Col  md={8} offset={{ md: 2 }}><ClassificationBuilder matches={this.props.matches} group={currentGroup} /></Col>
+                </Row> */}
             </div>
         )
     }
@@ -93,6 +95,6 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { matchesFetch, changeStage })(
-    injectIntl(withRouter(withFirebase(muiThemeable()(GroupsBuilder))))
+    injectIntl(withRouter(withFirebase(muiThemeable()(KnockoutBuilder))))
 );
 

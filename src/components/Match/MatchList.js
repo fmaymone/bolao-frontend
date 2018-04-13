@@ -27,66 +27,29 @@ import {changeStage}  from '../../store/actions/bolaoActions'
 
 class MatchList extends Component {
 
-
-
+  
 render() {
+  
+  
   const {
-    history,
-    intl,
-    setDialogIsOpen,
-    dialogs,
-    match,
-    submit,
-    muiTheme,
-    isGranted,
-    firebaseApp,
     matches,
-    playerDataReducer
+    stage
     } = this.props;
-  const uid = this.props.auth.uid;
-
-  if (uid) {
+  
     return (
-      <Container fluid style={styles.matchesContainer}>
-        <h1>Grupo {playerDataReducer.currentGroup.toUpperCase()} </h1>
-
-        
+      <Container>
+        <h1>{this.props.title} </h1>
         {matches.map(match => (
           <div key={match.name}>
             <Match game={match.val} />
           </div>
         ))}
-
-       
       </Container>
 
     );
-  } else {
-    return "Oi";
-  }
+  } 
 }
-}
-const mapStateToProps = state => {
-  const { auth, browser, lists, worldCupData, playerDataReducer } = state;
 
-  return {
-    auth,
-    browser,
-    isGranted: grant => isGranted(state, grant),
-    worldCupData: worldCupData,
-    playerDataReducer: playerDataReducer
-  };
-};
+export default MatchList;
 
-export default connect(mapStateToProps)(
-  injectIntl(muiThemeable()(withRouter(withFirebase(MatchList))))
-);
 
-const styles = {
-  matchesContainer: {
-    overflow: "hidden",
-    display: "flex",
-    left: 20,
-    flexDirection: "column"
-  }
-};

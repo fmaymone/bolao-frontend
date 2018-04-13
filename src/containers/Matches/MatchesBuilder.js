@@ -6,11 +6,13 @@ import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
 import GroupsBuilder from "./GroupsBuilder";
-import { GROUPS_STAGE, KNOCKOUT_STAGE } from "../../store/actions/types";
+import KnockoutBuilder from './KnockoutBuilder';
+import { GROUPS_STAGE, KNOCKOUT_STAGE, ROUND_16 } from "../../store/actions/types";
 import MatchList from "../../components/Match/MatchList";
 import { matchesFetch, changeStage } from "../../store/actions/bolaoActions";
 import FlatButton from "material-ui/FlatButton";
 import { Container, Row, Col } from "react-grid-system";
+
 
 const groups = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
@@ -32,21 +34,31 @@ class MatchesBuilder extends Component {
   filterFromGroup = value => {
     return value.val.group == this.props.playerDataReducer.currentGroup;
   };
-  getMatchesFromGroup = () => {
+  getActualMatches = () => {
     const matches = this.props.matches.filter(this.filterFromGroup);
     return matches;
   };
-
+  
   renderGroupsStage() {
     if (this.props.matches === undefined)
       return <div />;
     return (
-      <GroupsBuilder matches={this.getMatchesFromGroup()} />
+      <GroupsBuilder matches={this.getActualMatches()} />
     );
   }
 
   renderKnockoutStage() {
-    return <h1>Knockout Stage</h1>;
+    if (this.props.matches === undefined)
+      return <div />;
+    return (
+      <KnockoutBuilder matches={this.getActualMatches()} />
+    );
+  }
+  handleChangeKnockout = () =>{
+    const data = {currentGroup:ROUND_16,
+      currentPhase:KNOCKOUT_STAGE}
+    this.props.changeStage(data);
+
   }
 
   render() {
@@ -60,6 +72,11 @@ class MatchesBuilder extends Component {
         <Container>
           <Row>
             <Col sm={2}>
+            <FlatButton
+                    label={"Knockout >"}
+                    primary={true}
+                    onClick={this.handleChangeKnockout.bind(this)}
+                />
             </Col>
             <Col sm={8}>
               <center>{type}</center>
