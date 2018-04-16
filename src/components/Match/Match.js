@@ -49,8 +49,13 @@ class Match extends Component {
   chooseDrawWinnerHandler = async (id) =>{
 
     console.log(id);
-    this.setState({winner: id});
-    this.setState({isDraw: true});
+    // this.setState({winner: id});
+    // this.setState({isDraw: true});
+    if (this.props) {
+      let gameToBeUpdated = { ...this.props.game };
+      gameToBeUpdated.winner = id;
+      await this.props.updateMatch(gameToBeUpdated);
+    }
 
   }
   awayScoreChangedHandler = async (event) => {
@@ -63,6 +68,21 @@ class Match extends Component {
       // this.setState({away_score: event.target.value})
 
     }
+
+  }
+
+  updateKnockoutMatch = async (game) =>{
+   
+    if (this.props) {
+      let gameToBeUpdated = { ...this.props.game };
+      if(game.home_result > game.away_result){
+        gameToBeUpdated.winner = game.home_team;
+      }else{
+        gameToBeUpdated.winner = game.away_team;
+      }
+      await this.props.updateMatch(gameToBeUpdated);
+    }
+
 
   }
   homeScoreChangedHandler = async (event) => {
@@ -109,6 +129,7 @@ class Match extends Component {
     if (game.home_result == game.away_result) {
       return this.renderDrawMatch();
     } else {
+      this.updateKnockoutMatch(game);
       return (
         <div key={this.props.game.name}>
           <Row align="center">
@@ -143,7 +164,7 @@ class Match extends Component {
       <div key={this.props.game.name}>
         <Row align="center" style={{ borderStyle: 'groove'  }} >
           <Col sm={4} onClick={this.chooseDrawWinnerHandler.bind(this,this.props.game.home_team)}>
-            <Team id={this.props.game.home_team} isHomeTeam="true" isWinner={this.state.winner}/>
+            <Team id={this.props.game.home_team} isHomeTeam="true" isWinner={this.props.game.winner}/>
           </Col>
           <Col sm={1}>
             <center><TextField type='number' value={this.props.game.home_result} onChange={this.homeScoreChangedHandler.bind(this)} /></center>
@@ -155,7 +176,7 @@ class Match extends Component {
             <center><TextField type='number' value={this.props.game.away_result} onChange={this.awayScoreChangedHandler.bind(this)} /></center>
           </Col>
           <Col sm={4} onClick={this.chooseDrawWinnerHandler.bind(this,this.props.game.away_team)}>
-            <Team id={this.props.game.away_team} isHomeTeam="false" isWinner={this.state.winner} />
+            <Team id={this.props.game.away_team} isHomeTeam="false" isWinner={this.props.game.winner} />
           </Col>
         </Row>
       </div>
