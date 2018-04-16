@@ -19,6 +19,7 @@ const groups = ['round_16', 'round_8', 'round_4', 'round2_loser', 'round2_winner
 
 class KnockoutBuilder extends Component {
 
+
     nextGroup = () => {
         const { changeStage, playerDataReducer } = this.props;
 
@@ -74,9 +75,9 @@ class KnockoutBuilder extends Component {
             <div>
                <Row><Col  md={12}> <MatchList matches={this.props.matches} stage={this.props.playerDataReducer} title={intl.formatMessage({ id: currentGroup })} /></Col></Row>
                <Row><Col  md={8} offset={{ md: 2 }} ><div>{this.groupsControls()}</div></Col></Row>
-                <Row>
-                    <Col  md={8} offset={{ md: 2 }}><ClassificationBuilder matches={this.props.matches} stage={this.props.playerDataReducer} /></Col>
-                </Row> 
+                {/* <Row>
+                    <Col  md={8} offset={{ md: 2 }}><ClassificationBuilder classification={this.props.matches} stage={this.props.playerDataReducer} /></Col>
+                </Row>  */}
             </div>
         )
     }

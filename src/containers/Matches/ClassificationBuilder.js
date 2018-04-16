@@ -8,9 +8,16 @@ import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import { injectIntl, intlShape } from "react-intl";
 import { GROUPS_STAGE, KNOCKOUT_STAGE, ROUND_16 } from "../../store/actions/types";
-
+import {updateClassification, updateMatch} from "../../store/actions/bolaoActions";
 
 class ClassificationBuilder extends Component {
+
+  componentDidMount() {
+    const { firebaseApp, auth, watchList } = this.props;
+    //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
+    let ref = firebaseApp.database().ref(`/users/${auth.uid}/matches`);
+    watchList(ref, "listMatches"); //Here we started watching a list
+  }
 
   updateKnockoutStage = async (teams) => {
     const stage = this.props.stage;
@@ -25,24 +32,41 @@ class ClassificationBuilder extends Component {
     }
   }
 
-  updateGroupsPhase = async (teams) => {
-
-    
-    const group = this.props.stage.currentGroup;
-    console.log(teams);
-  }
 
   updateGroupsPhase = async (teams) => {
 
-    
-    const group = this.props.stage.currentGroup;
-    console.log(teams);
-    let firstGroup = teams[0];
-    let secondGroup = teams[1];
+    await this.update16Phase(teams);
+    await this.updateClassificationDb(teams);
+   
+  }
 
-    
+  updateClassificationDb = async (teams) => {
+    const group = this.props.stage.currentGroup;
+    this.props.updateClassification(group, teams);
 
   }
+
+  update16Phase = async (teams) => {
+
+    const group = this.props.stage.currentGroup;
+    console.log(teams);
+    let firstOfGroup = teams[0];
+    let secondOfGroup = teams[1];
+    let homeMatchToUpdate = 0;
+    let awayMatchToUpdate = 0;
+    let actualMatches = this.props.userMatches;
+    const matchesToUpdate = this.props.worldCupData.knockout_crossings.ROUND_16.find(k=>k.id==group);
+    let firstMatch = actualMatches.find(k=>k.key==matchesToUpdate.homeTeam);
+    let secondMatch = actualMatches.find(k=>k.key==matchesToUpdate.awayTeam);
+
+    firstMatch.val.home_team = firstOfGroup.id;
+    secondMatch.val.away_team = secondOfGroup.id;
+
+    this.props.updateMatch(firstMatch.val);
+    this.props.updateMatch(secondMatch.val);
+  }
+
+  
 
   render() {
     console.log(this.props.matches);
@@ -131,14 +155,15 @@ class ClassificationBuilder extends Component {
 }
 
 const mapStateToProps = state => {
-  const { intl, dialogs, auth } = state;
+  const { intl, dialogs, auth, lists, player, worldCupData } = state;
 
   return {
     intl,
     dialogs,
     auth,
-
+    worldCupData,
+    userMatches: lists.listMatches
   };
 };
 
-export default connect(mapStateToProps)(withFirebase(ClassificationBuilder));
+export default connect(mapStateToProps, {updateClassification, updateMatch})(withFirebase(ClassificationBuilder));

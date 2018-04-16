@@ -53,7 +53,7 @@ class Team extends Component {
         return this.renderAwayTeam(teamEntity);
       }
     } else {
-      return "Olar";
+      return "Time não escolhido";
     }
   }
 }
