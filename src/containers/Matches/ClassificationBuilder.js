@@ -32,6 +32,12 @@ class ClassificationBuilder extends Component {
     }
   }
 
+  updateKnockoutPhase = async () =>{
+
+    console.log('KnockoutPhase');
+
+  }
+
 
   updateGroupsPhase = async (teams) => {
 
@@ -66,13 +72,8 @@ class ClassificationBuilder extends Component {
     this.props.updateMatch(secondMatch.val);
   }
 
-  
-
-  render() {
-    console.log(this.props.matches);
-    const matches = this.props.matches;
-    const classification = []
-
+  fillClassificationGroups = (matches) =>{
+    let classification = [];
 
     for (let match of matches) {
       if (!classification.find(k => k.id == match.val.away_team)) {
@@ -115,6 +116,8 @@ class ClassificationBuilder extends Component {
       }
 
     }
+    return classification.sort(compare);
+
     function compare(a, b) {
       if (a.points < b.points)
         return 1;
@@ -141,12 +144,19 @@ class ClassificationBuilder extends Component {
       }
       return 0;
     }
-    
-    const sortedList = classification.sort(compare);
+  }
+
+  
+
+  render() {
+    console.log(this.props.matches);
+    const matches = this.props.matches;
+    let sortedList = [];
     this.updateKnockoutStage(sortedList);
     if(this.props.stage.currentPhase === KNOCKOUT_STAGE){
       return <div />
     }else{
+       sortedList = this.fillClassificationGroups(matches);
     return (
       <Classification classification={sortedList} />
     );
