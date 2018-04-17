@@ -25,7 +25,8 @@ import TestForm from "../../components/Forms/TestForm";
 
 import { Container, Row, Col } from "react-grid-system";
 import TextField from 'material-ui/TextField';
-import { updateMatch } from '../../store/actions/bolaoActions'
+import { updateMatch } from '../../store/actions/bolaoActions';
+import {OTHERS} from '../../store/actions/types';
 
 const path = "/bets/";
 
@@ -35,17 +36,13 @@ class Match extends Component {
 
 
     // This binding is necessary to make `this` work in the callback
-    this.handleClick = this.handleClick.bind(this);
+ 
     this.state = {
       winner: 0,
       isDraw: false
     }
   }
-  handleClick() {
-    this.setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
-    }));
-  }
+
   chooseDrawWinnerHandler = async (id) =>{
 
     console.log(id);
@@ -81,10 +78,37 @@ class Match extends Component {
         gameToBeUpdated.winner = game.away_team;
       }
       await this.props.updateMatch(gameToBeUpdated);
+      await this.updateNextStageMatches(game);
     }
+  }
 
+  updateNextStageMatches = async (game) => {
+    
+    let isHome = true;
+    let matchTarget = this.props.worldCupData.knockout_crossings.OTHERS.find(k=>k.id==game.name);
+    let actualValue = this.props.matches.find(k=>k.key==game.name);
+    if(matchTarget.classified == 'winner'){
+
+      if(matchTarget.type == 'home'){
+        actualValue.val.home_team = game.winner;
+      }else{
+        actualValue.val.away_team = game.winner;
+      }
+
+    
+    }else{
+      if(matchTarget.type == 'home'){
+        actualValue.val.home_team = game.winner;
+      }else{
+        actualValue.val.away_team = game.winner;
+      }
+
+    }
+    await this.props.updateMatch(actualValue);
+    
 
   }
+
   homeScoreChangedHandler = async (event) => {
 
     if (this.props) {
@@ -122,7 +146,7 @@ class Match extends Component {
   }
 
   renderKnockoutMatch = () => {
-    const { game } = this.props;
+    const game  = this.props.game;
 
 
     //if the game is a draw, the user needs to choose the winner
@@ -131,23 +155,23 @@ class Match extends Component {
     } else {
       this.updateKnockoutMatch(game);
       return (
-        <div key={this.props.game.name}>
+        <div key={game.name}>
           <Row align="center">
 
             <Col sm={4}>
-              <Team id={this.props.game.home_team} isHomeTeam="true" />
+              <Team id={game.home_team} isHomeTeam="true" />
             </Col>
             <Col sm={1}>
-              <center><TextField type='number' value={this.props.game.home_result} onChange={this.homeScoreChangedHandler.bind(this)} /></center>
+              <center><TextField type='number' value={game.home_result} onChange={this.homeScoreChangedHandler.bind(this)} /></center>
             </Col>
             <Col sm={2}>
               <center>X</center>
             </Col>
             <Col sm={1}>
-              <center><TextField type='number' value={this.props.game.away_result} onChange={this.awayScoreChangedHandler.bind(this)} /></center>
+              <center><TextField type='number' value={game.away_result} onChange={this.awayScoreChangedHandler.bind(this)} /></center>
             </Col>
             <Col sm={4}>
-              <Team id={this.props.game.away_team} isHomeTeam="false" />
+              <Team id={game.away_team} isHomeTeam="false" />
             </Col>
           </Row>
         </div>
@@ -207,12 +231,14 @@ class Match extends Component {
 }
 
 const mapStateToProps = state => {
-  const { intl, dialogs, auth } = state;
+  const { intl, dialogs, auth, worldCupData,lists } = state;
 
   return {
     intl,
     dialogs,
     auth,
+    worldCupData,
+    matches: lists.listMatches,
     isGranted: grant => isGranted(state, grant)
   };
 };

@@ -1,4 +1,4 @@
-import { ROUND_16, ROUND_8, ROUND_4, ROUND_FINALS, ROUND_3x4 } from './store/actions/types';
+import { ROUND_16, ROUND_8, ROUND_4, ROUND_FINALS, ROUND_3x4, OTHERS } from './store/actions/types';
 
 const data = {
   stadiums: [
@@ -1205,9 +1205,42 @@ const data = {
       {id:'e', homeTeam: 53, awayTeam: 55},
       {id:'f', homeTeam: 55, awayTeam: 53},
       {id:'g', homeTeam: 54, awayTeam: 56},
-      {id:'h', homeTeam: 56, awayTeam: 54}
-    
-  ]
+      {id:'h', homeTeam: 56, awayTeam: 54}  
+  ],
+  OTHERS:[
+
+    {id:'49', type:'home', classified:'winner', target:'57'},
+    {id:'50', type:'away', classified:'winner', target:'57'},
+    {id:'51', type:'home', classified:'winner', target:'59'},
+    {id:'52', type:'away', classified:'winner', target:'59'},
+    {id:'53', type:'home', classified:'winner', target:'58'},
+    {id:'54', type:'away', classified:'winner', target:'58'},
+    {id:'55', type:'home', classified:'winner', target:'60'},
+    {id:'56', type:'away', classified:'winner', target:'60'},
+    {id:'57', type:'home', classified:'winner', target:'61'},
+    {id:'58', type:'away', classified:'winner', target:'61'},
+    {id:'59', type:'home', classified:'winner', target:'62'},
+    {id:'60', type:'away', classified:'winner', target:'62'},
+    {id:'61', type:'away', classified:'loser', target:'63'},
+    {id:'62', type:'away', classified:'loser', target:'63'},
+    {id:'61', type:'away', classified:'winner', target:'64'},
+    {id:'62', type:'away', classified:'winner', target:'64'},
+
+
+
+
+
+   
+    {id:'57', homeTeam: 49, awayTeam: 50},
+    {id:'58', homeTeam: 53, awayTeam: 54},
+    {id:'59', homeTeam: 51, awayTeam: 52},
+    {id:'60', homeTeam: 55, awayTeam: 56},
+    {id:'59', homeTeam: 51, awayTeam: 52},
+    {id:'61', homeTeam: 57, awayTeam: 58},
+    {id:'62', homeTeam: 59, awayTeam: 60},
+    {id:'63', homeTeam: 61, awayTeam: 62},
+    {id:'64', homeTeam: 61, awayTeam: 62},
+   ]
 }
   
 
