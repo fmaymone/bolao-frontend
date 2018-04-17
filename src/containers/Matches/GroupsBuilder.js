@@ -53,8 +53,8 @@ class GroupsBuilder extends Component {
         let gameToBeUpdated = { ...game };
         type === 'home' ?
             (gameToBeUpdated.home_result = e.target.value) : (gameToBeUpdated.away_result = e.target.value)
-        await this.props.updateMatch(gameToBeUpdated);
 
+         await this.props.updateMatch(gameToBeUpdated);
     }
 
 
