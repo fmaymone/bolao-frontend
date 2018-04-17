@@ -25,68 +25,45 @@ import TestForm from "../../components/Forms/TestForm";
 import { Container, Row, Col } from "react-grid-system";
 import TextField from 'material-ui/TextField';
 import { updateMatch } from '../../store/actions/bolaoActions';
-import KnockoutMatch from './KnockoutMatch';
-import GroupMatch from './GroupMatch';
 
 
+class GroupMatch extends Component {
 
+  renderMatch = () => {
 
-class Match extends Component {
+    return (
+      <div key={this.props.game.name}>
+        <Row align="center"  >
+          <Col sm={4} >
+            <Team id={this.props.game.home_team} isHomeTeam="true"  />
+          </Col>
+          <Col sm={1}>
+            <center><TextField type='number' value={this.props.game.home_result} onChange={(e,game,type)=>this.props.handleChangedResult(e, this.props.game, 'home')} /></center>
+          </Col>
+          <Col sm={2}>
+            <center>X</center>
+          </Col>
+          <Col sm={1}>
+            <center><TextField type='number' value={this.props.game.away_result} onChange={(e,game,type)=>this.props.handleChangedResult(e, this.props.game, 'away')} /></center>
+          </Col>
+          <Col sm={4} >
+            <Team id={this.props.game.away_team} isHomeTeam="false"  />
+          </Col>
+        </Row>
+      </div>
+    )
+  }
+
 
   render() {
-    const {
-      history,
-      intl,
-      setDialogIsOpen,
-      dialogs,
-      game,
-      submit,
-      muiTheme,
-      isGranted,
-      firebaseApp,
-      auth
-    } = this.props;
+    const { game } = this.props;
 
     if (game.type === 'group') {
-      return (<GroupMatch game={game} handleChangedResult={this.props.handleChangedResult}/>)
+      return this.renderMatch();
     } else {
-      return (<KnockoutMatch game={game} handleChangedResult={this.props.handleChangedResult}/>)
+      <div />
     }
   }
 }
 
-const mapStateToProps = state => {
-  const { intl, dialogs, auth, worldCupData, lists } = state;
-
-  return {
-    intl,
-    dialogs,
-    auth,
-    worldCupData,
-    matches: lists.listMatches,
-    isGranted: grant => isGranted(state, grant)
-  };
-};
-
-export default connect(mapStateToProps, {
-  setDialogIsOpen,
-  change,
-  submit,
-  updateMatch
-
-})(injectIntl(withRouter(withFirebase(muiThemeable()(Match)))));
-
-Match.propTypes = {
-  // name: PropTypes.string,
-  // code: PropTypes.string,
-  // home: PropTypes.boolean
-};
-const styles = {
-  match: {
-    overflow: "hidden",
-    display: "flex",
-
-    flexDirection: "row",
-    justifyContent: 'center'
-  }
-};
+export default GroupMatch;

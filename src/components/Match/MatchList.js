@@ -41,7 +41,7 @@ render() {
         <h1>{this.props.title} </h1>
         {matches.map(match => (
           <div key={match.name}>
-            <Match game={match.val} />
+            <Match game={match.val} handleChangedResult={this.props.handleChangedResult}/>
           </div>
         ))}
       </Container>

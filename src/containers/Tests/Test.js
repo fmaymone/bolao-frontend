@@ -13,7 +13,8 @@ class Test extends Component {
     componentDidMount() {
         //this.props.matchesFetch(this.props.auth.uid);
     }
-    
+
+        
     handlerInitialState = ( ) =>{
                 
         this.props.matchesInitialCreate(data);
@@ -27,6 +28,7 @@ class Test extends Component {
         this.props.getMatchesFromGroup('a');
     }
     render() {
+       
         return (
             <Activity
             ><h1>Testing</h1>

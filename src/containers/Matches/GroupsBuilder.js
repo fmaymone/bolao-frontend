@@ -11,7 +11,7 @@ import MatchesLoader from './MatchesLoader';
 import MatchList from '../../components/Match/MatchList';
 import ClassificationBuilder from './ClassificationBuilder';
 import FlatButton from "material-ui/FlatButton";
-import { matchesFetch, changeStage } from "../../store/actions/bolaoActions";
+import { matchesFetch, changeStage, updateMatch } from "../../store/actions/bolaoActions";
 import { Container, Row, Col } from "react-grid-system";
 
 const groups = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
@@ -48,6 +48,15 @@ class GroupsBuilder extends Component {
         changeStage(newGroupValue);
 
     };
+    handleChangedResult = async (e, game, type) => {
+
+        let gameToBeUpdated = { ...game };
+        type === 'home' ?
+            (gameToBeUpdated.home_result = e.target.value) : (gameToBeUpdated.away_result = e.target.value)
+        await this.props.updateMatch(gameToBeUpdated);
+
+    }
+
 
     groupsControls() {
         return (
@@ -70,10 +79,15 @@ class GroupsBuilder extends Component {
         const currentGroup = this.props.playerDataReducer.currentGroup;
         return (
             <div>
-                <Row><Col md={12}> <MatchList matches={this.props.matches} title={'Grupo ' + currentGroup.toUpperCase()} /></Col></Row>
+                <Row><Col md={12}> <MatchList matches={this.props.matches} title={'Grupo ' + currentGroup.toUpperCase()} handleChangedResult={this.handleChangedResult}
+                /></Col></Row>
                 <Row><Col md={8} offset={{ md: 2 }} ><div>{this.groupsControls()}</div></Col></Row>
                 <Row>
-                    <Col md={8} offset={{ md: 2 }}><ClassificationBuilder matches={this.props.matches} stage={this.props.playerDataReducer} /></Col>
+                    <Col md={8} offset={{ md: 2 }}><ClassificationBuilder
+                        matches={this.props.matches}
+                        stage={this.props.playerDataReducer}
+                    />
+                    </Col>
                 </Row>
             </div>
         )
@@ -92,7 +106,7 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { matchesFetch, changeStage })(
+export default connect(mapStateToProps, { matchesFetch, changeStage, updateMatch })(
     injectIntl(withRouter(withFirebase(muiThemeable()(GroupsBuilder))))
 );
 

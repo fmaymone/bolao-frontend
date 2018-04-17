@@ -11,13 +11,24 @@ import MatchesLoader from './MatchesLoader';
 import MatchList from '../../components/Match/MatchList';
 import ClassificationBuilder from './ClassificationBuilder';
 import FlatButton from "material-ui/FlatButton";
-import { matchesFetch, changeStage } from "../../store/actions/bolaoActions";
+import { matchesFetch, changeStage, updateMatch } from "../../store/actions/bolaoActions";
 import { Container, Row, Col } from "react-grid-system";
 import { GROUPS_STAGE, KNOCKOUT_STAGE } from "../../store/actions/types";
 
 const groups = ['round_16', 'round_8', 'round_4', 'round2_loser', 'round2_winner'];
 
 class KnockoutBuilder extends Component {
+
+
+    handleChangedResult = async (e, game, type) => {
+
+        let gameToBeUpdated = { ...game };
+        type === 'home' ?
+            (gameToBeUpdated.home_result = e.target.value) : (gameToBeUpdated.away_result = e.target.value)
+        await this.props.updateMatch(gameToBeUpdated);
+
+    }
+
 
 
     nextGroup = () => {
@@ -73,11 +84,11 @@ class KnockoutBuilder extends Component {
         const { intl } = this.props
         return (
             <div>
-               <Row><Col  md={12}> <MatchList matches={this.props.matches} stage={this.props.playerDataReducer} title={intl.formatMessage({ id: currentGroup })} /></Col></Row>
-               <Row><Col  md={8} offset={{ md: 2 }} ><div>{this.groupsControls()}</div></Col></Row>
-                <Row>
+                <Row><Col md={12}> <MatchList matches={this.props.matches} stage={this.props.playerDataReducer} title={intl.formatMessage({ id: currentGroup })} handleChangedResult={this.handleChangedResult} /></Col></Row>
+                <Row><Col md={8} offset={{ md: 2 }} ><div>{this.groupsControls()}</div></Col></Row>
+                {/* <Row>
                     <Col  md={8} offset={{ md: 2 }}><ClassificationBuilder classification={this.props.matches} stage={this.props.playerDataReducer} /></Col>
-                </Row> 
+                </Row>  */}
             </div>
         )
     }
@@ -95,7 +106,7 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { matchesFetch, changeStage })(
+export default connect(mapStateToProps, { matchesFetch, changeStage, updateMatch })(
     injectIntl(withRouter(withFirebase(muiThemeable()(KnockoutBuilder))))
 );
 

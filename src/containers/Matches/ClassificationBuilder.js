@@ -152,11 +152,12 @@ class ClassificationBuilder extends Component {
     console.log(this.props.matches);
     const matches = this.props.matches;
     let sortedList = [];
-    this.updateKnockoutStage(sortedList);
+    
     if(this.props.stage.currentPhase === KNOCKOUT_STAGE){
       return <div />
     }else{
        sortedList = this.fillClassificationGroups(matches);
+       this.updateKnockoutStage(sortedList);
     return (
       <Classification classification={sortedList} />
     );
