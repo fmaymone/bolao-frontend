@@ -1221,25 +1221,10 @@ const data = {
     {id:'58', type:'away', classified:'winner', target:'61'},
     {id:'59', type:'home', classified:'winner', target:'62'},
     {id:'60', type:'away', classified:'winner', target:'62'},
-    {id:'61', type:'away', classified:'loser', target:'63'},
+    {id:'61', type:'home', classified:'loser', target:'63'},
     {id:'62', type:'away', classified:'loser', target:'63'},
-    {id:'61', type:'away', classified:'winner', target:'64'},
+    {id:'61', type:'home', classified:'winner', target:'64'},
     {id:'62', type:'away', classified:'winner', target:'64'},
-
-
-
-
-
-   
-    {id:'57', homeTeam: 49, awayTeam: 50},
-    {id:'58', homeTeam: 53, awayTeam: 54},
-    {id:'59', homeTeam: 51, awayTeam: 52},
-    {id:'60', homeTeam: 55, awayTeam: 56},
-    {id:'59', homeTeam: 51, awayTeam: 52},
-    {id:'61', homeTeam: 57, awayTeam: 58},
-    {id:'62', homeTeam: 59, awayTeam: 60},
-    {id:'63', homeTeam: 61, awayTeam: 62},
-    {id:'64', homeTeam: 61, awayTeam: 62},
    ]
 }
   

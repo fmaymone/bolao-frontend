@@ -31,31 +31,50 @@ class KnockoutBuilder extends Component {
   handleChangedResult = async (e, game, type) => {
     let gameToBeUpdated = { ...game };
     type === "home"
-      ? (gameToBeUpdated.home_result ==e.target.value)
+      ? (gameToBeUpdated.home_result = e.target.value)
       : (gameToBeUpdated.away_result = e.target.value);
     if (gameToBeUpdated.home_result > gameToBeUpdated.away_result) {
       gameToBeUpdated.winner = gameToBeUpdated.home_team;
-    } else {
+      gameToBeUpdated.loser = gameToBeUpdated.away_team;
+    } 
+    if (gameToBeUpdated.home_result < gameToBeUpdated.away_result) {
       gameToBeUpdated.winner = gameToBeUpdated.away_team;
+      gameToBeUpdated.winner = gameToBeUpdated.home_team;
     }
     await this.props.updateMatch(gameToBeUpdated);
     await this.updateMatches(gameToBeUpdated);
   };
 
   updateMatches = async game => {
+    let gameToBeUpdated;
     let gameTarget = this.props.worldCupData.knockout_crossings.OTHERS.find(
       k => k.id == game.name
     );
-    let gameToBeUpdated = this.props.matches.find(
-      k => k.key == gameTarget.target
-    );
-    if (gameTarget.type === "home") {
-      gameToBeUpdated.home_team = game.winner;
-    } else {
-      gameToBeUpdated.away_team = game.winner;
+    if(gameTarget.classified === 'winner'){
+        gameToBeUpdated = this.props.referenceMatches.find(
+        k => k.key == gameTarget.target
+      );
+      if (gameTarget.type === "home") {
+        gameToBeUpdated.val.home_team = game.winner;
+      } else {
+        gameToBeUpdated.val.away_team = game.winner;
+      }
+    }else{
+      let gameToBeUpdated = this.props.referenceMatches.find(
+        k => k.key == gameTarget.target
+      );
+      if (gameTarget.type === "home") {
+        gameToBeUpdated.val.home_team = game.loser;
+      } else {
+        gameToBeUpdated.val.away_team = game.loser;
+      }
+      
     }
     await this.props.updateMatch(gameToBeUpdated);
-  };
+  }
+  
+    
+
 
   nextGroup = () => {
     const { changeStage, playerDataReducer } = this.props;
@@ -112,7 +131,6 @@ class KnockoutBuilder extends Component {
       <div>
         <Row>
           <Col md={12}>
-            {" "}
             <MatchList
               matches={this.props.matches}
               stage={this.props.playerDataReducer}
@@ -150,7 +168,7 @@ const mapStateToProps = state => {
     auth,
     playerDataReducer: playerDataReducer,
     worldCupData,
-    matches: lists.listMatches
+    referenceMatches: lists.listMatches
   };
 };
 
