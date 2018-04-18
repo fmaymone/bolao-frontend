@@ -50,7 +50,7 @@ class Match extends Component {
     if (game.type === 'group') {
       return (<GroupMatch game={game} handleChangedResult={this.props.handleChangedResult}/>)
     } else {
-      return (<KnockoutMatch game={game} handleChangedResult={this.props.handleChangedResult}/>)
+      return (<KnockoutMatch game={game}  chooseDrawWinnerHandler={this.props.chooseDrawWinnerHandler} handleChangedResult={this.props.handleChangedResult}/>)
     }
   }
 }

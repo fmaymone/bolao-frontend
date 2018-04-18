@@ -55,7 +55,7 @@ class MatchesBuilder extends Component {
     );
   }
   handleChangeKnockout = (phase) =>{
-    let group='ROUND_16'
+    let group='round_16'
     if(phase === GROUPS_STAGE){
       group = 'a';
     }

@@ -37,11 +37,18 @@ class Match extends Component {
     if (this.props) {
       let gameToBeUpdated = { ...this.props.game };
       gameToBeUpdated.winner = id;
+      //if the game needed to be updated is home, the loser is the away
+      if(gameToBeUpdated.home_team == id){
+        gameToBeUpdated.loser = gameToBeUpdated.away_team;
+      }else{
+        gameToBeUpdated.loser = gameToBeUpdated.home_team;
+      }
       await this.props.updateMatch(gameToBeUpdated);
+      await this.props.chooseDrawWinnerHandler(gameToBeUpdated);
     }
 
   }
- 
+
  renderKnockoutMatch = () => {
     const game = this.props.game;
     //if the game is a draw, the user needs to choose the winner

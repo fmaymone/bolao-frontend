@@ -567,7 +567,7 @@ const data = {
     40:
       {
         "name": 40,
-        "type": "group",
+        "type": "gr",
         "home_team": 14,
         "away_team": 15,
         "home_result": 0,
@@ -1191,7 +1191,17 @@ const data = {
         "finished": false,
         "group": "round2_winner",
         "isKnockout": true
-      }
+      },
+    result:{
+      first:0,
+      second:0,
+      third:0,
+      fourth:0
+    },
+    topscorer:{
+      name:'Romario'
+    }
+
 
   },
   knockout_crossings:{ 

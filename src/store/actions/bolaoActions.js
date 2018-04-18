@@ -58,6 +58,17 @@ export const updateMatch = match => {
         });
     };
  }
+ export const updateFinalResult = match => {
+  const { currentUser } = firebase.auth();
+   
+  return (dispatch) => {
+      firebase.database().ref(`/users/${currentUser.uid}/matches/result/`)
+        .set(match)
+        .then(() => {
+          //console.log("writen match")
+        });
+    };
+ }
 
 export const matchesFetch = () => {
   const { currentUser } = firebase.auth();
