@@ -16,7 +16,7 @@ const AsyncCompanies = MyLoadable({ loader: () => import('./containers/Companies
 const AsyncTest = MyLoadable({ loader: () => import('./containers/Tests/Test') });
 const AsyncPool = MyLoadable({ loader: () => import('./containers/Pools/Pool') });
 const AsyncPools = MyLoadable({ loader: () => import('./containers/Pools/Pools') }, [AsyncPool]);
-const AsyncMatches = MyLoadable({ loader: () => import('./containers/Matches/MatchesBuilder') }, [AsyncPool]);
+const AsyncMatches = MyLoadable({ loader: () => import('./containers/Matches/WelcomeBuilder') }, [AsyncPool]);
 
 
 const Routes = [

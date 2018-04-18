@@ -7,7 +7,6 @@ import { withRouter } from "react-router-dom";
 import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
-import MatchesLoader from './MatchesLoader';
 import MatchList from '../../components/Match/MatchList';
 import ClassificationBuilder from './ClassificationBuilder';
 import FlatButton from "material-ui/FlatButton";

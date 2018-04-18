@@ -26,19 +26,16 @@ class MatchesBuilder extends Component {
     let ref = firebaseApp.database().ref(`/users/${auth.uid}/matches`);
     watchList(ref, "listMatches"); //Here we started watching a list
   }
-  componentWillUnmount() {
-    const { unwatchList, auth } = this.props;
-    unwatchList(`/users/${auth.uid}/matches`); // To unwatch a watcher that is stored in a specific location we call the unwatchList with the path
-  }
 
   filterFromGroup = value => {
     return value.val.group == this.props.playerDataReducer.currentGroup;
   };
+
   getActualMatches = () => {
     const matches = this.props.matches.filter(this.filterFromGroup);
     return matches;
   };
-  
+
   renderGroupsStage() {
     if (this.props.matches === undefined)
       return <div />;
@@ -54,13 +51,16 @@ class MatchesBuilder extends Component {
       <KnockoutBuilder matches={this.getActualMatches()} />
     );
   }
-  handleChangeKnockout = (phase) =>{
-    let group='round_16'
-    if(phase === GROUPS_STAGE){
+ 
+  handleChangeKnockout = (phase) => {
+    let group = 'round_16'
+    if (phase === GROUPS_STAGE) {
       group = 'a';
     }
-    const data = {currentGroup:group,
-      currentPhase:phase}
+    const data = {
+      currentGroup: group,
+      currentPhase: phase
+    }
     this.props.changeStage(data);
 
   }
@@ -71,21 +71,21 @@ class MatchesBuilder extends Component {
         ? this.renderGroupsStage()
         : this.renderKnockoutStage();
 
-        return (
+    return (
       <Activity>
         <Container>
           <Row>
             <Col sm={2}>
-            <FlatButton
-                    label={"Knockout >"}
-                    primary={true}
-                    onClick={this.handleChangeKnockout.bind(this,KNOCKOUT_STAGE )}
-                />
-                <FlatButton
-                    label={"Groups >"}
-                    primary={true}
-                    onClick={this.handleChangeKnockout.bind(this,GROUPS_STAGE )}
-                />
+              <FlatButton
+                label={"Knockout >"}
+                primary={true}
+                onClick={this.handleChangeKnockout.bind(this, KNOCKOUT_STAGE)}
+              />
+              <FlatButton
+                label={"Groups >"}
+                primary={true}
+                onClick={this.handleChangeKnockout.bind(this, GROUPS_STAGE)}
+              />
             </Col>
             <Col sm={8}>
               <center>{type}</center>
