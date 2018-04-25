@@ -6,11 +6,13 @@ import {
   MATCHES_FETCH_SUCCESS,
   MATCH_SAVE_SUCCESS,
   MATCHES_INITIAL_CREATE,
+  ADD_USER_TO_POOL
   
 } from "./types";
 
 import { firebaseApp } from "../../firebase";
 import firebase from "firebase";
+import initialData from '../../world-cup'
 
 export const changeStage = group => {
   return {
@@ -100,4 +102,27 @@ export const updateClassification = (group, data) =>{
         .set(data);
     }
   };
+}
+
+export const addUserToPool = (user,pool) => {
+
+  return dispatch => {
+    firebaseApp
+      .database()
+      .ref(`/pools/${pool}/${user}`)
+      .set(initialData.matches)
+  };
+
+};
+
+export const fetchUserData = (uid) => {
+  return dispatch => {
+    firebaseApp
+      .database()
+      .ref(`/users/${uid}`)
+      .on('value', snapshot => {
+        return snapshot.val();
+      });
+  };
+
 }

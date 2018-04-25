@@ -16,6 +16,7 @@ export const MATCH_CREATE = 'match_create';
 export const MATCHES_FETCH_SUCCESS = 'matches_fetch_success';
 export const MATCH_SAVE_SUCCESS = 'match_save_success';
 export const MATCHES_INITIAL_CREATE = 'matches_initial_creation';
+export const ADD_USER_TO_POOL = 'add_user_to_pool';
 
 
 

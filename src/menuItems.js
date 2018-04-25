@@ -62,68 +62,68 @@ const getMenuItems = (props) => {
       primaryText: intl.formatMessage({ id: 'pools' }),
       leftIcon: <FontIcon className='material-icons' >Pools</FontIcon>
     },
-    {
-      value: '/matches',
-      visible: isAuthorised,
-      primaryText: intl.formatMessage({ id: 'bets' }),
-      leftIcon: <FontIcon className='material-icons' >Apostas</FontIcon>
-    },
-    {
-      visible: isAuthorised,
-      primaryText: intl.formatMessage({ id: 'chats' }),
-      primaryTogglesNestedList: true,
-      leftIcon: <FontIcon className='material-icons' >chats</FontIcon>,
-      nestedItems: [
-          {
-            value: '/chats',
-            visible: isAuthorised,
-            primaryText: intl.formatMessage({ id: 'private' }),
-            leftIcon: <FontIcon className='material-icons' >person</FontIcon>
-          },
-          {
-            value: '/public_chats',
-            visible: isAuthorised,
-            primaryText: intl.formatMessage({ id: 'public' }),
-            leftIcon: <FontIcon className='material-icons' >group</FontIcon>
-          },
-          {
-            value: '/predefined_chat_messages',
-            visible: isAuthorised,
-            primaryText: intl.formatMessage({ id: 'predefined_messages' }),
-            leftIcon: <FontIcon className='material-icons' >textsms</FontIcon>
-          }
-        ]
-    },
-    {
-      value: '/companies',
-      visible: isAuthorised,
-      primaryText: intl.formatMessage({ id: 'companies' }),
-      leftIcon: <FontIcon className='material-icons' >business</FontIcon>
-    },
-    {
-      value: '/tasks',
-      visible: isAuthorised,
-      primaryText: intl.formatMessage({ id: 'tasks' }),
-      leftIcon: <FontIcon className='material-icons' >list</FontIcon>
-    },
-    {
-      visible: isAuthorised,
-      primaryTogglesNestedList: true,
-      primaryText: intl.formatMessage({ id: 'firestore' }),
-      leftIcon: <FontIcon className='material-icons' >flash_on</FontIcon>,
-      nestedItems: [
-          {
-            value: '/document',
-            primaryText: intl.formatMessage({ id: 'document' }),
-            leftIcon: <FontIcon className='material-icons' >flash_on</FontIcon>
-          },
-          {
-            value: '/collection',
-            primaryText: intl.formatMessage({ id: 'collection' }),
-            leftIcon: <FontIcon className='material-icons' >flash_on</FontIcon>
-          }
-        ]
-    },
+    // {
+    //   value: '/matches',
+    //   visible: isAuthorised,
+    //   primaryText: intl.formatMessage({ id: 'bets' }),
+    //   leftIcon: <FontIcon className='material-icons' >Apostas</FontIcon>
+    // },
+    // {
+    //   visible: isAuthorised,
+    //   primaryText: intl.formatMessage({ id: 'chats' }),
+    //   primaryTogglesNestedList: true,
+    //   leftIcon: <FontIcon className='material-icons' >chats</FontIcon>,
+    //   nestedItems: [
+    //       {
+    //         value: '/chats',
+    //         visible: isAuthorised,
+    //         primaryText: intl.formatMessage({ id: 'private' }),
+    //         leftIcon: <FontIcon className='material-icons' >person</FontIcon>
+    //       },
+    //       {
+    //         value: '/public_chats',
+    //         visible: isAuthorised,
+    //         primaryText: intl.formatMessage({ id: 'public' }),
+    //         leftIcon: <FontIcon className='material-icons' >group</FontIcon>
+    //       },
+    //       {
+    //         value: '/predefined_chat_messages',
+    //         visible: isAuthorised,
+    //         primaryText: intl.formatMessage({ id: 'predefined_messages' }),
+    //         leftIcon: <FontIcon className='material-icons' >textsms</FontIcon>
+    //       }
+    //     ]
+    // },
+    // {
+    //   value: '/companies',
+    //   visible: isAuthorised,
+    //   primaryText: intl.formatMessage({ id: 'companies' }),
+    //   leftIcon: <FontIcon className='material-icons' >business</FontIcon>
+    // },
+    // {
+    //   value: '/tasks',
+    //   visible: isAuthorised,
+    //   primaryText: intl.formatMessage({ id: 'tasks' }),
+    //   leftIcon: <FontIcon className='material-icons' >list</FontIcon>
+    // },
+    // {
+    //   visible: isAuthorised,
+    //   primaryTogglesNestedList: true,
+    //   primaryText: intl.formatMessage({ id: 'firestore' }),
+    //   leftIcon: <FontIcon className='material-icons' >flash_on</FontIcon>,
+    //   nestedItems: [
+    //       {
+    //         value: '/document',
+    //         primaryText: intl.formatMessage({ id: 'document' }),
+    //         leftIcon: <FontIcon className='material-icons' >flash_on</FontIcon>
+    //       },
+    //       {
+    //         value: '/collection',
+    //         primaryText: intl.formatMessage({ id: 'collection' }),
+    //         leftIcon: <FontIcon className='material-icons' >flash_on</FontIcon>
+    //       }
+    //     ]
+    // },
     {
       value: '/about',
       visible: isAuthorised,

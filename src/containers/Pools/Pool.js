@@ -16,6 +16,7 @@ import { withFirebase } from 'firekit-provider'
 import FireForm from 'fireform'
 import { change, submit } from 'redux-form';
 import isGranted from 'rmw-shell/lib/utils/auth';
+import Users from '../Users/Users'
 
 
 const path = '/pools/';
@@ -170,6 +171,7 @@ class Pool extends Component {
           onRequestClose={this.handleClose}>
           {intl.formatMessage({ id: 'delete_pool_message' })}
         </Dialog>
+        <Users title='Usuários do Pool' pool={match.params.uid}/>
 
       </Activity>
     );
