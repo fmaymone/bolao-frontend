@@ -13,32 +13,28 @@ import Avatar from "material-ui/Avatar";
 import { withFirebase } from "firekit-provider";
 import isGranted from "rmw-shell/lib/utils/auth";
 import Scrollbar from "rmw-shell/lib/components/Scrollbar/Scrollbar";
-import { addUserToPool, fetchUserData } from '../../store/actions/bolaoActions'
+import { addUserToPool, fetchUserData } from "../../store/actions/bolaoActions";
 
 class Users extends Component {
   componentDidMount() {
     const { watchList, firebaseApp, pool } = this.props;
 
-    let ref = firebaseApp
-      .database()
-      .ref("pool")
-      .limitToFirst(20);
+    let ref = firebaseApp.database().ref("users");
 
     watchList(ref);
   }
 
-  handleAddUserToPool = (user) =>{
-    this.props.addUserToPool( user, this.props.pool);
-  }
+  handleAddUserToPool = user => {
+    this.props.addUserToPool(user, this.props.pool);
+  };
 
-  getUserData = async (uid) => {
-
+  getUserData = async uid => {
     return this.props.fetchUserData(uid);
+  };
 
-  }
-
-  renderList = (users) => {
+  renderList = users => {
     const { history } = this.props;
+    
 
     if (users === undefined) {
       return <div />;
@@ -50,52 +46,47 @@ class Users extends Component {
           <ListItem
             leftAvatar={
               <Avatar
-                src={user.val.photoURL}
+                src={user.photoURL}
                 alt="bussines"
                 icon={<FontIcon className="material-icons">business</FontIcon>}
               />
             }
             key={index}
-            primaryText={user.val.displayName}
+            primaryText={user.displayName}
             id={index}
             //secondaryText={user.val.full_name}
-            onClick={ () => this.handleAddUserToPool(user.val.uid)}
-               //this.props.addUserToPool(this.props.pool, user.val.userId);
-            
+            //onClick={() => this.handleAddUserToPool(user.uid)}
+            //this.props.addUserToPool(this.props.pool, user.val.userId);
           />
           <Divider inset />
         </div>
       );
     });
-  }
+  };
 
   render() {
     const { intl, users, muiTheme, history, isGranted } = this.props;
 
     return (
-      
-        
-        <Scrollbar>
-            <h1>{this.props.title}</h1>
-          <div
-            style={{
-              overflow: "none",
-              backgroundColor: muiTheme.palette.convasColor
+      <Scrollbar>
+        <h1>{this.props.title}</h1>
+        <div
+          style={{
+            overflow: "none",
+            backgroundColor: muiTheme.palette.convasColor
+          }}
+        >
+          <List
+            id="test"
+            style={{ height: "100%" }}
+            ref={field => {
+              this.list = field;
             }}
           >
-            <List
-              id="test"
-              style={{ height: "100%" }}
-              ref={field => {
-                this.list = field;
-              }}
-            >
-              {this.renderList(users)}
-            </List>
-          </div>
-        </Scrollbar>
-        
-      
+            {this.renderList(users)}
+          </List>
+        </div>
+      </Scrollbar>
     );
   }
 }
@@ -110,13 +101,13 @@ const mapStateToProps = state => {
   const { auth, browser, lists } = state;
 
   return {
-    users: lists.users,
+    
     auth,
     browser,
     isGranted: grant => isGranted(state, grant)
   };
 };
 
-export default connect(mapStateToProps, {addUserToPool, fetchUserData})(
+export default connect(mapStateToProps, { addUserToPool, fetchUserData })(
   injectIntl(muiThemeable()(withRouter(withFirebase(Users))))
 );

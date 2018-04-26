@@ -109,7 +109,7 @@ export const addUserToPool = (user,pool) => {
   return dispatch => {
     firebaseApp
       .database()
-      .ref(`/pools/${pool}/${user}`)
+      .ref(`/pools/${pool}/users/${user}`)
       .set(initialData.matches)
   };
 
