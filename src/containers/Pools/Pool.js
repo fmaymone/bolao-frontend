@@ -18,6 +18,7 @@ import { change, submit } from "redux-form";
 import isGranted from "rmw-shell/lib/utils/auth";
 import Users from "../Users/Users";
 import UserBuilder from "../Users/UserBuilder";
+import { Container, Row, Col } from "react-grid-system";
 
 const path = "/pools/";
 const form_name = "pool";
@@ -91,7 +92,6 @@ class Pool extends Component {
       ...values
     };
   };
-  
 
   render() {
     const {
@@ -108,6 +108,10 @@ class Pool extends Component {
     } = this.props;
 
     const uid = match.params.uid;
+    let canAddUsers = false;
+    if (this.props.match.path === "/pools/edit/:uid") {
+      canAddUsers = true;
+    }
 
     let usersObjects = [];
     let allUsersObjects = [];
@@ -176,6 +180,20 @@ class Pool extends Component {
       }
     ];
 
+    const addUsers = canAddUsers ? (
+      <div>
+        <Users
+          title="Usuários do Pool"
+          users={usersObjects}
+          pool={uid}
+          mode="delete"
+        />
+        <Users title="Usuários" users={filteredUsers} pool={uid} mode="add" />
+      </div>
+    ) : (
+      <div></div>
+    );
+
     return (
       <Activity
         iconStyleRight={{ width: "50%" }}
@@ -194,24 +212,33 @@ class Pool extends Component {
           id: match.params.uid ? "edit_pool" : "create_pool"
         })}
       >
-        <div style={{ margin: 15, display: "flex" }}>
-          <FireForm
-            firebaseApp={firebaseApp}
-            name={"pool"}
-            path={`${path}`}
-            validate={this.validate}
-            handleCreateValues={this.handleCreateValues}
-            onSubmitSuccess={values => {
-              history.push("/pools");
-            }}
-            onDelete={values => {
-              history.push("/pools");
-            }}
-            uid={match.params.uid}
-          >
-            <PoolForm />
-          </FireForm>
-        </div>
+        <Row>
+          <Col sm={12}>
+            <FireForm
+              firebaseApp={firebaseApp}
+              name={"pool"}
+              path={`${path}`}
+              validate={this.validate}
+              handleCreateValues={this.handleCreateValues}
+              onSubmitSuccess={values => {
+                history.push("/pools");
+              }}
+              onDelete={values => {
+                history.push("/pools");
+              }}
+              uid={match.params.uid}
+            >
+              <PoolForm />
+            </FireForm>
+          </Col>
+          
+        </Row>
+        <Row>
+        <Col sm={12} >
+           {addUsers}
+          </Col>
+        </Row>
+
         <Dialog
           title={intl.formatMessage({ id: "delete_pool_title" })}
           actions={actions}
@@ -221,10 +248,6 @@ class Pool extends Component {
         >
           {intl.formatMessage({ id: "delete_pool_message" })}
         </Dialog>
-        <Users title="Usuários do Pool" users={usersObjects} pool={uid} mode='delete'/>
-        <Users title="Usuários" users={filteredUsers} pool={uid} mode='add'/>
-
-        
       </Activity>
     );
   }

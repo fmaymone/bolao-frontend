@@ -72,7 +72,7 @@ class Users extends Component {
     const { intl, users, muiTheme, history, isGranted } = this.props;
 
     return (
-      <Scrollbar>
+      <div>
         <h1>{this.props.title}</h1>
         <div
           style={{
@@ -90,7 +90,7 @@ class Users extends Component {
             {this.renderList(users)}
           </List>
         </div>
-      </Scrollbar>
+      </div>
     );
   }
 }
