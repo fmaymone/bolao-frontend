@@ -109,11 +109,25 @@ export const addUserToPool = (user,pool) => {
   return dispatch => {
     firebaseApp
       .database()
-      .ref(`/pools/${pool}/users/${user}`)
+      .ref(`/pools/${pool}/users/${user.key}`)
       .set(initialData.matches)
   };
 
 };
+
+export const removeUserOfPool = (user,pool) => {
+
+  return dispatch => {
+    firebaseApp
+      .database()
+      .ref(`/pools/${pool}/users/`)
+      .child(user.key)
+      .remove();
+  };
+  
+};
+
+
 
 export const fetchUserData = (uid) => {
   return dispatch => {

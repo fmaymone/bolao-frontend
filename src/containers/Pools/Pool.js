@@ -41,6 +41,8 @@ class Pool extends Component {
 
     let ref = firebaseApp.database().ref(`pools/${match.params.uid}/users`);
     watchList(ref, "usersOfPool");
+    let ref2 = firebaseApp.database().ref("users");
+    watchList(ref2);
   }
 
   handleUpdateValues = values => {
@@ -80,8 +82,6 @@ class Pool extends Component {
   handleCreateValues = values => {
     const { auth } = this.props;
 
-    console.log("Passei no handle");
-
     return {
       created: firebase.database.ServerValue.TIMESTAMP,
       userName: auth.displayName,
@@ -91,7 +91,7 @@ class Pool extends Component {
       ...values
     };
   };
-  poolFromUsers = () => {};
+  
 
   render() {
     const {
@@ -109,17 +109,22 @@ class Pool extends Component {
 
     const uid = match.params.uid;
 
-    const usersObjects = [];
+    let usersObjects = [];
+    let allUsersObjects = [];
+    let filteredUsers = [];
+    if (this.props.usersOfPool != undefined && this.props.users != undefined) {
+      allUsersObjects = [...this.props.users];
 
-    for (let index = 0; index <  this.props.usersOfPool.length; index++) {
-      const element = this.props.usersOfPool[index];
-      const userObject =  this.props.users.find(k=>k.key===element.key);
-      usersObjects.push(userObject.val);
-     
+      for (let index = 0; index < this.props.usersOfPool.length; index++) {
+        const element = this.props.usersOfPool[index];
+        const userObject = allUsersObjects.find(k => k.key === element.key);
+        usersObjects.push(userObject);
+      }
+
+      filteredUsers = allUsersObjects.filter(
+        u => usersObjects.indexOf(u) === -1
+      );
     }
-   
-    
-   
 
     const actions = [
       <FlatButton
@@ -216,8 +221,10 @@ class Pool extends Component {
         >
           {intl.formatMessage({ id: "delete_pool_message" })}
         </Dialog>
-        <Users title="Usuários do Pool" users={usersObjects} />
-        {/* <UserBuilder id={auth.uid} /> */}
+        <Users title="Usuários do Pool" users={usersObjects} pool={uid} mode='delete'/>
+        <Users title="Usuários" users={filteredUsers} pool={uid} mode='add'/>
+
+        
       </Activity>
     );
   }

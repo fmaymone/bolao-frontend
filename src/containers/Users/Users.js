@@ -13,7 +13,7 @@ import Avatar from "material-ui/Avatar";
 import { withFirebase } from "firekit-provider";
 import isGranted from "rmw-shell/lib/utils/auth";
 import Scrollbar from "rmw-shell/lib/components/Scrollbar/Scrollbar";
-import { addUserToPool, fetchUserData } from "../../store/actions/bolaoActions";
+import { addUserToPool, fetchUserData, removeUserOfPool } from "../../store/actions/bolaoActions";
 
 class Users extends Component {
   componentDidMount() {
@@ -24,8 +24,12 @@ class Users extends Component {
     watchList(ref);
   }
 
-  handleAddUserToPool = user => {
-    this.props.addUserToPool(user, this.props.pool);
+  handleClick = user => {
+    if (this.props.mode === 'add') {
+      this.props.addUserToPool(user, this.props.pool);
+    } else {
+      this.props.removeUserOfPool(user, this.props.pool);
+    }
   };
 
   getUserData = async uid => {
@@ -34,7 +38,7 @@ class Users extends Component {
 
   renderList = users => {
     const { history } = this.props;
-    
+
 
     if (users === undefined) {
       return <div />;
@@ -46,17 +50,17 @@ class Users extends Component {
           <ListItem
             leftAvatar={
               <Avatar
-                src={user.photoURL}
+                src={user.val.photoURL}
                 alt="bussines"
                 icon={<FontIcon className="material-icons">business</FontIcon>}
               />
             }
             key={index}
-            primaryText={user.displayName}
+            primaryText={user.val.displayName}
             id={index}
             //secondaryText={user.val.full_name}
-            //onClick={() => this.handleAddUserToPool(user.uid)}
-            //this.props.addUserToPool(this.props.pool, user.val.userId);
+            onClick={() => this.handleClick(user)}
+          //this.props.addUserToPool(this.props.pool, user.val.userId);
           />
           <Divider inset />
         </div>
@@ -101,13 +105,13 @@ const mapStateToProps = state => {
   const { auth, browser, lists } = state;
 
   return {
-    
+
     auth,
     browser,
     isGranted: grant => isGranted(state, grant)
   };
 };
 
-export default connect(mapStateToProps, { addUserToPool, fetchUserData })(
+export default connect(mapStateToProps, { addUserToPool, fetchUserData, removeUserOfPool })(
   injectIntl(muiThemeable()(withRouter(withFirebase(Users))))
 );
