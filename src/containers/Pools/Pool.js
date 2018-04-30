@@ -24,6 +24,12 @@ const path = "/pools/";
 const form_name = "pool";
 
 class Pool extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {usersFromPool: []};
+  
+  }
   validate = values => {
     const { intl } = this.props;
     const errors = {};
@@ -40,10 +46,9 @@ class Pool extends Component {
   componentDidMount() {
     const { watchList, firebaseApp, match } = this.props;
 
-    let ref = firebaseApp.database().ref(`pools/${match.params.uid}/users`);
-    watchList(ref, "usersOfPool");
-    let ref2 = firebaseApp.database().ref("users");
-    watchList(ref2);
+    
+    let ref = firebaseApp.database().ref("users");
+    watchList(ref);
   }
 
   handleUpdateValues = values => {
@@ -113,15 +118,22 @@ class Pool extends Component {
       canAddUsers = true;
     }
 
+    let usersOfPool = [] ;
+    if(this.props.pools.find(k => k.key === uid).val.users !== undefined) {
+      usersOfPool = Object.keys(this.props.pools.find(k => k.key === uid).val.users);
+    }
     let usersObjects = [];
     let allUsersObjects = [];
     let filteredUsers = [];
-    if (this.props.usersOfPool != undefined && this.props.users != undefined) {
+    
+    if (this.props.users != undefined && this.props.pools != undefined) {
+      
       allUsersObjects = [...this.props.users];
+      
 
-      for (let index = 0; index < this.props.usersOfPool.length; index++) {
-        const element = this.props.usersOfPool[index];
-        const userObject = allUsersObjects.find(k => k.key === element.key);
+      for (let index = 0; index < usersOfPool.length; index++) {
+        const element = usersOfPool[index];
+        const userObject = allUsersObjects.find(k => k.key === element);
         usersObjects.push(userObject);
       }
 
@@ -272,7 +284,7 @@ const mapStateToProps = state => {
     dialogs,
     auth,
     isGranted: grant => isGranted(state, grant),
-    usersOfPool: lists.usersOfPool,
+    pools: lists.pools,
     users: lists.users
   };
 };
