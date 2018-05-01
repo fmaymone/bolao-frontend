@@ -13,7 +13,7 @@ import Avatar from "material-ui/Avatar";
 import { withFirebase } from "firekit-provider";
 import isGranted from "rmw-shell/lib/utils/auth";
 import Scrollbar from "rmw-shell/lib/components/Scrollbar/Scrollbar";
-import { addUserToPool, fetchUserData, removeUserOfPool } from "../../store/actions/bolaoActions";
+import { addUserToPool, fetchUserData, removeUserOfPool, addUserPools, removeUserPools } from "../../store/actions/bolaoActions";
 
 class Users extends Component {
   componentDidMount() {
@@ -24,13 +24,22 @@ class Users extends Component {
     watchList(ref);
   }
 
-  handleClick = user => {
+  handleClick = async user => {
     if (this.props.mode === 'add') {
-      this.props.addUserToPool(user, this.props.pool);
+      await this.addUserToPool(user, this.props.pool);
     } else {
-      this.props.removeUserOfPool(user, this.props.pool);
+      await this.removeUserOfPool(user, this.props.pool);
     }
   };
+
+  addUserToPool = async (user,pool) => {
+    await this.props.addUserToPool(user, pool);
+    await this.props.addUserPools(user, pool);
+  }
+  removeUserOfPool = async (user,pool) => {
+    await this.props.removeUserOfPool(user, pool);
+    await this.props.removeUserPools(user, pool);
+  }
 
   getUserData = async uid => {
     return this.props.fetchUserData(uid);
@@ -112,6 +121,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { addUserToPool, fetchUserData, removeUserOfPool })(
+export default connect(mapStateToProps, { addUserToPool, fetchUserData, removeUserOfPool, addUserPools , removeUserPools})(
   injectIntl(muiThemeable()(withRouter(withFirebase(Users))))
 );

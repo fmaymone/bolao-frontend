@@ -24,11 +24,9 @@ const path = "/pools/";
 const form_name = "pool";
 
 class Pool extends Component {
-  
   constructor(props) {
     super(props);
-    this.state = {usersFromPool: []};
-  
+    this.state = { usersFromPool: [] };
   }
   validate = values => {
     const { intl } = this.props;
@@ -44,9 +42,8 @@ class Pool extends Component {
   };
 
   componentDidMount() {
-    const { watchList, firebaseApp, match } = this.props;
+    const { watchList, firebaseApp  } = this.props;
 
-    
     let ref = firebaseApp.database().ref("users");
     watchList(ref);
   }
@@ -113,35 +110,40 @@ class Pool extends Component {
     } = this.props;
 
     const uid = match.params.uid;
-    let canAddUsers = false;
-    if (this.props.match.path === "/pools/edit/:uid") {
-      canAddUsers = true;
-    }
 
-    let usersOfPool = [] ;
-    if(this.props.pools.find(k => k.key === uid).val.users !== undefined) {
-      usersOfPool = Object.keys(this.props.pools.find(k => k.key === uid).val.users);
-    }
-    let usersObjects = [];
-    let allUsersObjects = [];
-    let filteredUsers = [];
     
-    if (this.props.users != undefined && this.props.pools != undefined) {
-      
-      allUsersObjects = [...this.props.users];
-      
-
-      for (let index = 0; index < usersOfPool.length; index++) {
-        const element = usersOfPool[index];
-        const userObject = allUsersObjects.find(k => k.key === element);
-        usersObjects.push(userObject);
+      let canAddUsers = false;
+      if (this.props.match.path === "/pools/edit/:uid") {
+        canAddUsers = true;
       }
 
-      filteredUsers = allUsersObjects.filter(
-        u => usersObjects.indexOf(u) === -1
-      );
-    }
+      let usersOfPool = [];
+      let usersObjects = [];
+      let allUsersObjects = [];
+      let filteredUsers = [];
 
+      if ( this.props.pools.find(k => k.key === uid) !== undefined) {
+
+      if ( this.props.pools.find(k => k.key === uid).val.users !== undefined) {
+        usersOfPool = Object.keys(
+          this.props.pools.find(k => k.key === uid).val.users
+        );
+      }
+      
+      if (this.props.users !== undefined && this.props.pools !== undefined) {
+        allUsersObjects = [...this.props.users];
+
+        for (let index = 0; index < usersOfPool.length; index++) {
+          const element = usersOfPool[index];
+          const userObject = allUsersObjects.find(k => k.key === element);
+          usersObjects.push(userObject);
+        }
+
+        filteredUsers = allUsersObjects.filter(
+          u => usersObjects.indexOf(u) === -1
+        );
+      }
+    }
     const actions = [
       <FlatButton
         label={intl.formatMessage({ id: "cancel" })}
@@ -203,7 +205,7 @@ class Pool extends Component {
         <Users title="Usuários" users={filteredUsers} pool={uid} mode="add" />
       </div>
     ) : (
-      <div></div>
+      <div />
     );
 
     return (
@@ -243,12 +245,9 @@ class Pool extends Component {
               <PoolForm />
             </FireForm>
           </Col>
-          
         </Row>
         <Row>
-        <Col sm={12} >
-           {addUsers}
-          </Col>
+          <Col sm={12}>{addUsers}</Col>
         </Row>
 
         <Dialog
