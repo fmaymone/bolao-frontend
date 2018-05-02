@@ -31,11 +31,11 @@ class Test extends Component {
     }
     render() {
 
-        const pool = this.props.pools[0];
+        
        
         return (
             <Activity
-            ><PoolList pools={this.props.pools} />
+            ><PoolList pools={this.props.pools} history={this.props.history} />
             
                     
             </Activity>
@@ -45,18 +45,21 @@ class Test extends Component {
 }
 
 const mapStateToProps = state => {
-    const { intl, dialogs, auth, playerDataReducer, lists } = state;
+    const { intl, dialogs, auth, playerDataReducer, lists, history } = state;
     
     return {
         intl,
         dialogs,
         auth,
         playerDataReducer: playerDataReducer,
-        pools: lists.pools
+        pools: lists.pools,
+        
     };
 };
+export default connect(
+    mapStateToProps
+  )(injectIntl(muiThemeable()(withRouter(withFirebase(Test)))))
 
-export default connect(mapStateToProps,{matchesFetch, matchesInitialCreate }
 
-)(injectIntl(withRouter(withFirebase(muiThemeable()(Test)))));
+
 

@@ -9,6 +9,7 @@ const AsyncDashboard = MyLoadable({ loader: () => import('./containers/Dashboard
 const AsyncAbout = MyLoadable({ loader: () => import('./containers/About/About') });
 const AsyncTest = MyLoadable({ loader: () => import('./containers/Tests/Test') });
 const AsyncPool = MyLoadable({ loader: () => import('./containers/Pools/Pool') });
+const AsyncPoolDetails = MyLoadable({ loader: () => import('./containers/Pools/PoolDetails') });
 const AsyncPools = MyLoadable({ loader: () => import('./containers/Pools/Pools') }, [AsyncPool]);
 const AsyncMatches = MyLoadable({ loader: () => import('./containers/Matches/WelcomeBuilder') }, [AsyncPool]);
 
@@ -20,6 +21,7 @@ const Routes = [
     <RestrictedRoute type='private' path="/test" exact component={AsyncTest} />,
     <RestrictedRoute type='private' path="/pools" exact component={AsyncPools} />,
     <RestrictedRoute type='private' path="/pools/edit/:uid" exact component={AsyncPool} />,
+    <RestrictedRoute type='private' path="/pools/show/:uid" exact component={AsyncPoolDetails} />,
     <RestrictedRoute type='private' path="/pools/create" exact component={AsyncPool} />,
     <RestrictedRoute type='private' path="/matches" exact component={AsyncMatches} />
 ]

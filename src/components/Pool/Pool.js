@@ -1,30 +1,39 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import UsersOfPool from '../../containers/Users/UsersOfPool';
+import Divider from 'material-ui/Divider';
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style = {
+  margin: 12,
+};
 
 const Pool = ({pool}) => (
     <Card>
-    <CardHeader
-      title="URL Avatar"
-      subtitle="Subtitle"
-      avatar="images/jsa-128.jpg"
-    />
-    <CardMedia
-      overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
+    {/* <CardHeader
+      title={pool.val.name}
+      subtitle={`criado por: ${pool.val.userName}`} 
+      avatar={pool.val.photoUrl}
+    /> */}
+    {/* <CardMedia
+      overlay={<CardTitle title="Pool" subtitle="Detalhes" />}
     >
-      <img src="images/nature-600-337.jpg" alt="" />
-    </CardMedia>
-    <CardTitle title="Card title" subtitle="Card subtitle" />
+      
+    </CardMedia> */}
+    <CardTitle title={pool.val.name} subtitle={`criado por: ${pool.val.userName}`}  />
     <CardText>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-      Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-      Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+    {pool.val.description ? pool.val.description : 'N/A'}
     </CardText>
+    
     <CardActions>
-      <FlatButton label="Action1" />
-      <FlatButton label="Action2" />
+      <RaisedButton label="Minhas Apostas" primary={true} style={style} />
     </CardActions>
+    <Divider />
+    <CardTitle title='Usuários do Pool'  />
+    <CardText>
+      <UsersOfPool users={pool.val.users} />
+    </CardText>
   </Card>
 );
 

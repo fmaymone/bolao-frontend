@@ -49,11 +49,11 @@ class Pool extends Component {
   }
 
   handleUpdateValues = values => {
-    const { auth } = this.props;
+    const { auth, match } = this.props;
 
     return {
       userName: auth.displayName,
-      poolPhotoURL: auth.photoURL,
+      userPhotoURL: match.params.uid,
       userId: auth.uid,
       updated: firebase.database.ServerValue.TIMESTAMP,
       ...values
