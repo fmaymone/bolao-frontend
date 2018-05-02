@@ -11,7 +11,7 @@ import MatchList from "../../components/Match/MatchList";
 import ClassificationBuilder from "./ClassificationBuilder";
 import FlatButton from "material-ui/FlatButton";
 import {
-  matchesFetch,
+  
   changeStage,
   updateMatch,
   updateFinalResult
@@ -101,7 +101,7 @@ class KnockoutBuilder extends Component {
           gameToBeUpdated.val.away_team = game.winner;
         }
       }
-      await this.props.updateMatch(gameToBeUpdated);
+      await this.props.updateMatch(gameToBeUpdated, this.props.pool);
      
     }else{
       if(game.name == '61' || game.name == '62'){
@@ -222,7 +222,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  matchesFetch,
+  
   changeStage,
   updateMatch,
   updateFinalResult

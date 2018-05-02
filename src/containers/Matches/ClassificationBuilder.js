@@ -48,7 +48,7 @@ class ClassificationBuilder extends Component {
 
   updateClassificationDb = async (teams) => {
     const group = this.props.stage.currentGroup;
-    this.props.updateClassification(group, teams);
+    this.props.updateClassification(group, teams, this.props.pool);
 
   }
 
@@ -68,8 +68,8 @@ class ClassificationBuilder extends Component {
     firstMatch.val.home_team = firstOfGroup.id;
     secondMatch.val.away_team = secondOfGroup.id;
 
-    this.props.updateMatch(firstMatch.val);
-    this.props.updateMatch(secondMatch.val);
+    this.props.updateMatch(firstMatch.val, this.props.pool);
+    this.props.updateMatch(secondMatch.val, this.props.pool);
   }
 
   fillClassificationGroups = (matches) =>{

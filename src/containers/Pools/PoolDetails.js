@@ -7,6 +7,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable'
 import { withFirebase } from 'firekit-provider';
 import Pool from '../../components/Pool/Pool';
 
+
 class PoolDetails extends Component {
     constructor(props) {
         super(props);

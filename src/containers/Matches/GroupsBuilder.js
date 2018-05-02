@@ -10,7 +10,7 @@ import muiThemeable from "material-ui/styles/muiThemeable";
 import MatchList from '../../components/Match/MatchList';
 import ClassificationBuilder from './ClassificationBuilder';
 import FlatButton from "material-ui/FlatButton";
-import { matchesFetch, changeStage, updateMatch } from "../../store/actions/bolaoActions";
+import {  changeStage, updateMatch } from "../../store/actions/bolaoActions";
 import { Container, Row, Col } from "react-grid-system";
 
 const groups = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
@@ -53,7 +53,7 @@ class GroupsBuilder extends Component {
         type === 'home' ?
             (gameToBeUpdated.home_result = e.target.value) : (gameToBeUpdated.away_result = e.target.value)
 
-         await this.props.updateMatch(gameToBeUpdated);
+         await this.props.updateMatch(gameToBeUpdated, this.props.pool);
     }
 
 
@@ -85,6 +85,7 @@ class GroupsBuilder extends Component {
                     <Col md={8} offset={{ md: 2 }}><ClassificationBuilder
                         matches={this.props.matches}
                         stage={this.props.playerDataReducer}
+                        pool={this.props.pool}
                     />
                     </Col>
                 </Row>
@@ -105,7 +106,7 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { matchesFetch, changeStage, updateMatch })(
+export default connect(mapStateToProps, {  changeStage, updateMatch })(
     injectIntl(withRouter(withFirebase(muiThemeable()(GroupsBuilder))))
 );
 

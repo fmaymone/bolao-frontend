@@ -9,7 +9,7 @@ import GroupsBuilder from "./GroupsBuilder";
 import KnockoutBuilder from './KnockoutBuilder';
 import { GROUPS_STAGE, KNOCKOUT_STAGE, ROUND_16 } from "../../store/actions/types";
 import MatchList from "../../components/Match/MatchList";
-import { matchesFetch, changeStage } from "../../store/actions/bolaoActions";
+import {  changeStage } from "../../store/actions/bolaoActions";
 import FlatButton from "material-ui/FlatButton";
 import { Container, Row, Col } from "react-grid-system";
 
@@ -21,10 +21,10 @@ class MatchesBuilder extends Component {
     matches: ""
   };
   componentDidMount() {
-    const { firebaseApp, auth, watchList } = this.props;
+    const { firebaseApp, auth, watchList, pool } = this.props;
     //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
-    let ref = firebaseApp.database().ref(`/users/${auth.uid}/matches`);
-    watchList(ref, "listMatches"); //Here we started watching a list
+    let ref = firebaseApp.database().ref(`/pools/${pool.key}/users/${auth.uid}/`);
+    watchList(ref, "listMatches"); 
   }
 
   filterFromGroup = value => {
@@ -40,7 +40,7 @@ class MatchesBuilder extends Component {
     if (this.props.matches === undefined)
       return <div />;
     return (
-      <GroupsBuilder matches={this.getActualMatches()} />
+      <GroupsBuilder matches={this.getActualMatches()} pool={this.props.pool} />
     );
   }
 
@@ -48,7 +48,7 @@ class MatchesBuilder extends Component {
     if (this.props.matches === undefined)
       return <div />;
     return (
-      <KnockoutBuilder matches={this.getActualMatches()} />
+      <KnockoutBuilder matches={this.getActualMatches()} pool={this.props.pool}/>
     );
   }
  
@@ -111,6 +111,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { matchesFetch, changeStage })(
+export default connect(mapStateToProps, { changeStage })(
   injectIntl(withRouter(withFirebase(muiThemeable()(MatchesBuilder))))
 );

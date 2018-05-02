@@ -32,41 +32,41 @@ export const matchUpdate = ({ prop, value }) => {
   };
 };
 
-export const matchesInitialCreate = data => {
-  const { currentUser } = firebase.auth();
+// export const matchesInitialCreate = data => {
+//   const { currentUser } = firebase.auth();
 
-  return dispatch => {
-    firebaseApp
-      .database()
-      .ref(`/users/${currentUser.uid}/matches`)
-      .set(data.matches)
-      .then(() => {
-        dispatch({ type: MATCHES_INITIAL_CREATE });
-      });
-  };
-};
+//   return dispatch => {
+//     firebaseApp
+//       .database()
+//       .ref(`/users/${currentUser.uid}/matches`)
+//       .set(data.matches)
+//       .then(() => {
+//         dispatch({ type: MATCHES_INITIAL_CREATE });
+//       });
+//   };
+// };
 
-export const updateMatch = match => {
+export const updateMatch = (match, pool) => {
   const { currentUser } = firebase.auth();
   const id = match.name;
 
   return dispatch => {
     firebase
       .database()
-      .ref(`/users/${currentUser.uid}/matches/${id}/`)
+      .ref(`/pools/${pool.key}/users/${currentUser.uid}/matches/${id}/`)
       .set(match)
       .then(() => {
         //console.log("writen match")
       });
   };
 };
-export const updateFinalResult = match => {
+export const updateFinalResult = (match, pool) => {
   const { currentUser } = firebase.auth();
 
   return dispatch => {
     firebase
       .database()
-      .ref(`/users/${currentUser.uid}/matches/result/`)
+      .ref(`/pools/${pool.key}/users/${currentUser.uid}/matches/result/`)
       .set(match)
       .then(() => {
         //console.log("writen match")
@@ -74,33 +74,33 @@ export const updateFinalResult = match => {
   };
 };
 
-export const matchesFetch = () => {
+// export const matchesFetch = () => {
+//   const { currentUser } = firebase.auth();
+
+//   return dispatch => {
+//     if (currentUser) {
+//       firebase
+//         .database()
+//         .ref(`/users/${currentUser.uid}/matches`)
+//         .on("value", snapshot => {
+//           dispatch({
+//             type: MATCHES_FETCH_SUCCESS,
+//             payload: { matches: snapshot.val() }
+//           });
+//           // console.log(snapshot.val().groups);
+//         });
+//     }
+//   };
+// };
+
+export const updateClassification = (group, data, pool) => {
   const { currentUser } = firebase.auth();
 
   return dispatch => {
     if (currentUser) {
       firebase
         .database()
-        .ref(`/users/${currentUser.uid}/matches`)
-        .on("value", snapshot => {
-          dispatch({
-            type: MATCHES_FETCH_SUCCESS,
-            payload: { matches: snapshot.val() }
-          });
-          // console.log(snapshot.val().groups);
-        });
-    }
-  };
-};
-
-export const updateClassification = (group, data) => {
-  const { currentUser } = firebase.auth();
-
-  return dispatch => {
-    if (currentUser) {
-      firebase
-        .database()
-        .ref(`/users/${currentUser.uid}/classification/${group}`)
+        .ref(`/pools/${pool.key}/users/${currentUser.uid}/classification/${group}`)
         .set(data);
     }
   };
@@ -110,7 +110,7 @@ export const addUserToPool = (user, pool) => {
   return dispatch => {
     firebaseApp
       .database()
-      .ref(`/pools/${pool}/users/${user.key}`)
+      .ref(`/pools/${pool}/users/${user.key}/matches/`)
       .set(initialData.matches)
       
   };

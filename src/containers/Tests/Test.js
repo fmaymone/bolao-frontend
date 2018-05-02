@@ -10,11 +10,10 @@ import FlatButton from "material-ui/FlatButton";
 import data from '../../world-cup';
 import Pool from '../../components/Pool/Pool';
 import PoolList from '../../components/Pool/PoolList';
+import MatchesBuilder from '../Matches/MatchesBuilder';
 
 class Test extends Component {
-    componentDidMount() {
-        //this.props.matchesFetch(this.props.auth.uid);
-    }
+    
 
         
     handlerInitialState = ( ) =>{
@@ -34,10 +33,13 @@ class Test extends Component {
         
        
         return (
-            <Activity
-            ><PoolList pools={this.props.pools} history={this.props.history} />
+            // <Activity
+            // ><PoolList pools={this.props.pools} history={this.props.history} />
             
                     
+            // </Activity>
+            <Activity>
+                <MatchesBuilder pool={this.props.pools[0]} />
             </Activity>
         
         )
