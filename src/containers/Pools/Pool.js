@@ -53,7 +53,7 @@ class Pool extends Component {
 
     return {
       userName: auth.displayName,
-      userPhotoURL: auth.photoURL,
+      poolPhotoURL: auth.photoURL,
       userId: auth.uid,
       updated: firebase.database.ServerValue.TIMESTAMP,
       ...values

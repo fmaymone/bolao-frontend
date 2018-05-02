@@ -7,7 +7,9 @@ import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
 import {matchesFetch, matchesInitialCreate } from '../../store/actions/bolaoActions'
 import FlatButton from "material-ui/FlatButton";
-import data from '../../world-cup'
+import data from '../../world-cup';
+import Pool from '../../components/Pool/Pool';
+import PoolList from '../../components/Pool/PoolList';
 
 class Test extends Component {
     componentDidMount() {
@@ -28,20 +30,14 @@ class Test extends Component {
         this.props.getMatchesFromGroup('a');
     }
     render() {
+
+        const pool = this.props.pools[0];
        
         return (
             <Activity
-            ><h1>Testing</h1>
-        <FlatButton
-          label={"Load Data to Firebase"}
-          primary={true}
-          onClick={this.handlerInitialState.bind(this)}
-        />
-             <FlatButton
-          label={"Load"}
-          primary={true}
-          onClick={this.handlerLoadState.bind(this )}
-        />               
+            ><PoolList pools={this.props.pools} />
+            
+                    
             </Activity>
         
         )
@@ -49,13 +45,14 @@ class Test extends Component {
 }
 
 const mapStateToProps = state => {
-    const { intl, dialogs, auth, playerDataReducer } = state;
+    const { intl, dialogs, auth, playerDataReducer, lists } = state;
     
     return {
         intl,
         dialogs,
         auth,
         playerDataReducer: playerDataReducer,
+        pools: lists.pools
     };
 };
 
