@@ -16,7 +16,7 @@ class PoolDetails extends Component {
     renderPool = (pool) => {
        
         return (<Activity title='Pool'>
-            <Pool pool={pool} />
+            <Pool pool={pool} user={this.props.auth}/>
         </Activity>)
     }
     render() {

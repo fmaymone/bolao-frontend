@@ -36,7 +36,7 @@ class PoolList extends Component {
                 <Subheader>Pools</Subheader>
                 {pools.map((pool) => (
                     <GridTile
-                        key={pool.val.photoURL}
+                        key={pool.key}
                         title={pool.val.name}
                         subtitle={<span>by <b>{pool.val.userName}</b></span>}
                         actionIcon={<IconButton><StarBorder color="white" /></IconButton>}

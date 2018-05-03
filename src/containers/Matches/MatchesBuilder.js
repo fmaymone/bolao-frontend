@@ -27,15 +27,15 @@ class MatchesBuilder extends Component {
 
   componentDidMount() {
 
-    this.fetchUserAddressbook();
+    this.fetchMatches();
 
   }
 
-  fetchUserAddressbook = () => {
+  fetchMatches = async () => {
     const { firebaseApp, auth, pool } = this.props;
   
   
-      firebaseApp.database()
+      await firebaseApp.database()
         .ref(`/pools/${pool.key}/users/${auth.uid}/`)
         .once('value')
         .then(snapshot =>{
@@ -49,12 +49,16 @@ class MatchesBuilder extends Component {
   };
 
   getActualMatches = () => {
-    const matches = this.props.matches.filter(this.filterFromGroup);
+    let matches = this.state.matches.matches;
+    for (let index = 0; index < matches.length; index++) {
+      const element = matches[index];
+      console.log(element);
+    }
     return matches;
   };
 
   renderGroupsStage() {
-    if (this.props.matches === undefined)
+    if (this.state.matches === undefined)
       return <div />;
     return (
       <GroupsBuilder matches={this.getActualMatches()} pool={this.props.pool} />
@@ -62,7 +66,7 @@ class MatchesBuilder extends Component {
   }
 
   renderKnockoutStage() {
-    if (this.props.matches === undefined)
+    if (this.state.matches === undefined)
       return <div />;
     return (
       <KnockoutBuilder matches={this.getActualMatches()} pool={this.props.pool} />
@@ -88,6 +92,9 @@ class MatchesBuilder extends Component {
 
     console.log(pool);
 
+    if (this.state.matches === null) {
+      return "oi";
+    }
     if (this.state.matches.length === 0) {
       return "oi";
     }
