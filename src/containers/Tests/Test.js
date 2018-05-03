@@ -13,8 +13,20 @@ import PoolList from '../../components/Pool/PoolList';
 import MatchesBuilder from '../Matches/MatchesBuilder';
 
 class Test extends Component {
-    
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            matches: []
+        }
+    }
+    
+    componentDidMount() {
+         const { firebaseApp, auth, watchList, pool } = this.props;
+          //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
+         // let ref = firebaseApp.database().ref(`/pools/${pool.key}/users/${auth.uid}/`);
+          //watchList(ref, "listMatches"); 
+    }
         
     handlerInitialState = ( ) =>{
                 
@@ -29,7 +41,7 @@ class Test extends Component {
         this.props.getMatchesFromGroup('a');
     }
     render() {
-
+        const { pools, auth, pool } = this.props;
         
        
         return (
@@ -39,7 +51,7 @@ class Test extends Component {
                     
             // </Activity>
             <Activity>
-                <MatchesBuilder pool={this.props.pools[0]} />
+                <MatchesBuilder pool={this.props.pools[0]} user={auth} />
             </Activity>
         
         )

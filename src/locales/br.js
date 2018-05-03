@@ -162,7 +162,8 @@ const messages=defineMessages({
   round_8: 'Quartas de Final',
   round_4: 'Semi-Finais', 
   round2_loser: 'Rubens Barrichello',
-  round2_winner: 'Final'
+  round2_winner: 'Final',
+  my_pools: 'Meus Pools'
 
 });
 

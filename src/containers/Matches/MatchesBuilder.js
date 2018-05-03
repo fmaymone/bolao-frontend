@@ -9,22 +9,39 @@ import GroupsBuilder from "./GroupsBuilder";
 import KnockoutBuilder from './KnockoutBuilder';
 import { GROUPS_STAGE, KNOCKOUT_STAGE, ROUND_16 } from "../../store/actions/types";
 import MatchList from "../../components/Match/MatchList";
-import {  changeStage } from "../../store/actions/bolaoActions";
+import { changeStage } from "../../store/actions/bolaoActions";
 import FlatButton from "material-ui/FlatButton";
 import { Container, Row, Col } from "react-grid-system";
+import PacmanLoader from 'react-spinners';
 
 
 const groups = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
 class MatchesBuilder extends Component {
-  state = {
-    matches: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      matches: []
+    }
+  }
+
   componentDidMount() {
-    const { firebaseApp, auth, watchList, pool } = this.props;
-    //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
-    let ref = firebaseApp.database().ref(`/pools/${pool.key}/users/${auth.uid}/`);
-    watchList(ref, "listMatches"); 
+
+    this.fetchUserAddressbook();
+
+  }
+
+  fetchUserAddressbook = () => {
+    const { firebaseApp, auth, pool } = this.props;
+  
+  
+      firebaseApp.database()
+        .ref(`/pools/${pool.key}/users/${auth.uid}/`)
+        .once('value')
+        .then(snapshot =>{
+          this.setState({matches:snapshot.val()})
+        })
+  
   }
 
   filterFromGroup = value => {
@@ -48,10 +65,10 @@ class MatchesBuilder extends Component {
     if (this.props.matches === undefined)
       return <div />;
     return (
-      <KnockoutBuilder matches={this.getActualMatches()} pool={this.props.pool}/>
+      <KnockoutBuilder matches={this.getActualMatches()} pool={this.props.pool} />
     );
   }
- 
+
   handleChangeKnockout = (phase) => {
     let group = 'round_16'
     if (phase === GROUPS_STAGE) {
@@ -66,6 +83,15 @@ class MatchesBuilder extends Component {
   }
 
   render() {
+
+    const { pools, auth, pool } = this.props;
+
+    console.log(pool);
+
+    if (this.state.matches.length === 0) {
+      return "oi";
+    }
+
     let type =
       this.props.playerDataReducer.currentPhase === GROUPS_STAGE
         ? this.renderGroupsStage()
@@ -107,7 +133,7 @@ const mapStateToProps = state => {
     dialogs,
     auth,
     playerDataReducer: playerDataReducer,
-    matches: lists.listMatches
+    pools: lists.pools
   };
 };
 

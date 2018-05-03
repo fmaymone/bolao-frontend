@@ -10,7 +10,7 @@ const style = {
   margin: 12,
 };
 
-const Pool = ({pool}) => (
+const Pool = ({pool, user}) => (
   //   <Card>
   //   {/* <CardHeader
   //     title={pool.val.name}
@@ -37,7 +37,7 @@ const Pool = ({pool}) => (
   //     <UsersOfPool users={pool.val.users} />
   //   </CardText>
   // </Card>
-  <MatchesBuilder pool={pool} />
+  <MatchesBuilder pool={pool} user={user} />
 );
 
 export default Pool;
