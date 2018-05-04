@@ -24,22 +24,7 @@ class Users extends Component {
     watchList(ref);
   }
 
-  handleClick = async user => {
-    if (this.props.mode === 'add') {
-      await this.addUserToPool(user, this.props.pool);
-    } else {
-      await this.removeUserOfPool(user, this.props.pool);
-    }
-  };
-
-  addUserToPool = async (user,pool) => {
-    await this.props.addUserToPool(user, pool);
-    await this.props.addUserPools(user, pool);
-  }
-  removeUserOfPool = async (user,pool) => {
-    await this.props.removeUserOfPool(user, pool);
-    await this.props.removeUserPools(user, pool);
-  }
+  
 
   getUserData = async uid => {
     return this.props.fetchUserData(uid);
@@ -68,7 +53,7 @@ class Users extends Component {
             primaryText={user.val.displayName}
             id={index}
             //secondaryText={user.val.full_name}
-            onClick={() => this.handleClick(user)}
+            onClick={() => this.props.handleClick(user, this.props.mode)}
           //this.props.addUserToPool(this.props.pool, user.val.userId);
           />
           <Divider inset />

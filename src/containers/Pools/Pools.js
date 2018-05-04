@@ -25,7 +25,10 @@ class Pools extends Component {
 
     watchList(ref);
   }
-
+  componentWillUnmount() {
+    const { unwatchList, auth } = this.props;
+    unwatchList('pools'); // To unwatch a watcher that is stored in a specific location we call the unwatchList with the path
+  }
   renderList(pools) {
     const { history } = this.props;
 

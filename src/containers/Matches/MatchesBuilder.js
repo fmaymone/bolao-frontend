@@ -24,14 +24,14 @@ class MatchesBuilder extends Component {
     const { firebaseApp, auth, watchList } = this.props;
     //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
     
-    //let ref = firebaseApp.database().ref(`/users/${auth.uid}/matches`);
-    let ref = firebaseApp.database().ref(`/pools/-LBXZbmmksFrFv2lCUfN/users/eyn6bCswRnZ5qIJZ4ZiC98rTe4n2/matches`);
+    let ref = firebaseApp.database().ref(`/pools/${this.props.pool.key}/users/${auth.uid}/matches`);
+    //let ref = firebaseApp.database().ref(`/pools/-LBXZbmmksFrFv2lCUfN/users/eyn6bCswRnZ5qIJZ4ZiC98rTe4n2/matches`);
     watchList(ref, "listMatches"); //Here we started watching a list
   }
-  // componentWillUnmount() {
-  //   //const { unwatchList, auth } = this.props;
-  //   //unwatchList(`/users/${auth.uid}/matches`); // To unwatch a watcher that is stored in a specific location we call the unwatchList with the path
-  // }
+  componentWillUnmount() {
+    const { unwatchList, auth } = this.props;
+    unwatchList(`/pools/${this.props.pool.key}/users/${auth.uid}/matches`); // To unwatch a watcher that is stored in a specific location we call the unwatchList with the path
+  }
 
   filterFromGroup = value => {
     return value.val.group == this.props.playerDataReducer.currentGroup;
