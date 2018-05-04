@@ -21,7 +21,9 @@ class PoolDetails extends Component {
     }
     render() {
         const { pools, match } = this.props;
-
+        if (pools === undefined) {
+            return <div />;
+        }
         const pool = pools.find(k => k.key === match.params.uid);
         if (pool !== undefined) {
             return this.renderPool(pool);

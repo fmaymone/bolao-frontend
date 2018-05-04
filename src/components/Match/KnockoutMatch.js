@@ -43,7 +43,7 @@ class Match extends Component {
       }else{
         gameToBeUpdated.loser = gameToBeUpdated.home_team;
       }
-      await this.props.updateMatch(gameToBeUpdated);
+      await this.props.updateMatch(gameToBeUpdated, this.props.pool);
       await this.props.chooseDrawWinnerHandler(gameToBeUpdated);
     }
 

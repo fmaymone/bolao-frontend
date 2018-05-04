@@ -10,7 +10,22 @@ import PoolList from '../../components/Pool/PoolList';
 
 class MyPools extends Component {
 
+    componentDidMount() {
+        const { watchList, firebaseApp } = this.props;
+    
+        let ref = firebaseApp
+          .database()
+          .ref("pools");
+          
+    
+        watchList(ref);
+      }
+
     render() {
+        const { pools  } = this.props;
+        if (pools === undefined) {
+            return <div />;
+        }
         return (
         <Activity>
             <PoolList pools={this.props.pools} history={this.props.history} user={this.props.auth} />

@@ -45,7 +45,7 @@ class KnockoutBuilder extends Component {
       gameToBeUpdated.winner = gameToBeUpdated.away_team;
       gameToBeUpdated.loser = gameToBeUpdated.home_team;
     }
-    await this.props.updateMatch(gameToBeUpdated);
+    await this.props.updateMatch(gameToBeUpdated, this.props.pool);
     await this.updateNextMatches(gameToBeUpdated);
     //need to check the fucking match it it isnt semi-final (matches 61,62) or
     // the matches of the final and 3rd place (63)
@@ -64,8 +64,8 @@ class KnockoutBuilder extends Component {
       finalMatch.val.away_team = game.winner;
       losersMatch.val.away_team = game.loser;
     }
-    await this.props.updateMatch(finalMatch);
-    await this.props.updateMatch(losersMatch);
+    await this.props.updateMatch(finalMatch, this.props.pool);
+    await this.props.updateMatch(losersMatch, this.props.pool);
 
   }
   updateFinals = async game => {
@@ -81,7 +81,7 @@ class KnockoutBuilder extends Component {
       finalResult.val.third = game.winner;
       finalResult.val.fourth = game.loser;
     }
-    await this.props.updateFinalResult(finalResult.val);
+    await this.props.updateFinalResult(finalResult.val, this.props.pool);
   }
 
   updateNextMatches = async game => {
@@ -185,6 +185,7 @@ class KnockoutBuilder extends Component {
               stage={this.props.playerDataReducer}
               title={intl.formatMessage({ id: currentGroup })}
               handleChangedResult={this.handleChangedResult}
+              pool = {this.props.pool}
             />
           </Col>
         </Row>

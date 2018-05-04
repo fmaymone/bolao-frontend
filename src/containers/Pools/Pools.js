@@ -20,8 +20,8 @@ class Pools extends Component {
 
     let ref = firebaseApp
       .database()
-      .ref("pools")
-      .limitToFirst(20);
+      .ref("pools");
+      
 
     watchList(ref);
   }
