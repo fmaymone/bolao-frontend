@@ -110,7 +110,7 @@ export const addUserToPool = (user, pool) => {
   return dispatch => {
     firebaseApp
       .database()
-      .ref(`/pools/${pool}/users/${user.key}/matches/`)
+      .ref(`/pools/${pool}/users/${user}/matches/`)
       .set(initialData.matches)
       
   };
@@ -121,7 +121,7 @@ export const addUserPools = (user, pool) => {
   return dispatch => {
   firebaseApp
     .database()
-    .ref(`/users/${user.key}/pools/${pool}`)
+    .ref(`/users/${user}/pools/${pool}`)
     .set(pool)
     
   }
@@ -132,7 +132,7 @@ export const removeUserPools = (user, pool) => {
   return dispatch => {
   firebaseApp
     .database()
-    .ref(`/users/${user.key}/pools/`)
+    .ref(`/users/${user}/pools/`)
     .child(pool)
     .remove();
     
@@ -144,7 +144,7 @@ export const removeUserOfPool = (user, pool) => {
     firebaseApp
       .database()
       .ref(`/pools/${pool}/users/`)
-      .child(user.key)
+      .child(user)
       .remove();
   };
 };

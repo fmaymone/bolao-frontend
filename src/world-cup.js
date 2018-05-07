@@ -567,7 +567,7 @@ const data = {
     40:
       {
         "name": 40,
-        "type": "gr",
+        "type": "group",
         "home_team": 14,
         "away_team": 15,
         "home_result": 0,

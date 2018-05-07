@@ -13,18 +13,23 @@ import Avatar from "material-ui/Avatar";
 import { withFirebase } from "firekit-provider";
 import isGranted from "rmw-shell/lib/utils/auth";
 import Scrollbar from "rmw-shell/lib/components/Scrollbar/Scrollbar";
-import { addUserToPool, fetchUserData, removeUserOfPool, addUserPools, removeUserPools } from "../../store/actions/bolaoActions";
+import BounceLoader from 'react-spinners'
+import {
+  addUserToPool,
+  fetchUserData,
+  removeUserOfPool,
+  addUserPools,
+  removeUserPools
+} from "../../store/actions/bolaoActions";
 
 class Users extends Component {
   componentDidMount() {
-    const { watchList, firebaseApp, pool } = this.props;
+    const { watchList, firebaseApp } = this.props;
 
     let ref = firebaseApp.database().ref("users");
 
     watchList(ref);
   }
-
-  
 
   getUserData = async uid => {
     return this.props.fetchUserData(uid);
@@ -33,32 +38,37 @@ class Users extends Component {
   renderList = users => {
     const { history } = this.props;
 
-
     if (users === undefined) {
       return <div />;
     }
 
     return users.map((user, index) => {
-      return (
-        <div key={index}>
-          <ListItem
-            leftAvatar={
-              <Avatar
-                src={user.val.photoURL}
-                alt="bussines"
-                icon={<FontIcon className="material-icons">business</FontIcon>}
-              />
-            }
-            key={index}
-            primaryText={user.val.displayName}
-            id={index}
-            //secondaryText={user.val.full_name}
-            onClick={() => this.props.handleClick(user, this.props.mode)}
-          //this.props.addUserToPool(this.props.pool, user.val.userId);
-          />
-          <Divider inset />
-        </div>
-      );
+      if (user === undefined) {
+      return (<div></div>) ;
+      } else {
+        return (
+          <div key={index}>
+            <ListItem
+              leftAvatar={
+                <Avatar
+                  src={user.val.photoURL}
+                  alt="bussines"
+                  icon={
+                    <FontIcon className="material-icons">business</FontIcon>
+                  }
+                />
+              }
+              key={index}
+              primaryText={user.val.displayName}
+              id={index}
+              //secondaryText={user.val.full_name}
+              onClick={() => this.props.handleClick(user, this.props.mode)}
+              //this.props.addUserToPool(this.props.pool, user.val.userId);
+            />
+            <Divider inset />
+          </div>
+        );
+      }
     });
   };
 
@@ -99,13 +109,16 @@ const mapStateToProps = state => {
   const { auth, browser, lists } = state;
 
   return {
-
     auth,
     browser,
     isGranted: grant => isGranted(state, grant)
   };
 };
 
-export default connect(mapStateToProps, { addUserToPool, fetchUserData, removeUserOfPool, addUserPools , removeUserPools})(
-  injectIntl(muiThemeable()(withRouter(withFirebase(Users))))
-);
+export default connect(mapStateToProps, {
+  addUserToPool,
+  fetchUserData,
+  removeUserOfPool,
+  addUserPools,
+  removeUserPools
+})(injectIntl(muiThemeable()(withRouter(withFirebase(Users)))));

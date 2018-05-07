@@ -19,7 +19,14 @@ import isGranted from "rmw-shell/lib/utils/auth";
 import Users from "../Users/Users";
 import UserBuilder from "../Users/UserBuilder";
 import { Container, Row, Col } from "react-grid-system";
-import { addUserToPool, fetchUserData, removeUserOfPool, addUserPools, removeUserPools } from "../../store/actions/bolaoActions";
+import {
+  addUserToPool,
+  fetchUserData,
+  removeUserOfPool,
+  addUserPools,
+  removeUserPools
+} from "../../store/actions/bolaoActions";
+import UsersOfPool from "../Pools/UsersOfPool";
 const path = "/pools/";
 const form_name = "pool";
 
@@ -42,10 +49,9 @@ class Pool extends Component {
   };
 
   componentDidMount() {
-    const { watchList, firebaseApp  } = this.props;
+    const { watchList, firebaseApp } = this.props;
     let ref = firebaseApp.database().ref("users");
     watchList(ref);
-
   }
   // componentWillUnmount() {
   //   const { unwatchList, auth } = this.props;
@@ -99,24 +105,6 @@ class Pool extends Component {
     };
   };
 
-  handleClick = async (user, mode) => {
-    const uid = this.props.match.params.uid;
-    if (mode === 'add') {
-      await this.addUserToPool(user, uid);
-    } else {
-      await this.removeUserOfPool(user, uid);
-    }
-  };
-
-  addUserToPool = async (user,pool) => {
-    await this.props.addUserToPool(user, pool);
-    await this.props.addUserPools(user, pool);
-  }
-  removeUserOfPool = async (user,pool) => {
-    await this.props.removeUserOfPool(user, pool);
-    await this.props.removeUserPools(user, pool);
-  }
-
   render() {
     const {
       history,
@@ -133,25 +121,23 @@ class Pool extends Component {
 
     const uid = match.params.uid;
 
-    
-      let canAddUsers = false;
-      if (this.props.match.path === "/pools/edit/:uid") {
-        canAddUsers = true;
-      }
+    let canAddUsers = false;
+    if (this.props.match.path === "/pools/edit/:uid") {
+      canAddUsers = true;
+    }
 
-      let usersOfPool = [];
-      let usersObjects = [];
-      let allUsersObjects = [];
-      let filteredUsers = [];
-      
-      let currentPool = this.props.pools.find(k => k.key === uid);
-      let keysUsers = [];
-      if(currentPool.val.users !== undefined){
-        keysUsers = Object.keys(currentPool.val.users);
-      }
-      
-      if ( currentPool !== undefined) {
-      
+    let usersOfPool = [];
+    let usersObjects = [];
+    let allUsersObjects = [];
+    let filteredUsers = [];
+
+    let currentPool = this.props.pools.find(k => k.key === uid);
+    let keysUsers = [];
+    if (currentPool.val.users !== undefined) {
+      keysUsers = Object.keys(currentPool.val.users);
+    }
+
+    if (currentPool !== undefined) {
       if (this.props.users !== undefined && this.props.pools !== undefined) {
         allUsersObjects = [...this.props.users];
 
@@ -224,14 +210,7 @@ class Pool extends Component {
 
     const addUsers = canAddUsers ? (
       <div>
-        <Users
-          title="Usuários do Pool"
-          users={usersObjects}
-          pool={uid}
-          mode="delete"
-          handleClick={this.handleClick}  
-        />
-        <Users title="Usuários" users={filteredUsers} handleClick={this.handleClick} mode="add" />
+        <UsersOfPool pool={currentPool} />
       </div>
     ) : (
       <div />
@@ -317,6 +296,13 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { setDialogIsOpen, change, submit,  addUserToPool, fetchUserData, removeUserOfPool, addUserPools , removeUserPools })(
-  injectIntl(withRouter(withFirebase(muiThemeable()(Pool))))
-);
+export default connect(mapStateToProps, {
+  setDialogIsOpen,
+  change,
+  submit,
+  addUserToPool,
+  fetchUserData,
+  removeUserOfPool,
+  addUserPools,
+  removeUserPools
+})(injectIntl(withRouter(withFirebase(muiThemeable()(Pool)))));
