@@ -9,7 +9,10 @@ import Users from "../Users/Users";
 import User from "../Users/User";
 import { Activity } from 'rmw-shell';
 import UserList from '../Users/UserList';
-
+import RaisedButton from "material-ui/RaisedButton";
+import Scrollbar from 'rmw-shell/lib/components/Scrollbar/Scrollbar'
+import FontIcon from 'material-ui/FontIcon';
+import { ResponsiveMenu } from 'material-ui-responsive-menu';
 import { List, ListItem } from "material-ui/List";
 import {
   addUserToPool,
@@ -73,7 +76,7 @@ class UsersOfPool extends Component {
       .then(snapshot => {
         this.setState({
           pool: snapshot.val(),
-          usersOfPool : snapshot.val().users,
+          usersOfPool: snapshot.val().users,
           isLoadingPool: false
         });
       });
@@ -94,7 +97,7 @@ class UsersOfPool extends Component {
           isLoadingUsers: false
         });
       });
-      this.setState({bla:true});
+    this.setState({ bla: true });
   };
 
   fetchUsersOfPoolData = async () => {
@@ -122,10 +125,19 @@ class UsersOfPool extends Component {
   };
 
 
-
+  
 
   render() {
-    const  { intl } = this.props;
+    const { intl, history, muiTheme } = this.props;
+
+    const menuList = [
+      {
+       
+        text: intl.formatMessage({ id: 'pool_back' }),
+        icon: <FontIcon className="material-icons" color={muiTheme.palette.canvasColor}>save</FontIcon>,
+        onClick: () => { history.goBack() }
+      }
+    ]
 
     let keysFromUsersFromPool;
 
@@ -138,8 +150,26 @@ class UsersOfPool extends Component {
       return (
         <Activity
           containerStyle={{ overflow: 'hidden' }}
-          title={intl.formatMessage({ id: 'pool_users' })}>
-          <UserList usersOfPool={keysFromUsersFromPool} users={this.state.users} handleClick={this.handleClick} mode='delete' />
+          title={intl.formatMessage({ id: 'pool_users' })}
+          iconStyleRight={{ width: '50%' }}
+          iconElementRight={
+            <div>
+              <ResponsiveMenu
+                iconMenuColor={muiTheme.palette.canvasColor}
+                menuList={menuList}
+              />
+            </div>
+          }
+        >
+          <Scrollbar>
+            <UserList usersOfPool={keysFromUsersFromPool} users={this.state.users} handleClick={this.handleClick} mode='delete' />
+          </Scrollbar>
+          <RaisedButton
+            onClick={() => { history.goBack() }}
+            label="Retornar ao Pool"
+            primary={true}
+            style={{ margin: 12, marginLeft: 0 }}
+          />
         </Activity>
       );
     }

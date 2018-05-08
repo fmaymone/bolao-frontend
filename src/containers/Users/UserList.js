@@ -15,6 +15,7 @@ import isGranted from "rmw-shell/lib/utils/auth";
 import Scrollbar from "rmw-shell/lib/components/Scrollbar/Scrollbar";
 import User from './User';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
+import {green500, red500} from 'material-ui/styles/colors';
 
 import { addUserToPool, fetchUserData, removeUserOfPool, addUserPools, removeUserPools } from "../../store/actions/bolaoActions";
 
@@ -45,8 +46,8 @@ class UserList extends Component {
             let iconAddOrRemove;
             let mode = 'delete';
             isUserFromPool ? 
-            iconAddOrRemove = <FontIcon className="material-icons">remove_circle</FontIcon>
-            : iconAddOrRemove = <FontIcon className="material-icons">add_circle</FontIcon>
+            iconAddOrRemove = <div><FontIcon className="material-icons" color={red500}>remove_circle</FontIcon></div>
+            : iconAddOrRemove = <FontIcon className="material-icons" color={green500}>add_circle</FontIcon>
 
             isUserFromPool ? mode = 'delete' : mode = 'add'
             

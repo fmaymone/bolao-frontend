@@ -31,6 +31,14 @@ import {
 const path = "/pools/";
 const form_name = "pool";
 
+const styles = {
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+}
+
 class Pool extends Component {
   constructor(props) {
     super(props);
@@ -174,10 +182,10 @@ class Pool extends Component {
     const addUsers = canAddUsers ? (
       <div>
         <RaisedButton
-           onClick={() => { history.push(`/pools/edit/users/${uid}`) }}
-            label="Gerenciar Usuários do Pool"
-            primary={true}
-            style={{margin: 12, marginLeft:0}}
+          onClick={() => { history.push(`/pools/edit/users/${uid}`) }}
+          label="Gerenciar Usuários do Pool"
+          primary={true}
+          style={{ margin: 12, marginLeft: 0 }}
         />
       </div>
     ) : (
@@ -202,39 +210,39 @@ class Pool extends Component {
           id: match.params.uid ? "edit_pool" : "create_pool"
         })}
       >
-        <Row>
-          <Col sm={12}>
-            <FireForm
-              firebaseApp={firebaseApp}
-              name={"pool"}
-              path={`${path}`}
-              validate={this.validate}
-              handleCreateValues={this.handleCreateValues}
-              onSubmitSuccess={values => {
-                history.push("/pools");
-              }}
-              onDelete={values => {
-                history.push("/pools");
-              }}
-              uid={match.params.uid}
-            >
-              <PoolForm />
-            </FireForm>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={12}>{addUsers}</Col>
-        </Row>
+        <Container style={styles.container}>
+          <Row>
+            <Col sm={8}>
+              <FireForm
+                firebaseApp={firebaseApp}
+                name={"pool"}
+                path={`${path}`}
+                validate={this.validate}
+                handleCreateValues={this.handleCreateValues}
+                onSubmitSuccess={values => {
+                  history.push("/pools");
+                }}
+                onDelete={values => {
+                  history.push("/pools");
+                }}
+                uid={match.params.uid}
+              >
+                <PoolForm />
+              </FireForm>
+            </Col>
+            <Col sm={4}>{addUsers}</Col>
+          </Row>
 
-        <Dialog
-          title={intl.formatMessage({ id: "delete_pool_title" })}
-          actions={actions}
-          modal={false}
-          open={dialogs.delete_pool === true}
-          onRequestClose={this.handleClose}
-        >
-          {intl.formatMessage({ id: "delete_pool_message" })}
-        </Dialog>
+          <Dialog
+            title={intl.formatMessage({ id: "delete_pool_title" })}
+            actions={actions}
+            modal={false}
+            open={dialogs.delete_pool === true}
+            onRequestClose={this.handleClose}
+          >
+            {intl.formatMessage({ id: "delete_pool_message" })}
+          </Dialog>
+        </Container>
       </Activity>
     );
   }
