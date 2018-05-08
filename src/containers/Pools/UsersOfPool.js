@@ -36,12 +36,31 @@ class UsersOfPool extends Component {
     super(props);
     this.state = {
       pool: {},
-      isLoading: true
+      allUsers: [],
+      usersOfPool: [],
+      isLoadingPool: true,
+      isLoadingUsers: true,
+      bla: false
+
     };
   }
   componentDidMount() {
     this.fetchPoolData(this.props.match.params.uid);
+    this.fetchUsersData();
+    //this.updateUsersOfPool();
+
   }
+  snapshotToArray(snapshot) {
+    var returnArr = [];
+
+    snapshot.forEach(function (childSnapshot) {
+      var item = childSnapshot.val();
+      item.key = childSnapshot.key;
+      returnArr.push(item);
+    });
+
+    return returnArr;
+  };
   fetchPoolData = async (id) => {
 
     const { history, match, firebaseApp } = this.props;
@@ -54,11 +73,34 @@ class UsersOfPool extends Component {
       .then(snapshot => {
         this.setState({
           pool: snapshot.val(),
-          isLoading: false
+          usersOfPool : snapshot.val().users,
+          isLoadingPool: false
         });
       });
   };
 
+  fetchUsersData = async () => {
+
+    const { firebaseApp } = this.props;
+
+
+    await firebaseApp
+      .database()
+      .ref(`/users/`)
+      .once("value")
+      .then(snapshot => {
+        this.setState({
+          users: this.snapshotToArray(snapshot),
+          isLoadingUsers: false
+        });
+      });
+      this.setState({bla:true});
+  };
+
+  fetchUsersOfPoolData = async () => {
+    let usersObjectsOfPool = [];
+    console.log(this.state.allUsers);
+  }
 
   handleClick = async (user, mode) => {
     const uid = this.props.match.params.uid;
@@ -67,6 +109,7 @@ class UsersOfPool extends Component {
     } else {
       await this.removeUserOfPool(user, uid);
     }
+    this.fetchPoolData(this.props.match.params.uid);
   };
 
   addUserToPool = async (user, pool) => {
@@ -78,50 +121,25 @@ class UsersOfPool extends Component {
     await this.props.removeUserPools(user, pool);
   };
 
-  renderListUsersPool = pool => {
 
-    if (pool === null) {
-      return <div>Sem usuários</div>;
-    } else {
-      const users = pool.users;
-      if (users === undefined) {
-        return <div />;
-      }
-      let objects = [];
-      let keys = Object.keys(users);
-      for (let index = 0; index < keys.length; index++) {
-        const element = keys[index];
-        objects.push(<User userKey={element} handleClick={this.handleClick} mode='delete' />);
 
-      }
-      return objects;
-    }
-  };
 
   render() {
-    const { intl } = this.props;
+    const  { intl } = this.props;
 
-    if (this.state.isLoading) {
+    let keysFromUsersFromPool;
+
+
+    if (this.state.isLoadingPool && this.state.isLoadingUsers) {
       return <Loader />
     } else {
+      console.log('oi');
+      this.state.pool.users === undefined ? keysFromUsersFromPool = [] : keysFromUsersFromPool = Object.keys(this.state.pool.users);
       return (
         <Activity
-        
           containerStyle={{ overflow: 'hidden' }}
           title={intl.formatMessage({ id: 'pool_users' })}>
-         <div><h1>Usuarios do Pool</h1></div>
-        <List
-          id="usersOfPools"
-          style={{ height: "100%" }}
-          ref={field => {
-            this.list = field;
-          }}
-        >
-          {this.renderListUsersPool(this.state.pool)}
-        </List>
-        <div><h1>Adicionar Usuarios</h1>
-          <UserList users={this.props.allUsers} handleClick={this.handleClick} mode='add' />
-        </div>
+          <UserList usersOfPool={keysFromUsersFromPool} users={this.state.users} handleClick={this.handleClick} mode='delete' />
         </Activity>
       );
     }
