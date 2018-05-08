@@ -37,7 +37,7 @@ class UserList extends Component {
                         primaryText={user.val.displayName}
                         id={index}
                     //secondaryText={user.val.full_name}
-                    // onClick={() => this.handleClick(user)}
+                     onClick={() => this.props.handleClick(user.key,this.props.mode)}
                     //this.props.addUserToPool(this.props.pool, user.val.userId);
                     />
                     <Divider inset />

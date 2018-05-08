@@ -7,6 +7,9 @@ import muiThemeable from "material-ui/styles/muiThemeable";
 import { Container, Row, Col } from "react-grid-system";
 import Users from "../Users/Users";
 import User from "../Users/User";
+import { Activity } from 'rmw-shell';
+import UserList from '../Users/UserList';
+
 import { List, ListItem } from "material-ui/List";
 import {
   addUserToPool,
@@ -31,8 +34,31 @@ const style = {
 class UsersOfPool extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      pool: {},
+      isLoading: true
+    };
   }
+  componentDidMount() {
+    this.fetchPoolData(this.props.match.params.uid);
+  }
+  fetchPoolData = async (id) => {
+
+    const { history, match, firebaseApp } = this.props;
+
+
+    await firebaseApp
+      .database()
+      .ref(`/pools/${id}`)
+      .once("value")
+      .then(snapshot => {
+        this.setState({
+          pool: snapshot.val(),
+          isLoading: false
+        });
+      });
+  };
+
 
   handleClick = async (user, mode) => {
     const uid = this.props.match.params.uid;
@@ -52,42 +78,62 @@ class UsersOfPool extends Component {
     await this.props.removeUserPools(user, pool);
   };
 
-  renderList = users => {
-    if (users === undefined) {
-      return <div />;
-    }
-    let objects = [];
-    let keys = Object.keys(users);
-    for (let index = 0; index < keys.length; index++) {
-      const element = keys[index];
-     return <User userKey={element} handleClick={this.handleClick} mode='delete'/>;
-     
-    }
+  renderListUsersPool = pool => {
 
-    
+    if (pool === null) {
+      return <div>Sem usuários</div>;
+    } else {
+      const users = pool.users;
+      if (users === undefined) {
+        return <div />;
+      }
+      let objects = [];
+      let keys = Object.keys(users);
+      for (let index = 0; index < keys.length; index++) {
+        const element = keys[index];
+        objects.push(<User userKey={element} handleClick={this.handleClick} mode='delete' />);
+
+      }
+      return objects;
+    }
   };
 
   render() {
-    if (this.props.pool === undefined) {
-      return <Loader />;
+    const { intl } = this.props;
+
+    if (this.state.isLoading) {
+      return <Loader />
     } else {
       return (
+        <Activity
+        
+          containerStyle={{ overflow: 'hidden' }}
+          title={intl.formatMessage({ id: 'pool_users' })}>
+         <div><h1>Usuarios do Pool</h1></div>
         <List
-          id="test"
+          id="usersOfPools"
           style={{ height: "100%" }}
           ref={field => {
             this.list = field;
           }}
         >
-          {this.renderList(this.props.pool.val.users)}
+          {this.renderListUsersPool(this.state.pool)}
         </List>
+        <div><h1>Adicionar Usuarios</h1>
+          <UserList users={this.props.allUsers} handleClick={this.handleClick} mode='add' />
+        </div>
+        </Activity>
       );
     }
   }
 }
 
 const mapStateToProps = state => {
-  return {};
+  const { auth, browser, lists } = state;
+
+  return {
+    allUsers: lists.users
+  };
 };
 export default connect(mapStateToProps, {
   addUserToPool,

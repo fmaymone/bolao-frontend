@@ -163,7 +163,10 @@ const messages=defineMessages({
   round_4: 'Semi-Finais', 
   round2_loser: 'Rubens Barrichello',
   round2_winner: 'Final',
-  my_pools: 'Meus Pools'
+  my_pools: 'Meus Pools',
+
+  pool_basic_data: 'Dados Básicos',
+  pool_users: 'Usuários do Pool'
 
 });
 

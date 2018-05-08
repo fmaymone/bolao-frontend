@@ -10,7 +10,6 @@ import PoolForm from "../../components/Forms/PoolForm";
 import { withRouter } from "react-router-dom";
 import firebase from "firebase";
 import FontIcon from "material-ui/FontIcon";
-import RaisedButton from "material-ui/RaisedButton";
 import FlatButton from "material-ui/FlatButton";
 import Dialog from "material-ui/Dialog";
 import { withFirebase } from "firekit-provider";
@@ -27,7 +26,7 @@ import {
   addUserPools,
   removeUserPools
 } from "../../store/actions/bolaoActions";
-
+import UsersOfPool from "../Pools/UsersOfPool";
 const path = "/pools/";
 const form_name = "pool";
 
@@ -173,12 +172,7 @@ class Pool extends Component {
 
     const addUsers = canAddUsers ? (
       <div>
-        <RaisedButton
-           onClick={() => { history.push(`/pools/edit/users/${uid}`) }}
-            label="Gerenciar Usuários do Pool"
-            primary={true}
-            style={{margin: 12, marginLeft:0}}
-        />
+        <UsersOfPool pool={uid} />
       </div>
     ) : (
         <div />
