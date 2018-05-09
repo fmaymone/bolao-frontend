@@ -14,12 +14,7 @@ const styles = {
 
 class PoolTabs extends Component {
 
-    constructor(props) {
-      super(props);
-      this.state = {
-        value: 'a',
-      };
-    }
+  
   
     handleChange = (value) => {
       this.setState({
@@ -34,12 +29,12 @@ class PoolTabs extends Component {
           value={this.state.value}
           onChange={this.handleChange}
         >
-          <Tab label= {intl.formatMessage({ id: "pool_basic_data" })} value="a">
+          <Tab label= {intl.formatMessage({ id: "pool_basic_data" })} value={GROUPS_STAGE}>
             <div>
              <PoolBasicData />
             </div>
           </Tab>
-          <Tab label= {intl.formatMessage({ id: "pool_users" })} value="b">
+          <Tab label= {intl.formatMessage({ id: "pool_users" })} value={KNOCKOUT_STAGE}>
             <div>
               <h2 style={styles.headline}>Controllable Tab B</h2>
               <p>

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Activity } from "rmw-shell";
 import { injectIntl } from "react-intl";
 import { withRouter } from "react-router-dom";
 import { withFirebase } from "firekit-provider";
@@ -7,40 +6,38 @@ import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
 import GroupsBuilder from "./GroupsBuilder";
 import KnockoutBuilder from './KnockoutBuilder';
-import { GROUPS_STAGE, KNOCKOUT_STAGE, ROUND_16 } from "../../store/actions/types";
-import MatchList from "../../components/Match/MatchList";
-import {  changeStage } from "../../store/actions/bolaoActions";
-import FlatButton from "material-ui/FlatButton";
+import { GROUPS_STAGE, KNOCKOUT_STAGE  } from "../../store/actions/types";
+import { changeStage } from "../../store/actions/bolaoActions";
 import { Container, Row, Col } from "react-grid-system";
+import { Tabs, Tab } from 'material-ui/Tabs';
 
-
-const groups = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
 class MatchesBuilder extends Component {
-  state = {
-    matches: ""
+  
+  handleChange = async (value) => {
+    await this.handleChangeKnockout(value);
   };
   componentDidMount() {
     const { firebaseApp, auth, watchList, user } = this.props;
     //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
-    
+
     let ref = firebaseApp.database().ref(`/pools/${this.props.pool.key}/users/${user.uid}/matches`);
     //let ref = firebaseApp.database().ref(`/pools/-LBXZbmmksFrFv2lCUfN/users/eyn6bCswRnZ5qIJZ4ZiC98rTe4n2/matches`);
     watchList(ref, "listMatches"); //Here we started watching a list
   }
   componentWillUnmount() {
-    const { unwatchList, auth } = this.props;
-    unwatchList(`/pools/${this.props.pool.key}/users/${auth.uid}/matches`); // To unwatch a watcher that is stored in a specific location we call the unwatchList with the path
+    const { unwatchList, user } = this.props;
+    unwatchList(`/pools/${this.props.pool.key}/users/${user.uid}/matches`); // To unwatch a watcher that is stored in a specific location we call the unwatchList with the path
   }
 
   filterFromGroup = value => {
-    return value.val.group == this.props.playerDataReducer.currentGroup;
+    return value.val.group === this.props.playerDataReducer.currentGroup;
   };
   getActualMatches = () => {
     const matches = this.props.matches.filter(this.filterFromGroup);
     return matches;
   };
-  
+
   renderGroupsStage() {
     if (this.props.matches === undefined)
       return <div />;
@@ -53,69 +50,86 @@ class MatchesBuilder extends Component {
     if (this.props.matches === undefined)
       return <div />;
     return (
-      <KnockoutBuilder matches={this.getActualMatches()} pool={this.props.pool}/>
+      <KnockoutBuilder matches={this.getActualMatches()} pool={this.props.pool} />
     );
   }
-  handleChangeKnockout = (phase) =>{
-    let group='round_16'
-    if(phase === GROUPS_STAGE){
+  handleChangeKnockout = async (phase) => {
+    let group = 'round_16'
+    if (phase === GROUPS_STAGE) {
       group = 'a';
     }
-    const data = {currentGroup:group,
-      currentPhase:phase}
-    this.props.changeStage(data);
+    const data = {
+      currentGroup: group,
+      currentPhase: phase
+    }
+    await this.props.changeStage(data);
 
   }
 
   render() {
     const { intl } = this.props
-    let type =
-      this.props.playerDataReducer.currentPhase === GROUPS_STAGE
-        ? this.renderGroupsStage()
-        : this.renderKnockoutStage();
+    // return (
+    // <Container>
+    //   <Row>
+    //     <Col sm={2}>
+    //     <FlatButton
+    //             label={intl.formatMessage({ id: 'second_phase' })}
+    //             primary={true}
+    //             onClick={this.handleChangeKnockout.bind(this,KNOCKOUT_STAGE )}
+    //         />
+    //         <FlatButton
+    //             label={intl.formatMessage({ id: 'first_phase' })}
+    //             primary={true}
+    //             onClick={this.handleChangeKnockout.bind(this,GROUPS_STAGE )}
+    //         />
+    //     </Col>
+    //     <Col sm={8}>
+    //       <center>{type}</center>
+    //     </Col>
+    //     <Col sm={2}>
+    //     </Col>
+    //   </Row>
+    // </Container>
 
-        return (
-     
-     
+    return (<Tabs
+      value={this.props.playerDataReducer.currentPhase}
+      onChange={this.handleChange}
+    >
+      <Tab label={intl.formatMessage({ id: "first_phase" })} value={GROUPS_STAGE}>
         <Container>
           <Row>
-            <Col sm={2}>
-            <FlatButton
-                    label={intl.formatMessage({ id: 'first_phase' })}
-                    primary={true}
-                    onClick={this.handleChangeKnockout.bind(this,KNOCKOUT_STAGE )}
-                />
-                <FlatButton
-                    label={intl.formatMessage({ id: 'second_phase' })}
-                    primary={true}
-                    onClick={this.handleChangeKnockout.bind(this,GROUPS_STAGE )}
-                />
-            </Col>
-            <Col sm={8}>
-              <center>{type}</center>
-            </Col>
-            <Col sm={2}>
-            </Col>
+            <Col sm={2}></Col>
+            <Col sm={8}>{this.renderGroupsStage()}</Col>
+            <Col sm={2}></Col>
           </Row>
         </Container>
-        
-      
+
+      </Tab>
+      <Tab label={intl.formatMessage({ id: "second_phase" })} value={KNOCKOUT_STAGE}>
+        <Container>
+          <Row>
+            <Col sm={2}></Col>
+            <Col sm={8}> {this.renderKnockoutStage()}</Col>
+            <Col sm={2}></Col>
+          </Row>
+        </Container>
+      </Tab>
+    </Tabs>
     )
   }
 }
 
 const mapStateToProps = state => {
-  const { intl, dialogs, auth, playerDataReducer, lists } = state;
+  const { intl, dialogs,  playerDataReducer, lists } = state;
 
   return {
     intl,
     dialogs,
-    auth,
     playerDataReducer: playerDataReducer,
     matches: lists.listMatches
   };
 };
 
-export default connect(mapStateToProps, {  changeStage })(
+export default connect(mapStateToProps, { changeStage })(
   injectIntl(withRouter(withFirebase(muiThemeable()(MatchesBuilder))))
 );

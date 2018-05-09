@@ -176,7 +176,7 @@ class KnockoutBuilder extends Component {
     const currentGroup = this.props.playerDataReducer.currentGroup;
     const { intl } = this.props;
     return (
-      <div>
+      <div key={this.props.pool} >
         <Row>
           <Col md={12}>
             <MatchList
