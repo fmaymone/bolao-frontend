@@ -40,8 +40,16 @@ class PoolList extends Component {
                         title={pool.val.name}
                         subtitle={<span>by <b>{pool.val.userName}</b></span>}
                         actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-                        onClick={() => { history.push(`/pools/show/${pool.key}`) }}
+                        // onClick={() => { history.push(`/pools/show/${pool.key}`) }}
+                        onClick={() => {
+                            history.push({
+                                pathname: `/pools/show/${pool.key}`,
+                                state: { userOfPool: this.props.user }
+                              })
+                        }}
                     >
+
+                    
                         <img src={pool.val.photoURL} />
                     </GridTile>
                 ))}

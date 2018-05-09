@@ -5,6 +5,14 @@ import { List, ListItem } from "material-ui/List";
 import Divider from "material-ui/Divider";
 import Avatar from "material-ui/Avatar";
 import FontIcon from "material-ui/FontIcon";
+import {blue500, red500, greenA200} from 'material-ui/styles/colors';
+import SvgIcon from 'material-ui/SvgIcon';
+
+const HomeIcon = (props) => (
+  <SvgIcon {...props}>
+    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+  </SvgIcon>
+);
 
 class User extends Component {
   constructor(props) {

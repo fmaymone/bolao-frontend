@@ -166,7 +166,8 @@ const messages=defineMessages({
   my_pools: 'Meus Pools',
 
   pool_basic_data: 'Dados Básicos',
-  pool_users: 'Usuários do Pool'
+  pool_users: 'Usuários do Pool',
+  pool_back: 'Retornar pro Pool'
 
 });
 

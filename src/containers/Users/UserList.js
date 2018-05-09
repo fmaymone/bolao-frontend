@@ -15,7 +15,7 @@ import isGranted from "rmw-shell/lib/utils/auth";
 import Scrollbar from "rmw-shell/lib/components/Scrollbar/Scrollbar";
 import User from './User';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
-import {green500, red500} from 'material-ui/styles/colors';
+import { green500, red500 } from 'material-ui/styles/colors';
 
 import { addUserToPool, fetchUserData, removeUserOfPool, addUserPools, removeUserPools } from "../../store/actions/bolaoActions";
 
@@ -23,12 +23,22 @@ class UserList extends Component {
 
     isUserFromPool = (id) => {
 
-            if (this.props.usersOfPool.find(k => k === id)) {
-                return true;
-            }else{
-                return false;
-            }
+        if (this.props.usersOfPool.find(k => k === id)) {
+            return true;
+        } else {
+            return false;
         }
+    }
+
+    compare = (a, b) =>{
+        if(this.isUserFromPool(a.uid) && !this.isUserFromPool(b.uid)){
+            return -1
+        }
+        if(!this.isUserFromPool(a.uid) && this.isUserFromPool(b.uid)){
+            return 1
+        }
+        return 0;
+    }
 
     renderListWithUsersObjects = users => {
 
@@ -40,17 +50,20 @@ class UserList extends Component {
             return <ListItem primaryText='Nenhum Usuário Adicionado' />
         }
 
+        users.sort(this.compare);
+
+
         return users.map((user, index) => {
             console.log(user);
             let isUserFromPool = this.isUserFromPool(user.uid);
             let iconAddOrRemove;
             let mode = 'delete';
-            isUserFromPool ? 
-            iconAddOrRemove = <div><FontIcon className="material-icons" color={red500}>remove_circle</FontIcon></div>
-            : iconAddOrRemove = <FontIcon className="material-icons" color={green500}>add_circle</FontIcon>
+            isUserFromPool ?
+                iconAddOrRemove = <div><FontIcon className="material-icons" color={red500}>remove_circle</FontIcon></div>
+                : iconAddOrRemove = <FontIcon className="material-icons" color={green500}>add_circle</FontIcon>
 
             isUserFromPool ? mode = 'delete' : mode = 'add'
-            
+
             return (
                 <div key={index}>
                     <ListItem
