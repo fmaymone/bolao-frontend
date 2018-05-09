@@ -68,23 +68,25 @@ class MatchesBuilder extends Component {
   }
 
   render() {
+    const { intl } = this.props
     let type =
       this.props.playerDataReducer.currentPhase === GROUPS_STAGE
         ? this.renderGroupsStage()
         : this.renderKnockoutStage();
 
         return (
-      <Activity>
+     
+     
         <Container>
           <Row>
             <Col sm={2}>
             <FlatButton
-                    label={"Knockout >"}
+                    label={intl.formatMessage({ id: 'first_phase' })}
                     primary={true}
                     onClick={this.handleChangeKnockout.bind(this,KNOCKOUT_STAGE )}
                 />
                 <FlatButton
-                    label={"Groups >"}
+                    label={intl.formatMessage({ id: 'second_phase' })}
                     primary={true}
                     onClick={this.handleChangeKnockout.bind(this,GROUPS_STAGE )}
                 />
@@ -96,7 +98,8 @@ class MatchesBuilder extends Component {
             </Col>
           </Row>
         </Container>
-      </Activity>
+        
+      
     )
   }
 }

@@ -25,16 +25,22 @@ const styles = {
 
 class PoolList extends Component {
 
-    render() {
-        const pools = this.props.pools;
-        const { history } = this.props
-        return (<div style={styles.root}>
+    renderList = (poolsOfUser) => {
+        let objectsOfPool = [];
+        for (let index = 0; index < poolsOfUser.length; index++) {
+            const element = poolsOfUser[index];
+            const object = this.props.pools.find(k=>k.key === element.key);
+            objectsOfPool.push(object);
+        }
+        
+        return(
+        <div style={styles.root}>
             <GridList
                 cellHeight={180}
                 style={styles.gridList}
             >
                 <Subheader>Pools</Subheader>
-                {pools.map((pool) => (
+                {objectsOfPool.map((pool) => (
                     <GridTile
                         key={pool.key}
                         title={pool.val.name}
@@ -42,7 +48,7 @@ class PoolList extends Component {
                         actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
                         // onClick={() => { history.push(`/pools/show/${pool.key}`) }}
                         onClick={() => {
-                            history.push({
+                            this.props.history.push({
                                 pathname: `/pools/show/${pool.key}`,
                                 state: { userOfPool: this.props.user }
                               })
@@ -54,7 +60,19 @@ class PoolList extends Component {
                     </GridTile>
                 ))}
             </GridList>
-        </div>)
+        </div>
+        )
+    }
+
+    render() {
+        
+        const { history, poolsOfUser, pools} = this.props
+        if(poolsOfUser === undefined){
+            return <h1>Sem Pools</h1>
+        }else{
+            return this.renderList(poolsOfUser);
+        }
+        
     }
 }
 const mapStateToProps = (state) => {

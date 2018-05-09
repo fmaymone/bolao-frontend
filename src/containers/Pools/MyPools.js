@@ -20,16 +20,21 @@ const style = {
 class MyPools extends Component {
 
     componentDidMount() {
-        // const { watchList, firebaseApp } = this.props;
+        const { watchList, firebaseApp, auth } = this.props;
 
-        // let ref = firebaseApp
-        //     .database()
-        //     .ref("pools");
-        // watchList(ref);
+        let ref = firebaseApp
+            .database()
+            .ref(`pools`);
+
+        let ref2 = firebaseApp
+            .database()
+            .ref(`users/${auth.uid}/pools`);
+
+        watchList(ref2, 'poolsOfUser');
     }
 
     render() {
-        const { pools } = this.props;
+        const { pools, intl } = this.props;
         if (pools === undefined) {
             return (
                 <Activity>
@@ -38,8 +43,10 @@ class MyPools extends Component {
             )
         }
         return (
-            <Activity>
-                <PoolList pools={this.props.pools} history={this.props.history} user={this.props.auth} />
+            <Activity title={intl.formatMessage({ id: 'my_pools' })}>
+                <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+                    <PoolList poolsOfUser={this.props.poolsOfUser} pools={this.props.pools} history={this.props.history} user={this.props.auth} />
+                </div>
             </Activity>
         )
     }
@@ -50,6 +57,7 @@ const mapStateToProps = state => {
 
     return {
         pools: lists.pools,
+        poolsOfUser: lists.poolsOfUser,
         auth,
         browser,
 

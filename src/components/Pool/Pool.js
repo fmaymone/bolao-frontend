@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
 import MatchesBuilder from '../../containers/Matches/MatchesBuilder'
+import muiThemeable from 'material-ui/styles/muiThemeable'
 
 const style = {
   margin: 12,
@@ -46,4 +47,4 @@ class Pool extends Component {
   }
 }
 
-export default withRouter(Pool);
+export default withRouter(muiThemeable()(Pool));

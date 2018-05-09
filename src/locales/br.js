@@ -167,7 +167,10 @@ const messages=defineMessages({
 
   pool_basic_data: 'Dados Básicos',
   pool_users: 'Usuários do Pool',
-  pool_back: 'Retornar pro Pool'
+  pool_back: 'Retornar pro Pool',
+  first_phase: 'Primeira Fase',
+  second_phase: 'Segunda Fase',
+  
 
 });
 

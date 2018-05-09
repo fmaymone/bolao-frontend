@@ -58,11 +58,19 @@ class UserList extends Component {
             let isUserFromPool = this.isUserFromPool(user.uid);
             let iconAddOrRemove;
             let mode = 'delete';
-            isUserFromPool ?
+            let secondaryText = 'Não pertence ao Pool'
+            
+            if(isUserFromPool){
                 iconAddOrRemove = <div><FontIcon className="material-icons" color={red500}>remove_circle</FontIcon></div>
-                : iconAddOrRemove = <FontIcon className="material-icons" color={green500}>add_circle</FontIcon>
+                mode = 'delete';
+                secondaryText = 'Já Adicionado'
 
-            isUserFromPool ? mode = 'delete' : mode = 'add'
+            }else{
+                iconAddOrRemove = <FontIcon className="material-icons" color={green500}>add_circle</FontIcon>
+                mode = 'add'
+            }
+
+            
 
             return (
                 <div key={index}>
@@ -78,7 +86,7 @@ class UserList extends Component {
                         primaryText={user.displayName}
                         id={index}
                         rightIcon={iconAddOrRemove}
-                        //secondaryText={user.val.full_name}
+                        secondaryText={secondaryText}
                         onClick={() => this.props.handleClick(user.uid, mode)}
 
                     //this.props.addUserToPool(this.props.pool, user.val.userId);
