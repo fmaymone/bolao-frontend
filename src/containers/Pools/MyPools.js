@@ -20,12 +20,12 @@ const style = {
 class MyPools extends Component {
 
     componentDidMount() {
-        const { watchList, firebaseApp } = this.props;
+        // const { watchList, firebaseApp } = this.props;
 
-        let ref = firebaseApp
-            .database()
-            .ref("pools");
-        watchList(ref);
+        // let ref = firebaseApp
+        //     .database()
+        //     .ref("pools");
+        // watchList(ref);
     }
 
     render() {
