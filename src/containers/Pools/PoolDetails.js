@@ -8,6 +8,8 @@ import { withFirebase } from 'firekit-provider';
 import Pool from '../../components/Pool/Pool';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import MatchesBuilder from '../Matches/MatchesBuilder';
+import Avatar from 'material-ui/Avatar';
+import UsersOfPool from './UsersOfPool';
 
 const styles = {
     headline: {
@@ -26,7 +28,9 @@ class PoolDetails extends Component {
 
     renderData = (pool) => {
         return(
-        <Activity title = {`${pool.val.name}`} >
+        <Activity title = {`${pool.val.name}`}
+    
+        >
             {/* <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
                 {this.renderPool(pool)}
             </div> */}
@@ -34,13 +38,19 @@ class PoolDetails extends Component {
       <Tabs
         value={this.state.value}
         onChange={this.handleChange}
+        tabTemplateStyle={'backgroundColor : #fff'}
       >
-        <Tab label="Tab A" value="a">
+        <Tab label="Minhas Apostas" value="a"  style={'backgroundColor : #fff'}>
           <div>
           <MatchesBuilder pool={pool} user={this.props.location.state.userOfPool} />
           </div>
         </Tab>
-        <Tab label="Tab B" value="b">
+        <Tab label="Usuários do Pool" value="b"  style={'backgroundColor : #fff'}>
+          <div>
+            <UsersOfPool />
+          </div>
+        </Tab>
+        <Tab label="Classificação" value="c"  style={'backgroundColor : #fff'}>
           <div>
             <h2 style={styles.headline}>Controllable Tab B</h2>
             <p>

@@ -148,19 +148,7 @@ class UsersOfPool extends Component {
       console.log('oi');
       this.state.pool.users === undefined ? keysFromUsersFromPool = [] : keysFromUsersFromPool = Object.keys(this.state.pool.users);
       return (
-        <Activity
-          containerStyle={{ overflow: 'hidden' }}
-          title={intl.formatMessage({ id: 'pool_users' })}
-          iconStyleRight={{ width: '50%' }}
-          iconElementRight={
-            <div>
-              <ResponsiveMenu
-                iconMenuColor={muiTheme.palette.canvasColor}
-                menuList={menuList}
-              />
-            </div>
-          }
-        >
+       <div>
           <Scrollbar>
             <UserList usersOfPool={keysFromUsersFromPool} users={this.state.users} handleClick={this.handleClick} mode='delete' />
           </Scrollbar>
@@ -170,7 +158,8 @@ class UsersOfPool extends Component {
             primary={true}
             style={{ margin: 12, marginLeft: 0 }}
           />
-        </Activity>
+        </div>
+        
       );
     }
   }

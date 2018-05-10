@@ -39,14 +39,13 @@ class PoolList extends Component {
                 cellHeight={180}
                 style={styles.gridList}
             >
-                <Subheader>Pools</Subheader>
+                {/* <Subheader>Pools</Subheader> */}
                 {objectsOfPool.map((pool) => (
                     <GridTile
                         key={pool.key}
                         title={pool.val.name}
-                        subtitle={<span>by <b>{pool.val.userName}</b></span>}
+                        subtitle={<span>Criado por: <b>{pool.val.userName}</b></span>}
                         actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-                        // onClick={() => { history.push(`/pools/show/${pool.key}`) }}
                         onClick={() => {
                             this.props.history.push({
                                 pathname: `/pools/show/${pool.key}`,
