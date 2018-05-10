@@ -10,7 +10,7 @@ import muiThemeable from "material-ui/styles/muiThemeable";
 import MatchList from '../../components/Match/MatchList';
 import ClassificationBuilder from './ClassificationBuilder';
 import FlatButton from "material-ui/FlatButton";
-import {  changeStage, updateMatch } from "../../store/actions/bolaoActions";
+import { changeStage, updateMatch } from "../../store/actions/bolaoActions";
 import { Container, Row, Col } from "react-grid-system";
 
 const groups = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
@@ -53,24 +53,29 @@ class GroupsBuilder extends Component {
         type === 'home' ?
             (gameToBeUpdated.home_result = e.target.value) : (gameToBeUpdated.away_result = e.target.value)
 
-         await this.props.updateMatch(gameToBeUpdated, this.props.pool);
+        await this.props.updateMatch(gameToBeUpdated, this.props.pool);
     }
 
 
     groupsControls() {
         return (
-            <div>
-                <FlatButton
-                    label={"< Anterior"}
-                    primary={true}
-                    onClick={this.prevGroup.bind(this)}
-                />
-                <FlatButton
-                    label={"Proximo >"}
-                    primary={true}
-                    onClick={this.nextGroup.bind(this)}
-                />
-            </div>
+
+            <Row>
+                <Col md={4} >
+                    <FlatButton
+                        label={"< Anterior"}
+                        primary={true}
+                        onClick={this.prevGroup.bind(this)}
+                    />
+                </Col>
+                <Col md={4} >
+                    <FlatButton
+                        label={"Proximo >"}
+                        primary={true}
+                        onClick={this.nextGroup.bind(this)}
+                    />
+                </Col>
+            </Row>
         )
     }
 
@@ -80,7 +85,7 @@ class GroupsBuilder extends Component {
             <div>
                 <Row><Col md={12}> <MatchList matches={this.props.matches} title={'Grupo ' + currentGroup.toUpperCase()} handleChangedResult={this.handleChangedResult}
                 /></Col></Row>
-                <Row><Col md={8} offset={{ md: 2 }} ><div>{this.groupsControls()}</div></Col></Row>
+                {this.groupsControls()}
                 <Row>
                     <Col md={8} offset={{ md: 2 }}><ClassificationBuilder
                         matches={this.props.matches}
@@ -106,7 +111,7 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, {  changeStage, updateMatch })(
+export default connect(mapStateToProps, { changeStage, updateMatch })(
     injectIntl(withRouter(withFirebase(muiThemeable()(GroupsBuilder))))
 );
 

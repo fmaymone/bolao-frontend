@@ -53,8 +53,6 @@ class PoolList extends Component {
                               })
                         }}
                     >
-
-                    
                         <img src={pool.val.photoURL} />
                     </GridTile>
                 ))}

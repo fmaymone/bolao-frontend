@@ -51,22 +51,22 @@ const getMenuItems = (props) => {
 
   return [
     {
-      value: '/dashboard',
+      value: '/home',
       visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'dashboard' }),
-      leftIcon: <FontIcon className='material-icons' >Dashboard</FontIcon>
+      leftIcon: <FontIcon className='material-icons' >home</FontIcon>
     },
     {
       value: '/pools',
       visible: isGranted('administration'),
       primaryText: intl.formatMessage({ id: 'pools' }),
-      leftIcon: <FontIcon className='material-icons' >Pools</FontIcon>
+      leftIcon: <FontIcon className='material-icons' >apps</FontIcon>
     },
     {
       value: '/mypools',
       visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'my_pools' }),
-      leftIcon: <FontIcon className='material-icons' >Meus Pools</FontIcon>
+      leftIcon: <FontIcon className='material-icons' >sentiment_satisfied_alt</FontIcon>
     },
     // {
     //   value: '/matches',

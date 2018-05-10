@@ -17,7 +17,7 @@ const AsyncUsersOfPool = MyLoadable({ loader: () => import('./containers/Pools/U
 
 const Routes = [
     <RestrictedRoute type='private' path="/" exact component={AsyncDashboard} />,
-    <RestrictedRoute type='private' path="/dashboard" exact component={AsyncDashboard} />,
+    <RestrictedRoute type='private' path="/home" exact component={AsyncDashboard} />,
     <RestrictedRoute type='private' path="/about" exact component={AsyncAbout} />,
     <RestrictedRoute type='private' path="/test" exact component={AsyncTest} />,
     <RestrictedRoute type='private' path="/pools" exact component={AsyncPools} />,
