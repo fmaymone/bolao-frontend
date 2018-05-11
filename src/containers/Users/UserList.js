@@ -116,7 +116,7 @@ class UserList extends Component {
     render() {
         const { users, onlyKeys } = this.props;
         return (
-
+            <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
             <List
                 id="test"
                 style={{ height: "100%" }}
@@ -126,6 +126,7 @@ class UserList extends Component {
             >
                 {this.renderListWithUsersObjects(users)}
             </List>
+            </div>
 
         )
     }

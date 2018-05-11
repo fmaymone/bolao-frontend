@@ -68,29 +68,7 @@ class MatchesBuilder extends Component {
 
   render() {
     const { intl } = this.props
-    // return (
-    // <Container>
-    //   <Row>
-    //     <Col sm={2}>
-    //     <FlatButton
-    //             label={intl.formatMessage({ id: 'second_phase' })}
-    //             primary={true}
-    //             onClick={this.handleChangeKnockout.bind(this,KNOCKOUT_STAGE )}
-    //         />
-    //         <FlatButton
-    //             label={intl.formatMessage({ id: 'first_phase' })}
-    //             primary={true}
-    //             onClick={this.handleChangeKnockout.bind(this,GROUPS_STAGE )}
-    //         />
-    //     </Col>
-    //     <Col sm={8}>
-    //       <center>{type}</center>
-    //     </Col>
-    //     <Col sm={2}>
-    //     </Col>
-    //   </Row>
-    // </Container>
-
+   
     return (<Tabs
       value={this.props.playerDataReducer.currentPhase}
       onChange={this.handleChange}
