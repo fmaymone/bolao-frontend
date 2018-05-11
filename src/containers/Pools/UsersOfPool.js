@@ -148,19 +148,26 @@ class UsersOfPool extends Component {
       //console.log('oi');
       this.state.pool.users === undefined ? keysFromUsersFromPool = [] : keysFromUsersFromPool = Object.keys(this.state.pool.users);
       return (
-        <Activity title={this.state.pool.name}>
-         <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+        <Activity title={this.state.pool.name}
+          iconStyleRight={{ width: '50%' }}
+          iconElementRight={
+            <div>
+              <ResponsiveMenu
+                iconMenuColor={muiTheme.palette.canvasColor}
+                menuList={menuList}
+              />
+            </div>
+          }
+          onBackClick={() => { history.goBack() }}
+        >
+        <Scrollbar>
+        <div style={{ overflow: 'none', backgroundColor: muiTheme.palette.convasColor }}>
         
-          
+         
             <UserList usersOfPool={keysFromUsersFromPool} users={this.state.users} handleClick={this.handleClick} mode='delete' />
           
-          <RaisedButton
-            onClick={() => { history.goBack() }}
-            label="Retornar ao Pool"
-            primary={true}
-            style={{ margin: 12, marginLeft: 0 }}
-          />
         </div>
+        </Scrollbar>
         </Activity>
         
       );
