@@ -39,7 +39,28 @@ class Dashboard extends Component {
 
         <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
           <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
-            
+            <h1>H1 Normal</h1>
+          </div>
+          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
+            <h1>H1 Normal</h1>
+          </div>
+          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
+            <h1>H1 Normal</h1>
+          </div>
+          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
+            <h1>H1 Normal</h1>
+          </div>
+          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
+            <h1>H1 Normal</h1>
+          </div>
+          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
+            <h1>H1 Normal</h1>
+          </div>
+          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
+            <h1>H1 Normal</h1>
+          </div>
+          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
+            <h1>H1 Normal</h1>
           </div>
 
           <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
