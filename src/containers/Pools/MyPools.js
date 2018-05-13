@@ -38,7 +38,7 @@ class MyPools extends Component {
         if (pools === undefined) {
             return (
                 <Activity>
-                    <Paper style={style} zDepth={4} circle={true} />;
+                    <Paper style={style} zDepth={4} circle={true} />
                 </Activity>
             )
         }

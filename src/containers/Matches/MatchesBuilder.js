@@ -18,12 +18,17 @@ class MatchesBuilder extends Component {
     await this.handleChangeKnockout(value);
   };
   componentDidMount() {
+    this.fetchMatches();
+  }
+
+  fetchMatches = async () =>{
     const { firebaseApp, auth, watchList, user } = this.props;
     //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
 
     let ref = firebaseApp.database().ref(`/pools/${this.props.pool.key}/users/${user.uid}/matches`);
     //let ref = firebaseApp.database().ref(`/pools/-LBXZbmmksFrFv2lCUfN/users/eyn6bCswRnZ5qIJZ4ZiC98rTe4n2/matches`);
-    watchList(ref, "listMatches"); //Here we started watching a list
+    await watchList(ref, "listMatches"); 
+
   }
   componentWillUnmount() {
     const { unwatchList, user } = this.props;
