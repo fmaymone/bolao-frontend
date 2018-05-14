@@ -10,13 +10,15 @@ import { GROUPS_STAGE, KNOCKOUT_STAGE  } from "../../store/actions/types";
 import { changeStage } from "../../store/actions/bolaoActions";
 import { Container, Row, Col } from "react-grid-system";
 import { Tabs, Tab } from 'material-ui/Tabs';
+import Loader from '../../components/UI/Loader'
 
 
 class MatchesBuilder extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { isLoading: true };
+    this.state = { isLoading: true,
+    matches: [] };
   }
   
   handleChange = async (value) => {
@@ -25,16 +27,30 @@ class MatchesBuilder extends Component {
   componentDidMount() {
     this.fetchMatches();
   }
+  snapshotToArray(snapshot) {
+    var returnArr = [];
+
+    snapshot.forEach(function (childSnapshot) {
+      var item = childSnapshot.val();
+      item.key = childSnapshot.key;
+      returnArr.push(item);
+    });
+
+    return returnArr;
+  };
 
   fetchMatches = async () =>{
     const { firebaseApp, auth, watchList, user } = this.props;
-    let ref = firebaseApp.database().ref(`/pools/${this.props.pool.key}/users/${user.uid}/matches`);
-    await watchList(ref, "listMatches"); 
-    if(this.props.matches.length === 0){
-        this.setState({isLoading: true})
-    }else{
-      this.setState({isLoading: false})
-    }
+    await firebaseApp
+    .database()
+    .ref(`/pools/${this.props.pool.key}/users/${user.uid}/matches`)
+    .once('value')
+    .then(snapshot => {
+      this.setState({
+        matches: this.snapshotToArray(snapshot),
+        isLoading: false
+      });
+    });
 
   }
   componentWillUnmount() {
@@ -42,27 +58,34 @@ class MatchesBuilder extends Component {
     unwatchList(`/pools/${this.props.pool.key}/users/${user.uid}/matches`); // To unwatch a watcher that is stored in a specific location we call the unwatchList with the path
   }
 
+  updateMatches = () => {
+    this.fetchMatches();
+  }
+  // componentWillUpdate() {
+  //   this.fetchMatches();
+  // }
+
   filterFromGroup = value => {
-    return value.val.group === this.props.playerDataReducer.currentGroup;
+    return value.group === this.props.playerDataReducer.currentGroup;
   };
   getActualMatches = () => {
-    const matches = this.props.matches.filter(this.filterFromGroup);
+    const matches = this.state.matches.filter(this.filterFromGroup);
     return matches;
   };
 
   renderGroupsStage() {
-    if (this.props.matches === undefined)
+    if (this.state.matches === undefined)
       return <div />;
     return (
-      <GroupsBuilder matches={this.getActualMatches()} pool={this.props.pool} />
+      <GroupsBuilder matches={this.getActualMatches()} pool={this.props.pool} referenceMatches = {this.state.matches} updateMatches={this.updateMatches} />
     );
   }
 
   renderKnockoutStage() {
-    if (this.props.matches === undefined)
+    if (this.state.matches === undefined)
       return <div />;
     return (
-      <KnockoutBuilder matches={this.getActualMatches()} pool={this.props.pool} />
+      <KnockoutBuilder matches={this.getActualMatches()} pool={this.props.pool} referenceMatches = {this.state.matches} updateMatches={this.updateMatches}/>
     );
   }
   handleChangeKnockout = async (phase) => {
@@ -108,7 +131,7 @@ class MatchesBuilder extends Component {
       </Tab>
     </Tabs>
     )}else{
-      return <h1>isLoading</h1>
+      return <Loader />
     }
   }
 }

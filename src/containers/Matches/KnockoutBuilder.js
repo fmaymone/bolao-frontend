@@ -47,6 +47,7 @@ class KnockoutBuilder extends Component {
     }
     await this.props.updateMatch(gameToBeUpdated, this.props.pool);
     await this.updateNextMatches(gameToBeUpdated);
+    await this.props.updateMatches();
     //need to check the fucking match it it isnt semi-final (matches 61,62) or
     // the matches of the final and 3rd place (63)
   };
@@ -57,12 +58,12 @@ class KnockoutBuilder extends Component {
     let losersMatch = this.props.referenceMatches.find(k => k.key == '63');
     if(game.name == 61){
       
-      finalMatch.val.home_team = game.winner;
-      losersMatch.val.home_team = game.loser;
+      finalMatch.home_team = game.winner;
+      losersMatch.home_team = game.loser;
 
     }else{
-      finalMatch.val.away_team = game.winner;
-      losersMatch.val.away_team = game.loser;
+      finalMatch.away_team = game.winner;
+      losersMatch.away_team = game.loser;
     }
     await this.props.updateMatch(finalMatch, this.props.pool);
     await this.props.updateMatch(losersMatch, this.props.pool);
@@ -74,14 +75,14 @@ class KnockoutBuilder extends Component {
     
     if(game.name == 64){
       
-      finalResult.val.first = game.winner;
-      finalResult.val.second = game.loser;
+      finalResult.first = game.winner;
+      finalResult.second = game.loser;
     //final
     }else{
-      finalResult.val.third = game.winner;
-      finalResult.val.fourth = game.loser;
+      finalResult.third = game.winner;
+      finalResult.fourth = game.loser;
     }
-    await this.props.updateFinalResult(finalResult.val, this.props.pool);
+    await this.props.updateFinalResult(finalResult, this.props.pool);
   }
 
   updateNextMatches = async game => {
@@ -96,9 +97,9 @@ class KnockoutBuilder extends Component {
           k => (k.key == gameTarget.target)
         );
         if (gameTarget.type === "home") {
-          gameToBeUpdated.val.home_team = game.winner;
+          gameToBeUpdated.home_team = game.winner;
         } else {
-          gameToBeUpdated.val.away_team = game.winner;
+          gameToBeUpdated.away_team = game.winner;
         }
       }
       await this.props.updateMatch(gameToBeUpdated, this.props.pool);
@@ -119,6 +120,7 @@ class KnockoutBuilder extends Component {
   chooseDrawWinnerHandler = async (gameToBeUpdated) => {
 
       await this.updateNextMatches(gameToBeUpdated);
+      await this.props.updateMatches();
 
   }
     
@@ -217,8 +219,8 @@ const mapStateToProps = state => {
     dialogs,
     auth,
     playerDataReducer: playerDataReducer,
-    worldCupData,
-    referenceMatches: lists.listMatches
+    worldCupData
+    
   };
 };
 

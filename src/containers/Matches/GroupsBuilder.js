@@ -50,6 +50,7 @@ class GroupsBuilder extends Component {
       : (gameToBeUpdated.away_result = e.target.value);
 
     await this.props.updateMatch(gameToBeUpdated, this.props.pool);
+    await this.props.updateMatches();
   };
 
   groupsControls() {

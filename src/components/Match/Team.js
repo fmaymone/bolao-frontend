@@ -22,12 +22,13 @@ class Team extends Component {
     this.state = {};
   }
   renderHomeTeam = team => {
-    let bgColor = 'white';
+    
+    let fontWeight = 'normal';
     if(this.props.isWinner == team.id){
-      bgColor = 'green';
+      fontWeight = 'bold';
     }
     return (
-      <Row align="center" style={ {backgroundColor: bgColor}}>
+      <Row align="center" style={ {fontWeight: fontWeight }}>
         <Col>
           <Flag code={team.iso2} height="16" />
         </Col>
@@ -37,12 +38,13 @@ class Team extends Component {
   };
 
   renderAwayTeam = team => {
-    let bgColor = 'white';
+    
+    let fontWeight = 'normal';
     if(this.props.isWinner == team.id){
-      bgColor = 'green';
+      fontWeight = 'bold';
     }
     return (
-      <Row align="center" style={ {backgroundColor: bgColor}}>
+      <Row align="center" style={ {fontWeight: fontWeight }}>
         <Col> {team.name} </Col>
         <Col>
           <Flag code={team.iso2} height="16" />

@@ -82,8 +82,8 @@ class Match extends Component {
   renderDrawMatch = () => {
 
     return (
-      <div key={this.props.game.name}>
-        <Row align="center" style={{ borderStyle: 'groove' }} >
+      <div key={this.props.game.name} style={{ borderStyle: 'groove', borderRadius:10 }}>
+        <Row align="center" >
           <Col sm={4} onClick={this.chooseDrawWinnerHandler.bind(this, this.props.game.home_team)}>
             <Team id={this.props.game.home_team} isHomeTeam="true" isWinner={this.props.game.winner} />
           </Col>

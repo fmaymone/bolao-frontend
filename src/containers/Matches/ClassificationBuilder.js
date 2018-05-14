@@ -79,9 +79,9 @@ class ClassificationBuilder extends Component {
     let classification = [];
 
     for (let match of matches) {
-      if (!classification.find(k => k.id == match.val.away_team)) {
+      if (!classification.find(k => k.id == match.away_team)) {
         let element = {
-          id: match.val.away_team,
+          id: match.away_team,
           points: 0,
           win: 0,
           lost: 0,
@@ -91,9 +91,9 @@ class ClassificationBuilder extends Component {
         };
         classification.push(element);
       }
-      if (!classification.find(k => k.id == match.val.home_team)) {
+      if (!classification.find(k => k.id == match.home_team)) {
         let element = {
-          id: match.val.home_team,
+          id: match.home_team,
           points: 0,
           win: 0,
           lost: 0,
@@ -105,11 +105,11 @@ class ClassificationBuilder extends Component {
       }
     }
     for (let match of matches) {
-      let teamHome = classification.find(k => k.id == match.val.home_team);
-      let teamAway = classification.find(k => k.id == match.val.away_team);
+      let teamHome = classification.find(k => k.id == match.home_team);
+      let teamAway = classification.find(k => k.id == match.away_team);
 
-      let home_result = parseInt(match.val.home_result);
-      let away_result = parseInt(match.val.away_result);
+      let home_result = parseInt(match.home_result);
+      let away_result = parseInt(match.away_result);
 
       teamHome.gp += home_result;
       teamHome.gc += away_result;
