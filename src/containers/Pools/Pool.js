@@ -123,12 +123,7 @@ class Pool extends Component {
     if (this.props.match.path === "/pools/edit/:uid") {
       canAddUsers = true;
     }
-
-    // filteredUsers = allUsersObjects.filter(
-    //   u => usersObjects.indexOf(u) === -1
-    // );
-
-
+    
     const actions = [
       <FlatButton
         label={intl.formatMessage({ id: "cancel" })}
