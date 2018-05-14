@@ -13,6 +13,11 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 
 
 class MatchesBuilder extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { isLoading: true };
+  }
   
   handleChange = async (value) => {
     await this.handleChangeKnockout(value);
@@ -23,11 +28,13 @@ class MatchesBuilder extends Component {
 
   fetchMatches = async () =>{
     const { firebaseApp, auth, watchList, user } = this.props;
-    //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
-
     let ref = firebaseApp.database().ref(`/pools/${this.props.pool.key}/users/${user.uid}/matches`);
-    //let ref = firebaseApp.database().ref(`/pools/-LBXZbmmksFrFv2lCUfN/users/eyn6bCswRnZ5qIJZ4ZiC98rTe4n2/matches`);
     await watchList(ref, "listMatches"); 
+    if(this.props.matches.length === 0){
+        this.setState({isLoading: true})
+    }else{
+      this.setState({isLoading: false})
+    }
 
   }
   componentWillUnmount() {
@@ -73,7 +80,9 @@ class MatchesBuilder extends Component {
 
   render() {
     const { intl } = this.props
-   
+
+    
+   if(this.state.isLoading === false){
     return (<Tabs
       value={this.props.playerDataReducer.currentPhase}
       onChange={this.handleChange}
@@ -98,7 +107,9 @@ class MatchesBuilder extends Component {
         </Container>
       </Tab>
     </Tabs>
-    )
+    )}else{
+      return <h1>isLoading</h1>
+    }
   }
 }
 
@@ -114,5 +125,6 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { changeStage })(
+
   injectIntl(withRouter(withFirebase(muiThemeable()(MatchesBuilder))))
 );

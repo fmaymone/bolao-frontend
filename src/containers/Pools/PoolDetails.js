@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import { Activity } from 'rmw-shell';
-import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { injectIntl } from 'react-intl'
-import muiThemeable from 'material-ui/styles/muiThemeable'
 import { withFirebase } from 'firekit-provider';
+import { Tab, Tabs } from 'material-ui/Tabs';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+import React, { Component } from 'react';
+import { injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Activity } from 'rmw-shell';
 import Pool from '../../components/Pool/Pool';
-import {Tabs, Tab} from 'material-ui/Tabs';
 import MatchesBuilder from '../Matches/MatchesBuilder';
-import Avatar from 'material-ui/Avatar';
 import UsersOfPool from './UsersOfPool';
 
 const styles = {
@@ -40,23 +39,21 @@ class PoolDetails extends Component {
         onChange={this.handleChange}
         tabTemplateStyle={'backgroundColor : #fff'}
       >
-        <Tab label="Minhas Apostas" value="a"  style={'backgroundColor : #fff'}>
+        <Tab label="Minhas Apostas" value="a"  >
           <div>
           <MatchesBuilder pool={pool} user={this.props.location.state.userOfPool} />
           </div>
         </Tab>
-        <Tab label="Usuários do Pool" value="b"  style={'backgroundColor : #fff'}>
+        <Tab label="Usuários do Pool" value="b"  >
           <div>
             <UsersOfPool />
           </div>
         </Tab>
-        <Tab label="Classificação" value="c"  style={'backgroundColor : #fff'}>
+        <Tab label="Classificação" value="c" >
           <div>
-            <h2 style={styles.headline}>Controllable Tab B</h2>
+            <h2 style={styles.headline}>Classificacao</h2>
             <p>
-              This is another example of a controllable tab. Remember, if you
-              use controllable Tabs, you need to give all of your tabs values or else
-              you wont be able to select them.
+             Classificação
             </p>
           </div>
         </Tab>

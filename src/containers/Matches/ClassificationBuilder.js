@@ -2,16 +2,22 @@ import React, { Component } from "react";
 import TestList from "../../components/Match/TestList";
 import BetForm from "../../components/Forms/BetForm";
 import { Activity } from "rmw-shell";
-import Classification from '../../components/Match/Classification'
+import Classification from "../../components/Match/Classification";
 import firebase from "firebase";
 import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import { injectIntl, intlShape } from "react-intl";
-import { GROUPS_STAGE, KNOCKOUT_STAGE, ROUND_16 } from "../../store/actions/types";
-import {updateClassification, updateMatch} from "../../store/actions/bolaoActions";
+import {
+  GROUPS_STAGE,
+  KNOCKOUT_STAGE,
+  ROUND_16
+} from "../../store/actions/types";
+import {
+  updateClassification,
+  updateMatch
+} from "../../store/actions/bolaoActions";
 
 class ClassificationBuilder extends Component {
-
   componentDidMount() {
     const { firebaseApp, auth, watchList } = this.props;
     //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
@@ -19,7 +25,7 @@ class ClassificationBuilder extends Component {
     watchList(ref, "listMatches"); //Here we started watching a list
   }
 
-  updateKnockoutStage = async (teams) => {
+  updateKnockoutStage = async teams => {
     const stage = this.props.stage;
     try {
       if (stage.currentPhase === KNOCKOUT_STAGE) {
@@ -28,32 +34,25 @@ class ClassificationBuilder extends Component {
         await this.updateGroupsPhase(teams);
       }
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
-  }
+  };
 
-  updateKnockoutPhase = async () =>{
+  updateKnockoutPhase = async () => {
+    console.log("KnockoutPhase");
+  };
 
-    console.log('KnockoutPhase');
-
-  }
-
-
-  updateGroupsPhase = async (teams) => {
-
+  updateGroupsPhase = async teams => {
     await this.update16Phase(teams);
     await this.updateClassificationDb(teams);
-   
-  }
+  };
 
-  updateClassificationDb = async (teams) => {
+  updateClassificationDb = async teams => {
     const group = this.props.stage.currentGroup;
     this.props.updateClassification(group, teams, this.props.pool);
+  };
 
-  }
-
-  update16Phase = async (teams) => {
-
+  update16Phase = async teams => {
     const group = this.props.stage.currentGroup;
     console.log(teams);
     let firstOfGroup = teams[0];
@@ -61,32 +60,51 @@ class ClassificationBuilder extends Component {
     let homeMatchToUpdate = 0;
     let awayMatchToUpdate = 0;
     let actualMatches = this.props.userMatches;
-    const matchesToUpdate = this.props.worldCupData.knockout_crossings.ROUND_16.find(k=>k.id==group);
-    let firstMatch = actualMatches.find(k=>k.key==matchesToUpdate.homeTeam);
-    let secondMatch = actualMatches.find(k=>k.key==matchesToUpdate.awayTeam);
+    const matchesToUpdate = this.props.worldCupData.knockout_crossings.ROUND_16.find(
+      k => k.id == group
+    );
+    let firstMatch = actualMatches.find(k => k.key == matchesToUpdate.homeTeam);
+    let secondMatch = actualMatches.find(
+      k => k.key == matchesToUpdate.awayTeam
+    );
+    if (!firstMatch === undefined && !secondMatch === undefined) {
+      firstMatch.val.home_team = firstOfGroup.id;
+      secondMatch.val.away_team = secondOfGroup.id;
+      this.props.updateMatch(firstMatch.val, this.props.pool);
+      this.props.updateMatch(secondMatch.val, this.props.pool);
+    }
+  };
 
-    firstMatch.val.home_team = firstOfGroup.id;
-    secondMatch.val.away_team = secondOfGroup.id;
-
-    this.props.updateMatch(firstMatch.val, this.props.pool);
-    this.props.updateMatch(secondMatch.val, this.props.pool);
-  }
-
-  fillClassificationGroups = (matches) =>{
+  fillClassificationGroups = matches => {
     let classification = [];
 
     for (let match of matches) {
       if (!classification.find(k => k.id == match.val.away_team)) {
-        let element = { id: match.val.away_team, points: 0, win: 0, lost: 0, draw: 0, gc: 0, gp: 0 }
+        let element = {
+          id: match.val.away_team,
+          points: 0,
+          win: 0,
+          lost: 0,
+          draw: 0,
+          gc: 0,
+          gp: 0
+        };
         classification.push(element);
       }
       if (!classification.find(k => k.id == match.val.home_team)) {
-        let element = { id: match.val.home_team, points: 0, win: 0, lost: 0, draw: 0, gc: 0, gp: 0 }
+        let element = {
+          id: match.val.home_team,
+          points: 0,
+          win: 0,
+          lost: 0,
+          draw: 0,
+          gc: 0,
+          gp: 0
+        };
         classification.push(element);
       }
     }
     for (let match of matches) {
-
       let teamHome = classification.find(k => k.id == match.val.home_team);
       let teamAway = classification.find(k => k.id == match.val.away_team);
 
@@ -114,54 +132,46 @@ class ClassificationBuilder extends Component {
         teamAway.win += 1;
         teamAway.points += 3;
       }
-
     }
     return classification.sort(compare);
 
     function compare(a, b) {
-      if (a.points < b.points)
-        return 1;
-      if (a.points > b.points)
-        return -1;
+      if (a.points < b.points) return 1;
+      if (a.points > b.points) return -1;
       //if number points is equal, go to the diference btw gp and gc
       if (a.points == b.points) {
-        if ((a.gp - a.gc) > (b.gp - b.gc)) {
+        if (a.gp - a.gc > b.gp - b.gc) {
           return -1;
         }
-        if ((a.gp - a.gc) < (b.gp - b.gc)) {
+        if (a.gp - a.gc < b.gp - b.gc) {
           return 1;
         }
         //if gp-gc its equal, check if gp its bigger
-        if ((a.gp - a.gc) == (b.gp - b.gc)) {
+        if (a.gp - a.gc == b.gp - b.gc) {
           if (a.gp > b.gp) {
-            return -1
+            return -1;
           }
           if (a.gp < b.gp) {
-            return 1
+            return 1;
           }
         }
-
       }
       return 0;
     }
-  }
-
-  
+  };
 
   render() {
     console.log(this.props.matches);
     const matches = this.props.matches;
     let sortedList = [];
-    
-    if(this.props.stage.currentPhase === KNOCKOUT_STAGE){
-      return <div />
-    }else{
-       sortedList = this.fillClassificationGroups(matches);
-       this.updateKnockoutStage(sortedList);
-    return (
-      <Classification classification={sortedList} />
-    );
-  }
+
+    if (this.props.stage.currentPhase === KNOCKOUT_STAGE) {
+      return <div />;
+    } else {
+      sortedList = this.fillClassificationGroups(matches);
+      this.updateKnockoutStage(sortedList);
+      return <Classification classification={sortedList} />;
+    }
   }
 }
 
@@ -177,4 +187,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {updateClassification, updateMatch})(withFirebase(ClassificationBuilder));
+export default connect(mapStateToProps, { updateClassification, updateMatch })(
+  withFirebase(ClassificationBuilder)
+);

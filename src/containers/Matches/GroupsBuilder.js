@@ -56,27 +56,25 @@ class GroupsBuilder extends Component {
     return (
       <div
         style={{
-          margin: 5,
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: 'center'
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between'
         }}
       >
-        <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
+        <div style={{ }}>
           <FlatButton
             label={"< Anterior"}
             primary={true}
             onClick={this.prevGroup.bind(this)}
           />
         </div>
-        <div style={{ flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-   
-            flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
+        <div
+          style={{
+            
+          
+          }}
+        >
           <FlatButton
             label={"Proximo >"}
             primary={true}
