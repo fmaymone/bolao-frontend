@@ -7,14 +7,9 @@ import { Activity } from 'rmw-shell'
 import muiThemeable from 'material-ui/styles/muiThemeable'
 import { Line, Bar } from 'react-chartjs-2'
 import { withFirebase } from 'firekit-provider'
-import CountUp from 'react-countup'
-import FontIcon from 'material-ui/FontIcon'
-import ReactEcharts from 'echarts-for-react'
+import PoolStepper from '../Pools/PoolStepper';
 
-const currentYear = new Date().getFullYear()
-const daysPath = `/user_registrations_per_day/${currentYear}/${new Date().toISOString().slice(5, 7)}`
-const monthsPath = `/user_registrations_per_month/${currentYear}`
-const providerPath = `/provider_count`
+
 
 class Dashboard extends Component {
 
@@ -38,34 +33,7 @@ class Dashboard extends Component {
         title={intl.formatMessage({ id: 'dashboard' })} >
 
         <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
-          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
-            <h1>H1 Normal</h1>
-          </div>
-          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
-            <h1>H1 Normal</h1>
-          </div>
-          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
-            <h1>H1 Normal</h1>
-          </div>
-          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
-            <h1>H1 Normal</h1>
-          </div>
-          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
-            <h1>H1 Normal</h1>
-          </div>
-          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
-            <h1>H1 Normal</h1>
-          </div>
-          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
-            <h1>H1 Normal</h1>
-          </div>
-          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
-            <h1>H1 Normal</h1>
-          </div>
-
-          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
-            
-          </div>
+          <PoolStepper />
 
         </div>
 
@@ -85,10 +53,7 @@ const mapStateToProps = (state) => {
   const { paths } = state
 
   return {
-    days: paths[daysPath],
-    months: paths[monthsPath],
-    providers: paths[providerPath],
-    usersCount: paths['users_count'] ? paths['users_count'] : 0
+   
   }
 }
 
