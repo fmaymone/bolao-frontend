@@ -82,6 +82,6 @@ export default connect(mapStateToProps)(
 
 Team.propTypes = {
   name: PropTypes.string,
-  code: PropTypes.string,
-  home: PropTypes.boolean
+  code: PropTypes.string
+  
 };

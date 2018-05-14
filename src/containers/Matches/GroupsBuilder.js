@@ -107,6 +107,7 @@ class GroupsBuilder extends Component {
               matches={this.props.matches}
               stage={this.props.playerDataReducer}
               pool={this.props.pool}
+              referenceMatches={this.props.referenceMatches}
             />
           </Col>
         </Row>

@@ -59,7 +59,7 @@ class ClassificationBuilder extends Component {
     let secondOfGroup = teams[1];
     let homeMatchToUpdate = 0;
     let awayMatchToUpdate = 0;
-    let actualMatches = this.props.userMatches;
+    let actualMatches = this.props.referenceMatches;
     const matchesToUpdate = this.props.worldCupData.knockout_crossings.ROUND_16.find(
       k => k.id == group
     );
@@ -67,12 +67,12 @@ class ClassificationBuilder extends Component {
     let secondMatch = actualMatches.find(
       k => k.key == matchesToUpdate.awayTeam
     );
-    if (!firstMatch === undefined && !secondMatch === undefined) {
-      firstMatch.val.home_team = firstOfGroup.id;
-      secondMatch.val.away_team = secondOfGroup.id;
-      this.props.updateMatch(firstMatch.val, this.props.pool);
-      this.props.updateMatch(secondMatch.val, this.props.pool);
-    }
+   // if (!firstMatch === undefined && !secondMatch === undefined) {
+      firstMatch.home_team = firstOfGroup.id;
+      secondMatch.away_team = secondOfGroup.id;
+      this.props.updateMatch(firstMatch, this.props.pool);
+      this.props.updateMatch(secondMatch, this.props.pool);
+    //}
   };
 
   fillClassificationGroups = matches => {
