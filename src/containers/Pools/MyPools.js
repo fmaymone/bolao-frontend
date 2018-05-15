@@ -26,7 +26,8 @@ class MyPools extends Component {
         this.state = {
             allPools: [],
             userPools: [],
-            isLoading: true,
+            isLoadingAllPools: true,
+            isLoadingUserPools: true,
         };
     }
 
@@ -34,11 +35,10 @@ class MyPools extends Component {
     componentDidMount() {
         this.fetchPoolData();
         this.fecthUsersOfPooldata();
-
     }
+
     snapshotToArray(snapshot) {
         var returnArr = [];
-
         snapshot.forEach(function (childSnapshot) {
             var item = childSnapshot.val();
             item.key = childSnapshot.key;
@@ -60,6 +60,7 @@ class MyPools extends Component {
             .then(snapshot => {
                 this.setState({
                     allPools: this.snapshotToArray(snapshot),
+                    isLoadingAllPools: false
                 });
             });
     };
@@ -75,7 +76,7 @@ class MyPools extends Component {
                 .then(snapshot => {
                     this.setState({
                         userPools: Object.keys(snapshot.val()),
-                        isLoading: false
+                        isLoadingUserPools: false
                     });
                 });
         }
@@ -85,13 +86,7 @@ class MyPools extends Component {
     render() {
         const { pools, intl } = this.props;
 
-        if (this.state.isLoading) {
-            return (
-                <Activity title={intl.formatMessage({ id: 'my_pools' })}>
-                    <Loader />
-                </Activity>
-            )
-        } else {
+        if (this.state.isLoadingAllPools === false && this.state.isLoadingUserPools === false ) {
             if (pools === undefined) {
                 return (
                     <Activity title={intl.formatMessage({ id: 'my_pools' })}>
@@ -106,6 +101,14 @@ class MyPools extends Component {
                     </div>
                 </Activity>
             )
+            
+        } else {
+            return (
+                <Activity title={intl.formatMessage({ id: 'my_pools' })}>
+                    <Loader />
+                </Activity>
+            )
+            
         }
     }
 }

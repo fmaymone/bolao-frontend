@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 import muiThemeable from 'material-ui/styles/muiThemeable'
 import { withFirebase } from 'firekit-provider'
-
+import PoolThumbnail from './PoolThumbnail';
 const styles = {
     root: {
         display: 'flex',
@@ -25,10 +25,11 @@ const styles = {
 
 class PoolList extends Component {
 
-    renderList = (poolsOfUser) => {
+    renderList = (filterPools) => {
+        
         let objectsOfPool = [];
-        for (let index = 0; index < poolsOfUser.length; index++) {
-            const element = poolsOfUser[index];
+        for (let index = 0; index < filterPools.length; index++) {
+            const element = filterPools[index];
             const object = this.props.pools.find(k => k.key === element);
             objectsOfPool.push(object);
         }
@@ -39,22 +40,25 @@ class PoolList extends Component {
                     cellHeight={180}
                     style={styles.gridList}
                 >
-                    {/* <Subheader>Pools</Subheader> */}
                     {objectsOfPool.map((pool) => (
-                        <GridTile
-                            key={pool.key}
-                            title={pool.name}
-                            subtitle={<span>Criado por: <b>{pool.userName}</b></span>}
-                            actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-                            onClick={() => {
-                                this.props.history.push({
-                                    pathname: `/pools/show/${pool.key}`,
-                                    state: { userOfPool: this.props.user }
-                                })
-                            }}
-                        >
-                            <img src={pool.photoURL} />
-                        </GridTile>
+                       <PoolThumbnail history={this.props.history} pool = {pool}/>
+                    ))}
+                </GridList>
+            </div>
+        )
+    }
+    renderAllPools = () => {
+        console.log('this.props.pools--------------------');
+        console.log(this.props.pools);
+        console.log('this.props.pools--------------------');
+        return (
+            <div style={styles.root}>
+                <GridList
+                    cellHeight={180}
+                    style={styles.gridList}
+                >
+                    {this.props.pools.map((pool) => (
+                       <PoolThumbnail history={this.props.history} pool = {pool} user={this.props.user}/>
                     ))}
                 </GridList>
             </div>
@@ -63,17 +67,17 @@ class PoolList extends Component {
 
     render() {
 
-        const { history, poolsOfUser, pools } = this.props
-        if (poolsOfUser === undefined) {
-            return <h1>Sem Pools</h1>
+        const { history, filterPools, pools } = this.props
+        if (filterPools === undefined) {
+            return this.renderAllPools();
         } else {
-            return this.renderList(poolsOfUser);
+            return this.renderList(filterPools);
         }
 
     }
 }
 const mapStateToProps = (state) => {
-    //const { auth, browser, lists } = state
+    const { auth, browser, lists } = state
 
     return {
 
