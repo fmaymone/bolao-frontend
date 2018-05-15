@@ -29,56 +29,56 @@ class PoolList extends Component {
         let objectsOfPool = [];
         for (let index = 0; index < poolsOfUser.length; index++) {
             const element = poolsOfUser[index];
-            const object = this.props.pools.find(k=>k.key === element.key);
+            const object = this.props.pools.find(k => k.key === element);
             objectsOfPool.push(object);
         }
-        
-        return(
-        <div style={styles.root}>
-            <GridList
-                cellHeight={180}
-                style={styles.gridList}
-            >
-                {/* <Subheader>Pools</Subheader> */}
-                {objectsOfPool.map((pool) => (
-                    <GridTile
-                        key={pool.key}
-                        title={pool.val.name}
-                        subtitle={<span>Criado por: <b>{pool.val.userName}</b></span>}
-                        actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-                        onClick={() => {
-                            this.props.history.push({
-                                pathname: `/pools/show/${pool.key}`,
-                                state: { userOfPool: this.props.user }
-                              })
-                        }}
-                    >
-                        <img src={pool.val.photoURL} />
-                    </GridTile>
-                ))}
-            </GridList>
-        </div>
+
+        return (
+            <div style={styles.root}>
+                <GridList
+                    cellHeight={180}
+                    style={styles.gridList}
+                >
+                    {/* <Subheader>Pools</Subheader> */}
+                    {objectsOfPool.map((pool) => (
+                        <GridTile
+                            key={pool.key}
+                            title={pool.name}
+                            subtitle={<span>Criado por: <b>{pool.userName}</b></span>}
+                            actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+                            onClick={() => {
+                                this.props.history.push({
+                                    pathname: `/pools/show/${pool.key}`,
+                                    state: { userOfPool: this.props.user }
+                                })
+                            }}
+                        >
+                            <img src={pool.photoURL} />
+                        </GridTile>
+                    ))}
+                </GridList>
+            </div>
         )
     }
 
     render() {
-        
-        const { history, poolsOfUser, pools} = this.props
-        if(poolsOfUser === undefined){
+
+        const { history, poolsOfUser, pools } = this.props
+        if (poolsOfUser === undefined) {
             return <h1>Sem Pools</h1>
-        }else{
+        } else {
             return this.renderList(poolsOfUser);
         }
-        
+
     }
 }
 const mapStateToProps = (state) => {
     //const { auth, browser, lists } = state
-  
+
     return {
-     
+
     }
-  }
+}
 export default connect(
     mapStateToProps
-  )(injectIntl(muiThemeable()(withRouter(withFirebase(PoolList)))))
+)(injectIntl(muiThemeable()(withRouter(withFirebase(PoolList)))))

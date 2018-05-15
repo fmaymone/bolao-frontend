@@ -8,6 +8,8 @@ import { withFirebase } from 'firekit-provider';
 import Pool from '../../components/Pool/Pool';
 import PoolList from '../../components/Pool/PoolList';
 import Paper from 'material-ui/Paper';
+import Loader from '../../components/UI/Loader'
+import FontIcon from 'material-ui/FontIcon'
 
 const style = {
     height: 100,
@@ -19,36 +21,95 @@ const style = {
 
 class MyPools extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            allPools: [],
+            userPools: [],
+            isLoading: true,
+        };
+    }
+
+
     componentDidMount() {
-        const { watchList, firebaseApp, auth } = this.props;
+        this.fetchPoolData();
+        this.fecthUsersOfPooldata();
 
-        let ref = firebaseApp
+    }
+    snapshotToArray(snapshot) {
+        var returnArr = [];
+
+        snapshot.forEach(function (childSnapshot) {
+            var item = childSnapshot.val();
+            item.key = childSnapshot.key;
+            returnArr.push(item);
+        });
+
+        return returnArr;
+    };
+
+    fetchPoolData = async (id) => {
+
+        const { auth, firebaseApp } = this.props;
+        console.log(auth);
+
+        await firebaseApp
             .database()
-            .ref(`pools`);
+            .ref(`/pools/`)
+            .once("value")
+            .then(snapshot => {
+                this.setState({
+                    allPools: this.snapshotToArray(snapshot),
+                });
+            });
+    };
+    fecthUsersOfPooldata = async () => {
 
-        let ref2 = firebaseApp
-            .database()
-            .ref(`users/${auth.uid}/pools`);
+        const { auth, firebaseApp } = this.props;
+        console.log(auth);
+        if (auth.uid !== undefined) {
+            await firebaseApp
+                .database()
+                .ref(`/users/${auth.uid}/pools`)
+                .once("value")
+                .then(snapshot => {
+                    console.log('-------------------------------');
+                    console.log(auth.uid);
+                    console.log('-------------------------------');
+                    this.setState({
+                        userPools: Object.keys(snapshot.val()),
+                        isLoading: false
+                    });
+                });
+        }
 
-        watchList(ref2, 'poolsOfUser');
     }
 
     render() {
         const { pools, intl } = this.props;
-        if (pools === undefined) {
+
+        if (this.state.isLoading) {
             return (
-                <Activity>
-                    <Paper style={style} zDepth={4} circle={true} />
+                <Activity title={intl.formatMessage({ id: 'my_pools' })}>
+                    <Loader />
+                </Activity>
+            )
+        } else {
+            if (pools === undefined) {
+                return (
+                    <Activity title={intl.formatMessage({ id: 'my_pools' })}>
+                        <h2>Você não se cadastrou em nenhum Pool ainda!</h2>
+                    </Activity>
+                )
+            }
+            return (
+                <Activity title={intl.formatMessage({ id: 'my_pools' })}>
+                    <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+                        <PoolList filterPools={this.state.userPools} pools={this.state.allPools} history={this.props.history} user={this.props.auth} />
+                    </div>
                 </Activity>
             )
         }
-        return (
-            <Activity title={intl.formatMessage({ id: 'my_pools' })}>
-                <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
-                    <PoolList poolsOfUser={this.props.poolsOfUser} pools={this.props.pools} history={this.props.history} user={this.props.auth} />
-                </div>
-            </Activity>
-        )
     }
 }
 
