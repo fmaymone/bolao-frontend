@@ -73,9 +73,6 @@ class MyPools extends Component {
                 .ref(`/users/${auth.uid}/pools`)
                 .once("value")
                 .then(snapshot => {
-                    console.log('-------------------------------');
-                    console.log(auth.uid);
-                    console.log('-------------------------------');
                     this.setState({
                         userPools: Object.keys(snapshot.val()),
                         isLoading: false
