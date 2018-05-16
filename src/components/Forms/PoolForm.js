@@ -129,13 +129,13 @@ class Form extends Component {
 
           <div>
             <Field
-              name="description"
+              name="secret_word"
               disabled={!initialized}
               component={TextField}
               multiLine={true}
               rows={2}
-              hintText={intl.formatMessage({ id: 'description_hint' })}
-              floatingLabelText={intl.formatMessage({ id: 'description_label' })}
+              hintText={intl.formatMessage({ id: 'secret_word' })}
+              floatingLabelText={intl.formatMessage({ id: 'secret_label' })}
               ref="description"
               withRef
             />

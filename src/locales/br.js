@@ -80,23 +80,23 @@ const messages=defineMessages({
 
   bets: 'Apostas',
 
-  pools: 'Pools',
-  create_pool: 'Criar Pool',
-  edit_pool: 'Editar Pool',
-  delete_pool_title: 'Apagar pool?',
-  delete_pool_message: 'O Pool será removido',
+  pools: 'Grupos',
+  create_pool: 'Criar Grupo',
+  edit_pool: 'Editar Grupo',
+  delete_pool_title: 'Apagar grupo?',
+  delete_pool_message: 'O Grupo será removido',
 
 
 
 
   full_name_label: 'Nome Completo',
-  full_name_hint: 'Enter full name',
+  full_name_hint: 'Digite o nome do Grupo',
   vat_label: 'UID',
   vat_hint: 'Enter UID',
   description_label: 'Description',
   description_hint: 'Enter description',
-  name_label: 'Name',
-  name_hint: 'Enter name',
+  name_label: 'Nome',
+  name_hint: 'Digite o Nome',
   public_chats: 'Public chat', 
   delete_message_title: 'Delete message?',
   delete_message_message: 'Message will be deleted!',
@@ -164,14 +164,16 @@ const messages=defineMessages({
   round_4: 'Semi-Finais', 
   round2_loser: 'Rubens Barrichello',
   round2_winner: 'Final',
-  my_pools: 'Meus Pools',
+  my_pools: 'Meus Grupos',
 
   pool_basic_data: 'Dados Básicos',
-  pool_users: 'Usuários do Pool',
-  pool_back: 'Retornar pro Pool',
+  pool_users: 'Usuários do Grupo',
+  pool_back: 'Retornar pro Grupo',
   first_phase: 'Primeira Fase',
   second_phase: 'Segunda Fase',
-  
+
+  secret_word: 'Digite a palavra secreta',
+  secret_label: 'Palavra-Secreta'
 
 });
 

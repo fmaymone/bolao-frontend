@@ -41,16 +41,14 @@ class PoolList extends Component {
                     style={styles.gridList}
                 >
                     {objectsOfPool.map((pool) => (
-                       <PoolThumbnail history={this.props.history} pool = {pool}/>
+                       <PoolThumbnail history={this.props.history} pool = {pool} user={this.props.user} pools={this.props.pools}/>
                     ))}
                 </GridList>
             </div>
         )
     }
     renderAllPools = () => {
-        console.log('this.props.pools--------------------');
-        console.log(this.props.pools);
-        console.log('this.props.pools--------------------');
+        console.log(this.props);
         return (
             <div style={styles.root}>
                 <GridList
@@ -58,7 +56,7 @@ class PoolList extends Component {
                     style={styles.gridList}
                 >
                     {this.props.pools.map((pool) => (
-                       <PoolThumbnail history={this.props.history} pool = {pool} user={this.props.user}/>
+                       <PoolThumbnail history={this.props.history} pool = {pool} user={this.props.user} pools={this.props.pools}/>
                     ))}
                 </GridList>
             </div>

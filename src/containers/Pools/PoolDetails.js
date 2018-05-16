@@ -1,102 +1,110 @@
-import { withFirebase } from 'firekit-provider';
-import { Tab, Tabs } from 'material-ui/Tabs';
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import React, { Component } from 'react';
-import { injectIntl } from 'react-intl';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { Activity } from 'rmw-shell';
-import Pool from '../../components/Pool/Pool';
-import MatchesBuilder from '../Matches/MatchesBuilder';
-import UsersOfPool from './UsersOfPool';
+import { withFirebase } from "firekit-provider";
+import { Tab, Tabs } from "material-ui/Tabs";
+import muiThemeable from "material-ui/styles/muiThemeable";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { Activity } from "rmw-shell";
+import Pool from "../../components/Pool/Pool";
+import MatchesBuilder from "../Matches/MatchesBuilder";
+import UsersOfPool from "./UsersOfPool";
+import PoolStepper from "./PoolStepper";
 
 const styles = {
-    headline: {
-      fontSize: 24,
-      paddingTop: 16,
-      marginBottom: 12,
-      fontWeight: 400,
-    },
-  };
+  headline: {
+    fontSize: 24,
+    paddingTop: 16,
+    marginBottom: 12,
+    fontWeight: 400
+  }
+};
 
 class PoolDetails extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  isUserFromPool = (user, pool) => {
+    let answer = true;
+    const keys = Object.keys(pool.users);
+    const object = keys.find(k => k === user.uid);
+    if (object === undefined) {
+      answer = false;
     }
-
-    renderData = (pool) => {
-        return(
-        <Activity title = {`${pool.val.name}`}
-    
+    return answer;
+  };
+  renderData = pool => {
+    return (
+      <Activity title={`${pool.name}`}>
+        <Tabs
+          value={this.state.value}
+          onChange={this.handleChange}
+          tabTemplateStyle={"backgroundColor : #fff"}
         >
-            {/* <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
-                {this.renderPool(pool)}
-            </div> */}
-             
-      <Tabs
-        value={this.state.value}
-        onChange={this.handleChange}
-        tabTemplateStyle={'backgroundColor : #fff'}
-      >
-        <Tab label="Minhas Apostas" value="a"  >
-          <div>
-          <MatchesBuilder pool={pool} user={this.props.location.state.userOfPool} />
-          </div>
-        </Tab>
-        <Tab label="Usuários do Pool" value="b"  >
-          <div>
-            <UsersOfPool />
-          </div>
-        </Tab>
-        <Tab label="Classificação" value="c" >
-          <div>
-            <h2 style={styles.headline}>Classificacao</h2>
-            <p>
-             Classificação
-            </p>
-          </div>
-        </Tab>
-      </Tabs>
+          <Tab label="Minhas Apostas" value="a">
+            <div>
+              <MatchesBuilder
+                pool={pool}
+                user={this.props.location.state.userOfPool}
+              />
+            </div>
+          </Tab>
+          <Tab label="Usuários do Pool" value="b">
+            <div>
+              <UsersOfPool />
+            </div>
+          </Tab>
+          <Tab label="Classificação" value="c">
+            <div>
+              <h2 style={styles.headline}>Classificacao</h2>
+              <p>Classificação</p>
+            </div>
+          </Tab>
+        </Tabs>
+      </Activity>
+    );
+  };
+  renderPool = pool => {
+    return <Pool pool={pool} user={this.props.auth} />;
+  };
+
+  render() {
+    const { match } = this.props;
+
+    const user = this.props.location.state.userOfPool;
+    const pool = this.props.location.state.pool;
+    const isUserFromPool = this.isUserFromPool(user, pool);
+    if (isUserFromPool) {
+      if (pool !== undefined) {
+        return this.renderData(pool);
+      } else {
+        return (
+          <Activity>
+            <h1>Erro</h1>
+          </Activity>
+        );
+      }
+    } else {
+      return (
+        <Activity title={`${pool.name}`}>
+          <PoolStepper />
         </Activity>
-        )
+      );
     }
-    renderPool = (pool) => {
-        return <Pool pool={pool} user={this.props.auth} />
-    }
-
-    
-    render() {
-        const { pools, match } = this.props;
-        const user = this.props.location.state.userOfPool;
-        if (pools === undefined) {
-            return <div />;
-        }
-        const pool = pools.find(k => k.key === match.params.uid);
-        if (pool !== undefined) {
-            return this.renderData(pool);
-        } else {
-            return (
-                <Activity>
-                    <h1>Loading</h1>
-                </Activity>)
-
-        }
-
-    }
+  }
 }
 
 const mapStateToProps = state => {
-    const { auth, browser, lists } = state;
+  const { auth, browser  } = state;
 
-    return {
-        pools: lists.pools,
-        auth,
-        browser
-
-    };
+  return {
+    
+    auth,
+    browser
+  };
 };
 
 export default connect(mapStateToProps)(
-    injectIntl(muiThemeable()(withRouter(withFirebase(PoolDetails))))
+  injectIntl(muiThemeable()(withRouter(withFirebase(PoolDetails))))
 );

@@ -178,7 +178,7 @@ class Pool extends Component {
       <div>
         <RaisedButton
           onClick={() => { history.push(`/pools/edit/users/${uid}`) }}
-          label="Gerenciar Usuários do Pool"
+          label="Gerenciar Usuários do Grupo"
           primary={true}
           style={{ margin: 12, marginLeft: 0 }}
         />

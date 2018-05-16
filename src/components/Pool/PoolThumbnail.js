@@ -15,7 +15,8 @@ const PoolThumbnail = (props) => {
             onClick={() => {
                 history.push({
                     pathname: `/pools/show/${pool.key}`,
-                    state: { userOfPool: user }
+                    state: { userOfPool: user , pool: pool},
+                    
                 })
             }}
         >

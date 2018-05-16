@@ -28,6 +28,7 @@ class MyPools extends Component {
             userPools: [],
             isLoadingAllPools: true,
             isLoadingUserPools: true,
+            noPools: true
         };
     }
 
@@ -60,7 +61,8 @@ class MyPools extends Component {
             .then(snapshot => {
                 this.setState({
                     allPools: this.snapshotToArray(snapshot),
-                    isLoadingAllPools: false
+                    isLoadingAllPools: false,
+                    noPools: false
                 });
             });
     };
@@ -74,23 +76,30 @@ class MyPools extends Component {
                 .ref(`/users/${auth.uid}/pools`)
                 .once("value")
                 .then(snapshot => {
+                    if(snapshot.val() === null){
+                        this.setState({
+                           noPools: true,
+                           isLoadingUserPools: false
+                        });
+                    }else{
                     this.setState({
                         userPools: Object.keys(snapshot.val()),
                         isLoadingUserPools: false
                     });
+                }
                 });
         }
 
     }
 
     render() {
-        const { pools, intl } = this.props;
+        const { intl } = this.props;
 
-        if (this.state.isLoadingAllPools === false && this.state.isLoadingUserPools === false ) {
-            if (pools === undefined) {
+        if (this.state.isLoadingAllPools === false && this.state.isLoadingUserPools === false && this.props.auth.uid !== undefined) {
+            if (this.state.noPools) {
                 return (
                     <Activity title={intl.formatMessage({ id: 'my_pools' })}>
-                        <h2>Você não se cadastrou em nenhum Pool ainda!</h2>
+                        <h2>Você não se cadastrou em nenhum Grupo ainda!</h2>
                     </Activity>
                 )
             }
@@ -117,8 +126,7 @@ const mapStateToProps = state => {
     const { auth, browser, lists } = state;
 
     return {
-        pools: lists.pools,
-        poolsOfUser: lists.poolsOfUser,
+        
         auth,
         browser,
 
