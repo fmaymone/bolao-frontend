@@ -40,9 +40,9 @@ class PoolDetails extends Component {
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}
-          tabTemplateStyle={"backgroundColor : #fff"}
+          
         >
-          <Tab label="Minhas Apostas" value="a">
+          <Tab label="Minhas Apostas" value="a" >
             <div>
               <MatchesBuilder
                 pool={pool}

@@ -10,7 +10,8 @@ import { GROUPS_STAGE, KNOCKOUT_STAGE  } from "../../store/actions/types";
 import { changeStage } from "../../store/actions/bolaoActions";
 import { Container, Row, Col } from "react-grid-system";
 import { Tabs, Tab } from 'material-ui/Tabs';
-import Loader from '../../components/UI/Loader'
+import Loader from '../../components/UI/Loader';
+import {green500} from 'material-ui/styles/colors';
 
 
 class MatchesBuilder extends Component {
@@ -109,8 +110,9 @@ class MatchesBuilder extends Component {
     return (<Tabs
       value={this.props.playerDataReducer.currentPhase}
       onChange={this.handleChange}
+      
     >
-      <Tab label={intl.formatMessage({ id: "first_phase" })} value={GROUPS_STAGE}>
+      <Tab style ={{backgroundColor: green500}} label={intl.formatMessage({ id: "first_phase" })} value={GROUPS_STAGE}>
         <Container>
           <Row>
             <Col sm={2}></Col>
@@ -120,7 +122,7 @@ class MatchesBuilder extends Component {
         </Container>
 
       </Tab>
-      <Tab label={intl.formatMessage({ id: "second_phase" })} value={KNOCKOUT_STAGE}>
+      <Tab style ={{backgroundColor: green500}} label={intl.formatMessage({ id: "second_phase" })} value={KNOCKOUT_STAGE}>
         <Container>
           <Row>
             <Col sm={2}></Col>
