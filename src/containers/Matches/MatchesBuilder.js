@@ -36,11 +36,11 @@ class MatchesBuilder extends Component {
   }
 
 
-  checkLimiDate = () => {
+  checkLimitDate = () => {
     const limitDate = new Date(2018, 6, 13, 18);
     let now = new Date();
 
-    if(now<limitDate){
+    if(now>limitDate){
       this.setState({finishedTimeToBet: true})
     }
     
@@ -50,7 +50,7 @@ class MatchesBuilder extends Component {
     await this.handleChangeKnockout(value);
   };
   componentDidMount() {
-    this.checkLimiDate();
+    this.checkLimitDate();
     this.fetchMatches();
     
   }
