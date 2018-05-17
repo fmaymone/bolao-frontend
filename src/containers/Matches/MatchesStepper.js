@@ -59,10 +59,10 @@ class MatchesStepper extends React.Component {
       <div style={{ width: "100%", maxWidth: 700, margin: "auto" }}>
         <Stepper activeStep={this.getStepContent(bettingStatus)}>
           <Step>
-            <StepLabel>Preencha a Primeira-Fase de Apostas</StepLabel>
+            <StepLabel>Primeira-Fase de Apostas</StepLabel>
           </Step>
           <Step>
-            <StepLabel>Preencha a Segunda-Fase de Apostas</StepLabel>
+            <StepLabel> Segunda-Fase de Apostas</StepLabel>
           </Step>
           <Step>
             <StepLabel>{textFinishing}</StepLabel>

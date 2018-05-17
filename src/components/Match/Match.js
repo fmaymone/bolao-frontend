@@ -21,6 +21,7 @@ class Match extends Component {
         <GroupMatch
           game={game}
           handleChangedResult={this.props.handleChangedResult}
+          finishedTimeToBet={this.props.finishedTimeToBet}
         />
       );
     } else {
@@ -30,6 +31,7 @@ class Match extends Component {
           pool={this.props.pool}
           chooseDrawWinnerHandler={this.props.chooseDrawWinnerHandler}
           handleChangedResult={this.props.handleChangedResult}
+          finishedTimeToBet={this.props.finishedTimeToBet}
         />
       );
     }
