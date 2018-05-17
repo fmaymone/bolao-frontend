@@ -162,7 +162,7 @@ const messages=defineMessages({
   round_16: 'Oitavas de Final',
   round_8: 'Quartas de Final',
   round_4: 'Semi-Finais', 
-  round2_loser: 'Rubens Barrichello',
+  round2_loser: 'Disputa de 3o e 4o lugar',
   round2_winner: 'Final',
   my_pools: 'Meus Grupos',
 

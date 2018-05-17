@@ -1,4 +1,4 @@
-import { ROUND_16, ROUND_8, ROUND_4, ROUND_FINALS, ROUND_3x4, OTHERS } from './store/actions/types';
+import { ROUND_16, ROUND_8, ROUND_4, ROUND_FINALS, ROUND_3x4, OTHERS, NOT_CHOSEN } from './store/actions/types';
 
 const data = {
   stadiums: [
@@ -916,8 +916,8 @@ const data = {
       {
         "name": 49,
         "type": "qualified",
-        "home_team": "winner_a",
-        "away_team": "runner_b",
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -933,8 +933,8 @@ const data = {
       {
         "name": 50,
         "type": "qualified",
-        "home_team": "winner_c",
-        "away_team": "runner_d",
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -950,8 +950,8 @@ const data = {
       {
         "name": 51,
         "type": "qualified",
-        "home_team": "winner_b",
-        "away_team": "runner_a",
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -968,8 +968,8 @@ const data = {
       {
         "name": 52,
         "type": "qualified",
-        "home_team": "winner_d",
-        "away_team": "runner_c",
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -986,8 +986,8 @@ const data = {
       {
         "name": 53,
         "type": "qualified",
-        "home_team": "winner_e",
-        "away_team": "runner_f",
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -1003,8 +1003,8 @@ const data = {
       {
         "name": 54,
         "type": "qualified",
-        "home_team": "winner_g",
-        "away_team": "runner_h",
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -1020,8 +1020,8 @@ const data = {
       {
         "name": 55,
         "type": "qualified",
-        "home_team": "winner_f",
-        "away_team": "runner_e",
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -1037,8 +1037,8 @@ const data = {
       {
         "name": 56,
         "type": "qualified",
-        "home_team": "winner_h",
-        "away_team": "runner_g",
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -1054,8 +1054,8 @@ const data = {
       {
         "name": 57,
         "type": "winner",
-        "home_team": 49,
-        "away_team": 50,
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -1071,8 +1071,8 @@ const data = {
       {
         "name": 58,
         "type": "winner",
-        "home_team": 53,
-        "away_team": 54,
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -1088,8 +1088,8 @@ const data = {
       {
         "name": 59,
         "type": "winner",
-        "home_team": 51,
-        "away_team": 52,
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -1106,8 +1106,8 @@ const data = {
       {
         "name": 60,
         "type": "winner",
-        "home_team": 55,
-        "away_team": 56,
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -1124,8 +1124,8 @@ const data = {
       {
         "name": 61,
         "type": "winner",
-        "home_team": 57,
-        "away_team": 58,
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -1142,8 +1142,8 @@ const data = {
       {
         "name": 62,
         "type": "winner",
-        "home_team": 59,
-        "away_team": 60,
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -1160,8 +1160,8 @@ const data = {
       {
         "name": 63,
         "type": "loser",
-        "home_team": 61,
-        "away_team": 62,
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -1178,8 +1178,8 @@ const data = {
       {
         "name": 64,
         "type": "winner",
-        "home_team": 61,
-        "away_team": 62,
+        "home_team": NOT_CHOSEN,
+        "away_team": NOT_CHOSEN,
         "home_result": 0,
         "away_result": 0,
         "home_penalty": 0,
@@ -1193,13 +1193,13 @@ const data = {
         "isKnockout": true
       },
     result:{
-      first:0,
-      second:0,
-      third:0,
-      fourth:0
+      first: NOT_CHOSEN,
+      second:NOT_CHOSEN,
+      third:NOT_CHOSEN,
+      fourth:NOT_CHOSEN
     },
     topscorer:{
-      name:'Romario'
+      name: NOT_CHOSEN
     }
 
 
