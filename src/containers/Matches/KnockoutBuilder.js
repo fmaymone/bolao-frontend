@@ -159,17 +159,33 @@ class KnockoutBuilder extends Component {
 
   groupsControls() {
     return (
-      <div>
-        <FlatButton
-          label={"< Anterior"}
-          primary={true}
-          onClick={this.prevGroup.bind(this)}
-        />
-        <FlatButton
-          label={"Proximo >"}
-          primary={true}
-          onClick={this.nextGroup.bind(this)}
-        />
+      <div
+        style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+        }}
+      >
+        <div style={{ }}>
+          <FlatButton
+            label={"< Anterior"}
+            primary={true}
+            onClick={this.prevGroup.bind(this)}
+          />
+        </div>
+        <div
+          style={{
+            
+          
+          }}
+        >
+          <FlatButton
+            label={"Proximo >"}
+            primary={true}
+            onClick={this.nextGroup.bind(this)}
+          />
+        </div>
       </div>
     );
   }
@@ -192,13 +208,8 @@ class KnockoutBuilder extends Component {
           </Col>
         </Row>
         <Row>
-          <Col md={8} offset={{ md: 2 }}>
-            <div>{this.groupsControls()}</div>
-          </Col>
+        {this.groupsControls()}
         </Row>
-        {/* <Row>
-                    <Col  md={8} offset={{ md: 2 }}><ClassificationBuilder classification={this.props.matches} stage={this.props.playerDataReducer} /></Col>
-                </Row>  */}
       </div>
     );
   }

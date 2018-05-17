@@ -19,4 +19,12 @@ export const MATCHES_INITIAL_CREATE = 'matches_initial_creation';
 export const ADD_USER_TO_POOL = 'add_user_to_pool';
 
 
+export const FIRST_PHASE_STARTED = "first_phase_started";
+export const FIRST_PHASE_COMPLETE = "first_phase_complete";
+export const SECOND_PHASE_STARTED = "second_phase_started";
+export const SECOND_PHASE_FINISHED = "second_phase_finished";
+
+export const NOT_CHOSEN = 'not_chosen';
+
+
 
