@@ -97,17 +97,19 @@ class GroupsBuilder extends Component {
               matches={this.props.matches}
               title={"Grupo " + currentGroup.toUpperCase()}
               handleChangedResult={this.handleChangedResult}
+              finishedTimeToBet={this.props.finishedTimeToBet}
             />
           </Col>
         </Row>
         {this.groupsControls()}
         <Row>
-          <Col md={8} offset={{ md: 2 }}>
+          <Col md={10} >
             <ClassificationBuilder
               matches={this.props.matches}
               stage={this.props.playerDataReducer}
               pool={this.props.pool}
               referenceMatches={this.props.referenceMatches}
+              
             />
           </Col>
         </Row>

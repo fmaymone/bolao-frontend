@@ -17,16 +17,12 @@ import {
 } from "../../store/actions/types";
 import { changeStage } from "../../store/actions/bolaoActions";
 import { Container, Row, Col } from "react-grid-system";
-<<<<<<< HEAD
-import { Tabs, Tab } from 'material-ui/Tabs';
-import Loader from '../../components/UI/Loader';
-import {green500} from 'material-ui/styles/colors';
-
-=======
 import { Tabs, Tab } from "material-ui/Tabs";
 import Loader from "../../components/UI/Loader";
 import MatchesStepper from "./MatchesStepper";
->>>>>>> development
+import {cyan700} from 'material-ui/styles/colors';
+
+
 
 class MatchesBuilder extends Component {
   constructor(props) {
@@ -34,14 +30,27 @@ class MatchesBuilder extends Component {
     this.state = {
       isLoading: true,
       matches: [],
-      bettingStatus: FIRST_PHASE_STARTED
+      bettingStatus: FIRST_PHASE_STARTED,
+      finishedTimeToBet: false
     };
+  }
+
+
+  checkLimiDate = () => {
+    const limitDate = new Date(2018, 6, 13, 18);
+    let now = new Date();
+
+    if(now<limitDate){
+      this.setState({finishedTimeToBet: true})
+    }
+    
   }
 
   handleChange = async value => {
     await this.handleChangeKnockout(value);
   };
   componentDidMount() {
+    this.checkLimiDate();
     this.fetchMatches();
     
   }
@@ -133,6 +142,7 @@ class MatchesBuilder extends Component {
         pool={this.props.pool}
         referenceMatches={this.state.matches}
         updateMatches={this.updateMatches}
+        finishedTimeToBet={this.state.finishedTimeToBet}
       />
     );
   }
@@ -145,6 +155,7 @@ class MatchesBuilder extends Component {
         pool={this.props.pool}
         referenceMatches={this.state.matches}
         updateMatches={this.updateMatches}
+        finishedTimeToBet={this.state.finishedTimeToBet}
       />
     );
   }
@@ -161,39 +172,6 @@ class MatchesBuilder extends Component {
   };
 
   render() {
-<<<<<<< HEAD
-    const { intl } = this.props
-
-    
-   if(this.state.isLoading === false){
-    return (<Tabs
-      value={this.props.playerDataReducer.currentPhase}
-      onChange={this.handleChange}
-      
-    >
-      <Tab style ={{backgroundColor: green500}} label={intl.formatMessage({ id: "first_phase" })} value={GROUPS_STAGE}>
-        <Container>
-          <Row>
-            <Col sm={2}></Col>
-            <Col sm={8}>{this.renderGroupsStage()}</Col>
-            <Col sm={2}></Col>
-          </Row>
-        </Container>
-
-      </Tab>
-      <Tab style ={{backgroundColor: green500}} label={intl.formatMessage({ id: "second_phase" })} value={KNOCKOUT_STAGE}>
-        <Container>
-          <Row>
-            <Col sm={2}></Col>
-            <Col sm={8}> {this.renderKnockoutStage()}</Col>
-            <Col sm={2}></Col>
-          </Row>
-        </Container>
-      </Tab>
-    </Tabs>
-    )}else{
-      return <Loader />
-=======
     const { intl } = this.props;
 
     if (this.state.isLoading === false) {
@@ -203,6 +181,7 @@ class MatchesBuilder extends Component {
           onChange={this.handleChange}
         >
           <Tab
+            style ={{backgroundColor: cyan700}}
             label={intl.formatMessage({ id: "first_phase" })}
             value={GROUPS_STAGE}
           >
@@ -220,6 +199,8 @@ class MatchesBuilder extends Component {
             </Container>
           </Tab>
           <Tab
+             style ={{backgroundColor: cyan700}}
+            
             label={intl.formatMessage({ id: "second_phase" })}
             value={KNOCKOUT_STAGE}
           >
@@ -240,7 +221,6 @@ class MatchesBuilder extends Component {
       );
     } else {
       return <Loader />;
->>>>>>> development
     }
   }
 }
