@@ -74,24 +74,6 @@ export const updateFinalResult = (match, pool) => {
   };
 };
 
-// export const matchesFetch = () => {
-//   const { currentUser } = firebase.auth();
-
-//   return dispatch => {
-//     if (currentUser) {
-//       firebase
-//         .database()
-//         .ref(`/users/${currentUser.uid}/matches`)
-//         .on("value", snapshot => {
-//           dispatch({
-//             type: MATCHES_FETCH_SUCCESS,
-//             payload: { matches: snapshot.val() }
-//           });
-//           // console.log(snapshot.val().groups);
-//         });
-//     }
-//   };
-// };
 
 export const updateClassification = (group, data, pool) => {
   const { currentUser } = firebase.auth();

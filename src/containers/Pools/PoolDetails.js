@@ -23,26 +23,40 @@ const styles = {
 class PoolDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { isUserFromPool: false };
   }
+  componentDidMount() {
+    this.isUserFromPool(this.props.location.state.userOfPool, this.props.location.state.pool);
+  }
+
+  handleSetUserFromPool = async param => {
+    this.setState({ isUserFromPool: param });
+  };
+
   isUserFromPool = (user, pool) => {
     let answer = true;
-    const keys = Object.keys(pool.users);
-    const object = keys.find(k => k === user.uid);
-    if (object === undefined) {
-      answer = false;
+   
+      if (pool.users === undefined) {
+        answer = false;
+      } else {
+        const keys = Object.keys(pool.users);
+        const object = keys.find(k => k === user.uid);
+        if (object === undefined) {
+          answer = false;
+          this.setState({ isUserFromPool: false });
+        } else {
+          answer = true;
+          this.setState({ isUserFromPool: true });
+        }
+      
     }
     return answer;
   };
   renderData = pool => {
     return (
       <Activity title={`${pool.name}`}>
-        <Tabs
-          value={this.state.value}
-          onChange={this.handleChange}
-          
-        >
-          <Tab label="Minhas Apostas" value="a" >
+        <Tabs value={this.state.value} onChange={this.handleChange}>
+          <Tab label="Minhas Apostas" value="a">
             <div>
               <MatchesBuilder
                 pool={pool}
@@ -70,12 +84,12 @@ class PoolDetails extends Component {
   };
 
   render() {
-    const { match } = this.props;
+    const { match, auth, history } = this.props;
 
     const user = this.props.location.state.userOfPool;
     const pool = this.props.location.state.pool;
-    const isUserFromPool = this.isUserFromPool(user, pool);
-    if (isUserFromPool) {
+
+    if (this.state.isUserFromPool) {
       if (pool !== undefined) {
         return this.renderData(pool);
       } else {
@@ -88,7 +102,12 @@ class PoolDetails extends Component {
     } else {
       return (
         <Activity title={`${pool.name}`}>
-          <PoolStepper />
+          <PoolStepper
+            handleSetUserFromPool={this.handleSetUserFromPool}
+            pool={pool}
+            auth={auth}
+            history={history}
+          />
         </Activity>
       );
     }
@@ -96,10 +115,9 @@ class PoolDetails extends Component {
 }
 
 const mapStateToProps = state => {
-  const { auth, browser  } = state;
+  const { auth, browser } = state;
 
   return {
-    
     auth,
     browser
   };

@@ -13,6 +13,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import FlatButton from "material-ui/FlatButton";
 import ExpandTransition from "material-ui/internal/ExpandTransition";
 import TextField from "material-ui/TextField";
+import {addUserToPool, addUserPools} from '../../store/actions/bolaoActions'
 
 const style = {
   height: 100,
@@ -26,17 +27,38 @@ class PoolStepper extends Component {
   state = {
     loading: false,
     finished: false,
-    stepIndex: 0
+    stepIndex: 0,
+    value: '',
+    errorText: '',
+    canGo: false
   };
 
+  handleChange = (event) => {
+    
+    this.setState({
+      value: event.target.value,
+    });
+    if (event.target.value.match(this.props.pool.secret_word)) {
+      this.setState({ errorText: '' , canGo: true})
+    } else {
+      this.setState({ errorText: 'Palava-Chave Incorreta' })
+    }
+  };
   dummyAsync = cb => {
     this.setState({ loading: true }, () => {
       this.asyncTimer = setTimeout(cb, 500);
     });
   };
 
-  handleNext = () => {
+  handleNext = async () => {
     const { stepIndex } = this.state;
+    if (stepIndex === 2){
+      console.log('oi');
+      await this.props.addUserToPool(this.props.auth.uid, this.props.pool.key);
+      await this.props.addUserPools(this.props.auth.uid, this.props.pool.key);
+      await this.props.handleSetUserFromPool(true);
+
+    }
     if (!this.state.loading) {
       this.dummyAsync(() =>
         this.setState({
@@ -60,23 +82,27 @@ class PoolStepper extends Component {
     }
   };
 
-  getStepContent(stepIndex) {
+  getStepContent = (stepIndex) => {
     switch (stepIndex) {
       case 0:
         return (
           <p>
-            Ingresse nesse Pool. Para conseguir entrar você tem que saber a palavra-chave que você recebeu no seu convite para participar. 
+            Ingresse nesse Grupo. Para conseguir entrar você tem que saber a palavra-chave que você recebeu no seu convite para participar. 
           </p>
         );
       case 1:
         return (
           <div>
             <TextField
+              id="text-field-controlled"
+              value={this.state.value}
+              onChange={(e) => this.handleChange(e)}
               style={{ marginTop: 0 }}
-              floatingLabelText="Digite a palavra-chave do Pool"
+              floatingLabelText="Digite a palavra-chave do Grupo"
+              errorText= {this.state.errorText}
             />
             <p>
-              Ao receber o convite para esse Pool, foi enviado também uma palavra-chave secreta. Digite-a para poder ingressar. 
+              Ao receber o convite para esse Grupo, foi enviado também uma palavra-chave secreta. Digite-a para poder ingressar. 
             </p>
           
           </div>
@@ -84,7 +110,7 @@ class PoolStepper extends Component {
       case 2:
         return (
           <p>
-            Agora que você está no Pool, acesse o menu Lateral "Meus Pools" e faça suas apostas para a Copa. 
+           Você acertou a palavra-secreta do Grupo <b> {this.props.pool.name}. </b> Aperte o botão <b>iniciar</b> pra entrar e começar as suas Apostas. 
           </p>
         );
       default:
@@ -92,30 +118,17 @@ class PoolStepper extends Component {
     }
   }
 
-  renderContent() {
-    const { finished, stepIndex } = this.state;
+  renderContent = () => {
+    const { finished, stepIndex, canGo} = this.state;
     const contentStyle = { margin: "0 16px", overflow: "hidden" };
-
-    if (finished) {
-      return (
-        <div style={contentStyle}>
-          <p>
-            <a
-              href="#"
-              onClick={event => {
-                event.preventDefault();
-                this.setState({ stepIndex: 0, finished: false });
-              }}
-            >
-              Click here
-            </a>{" "}
-            to reset the example.
-          </p>
-        </div>
-      );
+    let disabledButton = false;
+    if(stepIndex === 1 && canGo === false){
+      disabledButton = true;
     }
-
+    
     return (
+  
+     
       <div style={contentStyle}>
         <div>{this.getStepContent(stepIndex)}</div>
         <div style={{ marginTop: 24, marginBottom: 12 }}>
@@ -126,7 +139,8 @@ class PoolStepper extends Component {
             style={{ marginRight: 12 }}
           />
           <RaisedButton
-            label={stepIndex === 2 ? "Finalizar" : "Próximo"}
+            disabled={disabledButton}
+            label={stepIndex === 2 ? "Iniciar" : "Próximo"}
             primary={true}
             onClick={this.handleNext}
           />
@@ -165,6 +179,6 @@ const mapStateToProps = state => {
   return {};
 };
 
-export default connect(mapStateToProps)(
+export default connect(mapStateToProps,{addUserPools, addUserToPool}  )(
   injectIntl(muiThemeable()(withRouter(withFirebase(PoolStepper))))
 );
