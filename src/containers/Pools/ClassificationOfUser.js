@@ -20,10 +20,11 @@ class ClassificationOfUser extends Component {
       <Table>
         <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
           <TableRow>
-            <TableHeaderColumn style={{ width: "30%" }}>Jogo</TableHeaderColumn>
-            <TableHeaderColumn>Minha Aposta</TableHeaderColumn>
-            <TableHeaderColumn>Resultado</TableHeaderColumn>
-            <TableHeaderColumn>Pontos</TableHeaderColumn>
+            <TableHeaderColumn style={{ width: "8%" }}>Jogo</TableHeaderColumn>
+            <TableHeaderColumn style={{ width: "23%" }}>Times</TableHeaderColumn>
+            <TableHeaderColumn style={{ width: "23%" }}>Minha Aposta</TableHeaderColumn>
+            <TableHeaderColumn style={{ width: "23%" }}>Resultado</TableHeaderColumn>
+            <TableHeaderColumn style={{ width: "23%" }}>Pontos</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={false}>

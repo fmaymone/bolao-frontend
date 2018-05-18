@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-import TestList from "../../components/Match/TestList";
-import BetForm from "../../components/Forms/BetForm";
-import { Activity } from "rmw-shell";
 import { injectIntl } from "react-intl";
 import { withRouter } from "react-router-dom";
 import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
 import MatchList from "../../components/Match/MatchList";
-import ClassificationBuilder from "./ClassificationBuilder";
 import FlatButton from "material-ui/FlatButton";
+
 import {
   
   changeStage,
@@ -195,7 +192,7 @@ class KnockoutBuilder extends Component {
     const { intl } = this.props;
     return (
       <div key={this.props.pool} >
-        <Row>
+           <Row>
           <Col md={12}>
             <MatchList
               matches={this.props.matches}

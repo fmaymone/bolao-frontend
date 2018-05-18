@@ -1,16 +1,9 @@
 import React, { Component } from "react";
-import TestList from "../../components/Match/TestList";
-import BetForm from "../../components/Forms/BetForm";
-import { Activity } from "rmw-shell";
 import Classification from "../../components/Match/Classification";
-import firebase from "firebase";
 import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
-import { injectIntl, intlShape } from "react-intl";
 import {
-  GROUPS_STAGE,
   KNOCKOUT_STAGE,
-  ROUND_16
 } from "../../store/actions/types";
 import {
   updateClassification,

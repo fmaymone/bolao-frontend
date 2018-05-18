@@ -10,19 +10,18 @@ import {
   GROUPS_STAGE,
   KNOCKOUT_STAGE,
   FIRST_PHASE_STARTED,
-  FIRST_PHASE_COMPLETE,
   SECOND_PHASE_STARTED,
   SECOND_PHASE_FINISHED,
-  NOT_CHOSEN
+  NOT_CHOSEN,
+  TOP_SCORER
 } from "../../store/actions/types";
-import { changeStage } from "../../store/actions/bolaoActions";
+import { changeStage, updateTopScorer } from "../../store/actions/bolaoActions";
 import { Container, Row, Col } from "react-grid-system";
 import { Tabs, Tab } from "material-ui/Tabs";
 import Loader from "../../components/UI/Loader";
 import MatchesStepper from "./MatchesStepper";
-import {cyan700} from 'material-ui/styles/colors';
-
-
+import { cyan700 } from "material-ui/styles/colors";
+import TopScorer from "./TopScorer";
 
 class MatchesBuilder extends Component {
   constructor(props) {
@@ -34,17 +33,20 @@ class MatchesBuilder extends Component {
       finishedTimeToBet: false
     };
   }
-
-
+  handleChangeTopScorer = async value => {
+    await this.props.updateTopScorer(this.props.pool, this.props.user,value
+    );
+    await this.updateMatches();
+  };
+ 
   checkLimitDate = () => {
     const limitDate = new Date(2018, 6, 13, 18);
     let now = new Date();
 
-    if(now>limitDate){
-      this.setState({finishedTimeToBet: true})
+    if (now > limitDate) {
+      this.setState({ finishedTimeToBet: true });
     }
-    
-  }
+  };
 
   handleChange = async value => {
     await this.handleChangeKnockout(value);
@@ -52,7 +54,6 @@ class MatchesBuilder extends Component {
   componentDidMount() {
     this.checkLimitDate();
     this.fetchMatches();
-    
   }
   snapshotToArray(snapshot) {
     var returnArr = [];
@@ -67,7 +68,6 @@ class MatchesBuilder extends Component {
   }
 
   fetchMatches = async () => {
- 
     const { firebaseApp, user } = this.props;
     await firebaseApp
       .database()
@@ -78,53 +78,50 @@ class MatchesBuilder extends Component {
           matches: this.snapshotToArray(snapshot),
           isLoading: false
         });
-       
       });
-      await this.checkBettingStatus();
+    await this.checkBettingStatus();
   };
-  componentWillUnmount() {
-    const { unwatchList, user } = this.props;
-    unwatchList(`/pools/${this.props.pool.key}/users/${user.uid}/matches`); // To unwatch a watcher that is stored in a specific location we call the unwatchList with the path
-  }
-  
-  checkBettingStatus = async () =>{
 
-    const matchesIdToSearch = [48,49,50,51,52,53,54,55];
+  checkBettingStatus = async () => {
+    const matchesIdToSearch = [48, 49, 50, 51, 52, 53, 54, 55];
 
     let findMatchNotAllocated = false;
-    if(this.state.bettingStatus === FIRST_PHASE_STARTED){
+    if (this.state.bettingStatus === FIRST_PHASE_STARTED) {
       for (let index = 0; index < matchesIdToSearch.length; index++) {
         const idToSearch = matchesIdToSearch[index];
-        const match = this.state.matches.find(k=>k.name == idToSearch);
-        if(!this.matchHasBeenAlocated(match)){
+        const match = this.state.matches.find(k => k.name == idToSearch);
+        if (!this.matchHasBeenAlocated(match)) {
           findMatchNotAllocated = true;
         }
       }
     }
-    if(findMatchNotAllocated === false){
-      this.setState({bettingStatus: SECOND_PHASE_STARTED})
+    if (findMatchNotAllocated === false) {
+      this.setState({ bettingStatus: SECOND_PHASE_STARTED });
     }
     //check if he finishes the finals and 3rd matches
-    const finalResult = this.state.matches.find(k=>k.key === 'result');
-    if (finalResult.first !== NOT_CHOSEN && finalResult.second !== NOT_CHOSEN &&
-    finalResult.third !== NOT_CHOSEN && finalResult.fourth !== NOT_CHOSEN){
-      this.setState({bettingStatus: SECOND_PHASE_FINISHED})
+    const finalResult = this.state.matches.find(k => k.key === "result");
+    if (
+      finalResult.first !== NOT_CHOSEN &&
+      finalResult.second !== NOT_CHOSEN &&
+      finalResult.third !== NOT_CHOSEN &&
+      finalResult.fourth !== NOT_CHOSEN
+    ) {
+      this.setState({ bettingStatus: SECOND_PHASE_FINISHED });
     }
-
-  }
+  };
   //check if a match have teams alocated. Used on the Status of the Matches Builder
-  matchHasBeenAlocated = (match) => {
+  matchHasBeenAlocated = match => {
     let answer = true;
-    if(match.away_team === NOT_CHOSEN || match.home_team === NOT_CHOSEN){
+    if (match.away_team === NOT_CHOSEN || match.home_team === NOT_CHOSEN) {
       answer = false;
     }
     return answer;
-  }
+  };
 
   updateMatches = () => {
     this.fetchMatches();
   };
-  
+
   filterFromGroup = value => {
     return value.group === this.props.playerDataReducer.currentGroup;
   };
@@ -149,7 +146,7 @@ class MatchesBuilder extends Component {
   }
 
   renderKnockoutStage() {
-    if (this.state.matches === undefined) return <div />;
+    if (this.state.matches.length < 0) return <div />;
     return (
       <KnockoutBuilder
         matches={this.getActualMatches()}
@@ -160,6 +157,21 @@ class MatchesBuilder extends Component {
         user={this.props.user}
       />
     );
+  }
+  renderTopScorer() {
+    if (this.state.matches.length < 1) {
+      return <div />;
+    } else {
+      const topScorer = this.state.matches.find(k => k.group === TOP_SCORER);
+
+      return (
+        <TopScorer
+          topScorer={topScorer}
+    
+          handleChangeTopScorer={this.handleChangeTopScorer}
+        />
+      );
+    }
   }
   handleChangeKnockout = async phase => {
     let group = "round_16";
@@ -183,7 +195,7 @@ class MatchesBuilder extends Component {
           onChange={this.handleChange}
         >
           <Tab
-            style ={{backgroundColor: cyan700}}
+            style={{ backgroundColor: cyan700 }}
             label={intl.formatMessage({ id: "first_phase" })}
             value={GROUPS_STAGE}
           >
@@ -201,21 +213,26 @@ class MatchesBuilder extends Component {
             </Container>
           </Tab>
           <Tab
-             style ={{backgroundColor: cyan700}}
-            
+            style={{ backgroundColor: cyan700 }}
             label={intl.formatMessage({ id: "second_phase" })}
             value={KNOCKOUT_STAGE}
           >
             <Container>
               <Row>
-                <Col sm={12}>
-                  <MatchesStepper bettingStatus={this.state.bettingStatus} />
-                </Col>
-              </Row>
-              <Row>
                 <Col sm={2} />
                 <Col sm={8}> {this.renderKnockoutStage()}</Col>
                 <Col sm={2} />
+              </Row>
+            </Container>
+          </Tab>
+          <Tab
+            style={{ backgroundColor: cyan700 }}
+            label={"Artilheiro"}
+            value={TOP_SCORER}
+          >
+            <Container>
+              <Row>
+                <Col sm={12}>{this.renderTopScorer()}</Col>
               </Row>
             </Container>
           </Tab>
@@ -238,6 +255,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { changeStage })(
+export default connect(mapStateToProps, { changeStage, updateTopScorer })(
   injectIntl(withRouter(withFirebase(muiThemeable()(MatchesBuilder))))
 );

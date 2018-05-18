@@ -60,6 +60,21 @@ export const updateFinalResult = (match, pool, user) => {
   };
 };
 
+export const updateTopScorer = (pool, user, data) => {
+
+  console.log('oi');
+
+  return dispatch => {
+    firebase
+      .database()
+      .ref(`/pools/${pool.key}/users/${user.uid}/matches/topscorer/`)
+      .set(data)
+      .then(() => {
+        console.log("topscorer")
+      });
+  };
+};
+
 export const updateClassification = (group, data, pool, user) => {
 
 

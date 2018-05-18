@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import TestList from "../../components/Match/TestList";
-import BetForm from "../../components/Forms/BetForm";
-import { Activity } from "rmw-shell";
 import { injectIntl } from "react-intl";
 import { withRouter } from "react-router-dom";
 import { withFirebase } from "firekit-provider";
@@ -11,7 +8,7 @@ import MatchList from "../../components/Match/MatchList";
 import ClassificationBuilder from "./ClassificationBuilder";
 import FlatButton from "material-ui/FlatButton";
 import { changeStage, updateMatch } from "../../store/actions/bolaoActions";
-import { Container, Row, Col } from "react-grid-system";
+import {  Row, Col } from "react-grid-system";
 
 const groups = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
