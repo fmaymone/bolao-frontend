@@ -162,8 +162,8 @@ const messages=defineMessages({
   round_16: 'Oitavas de Final',
   round_8: 'Quartas de Final',
   round_4: 'Semi-Finais', 
-  round2_loser: 'Disputa de 3o e 4o lugar',
-  round2_winner: 'Final',
+  '3x4': 'Disputa de 3o e 4o lugar',
+  finals: 'Final',
   my_pools: 'Meus Grupos',
 
   pool_basic_data: 'Dados Básicos',

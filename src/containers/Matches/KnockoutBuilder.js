@@ -21,8 +21,8 @@ const groups = [
   "round_16",
   "round_8",
   "round_4",
-  "round2_loser",
-  "round2_winner"
+  "3x4",
+  "finals"
 ];
 
 class KnockoutBuilder extends Component {
@@ -131,7 +131,7 @@ class KnockoutBuilder extends Component {
       currentPhase: KNOCKOUT_STAGE
     };
     let tempGroup;
-    if (playerDataReducer.currentGroup === "round2_winner") {
+    if (playerDataReducer.currentGroup === "finals") {
       tempGroup = "round_16";
     } else {
       tempGroup = groups[groups.indexOf(playerDataReducer.currentGroup) + 1];
@@ -146,7 +146,7 @@ class KnockoutBuilder extends Component {
     let newGroupValue = { currentGroup: "a", currentPhase: KNOCKOUT_STAGE };
     let tempGroup;
     if (playerDataReducer.currentGroup === "round_16") {
-      tempGroup = "round2_winner";
+      tempGroup = "finals";
     } else {
       tempGroup = groups[groups.indexOf(playerDataReducer.currentGroup) - 1];
     }
