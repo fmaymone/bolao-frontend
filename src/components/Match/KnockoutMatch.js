@@ -23,7 +23,7 @@ class Match extends Component {
       } else {
         gameToBeUpdated.loser = gameToBeUpdated.home_team;
       }
-      await this.props.updateMatch(gameToBeUpdated, this.props.pool);
+      await this.props.updateMatch(gameToBeUpdated, this.props.pool, this.props.user);
       await this.props.chooseDrawWinnerHandler(gameToBeUpdated);
     }
   };

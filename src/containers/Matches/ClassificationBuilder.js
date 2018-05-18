@@ -19,9 +19,9 @@ import {
 
 class ClassificationBuilder extends Component {
   componentDidMount() {
-    const { firebaseApp, auth, watchList } = this.props;
+    const { firebaseApp, watchList } = this.props;
     //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
-    let ref = firebaseApp.database().ref(`/users/${auth.uid}/matches`);
+    let ref = firebaseApp.database().ref(`/users/${this.props.user.uid}/matches`);
     watchList(ref, "listMatches"); //Here we started watching a list
   }
 
@@ -49,16 +49,13 @@ class ClassificationBuilder extends Component {
 
   updateClassificationDb = async teams => {
     const group = this.props.stage.currentGroup;
-    this.props.updateClassification(group, teams, this.props.pool);
+    this.props.updateClassification(group, teams, this.props.pool, this.props.user);
   };
 
   update16Phase = async teams => {
     const group = this.props.stage.currentGroup;
-    console.log(teams);
     let firstOfGroup = teams[0];
     let secondOfGroup = teams[1];
-    let homeMatchToUpdate = 0;
-    let awayMatchToUpdate = 0;
     let actualMatches = this.props.referenceMatches;
     const matchesToUpdate = this.props.worldCupData.knockout_crossings.ROUND_16.find(
       k => k.id == group
@@ -70,8 +67,8 @@ class ClassificationBuilder extends Component {
    // if (!firstMatch === undefined && !secondMatch === undefined) {
       firstMatch.home_team = firstOfGroup.id;
       secondMatch.away_team = secondOfGroup.id;
-      this.props.updateMatch(firstMatch, this.props.pool);
-      this.props.updateMatch(secondMatch, this.props.pool);
+      this.props.updateMatch(firstMatch, this.props.pool, this.props.user);
+      this.props.updateMatch(secondMatch, this.props.pool, this.props.user);
     //}
   };
 
@@ -176,12 +173,12 @@ class ClassificationBuilder extends Component {
 }
 
 const mapStateToProps = state => {
-  const { intl, dialogs, auth, lists, player, worldCupData } = state;
+  const { intl, dialogs,  lists, player, worldCupData } = state;
 
   return {
     intl,
     dialogs,
-    auth,
+    
     worldCupData,
     userMatches: lists.listMatches
   };

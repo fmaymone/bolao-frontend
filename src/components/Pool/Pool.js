@@ -25,14 +25,6 @@ class Pool extends Component {
         <CardText>
           {pool.val.description ? pool.val.description : 'N/A'}
         </CardText>
-        {/* <CardActions>
-          <MatchesBuilder pool={pool} user={user} />
-        </CardActions> */}
-        {/* <Divider /> */}
-        {/* <CardTitle title='Usuários do Pool' />
-        {/* <CardText>
-          <UsersOfPool users={pool.val.users} />
-        </CardText> */}
       </Card>
 
     )

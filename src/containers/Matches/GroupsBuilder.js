@@ -49,7 +49,7 @@ class GroupsBuilder extends Component {
       ? (gameToBeUpdated.home_result = e.target.value)
       : (gameToBeUpdated.away_result = e.target.value);
 
-    await this.props.updateMatch(gameToBeUpdated, this.props.pool);
+    await this.props.updateMatch(gameToBeUpdated, this.props.pool, this.props.user);
     await this.props.updateMatches();
   };
 
@@ -98,6 +98,7 @@ class GroupsBuilder extends Component {
               title={"Grupo " + currentGroup.toUpperCase()}
               handleChangedResult={this.handleChangedResult}
               finishedTimeToBet={this.props.finishedTimeToBet}
+              user={this.props.user}
             />
           </Col>
         </Row>
@@ -109,6 +110,7 @@ class GroupsBuilder extends Component {
               stage={this.props.playerDataReducer}
               pool={this.props.pool}
               referenceMatches={this.props.referenceMatches}
+              user={this.props.user}
               
             />
           </Col>
@@ -119,12 +121,11 @@ class GroupsBuilder extends Component {
 }
 
 const mapStateToProps = state => {
-  const { intl, dialogs, auth, playerDataReducer, lists } = state;
+  const { intl, dialogs, playerDataReducer, lists } = state;
 
   return {
     intl,
     dialogs,
-    auth,
     playerDataReducer: playerDataReducer
   };
 };

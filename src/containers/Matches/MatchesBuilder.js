@@ -67,6 +67,7 @@ class MatchesBuilder extends Component {
   }
 
   fetchMatches = async () => {
+ 
     const { firebaseApp, user } = this.props;
     await firebaseApp
       .database()
@@ -122,7 +123,6 @@ class MatchesBuilder extends Component {
 
   updateMatches = () => {
     this.fetchMatches();
-    //this.checkBettingStatus();
   };
   
   filterFromGroup = value => {
@@ -143,6 +143,7 @@ class MatchesBuilder extends Component {
         referenceMatches={this.state.matches}
         updateMatches={this.updateMatches}
         finishedTimeToBet={this.state.finishedTimeToBet}
+        user={this.props.user}
       />
     );
   }
@@ -156,6 +157,7 @@ class MatchesBuilder extends Component {
         referenceMatches={this.state.matches}
         updateMatches={this.updateMatches}
         finishedTimeToBet={this.state.finishedTimeToBet}
+        user={this.props.user}
       />
     );
   }

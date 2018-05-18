@@ -41,7 +41,7 @@ render() {
         <h1>{this.props.title} </h1>
         {matches.map(match => (
           <div key={match.name}>
-            <Match game={match}  pool = {this.props.pool} chooseDrawWinnerHandler={this.props.chooseDrawWinnerHandler} 
+            <Match game={match}  user={this.props.user} pool = {this.props.pool} chooseDrawWinnerHandler={this.props.chooseDrawWinnerHandler} 
             handleChangedResult={this.props.handleChangedResult} finishedTimeToBet={this.props.finishedTimeToBet}/>
           </div>
         ))}

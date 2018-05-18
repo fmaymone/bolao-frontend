@@ -6,7 +6,6 @@ import { withRouter } from "react-router-dom";
 import { withFirebase } from "firekit-provider";
 import { change, submit } from "redux-form";
 import isGranted from "rmw-shell/lib/utils/auth";
-import { updateMatch } from "../../store/actions/bolaoActions";
 import KnockoutMatch from "./KnockoutMatch";
 import GroupMatch from "./GroupMatch";
 
@@ -22,6 +21,7 @@ class Match extends Component {
           game={game}
           handleChangedResult={this.props.handleChangedResult}
           finishedTimeToBet={this.props.finishedTimeToBet}
+          user={this.props.user}
         />
       );
     } else {
@@ -32,6 +32,7 @@ class Match extends Component {
           chooseDrawWinnerHandler={this.props.chooseDrawWinnerHandler}
           handleChangedResult={this.props.handleChangedResult}
           finishedTimeToBet={this.props.finishedTimeToBet}
+          user={this.props.user}
         />
       );
     }
@@ -39,14 +40,13 @@ class Match extends Component {
 }
 
 const mapStateToProps = state => {
-  const { intl, dialogs, auth, worldCupData, lists } = state;
+  const { intl, dialogs, auth, worldCupData } = state;
 
   return {
     intl,
     dialogs,
     auth,
     worldCupData,
-    matches: lists.listMatches,
     isGranted: grant => isGranted(state, grant)
   };
 };
@@ -55,6 +55,6 @@ export default connect(mapStateToProps, {
   setDialogIsOpen,
   change,
   submit,
-  updateMatch
+  
 })(withRouter(withFirebase(muiThemeable()(Match))));
 

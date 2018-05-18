@@ -32,41 +32,27 @@ export const matchUpdate = ({ prop, value }) => {
   };
 };
 
-// export const matchesInitialCreate = data => {
-//   const { currentUser } = firebase.auth();
 
-//   return dispatch => {
-//     firebaseApp
-//       .database()
-//       .ref(`/users/${currentUser.uid}/matches`)
-//       .set(data.matches)
-//       .then(() => {
-//         dispatch({ type: MATCHES_INITIAL_CREATE });
-//       });
-//   };
-// };
-
-export const updateMatch = (match, pool) => {
-  const { currentUser } = firebase.auth();
+export const updateMatch = (match, pool, user) => {
+  
   const id = match.name;
 
   return dispatch => {
     firebase
       .database()
-      .ref(`/pools/${pool.key}/users/${currentUser.uid}/matches/${id}/`)
+      .ref(`/pools/${pool.key}/users/${user.uid}/matches/${id}/`)
       .set(match)
       .then(() => {
         //console.log("writen match")
       });
   };
 };
-export const updateFinalResult = (match, pool) => {
-  const { currentUser } = firebase.auth();
+export const updateFinalResult = (match, pool, user) => {
 
   return dispatch => {
     firebase
       .database()
-      .ref(`/pools/${pool.key}/users/${currentUser.uid}/matches/result/`)
+      .ref(`/pools/${pool.key}/users/${user.uid}/matches/result/`)
       .set(match)
       .then(() => {
         //console.log("writen match")
@@ -74,15 +60,16 @@ export const updateFinalResult = (match, pool) => {
   };
 };
 
+export const updateClassification = (group, data, pool, user) => {
 
-export const updateClassification = (group, data, pool) => {
-  const { currentUser } = firebase.auth();
 
   return dispatch => {
-    if (currentUser) {
+    if (user) {
       firebase
         .database()
-        .ref(`/pools/${pool.key}/users/${currentUser.uid}/classification/${group}`)
+        .ref(
+          `/pools/${pool.key}/users/${user.uid}/classification/${group}`
+        )
         .set(data);
     }
   };
@@ -93,32 +80,29 @@ export const addUserToPool = (user, pool) => {
     firebaseApp
       .database()
       .ref(`/pools/${pool}/users/${user}/matches/`)
-      .set(initialData.matches)
-      
+      .set(initialData.matches);
   };
 };
 
 export const addUserPools = (user, pool) => {
   console.log(user);
   return dispatch => {
-  firebaseApp
-    .database()
-    .ref(`/users/${user}/pools/${pool}`)
-    .set(pool)
-    
-  }
+    firebaseApp
+      .database()
+      .ref(`/users/${user}/pools/${pool}`)
+      .set(pool);
+  };
 };
 
 export const removeUserPools = (user, pool) => {
   console.log(user);
   return dispatch => {
-  firebaseApp
-    .database()
-    .ref(`/users/${user}/pools/`)
-    .child(pool)
-    .remove();
-    
-  }
+    firebaseApp
+      .database()
+      .ref(`/users/${user}/pools/`)
+      .child(pool)
+      .remove();
+  };
 };
 
 export const removeUserOfPool = (user, pool) => {

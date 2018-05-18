@@ -45,7 +45,7 @@ class KnockoutBuilder extends Component {
       gameToBeUpdated.winner = gameToBeUpdated.away_team;
       gameToBeUpdated.loser = gameToBeUpdated.home_team;
     }
-    await this.props.updateMatch(gameToBeUpdated, this.props.pool);
+    await this.props.updateMatch(gameToBeUpdated, this.props.pool, this.props.user);
     await this.updateNextMatches(gameToBeUpdated);
     await this.props.updateMatches();
     //need to check the fucking match it it isnt semi-final (matches 61,62) or
@@ -65,8 +65,8 @@ class KnockoutBuilder extends Component {
       finalMatch.away_team = game.winner;
       losersMatch.away_team = game.loser;
     }
-    await this.props.updateMatch(finalMatch, this.props.pool);
-    await this.props.updateMatch(losersMatch, this.props.pool);
+    await this.props.updateMatch(finalMatch, this.props.pool,this.props.user);
+    await this.props.updateMatch(losersMatch, this.props.pool,this.props.user);
 
   }
   updateFinals = async game => {
@@ -82,7 +82,7 @@ class KnockoutBuilder extends Component {
       finalResult.third = game.winner;
       finalResult.fourth = game.loser;
     }
-    await this.props.updateFinalResult(finalResult, this.props.pool);
+    await this.props.updateFinalResult(finalResult, this.props.pool, this.props.user);
   }
 
   updateNextMatches = async game => {
@@ -102,7 +102,7 @@ class KnockoutBuilder extends Component {
           gameToBeUpdated.away_team = game.winner;
         }
       }
-      await this.props.updateMatch(gameToBeUpdated, this.props.pool);
+      await this.props.updateMatch(gameToBeUpdated, this.props.pool, this.props.user);
      
     }else{
       if(game.name == '61' || game.name == '62'){
@@ -204,6 +204,7 @@ class KnockoutBuilder extends Component {
               title={intl.formatMessage({ id: currentGroup })}
               handleChangedResult={this.handleChangedResult}
               pool = {this.props.pool}
+              user = {this.props.user}
             />
           </Col>
         </Row>
@@ -219,7 +220,7 @@ const mapStateToProps = state => {
   const {
     intl,
     dialogs,
-    auth,
+    
     playerDataReducer,
     worldCupData,
     lists
@@ -228,7 +229,7 @@ const mapStateToProps = state => {
   return {
     intl,
     dialogs,
-    auth,
+   
     playerDataReducer: playerDataReducer,
     worldCupData
     

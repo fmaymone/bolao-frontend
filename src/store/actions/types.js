@@ -9,7 +9,10 @@ export const ROUND_8 = 'round_8'
 export const ROUND_4 = 'round_4'
 export const ROUND_FINALS = 'finals'
 export const ROUND_3x4 = '3x4'
+export const FINAL_RESULT = 'result'
 export const OTHERS = 'others'
+export const TOP_SCORER = 'topscorer'
+
 
 export const MATCH_UPDATE = 'match_update';
 export const MATCH_CREATE = 'match_create';
