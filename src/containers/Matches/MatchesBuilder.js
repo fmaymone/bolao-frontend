@@ -22,6 +22,9 @@ import Loader from "../../components/UI/Loader";
 import MatchesStepper from "./MatchesStepper";
 import { cyan700 } from "material-ui/styles/colors";
 import TopScorer from "./TopScorer";
+import Dialog from 'material-ui/Dialog';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 
 class MatchesBuilder extends Component {
   constructor(props) {
@@ -30,7 +33,9 @@ class MatchesBuilder extends Component {
       isLoading: true,
       matches: [],
       bettingStatus: FIRST_PHASE_STARTED,
-      finishedTimeToBet: false
+      finishedTimeToBet: false,
+      dialogHasOpened: false,
+      clicksDialogDraw: 0
     };
   }
   handleChangeTopScorer = async value => {
@@ -38,6 +43,40 @@ class MatchesBuilder extends Component {
     );
     this.updateMatches();
   };
+
+
+  handleOpen = () => {
+    this.setState({dialogHasOpened: true});
+  };
+  handleDialogClose = () => {
+    this.setState({dialogHasOpened: false});
+  };
+
+  openDialog = () => {
+    const actions = [
+
+      <FlatButton
+        label="Entendi"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.handleDialogClose}
+      />,
+    ];
+    return (
+      <div>
+        
+        <Dialog
+          title="Empates da 2a Fase"
+          actions={actions}
+          modal={false}
+          open={this.state.dialogHasOpened}
+          onRequestClose={this.handleDialogClose}
+        >
+         Se você desejar apostar que um jogo foi empate, clique em cima do time que você considera que irá se classificar. O time ficará em <b>negrito</b> e estará classificado para a próxima fase
+        </Dialog>
+      </div>
+    );
+  }
  
   checkLimitDate = () => {
     const limitDate = new Date(2018, 6, 13, 18);
@@ -97,6 +136,11 @@ class MatchesBuilder extends Component {
     }
     if (findMatchNotAllocated === false) {
       this.setState({ bettingStatus: SECOND_PHASE_STARTED });
+      if(this.state.clicksDialogDraw === 0){
+        this.setState({dialogHasOpened: true, clicksDialogDraw: 1})
+      }else{
+        this.setState({dialogHasOpened: false, clicksDialogDraw: 1})
+      }
     }
     //check if he finishes the finals and 3rd matches
     const finalResult = this.state.matches.find(k => k.key === "result");
@@ -146,9 +190,13 @@ class MatchesBuilder extends Component {
   }
 
   renderKnockoutStage() {
+    
     if (this.state.matches.length < 0) return <div />;
+    
     const finalResult = this.state.matches.find(k=>k.group==='result');
-    return (
+    return (<div>
+      {this.openDialog()}
+      
       <KnockoutBuilder
         matches={this.getActualMatches()}
         pool={this.props.pool}
@@ -158,6 +206,7 @@ class MatchesBuilder extends Component {
         user={this.props.user}
         finalResult = {finalResult}
       />
+      </div>
     );
   }
   renderTopScorer() {
