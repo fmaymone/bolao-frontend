@@ -17,7 +17,11 @@ class TopScorer extends Component {
       goals: 0
     };
   }
+  componentDidMount(){
 
+    this.setState(this.props.topScorer);
+
+  }
   handleChangeNameTopScorer = async event => {
     const { topScorer } = this.props;
     //let value = { ...topScorer, nameOfTopScorer: event.target.value };

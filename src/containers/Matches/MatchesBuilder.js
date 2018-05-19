@@ -36,7 +36,7 @@ class MatchesBuilder extends Component {
   handleChangeTopScorer = async value => {
     await this.props.updateTopScorer(this.props.pool, this.props.user,value
     );
-    await this.updateMatches();
+    this.updateMatches();
   };
  
   checkLimitDate = () => {
@@ -147,6 +147,7 @@ class MatchesBuilder extends Component {
 
   renderKnockoutStage() {
     if (this.state.matches.length < 0) return <div />;
+    const finalResult = this.state.matches.find(k=>k.group==='result');
     return (
       <KnockoutBuilder
         matches={this.getActualMatches()}
@@ -155,6 +156,7 @@ class MatchesBuilder extends Component {
         updateMatches={this.updateMatches}
         finishedTimeToBet={this.state.finishedTimeToBet}
         user={this.props.user}
+        finalResult = {finalResult}
       />
     );
   }
@@ -167,7 +169,6 @@ class MatchesBuilder extends Component {
       return (
         <TopScorer
           topScorer={topScorer}
-    
           handleChangeTopScorer={this.handleChangeTopScorer}
         />
       );

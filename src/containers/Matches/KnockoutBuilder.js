@@ -5,7 +5,8 @@ import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
 import MatchList from "../../components/Match/MatchList";
-import FlatButton from "material-ui/FlatButton";
+import FlatButton from 'material-ui/FlatButton';
+import FinalResult from '../Pools/FinalResult';
 
 import {
   
@@ -189,6 +190,7 @@ class KnockoutBuilder extends Component {
 
   render() {
     const currentGroup = this.props.playerDataReducer.currentGroup;
+    
     const { intl } = this.props;
     return (
       <div key={this.props.pool} >
@@ -208,6 +210,7 @@ class KnockoutBuilder extends Component {
         <Row>
         {this.groupsControls()}
         </Row>
+        <Row> <FinalResult finalResult={this.props.finalResult}/></Row>
       </div>
     );
   }

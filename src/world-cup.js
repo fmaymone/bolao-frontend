@@ -1161,10 +1161,10 @@ const data = {
   },
   knockout_crossings: {
     ROUND_16: [
-      { id: "a", homeTeam: 50, awayTeam: 51 },
-      { id: "b", homeTeam: 51, awayTeam: 50 },
-      { id: "c", homeTeam: 49, awayTeam: 52 },
-      { id: "d", homeTeam: 52, awayTeam: 49 },
+      { id: "a", homeTeam: 49, awayTeam: 51 },
+      { id: "b", homeTeam: 51, awayTeam: 49 },
+      { id: "c", homeTeam: 50, awayTeam: 52 },
+      { id: "d", homeTeam: 52, awayTeam: 50 },
       { id: "e", homeTeam: 53, awayTeam: 55 },
       { id: "f", homeTeam: 55, awayTeam: 53 },
       { id: "g", homeTeam: 54, awayTeam: 56 },
