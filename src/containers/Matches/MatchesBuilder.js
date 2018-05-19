@@ -22,9 +22,9 @@ import Loader from "../../components/UI/Loader";
 import MatchesStepper from "./MatchesStepper";
 import { cyan700 } from "material-ui/styles/colors";
 import TopScorer from "./TopScorer";
-import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+import Dialog from "material-ui/Dialog";
+import RaisedButton from "material-ui/RaisedButton";
+import FlatButton from "material-ui/FlatButton";
 
 class MatchesBuilder extends Component {
   constructor(props) {
@@ -39,32 +39,28 @@ class MatchesBuilder extends Component {
     };
   }
   handleChangeTopScorer = async value => {
-    await this.props.updateTopScorer(this.props.pool, this.props.user,value
-    );
+    await this.props.updateTopScorer(this.props.pool, this.props.user, value);
     this.updateMatches();
   };
 
-
   handleOpen = () => {
-    this.setState({dialogHasOpened: true});
+    this.setState({ dialogHasOpened: true });
   };
   handleDialogClose = () => {
-    this.setState({dialogHasOpened: false});
+    this.setState({ dialogHasOpened: false });
   };
 
   openDialog = () => {
     const actions = [
-
       <FlatButton
         label="Entendi"
         primary={true}
         keyboardFocused={true}
         onClick={this.handleDialogClose}
-      />,
+      />
     ];
     return (
       <div>
-        
         <Dialog
           title="Empates da 2a Fase"
           actions={actions}
@@ -72,12 +68,14 @@ class MatchesBuilder extends Component {
           open={this.state.dialogHasOpened}
           onRequestClose={this.handleDialogClose}
         >
-         Se você desejar apostar que um jogo foi empate, clique em cima do time que você considera que irá se classificar. O time ficará em <b>negrito</b> e estará classificado para a próxima fase
+          Se você desejar apostar que um jogo foi empate, clique em cima do time
+          que você considera que irá se classificar. O time ficará em{" "}
+          <b>negrito</b> e estará classificado para a próxima fase
         </Dialog>
       </div>
     );
-  }
- 
+  };
+
   checkLimitDate = () => {
     const limitDate = new Date(2018, 6, 13, 18);
     let now = new Date();
@@ -111,46 +109,47 @@ class MatchesBuilder extends Component {
     await firebaseApp
       .database()
       .ref(`/pools/${this.props.pool.key}/users/${user.uid}/matches`)
-      .once("value")
-      .then(snapshot => {
+      .on("value", snapshot => {
         this.setState({
           matches: this.snapshotToArray(snapshot),
           isLoading: false
         });
       });
+
     await this.checkBettingStatus();
   };
 
   checkBettingStatus = async () => {
     const matchesIdToSearch = [48, 49, 50, 51, 52, 53, 54, 55];
-
-    let findMatchNotAllocated = false;
-    if (this.state.bettingStatus === FIRST_PHASE_STARTED) {
-      for (let index = 0; index < matchesIdToSearch.length; index++) {
-        const idToSearch = matchesIdToSearch[index];
-        const match = this.state.matches.find(k => k.name == idToSearch);
-        if (!this.matchHasBeenAlocated(match)) {
-          findMatchNotAllocated = true;
+    if (this.state.matches.length > 0) {
+      let findMatchNotAllocated = false;
+      if (this.state.bettingStatus === FIRST_PHASE_STARTED) {
+        for (let index = 0; index < matchesIdToSearch.length; index++) {
+          const idToSearch = matchesIdToSearch[index];
+          const match = this.state.matches.find(k => k.name == idToSearch);
+          if (!this.matchHasBeenAlocated(match)) {
+            findMatchNotAllocated = true;
+          }
         }
       }
-    }
-    if (findMatchNotAllocated === false) {
-      this.setState({ bettingStatus: SECOND_PHASE_STARTED });
-      if(this.state.clicksDialogDraw === 0){
-        this.setState({dialogHasOpened: true, clicksDialogDraw: 1})
-      }else{
-        this.setState({dialogHasOpened: false, clicksDialogDraw: 1})
+      if (findMatchNotAllocated === false) {
+        this.setState({ bettingStatus: SECOND_PHASE_STARTED });
+        if (this.state.clicksDialogDraw === 0) {
+          this.setState({ dialogHasOpened: true, clicksDialogDraw: 1 });
+        } else {
+          this.setState({ dialogHasOpened: false, clicksDialogDraw: 1 });
+        }
       }
-    }
-    //check if he finishes the finals and 3rd matches
-    const finalResult = this.state.matches.find(k => k.key === "result");
-    if (
-      finalResult.first !== NOT_CHOSEN &&
-      finalResult.second !== NOT_CHOSEN &&
-      finalResult.third !== NOT_CHOSEN &&
-      finalResult.fourth !== NOT_CHOSEN
-    ) {
-      this.setState({ bettingStatus: SECOND_PHASE_FINISHED });
+      //check if he finishes the finals and 3rd matches
+      const finalResult = this.state.matches.find(k => k.key === "result");
+      if (
+        finalResult.first !== NOT_CHOSEN &&
+        finalResult.second !== NOT_CHOSEN &&
+        finalResult.third !== NOT_CHOSEN &&
+        finalResult.fourth !== NOT_CHOSEN
+      ) {
+        this.setState({ bettingStatus: SECOND_PHASE_FINISHED });
+      }
     }
   };
   //check if a match have teams alocated. Used on the Status of the Matches Builder
@@ -163,7 +162,7 @@ class MatchesBuilder extends Component {
   };
 
   updateMatches = () => {
-    this.fetchMatches();
+    //this.fetchMatches();
   };
 
   filterFromGroup = value => {
@@ -190,22 +189,22 @@ class MatchesBuilder extends Component {
   }
 
   renderKnockoutStage() {
-    
     if (this.state.matches.length < 0) return <div />;
-    
-    const finalResult = this.state.matches.find(k=>k.group==='result');
-    return (<div>
-      {this.openDialog()}
-      
-      <KnockoutBuilder
-        matches={this.getActualMatches()}
-        pool={this.props.pool}
-        referenceMatches={this.state.matches}
-        updateMatches={this.updateMatches}
-        finishedTimeToBet={this.state.finishedTimeToBet}
-        user={this.props.user}
-        finalResult = {finalResult}
-      />
+
+    const finalResult = this.state.matches.find(k => k.group === "result");
+    return (
+      <div>
+        {this.openDialog()}
+
+        <KnockoutBuilder
+          matches={this.getActualMatches()}
+          pool={this.props.pool}
+          referenceMatches={this.state.matches}
+          updateMatches={this.updateMatches}
+          finishedTimeToBet={this.state.finishedTimeToBet}
+          user={this.props.user}
+          finalResult={finalResult}
+        />
       </div>
     );
   }
@@ -268,7 +267,7 @@ class MatchesBuilder extends Component {
             value={KNOCKOUT_STAGE}
           >
             <Container>
-            <Row>
+              <Row>
                 <Col sm={12}>
                   <MatchesStepper bettingStatus={this.state.bettingStatus} />
                 </Col>

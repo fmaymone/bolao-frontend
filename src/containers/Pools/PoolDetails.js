@@ -10,8 +10,8 @@ import Pool from "../../components/Pool/Pool";
 import MatchesBuilder from "../Matches/MatchesBuilder";
 import UsersOfPool from "./UsersOfPool";
 import PoolStepper from "./PoolStepper";
-import ClassificationOfUser from './ClassificationOfUser';
-import Loader from '../../components/UI/Loader';
+import ClassificationOfUser from "./ClassificationOfUser";
+import Loader from "../../components/UI/Loader";
 
 const styles = {
   headline: {
@@ -50,8 +50,7 @@ class PoolDetails extends Component {
     await firebaseApp
       .database()
       .ref(`/pools/${outcomePoolId}/users/${outcomeUserId}/matches`)
-      .once("value")
-      .then(snapshot => {
+      .on("value", snapshot => {
         this.setState({
           outcomeMatches: this.snapshotToArray(snapshot),
           isLoadingOutcomeMatches: false
@@ -59,16 +58,14 @@ class PoolDetails extends Component {
       });
   };
   fetchMatches = async () => {
-
     const user = this.props.location.state.userOfPool;
     const pool = this.props.location.state.pool;
- 
-    const { firebaseApp  } = this.props;
+
+    const { firebaseApp } = this.props;
     await firebaseApp
       .database()
       .ref(`/pools/${pool.key}/users/${user.uid}/matches`)
-      .once("value")
-      .then(snapshot => {
+      .on("value", snapshot => {
         this.setState({
           matchesOfUser: this.snapshotToArray(snapshot),
           isLoadingMatchesOfUser: false
@@ -109,35 +106,40 @@ class PoolDetails extends Component {
     return answer;
   };
   renderData = pool => {
-    if(this.state.isLoadingMatchesOfUser === false && this.state.isLoadingOutcomeMatches === false){
-
-    return (
-      <Activity title={`${pool.name}`}>
-        <Tabs value={this.state.value} onChange={this.handleChange}>
-          <Tab label="Minhas Apostas" value="a">
-            <div>
-              <MatchesBuilder
-                pool={pool}
-                user={this.props.location.state.userOfPool}
-              />
-            </div>
-          </Tab>
-          <Tab label="Classificação" value="b">
-            <div>
-              <UsersOfPool />
-            </div>
-          </Tab>
-          <Tab label="Meus Pontos" value="c">
-            <div>
-            <ClassificationOfUser user={this.props.auth} matchesOfUser={this.state.matchesOfUser} outcomeMatches={this.state.outcomeMatches}/>
-            </div>
-          </Tab>
-        </Tabs>
-      </Activity>
-    );
-  }
-    else{
-      return <Loader />
+    if (
+      this.state.isLoadingMatchesOfUser === false &&
+      this.state.isLoadingOutcomeMatches === false
+    ) {
+      return (
+        <Activity title={`${pool.name}`}>
+          <Tabs value={this.state.value} onChange={this.handleChange}>
+            <Tab label="Minhas Apostas" value="a">
+              <div>
+                <MatchesBuilder
+                  pool={pool}
+                  user={this.props.location.state.userOfPool}
+                />
+              </div>
+            </Tab>
+            <Tab label="Classificação" value="b">
+              <div>
+                <UsersOfPool />
+              </div>
+            </Tab>
+            <Tab label="Meus Pontos" value="c">
+              <div>
+                <ClassificationOfUser
+                  user={this.props.auth}
+                  matchesOfUser={this.state.matchesOfUser}
+                  outcomeMatches={this.state.outcomeMatches}
+                />
+              </div>
+            </Tab>
+          </Tabs>
+        </Activity>
+      );
+    } else {
+      return <Loader />;
     }
   };
   renderPool = pool => {
