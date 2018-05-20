@@ -11,9 +11,7 @@ import GroupMatch from "./GroupMatch";
 
 class Match extends Component {
   render() {
-    const {
-      game,
-    } = this.props;
+    const { game } = this.props;
 
     if (game.type === "group") {
       return (
@@ -54,7 +52,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   setDialogIsOpen,
   change,
-  submit,
-  
+  submit
 })(withRouter(withFirebase(muiThemeable()(Match))));
-

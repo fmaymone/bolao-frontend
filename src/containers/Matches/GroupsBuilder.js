@@ -8,7 +8,7 @@ import MatchList from "../../components/Match/MatchList";
 import ClassificationBuilder from "./ClassificationBuilder";
 import FlatButton from "material-ui/FlatButton";
 import { changeStage, updateMatch } from "../../store/actions/bolaoActions";
-import {  Row, Col } from "react-grid-system";
+import { Row, Col } from "react-grid-system";
 
 const groups = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
@@ -46,7 +46,11 @@ class GroupsBuilder extends Component {
       ? (gameToBeUpdated.home_result = e.target.value)
       : (gameToBeUpdated.away_result = e.target.value);
 
-    await this.props.updateMatch(gameToBeUpdated, this.props.pool, this.props.user);
+    await this.props.updateMatch(
+      gameToBeUpdated,
+      this.props.pool,
+      this.props.user
+    );
     await this.props.updateMatches();
   };
 
@@ -54,25 +58,20 @@ class GroupsBuilder extends Component {
     return (
       <div
         style={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between'
+          flex: 1,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between"
         }}
       >
-        <div style={{ }}>
+        <div style={{}}>
           <FlatButton
             label={"< Anterior"}
             primary={true}
             onClick={this.prevGroup.bind(this)}
           />
         </div>
-        <div
-          style={{
-            
-          
-          }}
-        >
+        <div style={{}}>
           <FlatButton
             label={"Proximo >"}
             primary={true}
@@ -86,39 +85,40 @@ class GroupsBuilder extends Component {
   render() {
     const currentGroup = this.props.playerDataReducer.currentGroup;
     return (
-      <div>
-        <Row>
-          <Col md={12}>
-            {" "}
-            <MatchList
-              matches={this.props.matches}
-              title={"Grupo " + currentGroup.toUpperCase()}
-              handleChangedResult={this.handleChangedResult}
-              finishedTimeToBet={this.props.finishedTimeToBet}
-              user={this.props.user}
-            />
-          </Col>
-        </Row>
-        {this.groupsControls()}
-        <Row>
-          <Col md={10} >
-            <ClassificationBuilder
-              matches={this.props.matches}
-              stage={this.props.playerDataReducer}
-              pool={this.props.pool}
-              referenceMatches={this.props.referenceMatches}
-              user={this.props.user}
-              
-            />
-          </Col>
-        </Row>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column"
+        }}
+      >
+        <div style={{}}>
+          <h1>{"Grupo " + currentGroup.toUpperCase()}</h1>
+        </div>
+        <div style={{}}>
+          <MatchList
+            matches={this.props.matches}
+            handleChangedResult={this.handleChangedResult}
+            finishedTimeToBet={this.props.finishedTimeToBet}
+            user={this.props.user}
+          />
+        </div>
+        <div style={{}}> {this.groupsControls()}</div>
+        <div style={{}}>
+          <ClassificationBuilder
+            matches={this.props.matches}
+            stage={this.props.playerDataReducer}
+            pool={this.props.pool}
+            referenceMatches={this.props.referenceMatches}
+            user={this.props.user}
+          />
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  const { intl, dialogs, playerDataReducer, lists } = state;
+  const { intl, dialogs, playerDataReducer } = state;
 
   return {
     intl,

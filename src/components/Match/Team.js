@@ -10,10 +10,22 @@ import { injectIntl } from "react-intl";
 import { withRouter } from "react-router-dom";
 import { Container, Row, Col } from "react-grid-system";
 
-const style = {
-  margin: 20,
-  textAlign: "center",
-  display: "inline-block"
+const styles = {
+  team_home: {
+    justifyContent: "flex-start",
+    display: "flex",
+    flexFlow: "row nowrap",
+    alignItems: 'center',
+    marginLeft: '10%'
+  },
+
+  team_away: {
+    justifyContent: "flex-end",
+    display: "flex",
+    flexFlow: "row nowrap",
+    alignItems: 'center',
+    marginRight: '10%'
+  }
 };
 
 class Team extends Component {
@@ -22,39 +34,40 @@ class Team extends Component {
     this.state = {};
   }
   renderHomeTeam = team => {
-    
-    let fontWeight = 'normal';
-    if(this.props.isWinner == team.id){
-      fontWeight = 'bold';
+    let fontWeight = "normal";
+    if (this.props.isWinner == team.id) {
+      fontWeight = "bold";
     }
     return (
-      <Row align="center" style={ {fontWeight: fontWeight }}>
-        <Col>
-          <Flag code={team.iso2} height="16" />
-        </Col>
-        <Col> {team.name} </Col>
-      </Row>
+      <div style={styles.team_home}>
+        <div  >
+          <Flag code={team.iso2} height="16" />{" "}
+        </div>
+        <div style={{ fontWeight: fontWeight }}>{team.name} </div>
+      </div>
     );
   };
 
   renderAwayTeam = team => {
-    
-    let fontWeight = 'normal';
-    if(this.props.isWinner == team.id){
-      fontWeight = 'bold';
+    let fontWeight = "normal";
+    if (this.props.isWinner == team.id) {
+      fontWeight = "bold";
     }
     return (
-      <Row align="center" style={ {fontWeight: fontWeight }}>
-        <Col> {team.name} </Col>
-        <Col>
-          <Flag code={team.iso2} height="16" />
-        </Col>
-      </Row>
+      <div style={styles.team_away}>
+        
+        <div style={{ fontWeight: fontWeight }}>{team.name} </div>
+        <div>
+          <Flag code={team.iso2} height="16" />{" "}
+        </div>
+      </div>
     );
   };
   render() {
     const isHomeTeam = this.props.isHomeTeam;
-    const teamEntity = this.props.worldCupData.teams.find(k=>k.id==this.props.id);
+    const teamEntity = this.props.worldCupData.teams.find(
+      k => k.id == this.props.id
+    );
     if (teamEntity) {
       if (isHomeTeam == "true") {
         return this.renderHomeTeam(teamEntity);
@@ -67,7 +80,6 @@ class Team extends Component {
   }
 }
 
-const styles = {};
 const mapStateToProps = state => {
   const { auth, browser, lists, worldCupData } = state;
 
@@ -83,5 +95,4 @@ export default connect(mapStateToProps)(
 Team.propTypes = {
   name: PropTypes.string,
   code: PropTypes.string
-  
 };

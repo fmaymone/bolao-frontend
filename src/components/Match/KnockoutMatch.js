@@ -1,17 +1,43 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Team from "./Team";
-import { injectIntl, intlShape } from "react-intl";
+import { injectIntl } from "react-intl";
 import muiThemeable from "material-ui/styles/muiThemeable";
 import { setDialogIsOpen } from "rmw-shell/lib/store/dialogs/actions";
 import { withRouter } from "react-router-dom";
 import { withFirebase } from "firekit-provider";
 import { change, submit } from "redux-form";
 import isGranted from "rmw-shell/lib/utils/auth";
-import { Row, Col } from "react-grid-system";
+
 import TextField from "material-ui/TextField";
 import { updateMatch } from "../../store/actions/bolaoActions";
-
+const styles = {
+  container: {
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    backgroundColor: "aquamarine1"
+  },
+  team_home: {
+    justifyContent: "flex-start",
+    display: "flex",
+    flexFlow: "row nowrap",
+    backgroundColor: "aquamarine1"
+  },
+  inputs: {
+    justifyContent: "center",
+    display: "flex",
+    flexFlow: "row nowrap",
+    backgroundColor: "brown3"
+  },
+  team_away: {
+    justifyContent: "flex-end",
+    display: "flex",
+    flexFlow: "row nowrap",
+    backgroundColor: "chartreuse1"
+  }
+};
 class Match extends Component {
   chooseDrawWinnerHandler = async id => {
     if (this.props) {
@@ -23,7 +49,11 @@ class Match extends Component {
       } else {
         gameToBeUpdated.loser = gameToBeUpdated.home_team;
       }
-      await this.props.updateMatch(gameToBeUpdated, this.props.pool, this.props.user);
+      await this.props.updateMatch(
+        gameToBeUpdated,
+        this.props.pool,
+        this.props.user
+      );
       await this.props.chooseDrawWinnerHandler(gameToBeUpdated);
     }
   };
@@ -35,13 +65,40 @@ class Match extends Component {
       return this.renderDrawMatch();
     } else {
       return (
-        <div key={game.name}>
-          <Row align="center">
-            <Col sm={4}>
-              <Team id={game.home_team} isHomeTeam="true" />
-            </Col>
-            <Col sm={1}>
-              <center>
+        <div
+          style={{
+            display: "flex",
+            flexFlow: "row nowrap",
+            justifyContent: "space-around",
+            alignItems: "center",
+            margin: 10
+          }}
+        >
+          <div style={{ flex: 1 }}>
+            <div
+              style={{
+                justifyContent: "flex-start",
+                display: "flex",
+                flexFlow: "row nowrap"
+              }}
+            >
+              <Team
+                id={game.home_team}
+                isHomeTeam="true"
+                style={styles.team_home}
+              />
+            </div>
+          </div>
+          <div style={{ flex: 1 }}>
+            <div
+              style={{
+                justifyContent: "space-around",
+                display: "flex",
+                flexFlow: "row nowrap",
+                alignItems: "center"
+              }}
+            >
+              <div style={{ width: 3 }}>
                 <TextField
                   id={`${this.props.game.home_team}_away`}
                   type="number"
@@ -50,14 +107,11 @@ class Match extends Component {
                   onChange={(e, game, type) =>
                     this.props.handleChangedResult(e, this.props.game, "home")
                   }
+                  underlineShow={false}
                 />
-              </center>
-            </Col>
-            <Col sm={2}>
-              <center>X</center>
-            </Col>
-            <Col sm={1}>
-              <center>
+              </div>
+              <div>x</div>
+              <div style={{ width: 3 }}>
                 <TextField
                   id={`${this.props.game.home_team}_away`}
                   type="number"
@@ -66,13 +120,22 @@ class Match extends Component {
                   onChange={(e, game, type) =>
                     this.props.handleChangedResult(e, this.props.game, "away")
                   }
+                  underlineShow={false}
                 />
-              </center>
-            </Col>
-            <Col sm={4}>
+              </div>
+            </div>
+          </div>
+          <div style={{ flex: 1 }}>
+            <div
+              style={{
+                justifyContent: "flex-end",
+                display: "flex",
+                flexFlow: "row nowrap"
+              }}
+            >
               <Team id={game.away_team} isHomeTeam="false" />
-            </Col>
-          </Row>
+            </div>
+          </div>
         </div>
       );
     }
@@ -82,24 +145,49 @@ class Match extends Component {
     return (
       <div
         key={this.props.game.name}
-        style={{ borderStyle: "groove", borderRadius: 10 }}
+        style={{
+          display: "flex",
+          flexFlow: "row nowrap",
+          justifyContent: "space-around",
+          alignItems: "center",
+          margin: 10,
+          borderStyle: "groove",
+          borderRadius: 10
+        }}
       >
-        <Row align="center">
-          <Col
-            sm={4}
-            onClick={this.chooseDrawWinnerHandler.bind(
-              this,
-              this.props.game.home_team
-            )}
+        <div style={{ flex: 1 }}>
+          <div
+            style={{
+              justifyContent: "flex-start",
+              display: "flex",
+              flexFlow: "row nowrap"
+            }}
           >
-            <Team
-              id={this.props.game.home_team}
-              isHomeTeam="true"
-              isWinner={this.props.game.winner}
-            />
-          </Col>
-          <Col sm={1}>
-            <center>
+            <div
+              onClick={this.chooseDrawWinnerHandler.bind(
+                this,
+                this.props.game.home_team
+              )}
+            >
+              <Team
+                id={this.props.game.home_team}
+                isHomeTeam="true"
+                isWinner={this.props.game.winner}
+                style={styles.team_home}
+              />
+            </div>
+          </div>
+        </div>
+        <div style={{ flex: 1 }}>
+          <div
+            style={{
+              justifyContent: "space-around",
+              display: "flex",
+              flexFlow: "row nowrap",
+              alignItems: "center"
+            }}
+          >
+            <div style={{ width: 3 }}>
               <TextField
                 id={`${this.props.game.home_team}_away`}
                 type="number"
@@ -108,14 +196,12 @@ class Match extends Component {
                 onChange={(e, game, type) =>
                   this.props.handleChangedResult(e, this.props.game, "home")
                 }
+                // underlineShow={false}
+                style={{width: 40}}
               />
-            </center>
-          </Col>
-          <Col sm={2}>
-            <center>X</center>
-          </Col>
-          <Col sm={1}>
-            <center>
+            </div>
+            <div>x</div>
+            <div style={{ width: 3 }}>
               <TextField
                 id={`${this.props.game.home_team}_away`}
                 type="number"
@@ -124,23 +210,38 @@ class Match extends Component {
                 onChange={(e, game, type) =>
                   this.props.handleChangedResult(e, this.props.game, "away")
                 }
+                // underlineShow={false}
+                style={{width: 40}}
               />
-            </center>
-          </Col>
-          <Col
-            sm={4}
-            onClick={this.chooseDrawWinnerHandler.bind(
-              this,
-              this.props.game.away_team
-            )}
+            </div>
+          </div>
+        </div>
+        <div style={{ flex: 1 }}>
+          <div
+            style={{
+              justifyContent: "flex-end",
+              display: "flex",
+              flexFlow: "row nowrap"
+            }}
           >
-            <Team
-              id={this.props.game.away_team}
-              isHomeTeam="false"
-              isWinner={this.props.game.winner}
-            />
-          </Col>
-        </Row>
+            <div
+              onClick={this.chooseDrawWinnerHandler.bind(
+                this,
+                this.props.game.away_team
+              )}
+            >
+              <Team
+                id={this.props.game.away_team}
+                isHomeTeam="false"
+                isWinner={this.props.game.winner}
+                onClick={this.chooseDrawWinnerHandler.bind(
+                  this,
+                  this.props.game.away_team
+                )}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     );
   };
@@ -175,4 +276,3 @@ Match.propTypes = {
   // code: PropTypes.string,
   // home: PropTypes.boolean
 };
-

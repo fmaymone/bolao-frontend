@@ -37,15 +37,16 @@ render() {
     } = this.props;
   
     return (
-      <Container>
-        <h1>{this.props.title} </h1>
+      
+        <div>
         {matches.map(match => (
           <div key={match.name}>
             <Match game={match}  user={this.props.user} pool = {this.props.pool} chooseDrawWinnerHandler={this.props.chooseDrawWinnerHandler} 
             handleChangedResult={this.props.handleChangedResult} finishedTimeToBet={this.props.finishedTimeToBet}/>
           </div>
         ))}
-      </Container>
+        </div>  
+      
 
     );
   } 

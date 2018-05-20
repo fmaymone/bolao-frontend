@@ -30,6 +30,7 @@ import {
 
 import PointsOfClassifiedsTeams from "../Matches/PointsOfClassifiedsTeams";
 
+
 class ClassificationOfUser extends Component {
   constructor(props) {
     super(props);
@@ -51,7 +52,7 @@ class ClassificationOfUser extends Component {
     console.log('mamae');
     this.setState({group: data});
   }
-  renderList = () => {
+  renderPointsOfMatch = () => {
     return (
       <Card>
         <CardHeader title="Pontos por Jogo" />
@@ -95,6 +96,10 @@ class ClassificationOfUser extends Component {
       console.log("oi");
       return (
         <div>
+        <div>
+          {this.renderPointsOfMatch()}
+        </div>
+        <div>
           <PointsOfClassifiedsTeams
             matchesOfUser={matchesOfUser}
             outcomeMatches={outcomeMatches}
@@ -125,6 +130,7 @@ class ClassificationOfUser extends Component {
             group={ROUND_FINALS}
             updatePoints={this.updatePoints}
           />
+        </div>
         </div>
       );
 
