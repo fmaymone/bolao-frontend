@@ -137,20 +137,20 @@ const getMenuItems = (props) => {
       leftIcon: <FontIcon className='material-icons' >info_outline</FontIcon>
     },
     {
-      visible: isAuthorised, // In prod: isGranted('administration'),
+      visible: isGranted('administration'), // In prod: isGranted('administration'),
       primaryTogglesNestedList: true,
       primaryText: intl.formatMessage({ id: 'administration' }),
       leftIcon: <FontIcon className='material-icons' >security</FontIcon>,
       nestedItems: [
           {
             value: '/users',
-            visible: isAuthorised,  // In prod: isGranted('read_users'),
+            visible: isGranted('administration'),  // In prod: isGranted('read_users'),
             primaryText: intl.formatMessage({ id: 'users' }),
             leftIcon: <FontIcon className='material-icons' >group</FontIcon>
           },
           {
             visible: isAuthorised, 
-            visible: isGranted('read_roles'),
+            visible: isGranted('administration'),
             primaryText: intl.formatMessage({ id: 'roles' }),
             leftIcon: <FontIcon className='material-icons' >account_box</FontIcon>
           }
