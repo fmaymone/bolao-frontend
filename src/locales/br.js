@@ -1,4 +1,13 @@
 import {defineMessages} from 'react-intl';
+import {
+  ROUND_16,
+  ROUND_8,
+  ROUND_4,
+  ROUND_FINALS,
+  ROUND_3x4,
+  FINAL_RESULT,
+  TOP_SCORER
+} from "../store/actions/types"
 
 const messages=defineMessages({
   app_name: 'Bolão',
@@ -165,6 +174,8 @@ const messages=defineMessages({
   '3x4': 'Disputa de 3o e 4o lugar',
   finals: 'Final',
   my_pools: 'Meus Grupos',
+  result: 'Resultado Final',
+  topscorer: 'Artilheiro',
 
   pool_basic_data: 'Dados Básicos',
   pool_users: 'Usuários do Grupo',

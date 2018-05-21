@@ -46,7 +46,7 @@ class PoolDetails extends Component {
     //this is the place where the results will be stored
     const { firebaseApp } = this.props;
     const outcomePoolId = "-LCmgkjj3PpQwwuQvKTA";
-    const outcomeUserId = "eyn6bCswRnZ5qIJZ4ZiC98rTe4n2";
+    const outcomeUserId = "02b4c88iL0Olehf1KpeEeNUdBMX2";
     await firebaseApp
       .database()
       .ref(`/pools/${outcomePoolId}/users/${outcomeUserId}/matches`)

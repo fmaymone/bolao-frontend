@@ -77,7 +77,7 @@ class GroupMatch extends Component {
                 onChange={(e, game, type) =>
                   this.props.handleChangedResult(e, this.props.game, "home")
                 }
-                underlineShow = {false}
+                
                 style={{width:30}}
                 
               />
@@ -93,7 +93,7 @@ class GroupMatch extends Component {
                 onChange={(e, game, type) =>
                   this.props.handleChangedResult(e, this.props.game, "away")
                 }
-                underlineShow = {false}
+                
                 style={{width:30}}
               />
               
@@ -113,43 +113,7 @@ class GroupMatch extends Component {
           </div>
         </div>
       </div>
-      // <div key={this.props.game.name} style={styles.container}>
-      //   <div style={styles.team_home}>
-      //     <Team
-      //       id={this.props.game.home_team}
-      //       isHomeTeam="true"
-      //       style={styles.team_home}
-      //     />
-      //   </div>
-      //   <div style={styles.inputs}>
-      //     <div>
-      //       <TextField
-      //         id={`${this.props.game.home_team}_home`}
-      //         type="number"
-      //         disabled={this.props.finishedTimeToBet}
-      //         value={this.props.game.home_result}
-      //         onChange={(e, game, type) =>
-      //           this.props.handleChangedResult(e, this.props.game, "home")
-      //         }
-      //       />
-      //     </div>
-      //     <div>X</div>
-      //     <div>
-      //       <TextField
-      //         id={`${this.props.game.home_team}_away`}
-      //         type="number"
-      //         disabled={this.props.finishedTimeToBet}
-      //         value={this.props.game.away_result}
-      //         onChange={(e, game, type) =>
-      //           this.props.handleChangedResult(e, this.props.game, "away")
-      //         }
-      //       />
-      //     </div>
-      //   </div>
-      //   <div style={styles.team_away}>
-      //     <Team id={this.props.game.away_team} isHomeTeam="false" />
-      //   </div>
-      // </div>
+     
     );
   };
 

@@ -10,6 +10,8 @@ import {
 } from "../../store/actions/types";
 
 import ClassifiedTeamsPhase from "../../components/Classification/ClassifiedTeamsPhase";
+import FinalResult from "../../components/Classification/FinalResult";
+import TopScorer from "../../components/Classification/TopScorer";
 
 class PointsOfClassifiedsTeams extends Component {
   constructor(props) {
@@ -29,12 +31,48 @@ class PointsOfClassifiedsTeams extends Component {
     );
   };
 
-  renderFinalResult = () =>{
-    return (<h1>Final Result</h1>)
+  renderFinalResult =  () =>{
+    let points = 0;
+    
+    const {matchesOfUser, outcomeMatches} = this.props;
+    const userFinalResult = matchesOfUser.find(k=>k.group===FINAL_RESULT);
+    const outcomeFinalResult = outcomeMatches.find(k=>k.group===FINAL_RESULT);
+    let structuredReturn = {points: 0,
+      first:{id:userFinalResult.first,type:userFinalResult.first === outcomeFinalResult.first},
+      second:{id:userFinalResult.second,type:userFinalResult.second === outcomeFinalResult.second},
+      third:{id:userFinalResult.third,type:userFinalResult.third === outcomeFinalResult.third},
+      fourth:{id:userFinalResult.fourth,type:userFinalResult.fourth === outcomeFinalResult.fourth}
+    }
+
+    points += structuredReturn.first.type * this.numberPointsKnockoutMatches(this.props.group).first
+    points += structuredReturn.second.type * this.numberPointsKnockoutMatches(this.props.group).second
+    points += structuredReturn.third.type * this.numberPointsKnockoutMatches(this.props.group).third
+    points += structuredReturn.fourth.type * this.numberPointsKnockoutMatches(this.props.group).fourth
+
+    structuredReturn.points = points;
+
+  //  this.setState({points: structuredReturn.points, data: structuredReturn})
+//    await this.props.updatePoints(this.props.group, this.state.data);
+
+    return (<FinalResult data={structuredReturn} group={this.props.group} />)
   }
 
   renderTopScorer = () =>{
-    return (<h1>Top Scorer</h1>)
+    let points = 0;
+    
+    const {matchesOfUser, outcomeMatches} = this.props;
+    const userFinalResult = matchesOfUser.find(k=>k.group===TOP_SCORER);
+    const outcomeFinalResult = outcomeMatches.find(k=>k.group===TOP_SCORER);
+    
+    
+    if(userFinalResult.nameOfTopScorer === outcomeFinalResult.nameOfTopScorer){
+      points += this.numberPointsKnockoutMatches(this.props.group).name
+    }
+    if(userFinalResult.goals === outcomeFinalResult.goals){
+      points += this.numberPointsKnockoutMatches(this.props.group).goals
+    }
+
+    return (<TopScorer name={userFinalResult.nameOfTopScorer} goals={userFinalResult.goals} points={points} group={this.props.group}/>)
   }
 
   fillClassifieds = async () => {
@@ -108,7 +146,7 @@ class PointsOfClassifiedsTeams extends Component {
       case ROUND_FINALS:
         return { classified: 4, specificTeam: 8 };
       case FINAL_RESULT:
-        return { specificTeam: 8, first: 15, second: 10, third: 7, forth: 5 };
+        return { specificTeam: 8, first: 15, second: 10, third: 7, fourth: 5 };
       case TOP_SCORER:
         return { name: 12, goals: 5 };
       default:

@@ -25,30 +25,23 @@ const styles = {
   }
 };
 
-class FinalResult extends Component {
-  renderTeams = data => {
-    return (
-      <div>
-        <TeamClassified team={data.first} />
-        <TeamClassified team={data.second} />
-        <TeamClassified team={data.third} />
-        <TeamClassified team={data.fourth} />
-      </div>
-    );
-  };
+class TopScorer extends Component {
+  
 
   render() {
-    const { data, intl, group } = this.props;
+    const { name, goals,  intl, points, group } = this.props;
     return (
       <Card>
         <CardHeader
           title={intl.formatMessage({ id: group })}
-          subtitle={`Pontos: ${data.points}`}
+          subtitle={`Pontos: ${points}`}
         />
-        <div style={styles.wrapper}>{this.renderTeams(data)}</div>
+        <div style={styles.wrapper}>
+        <p>{`Nome: ${name} | Gols: ${goals}`}</p>
+        </div>
       </Card>
     );
   }
 }
 
-export default injectIntl(FinalResult);
+export default injectIntl(TopScorer);

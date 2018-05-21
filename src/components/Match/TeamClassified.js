@@ -34,8 +34,13 @@ class TeamClassified extends Component {
         return yellow500;
       case 'not_included':
         return red500;
-      default:
+      case true:
         return green500;
+      case false:
+        return red500;
+
+      default:
+        return red500;
     }
   }
   renderChipTeam = (team, isClassified) => {
