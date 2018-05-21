@@ -130,6 +130,18 @@ class ClassificationOfUser extends Component {
             group={ROUND_FINALS}
             updatePoints={this.updatePoints}
           />
+           <PointsOfClassifiedsTeams
+            matchesOfUser={matchesOfUser}
+            outcomeMatches={outcomeMatches}
+            group={FINAL_RESULT}
+            updatePoints={this.updatePoints}
+          />
+           <PointsOfClassifiedsTeams
+            matchesOfUser={matchesOfUser}
+            outcomeMatches={outcomeMatches}
+            group={TOP_SCORER}
+            updatePoints={this.updatePoints}
+          />
         </div>
         </div>
       );

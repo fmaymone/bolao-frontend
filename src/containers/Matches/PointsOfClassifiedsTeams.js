@@ -29,6 +29,14 @@ class PointsOfClassifiedsTeams extends Component {
     );
   };
 
+  renderFinalResult = () =>{
+    return (<h1>Final Result</h1>)
+  }
+
+  renderTopScorer = () =>{
+    return (<h1>Top Scorer</h1>)
+  }
+
   fillClassifieds = async () => {
     await this.calculatePointsIsClassified(
       this.props.group,
@@ -126,6 +134,12 @@ class PointsOfClassifiedsTeams extends Component {
       outcomeMatches.length > 0 &&
       this.state.isLoading === false
     ) {
+      if(this.props.group === FINAL_RESULT){
+        return this.renderFinalResult();
+      }
+      if(this.props.group === TOP_SCORER){
+        return this.renderTopScorer();
+      }
       return this.renderCard();
     } else {
       return <div />;

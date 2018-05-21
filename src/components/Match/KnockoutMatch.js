@@ -108,6 +108,7 @@ class Match extends Component {
                     this.props.handleChangedResult(e, this.props.game, "home")
                   }
                   underlineShow={false}
+                  style={{width:30}}
                 />
               </div>
               <div>x</div>
@@ -121,6 +122,7 @@ class Match extends Component {
                     this.props.handleChangedResult(e, this.props.game, "away")
                   }
                   underlineShow={false}
+                  style={{width:30}}
                 />
               </div>
             </div>
@@ -197,7 +199,7 @@ class Match extends Component {
                   this.props.handleChangedResult(e, this.props.game, "home")
                 }
                 // underlineShow={false}
-                style={{width: 40}}
+                style={{width: 30}}
               />
             </div>
             <div>x</div>
@@ -211,7 +213,7 @@ class Match extends Component {
                   this.props.handleChangedResult(e, this.props.game, "away")
                 }
                 // underlineShow={false}
-                style={{width: 40}}
+                style={{width: 30}}
               />
             </div>
           </div>
