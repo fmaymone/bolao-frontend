@@ -10,7 +10,8 @@ import { withFirebase } from 'firekit-provider'
 import PoolStepper from '../Pools/PoolStepper';
 import PoolList from '../../components/Pool/PoolList'
 import Pool from '../Pools/Pool';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import {calculatePoints} from '../../store/functions/general'
 
 
 
@@ -26,6 +27,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
+    calculatePoints('olar','mundo');
     this.fetchPoolData();
   }
   snapshotToArray(snapshot) {

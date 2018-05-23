@@ -98,7 +98,7 @@ class PointsOfClassifiedsTeams extends Component {
       case ROUND_3x4:
         return { classified: 4, specificTeam: 6 };
       case ROUND_FINALS:
-        return { classified: 4, specificTeam: 8 };
+        return { classified: 0, specificTeam: 10 };
       case FINAL_RESULT:
         return { specificTeam: 8, first: 15, second: 10, third: 7, forth: 5 };
       case TOP_SCORER:
