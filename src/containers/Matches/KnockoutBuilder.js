@@ -116,6 +116,14 @@ class KnockoutBuilder extends Component {
     await this.props.updateMatches();
   };
 
+  updateAllNextMatches = async () => {
+    const { matches } = this.props;
+
+    matches.map(async match => {
+      await this.updateNextMatches(match);
+    });
+  };
+
   nextGroup = () => {
     const { changeStage, playerDataReducer } = this.props;
 
@@ -131,6 +139,7 @@ class KnockoutBuilder extends Component {
     }
     newGroupValue.currentGroup = tempGroup;
     changeStage(newGroupValue);
+    this.updateAllNextMatches();
   };
 
   prevGroup = () => {
@@ -145,6 +154,7 @@ class KnockoutBuilder extends Component {
     }
     newGroupValue.currentGroup = tempGroup;
     changeStage(newGroupValue);
+    this.updateAllNextMatches();
   };
 
   groupsControls() {
