@@ -120,8 +120,9 @@ class KnockoutBuilder extends Component {
     const { matches } = this.props;
 
     matches.map(async match => {
-      await this.updateNextMatches(match);
+      await this.updateNextMatches(match);  
     });
+    await this.props.updateMatches();
   };
 
   nextGroup = () => {

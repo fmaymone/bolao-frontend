@@ -44,6 +44,7 @@ class GroupMatch extends Component {
         }}
       >
         <div style={{  flex: 1 }}>
+     
           <div
             style={{
               justifyContent: "flex-start",
@@ -111,6 +112,7 @@ class GroupMatch extends Component {
           >
             <Team id={this.props.game.away_team} isHomeTeam="false" />
           </div>
+         
         </div>
       </div>
      

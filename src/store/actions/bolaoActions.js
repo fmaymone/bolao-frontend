@@ -37,6 +37,12 @@ export const updateMatch = (match, pool, user) => {
   
   const id = match.name;
 
+  // if(match.home_result !== match.away_result){
+  //   match.home_score > match.away_score ? match.winner = match.home_team : match.winner = match.away_team
+  // }
+
+  
+
   return dispatch => {
     firebase
       .database()

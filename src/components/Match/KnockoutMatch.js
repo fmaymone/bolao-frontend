@@ -8,6 +8,9 @@ import { withRouter } from "react-router-dom";
 import { withFirebase } from "firekit-provider";
 import { change, submit } from "redux-form";
 import isGranted from "rmw-shell/lib/utils/auth";
+import Badge from "material-ui/Badge";
+import Chip from "material-ui/Chip";
+import { blue300, indigo900 } from "material-ui/styles/colors";
 
 import TextField from "material-ui/TextField";
 import { updateMatch } from "../../store/actions/bolaoActions";
@@ -36,6 +39,14 @@ const styles = {
     display: "flex",
     flexFlow: "row nowrap",
     backgroundColor: "chartreuse1"
+  },
+
+  chip: {
+    margin: 4
+  },
+  wrapper: {
+    display: "flex",
+    flexWrap: "wrap"
   }
 };
 class Match extends Component {
@@ -79,14 +90,23 @@ class Match extends Component {
               style={{
                 justifyContent: "flex-start",
                 display: "flex",
-                flexFlow: "row nowrap"
+                flexFlow: "row nowrap",
+                alignItems: "center"
               }}
             >
-              <Team
-                id={game.home_team}
-                isHomeTeam="true"
-                style={styles.team_home}
-              />
+              <div>
+                <Chip style={styles.chip}>{`Jogo: ${game.name}`}</Chip>
+              </div>
+              <div>
+                <Badge badgeContent={this.props.title.home} primary={true} />
+              </div>
+              <div>
+                <Team
+                  id={game.home_team}
+                  isHomeTeam="true"
+                  style={styles.team_home}
+                />
+              </div>
             </div>
           </div>
           <div style={{ flex: 1 }}>
@@ -107,8 +127,7 @@ class Match extends Component {
                   onChange={(e, game, type) =>
                     this.props.handleChangedResult(e, this.props.game, "home")
                   }
-                  
-                  style={{width:30}}
+                  style={{ width: 30 }}
                 />
               </div>
               <div>x</div>
@@ -121,8 +140,7 @@ class Match extends Component {
                   onChange={(e, game, type) =>
                     this.props.handleChangedResult(e, this.props.game, "away")
                   }
-                  
-                  style={{width:30}}
+                  style={{ width: 30 }}
                 />
               </div>
             </div>
@@ -132,10 +150,17 @@ class Match extends Component {
               style={{
                 justifyContent: "flex-end",
                 display: "flex",
-                flexFlow: "row nowrap"
+                flexFlow: "row nowrap",
+                alignItems: "center"
               }}
             >
-              <Team id={game.away_team} isHomeTeam="false" />
+              <div>
+                {" "}
+                <Team id={game.away_team} isHomeTeam="false" />
+              </div>
+              <div>
+                <Badge badgeContent={this.props.title.away} primary={true} />
+              </div>
             </div>
           </div>
         </div>
@@ -162,9 +187,17 @@ class Match extends Component {
             style={{
               justifyContent: "flex-start",
               display: "flex",
-              flexFlow: "row nowrap"
+              flexFlow: "row nowrap",
+              alignItems: "center"
             }}
           >
+            
+            <div>
+              <Chip style={styles.chip}>{`Jogo: ${this.props.game.name}`}</Chip>
+            </div>
+            <div>
+              <Badge badgeContent={this.props.title.home} primary={true} />
+            </div>
             <div
               onClick={this.chooseDrawWinnerHandler.bind(
                 this,
@@ -198,8 +231,8 @@ class Match extends Component {
                 onChange={(e, game, type) =>
                   this.props.handleChangedResult(e, this.props.game, "home")
                 }
-                // 
-                style={{width: 30}}
+                //
+                style={{ width: 30 }}
               />
             </div>
             <div>x</div>
@@ -212,8 +245,8 @@ class Match extends Component {
                 onChange={(e, game, type) =>
                   this.props.handleChangedResult(e, this.props.game, "away")
                 }
-                // 
-                style={{width: 30}}
+                //
+                style={{ width: 30 }}
               />
             </div>
           </div>
@@ -223,7 +256,8 @@ class Match extends Component {
             style={{
               justifyContent: "flex-end",
               display: "flex",
-              flexFlow: "row nowrap"
+              flexFlow: "row nowrap",
+              alignItems: 'center'
             }}
           >
             <div
@@ -241,6 +275,9 @@ class Match extends Component {
                   this.props.game.away_team
                 )}
               />
+            </div>
+            <div>
+              <Badge badgeContent={this.props.title.away} primary={true} />
             </div>
           </div>
         </div>

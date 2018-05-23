@@ -888,7 +888,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_16,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'1A', away:'2B'}
     },
     50: {
       name: 50,
@@ -905,7 +906,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_16,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'1C', away:'2D'}
     },
     51: {
       name: 51,
@@ -922,7 +924,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_16,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'1B', away:'2A'}
     },
     52: {
       name: 52,
@@ -939,7 +942,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_16,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'1D', away:'2C'}
     },
     53: {
       name: 53,
@@ -956,7 +960,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_16,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'1E', away:'2F'}
     },
     54: {
       name: 54,
@@ -973,7 +978,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_16,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'1G', away:'2H'}
     },
     55: {
       name: 55,
@@ -990,7 +996,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_16,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'1F', away:'2E'}
     },
     56: {
       name: 56,
@@ -1007,7 +1014,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_16,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'1H', away:'2G'}
     },
     57: {
       name: 57,
@@ -1024,7 +1032,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_8,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'V49', away:'V50'}
     },
     58: {
       name: 58,
@@ -1041,7 +1050,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_8,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'V53', away:'V54'}
     },
     59: {
       name: 59,
@@ -1058,7 +1068,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_8,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'V51', away:'V52'}
     },
     60: {
       name: 60,
@@ -1075,7 +1086,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_8,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'V55', away:'V56'}
     },
     61: {
       name: 61,
@@ -1092,7 +1104,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_4,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'V57', away:'V58'}
     },
     62: {
       name: 62,
@@ -1109,7 +1122,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_4,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'V59', away:'V60'}
     },
     63: {
       name: 63,
@@ -1126,7 +1140,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_3x4,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'P61', away:'P62'}
     },
     64: {
       name: 64,
@@ -1143,7 +1158,8 @@ const data = {
       channels: [],
       finished: false,
       group: ROUND_FINALS,
-      isKnockout: true
+      isKnockout: true,
+      title:{home:'V61', away:'V62'}
     },
     'result' : {
       first: NOT_CHOSEN,

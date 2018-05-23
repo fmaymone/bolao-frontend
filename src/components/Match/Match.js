@@ -11,7 +11,11 @@ import GroupMatch from "./GroupMatch";
 
 class Match extends Component {
   render() {
-    const { game } = this.props;
+    const { game, worldCupData } = this.props;
+
+    console.log(worldCupData);
+
+    const dataFromMatch = worldCupData.matches[game.name];
 
     if (game.type === "group") {
       return (
@@ -20,6 +24,7 @@ class Match extends Component {
           handleChangedResult={this.props.handleChangedResult}
           finishedTimeToBet={this.props.finishedTimeToBet}
           user={this.props.user}
+          title = {dataFromMatch.title}
         />
       );
     } else {
@@ -31,6 +36,8 @@ class Match extends Component {
           handleChangedResult={this.props.handleChangedResult}
           finishedTimeToBet={this.props.finishedTimeToBet}
           user={this.props.user}
+          title = {dataFromMatch.title}
+
         />
       );
     }

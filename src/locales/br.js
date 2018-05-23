@@ -174,7 +174,7 @@ const messages=defineMessages({
   '3x4': 'Disputa de 3o e 4o lugar',
   finals: 'Final',
   my_pools: 'Meus Grupos',
-  result: 'Resultado Final',
+  result: 'Classificação 1o ao 4o',
   topscorer: 'Artilheiro',
 
   pool_basic_data: 'Dados Básicos',
