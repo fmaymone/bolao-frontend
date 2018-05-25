@@ -1,49 +1,45 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import FlatButton from 'material-ui/FlatButton'
-import { injectIntl, intlShape } from 'react-intl'
-import { GitHubIcon } from 'rmw-shell/lib/components/Icons'
-import { Activity } from 'rmw-shell'
-import muiThemeable from 'material-ui/styles/muiThemeable'
-import { Line, Bar } from 'react-chartjs-2'
-import { withFirebase } from 'firekit-provider'
-import PoolStepper from '../Pools/PoolStepper';
-import PoolList from '../../components/Pool/PoolList'
-import Pool from '../Pools/Pool';
-import { withRouter } from 'react-router-dom';
-import {calculatePoints} from '../../store/functions/general'
-
-
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import FlatButton from "material-ui/FlatButton";
+import { injectIntl, intlShape } from "react-intl";
+import { GitHubIcon } from "rmw-shell/lib/components/Icons";
+import { Activity } from "rmw-shell";
+import muiThemeable from "material-ui/styles/muiThemeable";
+import { Line, Bar } from "react-chartjs-2";
+import { withFirebase } from "firekit-provider";
+import PoolStepper from "../Pools/PoolStepper";
+import PoolList from "../../components/Pool/PoolList";
+import Pool from "../Pools/Pool";
+import { withRouter } from "react-router-dom";
+import { calculatePoints } from "../../store/functions/general";
+import Loader from "../../components/UI/Loader";
 
 class Dashboard extends Component {
-
-
   constructor(props) {
     super(props);
     this.state = {
       allPools: [],
-      isLoading: true,
+      isLoading: true
     };
   }
 
   componentDidMount() {
-    calculatePoints('olar','mundo');
+    calculatePoints("olar", "mundo");
     this.fetchPoolData();
   }
   snapshotToArray(snapshot) {
     var returnArr = [];
 
-    snapshot.forEach(function (childSnapshot) {
+    snapshot.forEach(function(childSnapshot) {
       var item = childSnapshot.val();
       item.key = childSnapshot.key;
       returnArr.push(item);
     });
 
     return returnArr;
-  };
+  }
 
-  fetchPoolData = async (id) => {
-
+  fetchPoolData = async id => {
     const { auth, firebaseApp } = this.props;
     //console.log(auth);
 
@@ -59,38 +55,51 @@ class Dashboard extends Component {
       });
   };
 
-
   render() {
-
     const { intl, history } = this.props;
-    if(this.state.isLoading){
-      return <h1>Carregando</h1>
-    }else{
-    return (
-      <Activity
-        title={intl.formatMessage({ id: 'dashboard' })} >
-        <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
-          <PoolList pools={this.state.allPools} history={this.props.history} user={this.props.auth} />
-        </div>
-        <br />
-      </Activity >
-    )
-  }
+    if (this.state.isLoading) {
+      return (
+        <Activity>
+          <Loader />
+        </Activity>
+      );
+    } else {
+      return (
+        <Activity title={intl.formatMessage({ id: "dashboard" })}>
+          <div
+            style={{
+              margin: 5,
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              alignItems: "center"
+            }}
+          >
+            <PoolList
+              pools={this.state.allPools}
+              history={this.props.history}
+              user={this.props.auth}
+            />
+          </div>
+          <br />
+        </Activity>
+      );
+    }
   }
 }
 
 Dashboard.propTypes = {
   intl: intlShape.isRequired
-}
+};
 
-const mapStateToProps = (state) => {
-  const {  auth } = state
+const mapStateToProps = state => {
+  const { auth } = state;
 
   return {
     auth
   };
-}
+};
 
-export default connect(
-  mapStateToProps
-)(injectIntl(muiThemeable()(withRouter(withFirebase(Dashboard)))))
+export default connect(mapStateToProps)(
+  injectIntl(muiThemeable()(withRouter(withFirebase(Dashboard))))
+);
