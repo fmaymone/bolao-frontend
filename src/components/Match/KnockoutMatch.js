@@ -14,9 +14,7 @@ import { blue300, indigo900 } from "material-ui/styles/colors";
 
 import TextField from "material-ui/TextField";
 import { updateMatch } from "../../store/actions/bolaoActions";
-
-const device = require('../../../utils/device')
-
+import { isMobile } from "../../device";
 const styles = {
   container: {
     display: "flex",
@@ -53,6 +51,33 @@ const styles = {
   }
 };
 class Match extends Component {
+  getDesktopContent = type => {
+    if (!isMobile()) {
+      if (type === "home") {
+        return (
+          <div>
+            <div>
+              <Chip style={styles.chip}>{`Jogo: ${this.props.game.name}`}</Chip>
+            </div>
+            <div>
+              <Badge badgeContent={this.props.title.home} primary={true} />
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            
+            <div>
+              <Badge badgeContent={this.props.title.away} primary={true} />
+            </div>
+          </div>
+        );
+      }
+    } else {
+      return <div />;
+    }
+  };
   chooseDrawWinnerHandler = async id => {
     if (this.props) {
       let gameToBeUpdated = { ...this.props.game };
@@ -78,184 +103,89 @@ class Match extends Component {
     if (game.home_result == game.away_result) {
       return this.renderDrawMatch();
     } else {
-
-      if (device.isMobile()) {
-        return (
-          <div
-            style={{
-              display: "flex",
-              flexFlow: "row nowrap",
-              justifyContent: "space-around",
-              alignItems: "center",
-              margin: 10
-            }}
-          >
-            <div style={{ flex: 1 }}>
-              <div
-                style={{
-                  justifyContent: "flex-start",
-                  display: "flex",
-                  flexFlow: "row nowrap",
-                  alignItems: "center"
-                }}
-              >
-                <div>
-                  <Team
-                    id={game.home_team}
-                    isHomeTeam="true"
-                    style={styles.team_home}
-                  />
-                </div>
-              </div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div
-                style={{
-                  justifyContent: "space-around",
-                  display: "flex",
-                  flexFlow: "row nowrap",
-                  alignItems: "center"
-                }}
-              >
-                <div style={{ width: 3 }}>
-                  <TextField
-                    id={`${this.props.game.home_team}_away`}
-                    type="number"
-                    disabled={this.props.finishedTimeToBet}
-                    value={this.props.game.home_result}
-                    onChange={(e, game, type) =>
-                      this.props.handleChangedResult(e, this.props.game, "home")
-                    }
-                    style={{ width: 30 }}
-                  />
-                </div>
-                <div>x</div>
-                <div style={{ width: 3 }}>
-                  <TextField
-                    id={`${this.props.game.home_team}_away`}
-                    type="number"
-                    disabled={this.props.finishedTimeToBet}
-                    value={this.props.game.away_result}
-                    onChange={(e, game, type) =>
-                      this.props.handleChangedResult(e, this.props.game, "away")
-                    }
-                    style={{ width: 30 }}
-                  />
-                </div>
-              </div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div
-                style={{
-                  justifyContent: "flex-end",
-                  display: "flex",
-                  flexFlow: "row nowrap",
-                  alignItems: "center"
-                }}
-              >
-                <div>
-                  {" "}
-                  <Team id={game.away_team} isHomeTeam="false" />
-                </div>
-                <div>
-                  <Badge badgeContent={this.props.title.away} primary={true} />
-                </div>
+      return (
+        <div
+          style={{
+            display: "flex",
+            flexFlow: "row nowrap",
+            justifyContent: "space-around",
+            alignItems: "center",
+            margin: 10
+          }}
+        >
+          <div style={{ flex: 1 }}>
+            <div
+              style={{
+                justifyContent: "flex-start",
+                display: "flex",
+                flexFlow: "row nowrap",
+                alignItems: "center"
+              }}
+            >
+             {this.getDesktopContent('home')}
+              <div>
+                <Team
+                  id={game.home_team}
+                  isHomeTeam="true"
+                  style={styles.team_home}
+                />
               </div>
             </div>
           </div>
-        );
-      } else {
-        return (
-          <div
-            style={{
-              display: "flex",
-              flexFlow: "row nowrap",
-              justifyContent: "space-around",
-              alignItems: "center",
-              margin: 10
-            }}
-          >
-            <div style={{ flex: 1 }}>
-              <div
-                style={{
-                  justifyContent: "flex-start",
-                  display: "flex",
-                  flexFlow: "row nowrap",
-                  alignItems: "center"
-                }}
-              >
-                <div>
-                  <Chip style={styles.chip}>{`Jogo: ${game.name}`}</Chip>
-                </div>
-                <div>
-                  <Badge badgeContent={this.props.title.home} primary={true} />
-                </div>
-                <div>
-                  <Team
-                    id={game.home_team}
-                    isHomeTeam="true"
-                    style={styles.team_home}
-                  />
-                </div>
+          <div style={{ flex: 1 }}>
+            <div
+              style={{
+                justifyContent: "space-around",
+                display: "flex",
+                flexFlow: "row nowrap",
+                alignItems: "center"
+              }}
+            >
+              <div style={{ width: 3 }}>
+                <TextField
+                  id={`${this.props.game.home_team}_away`}
+                  type="number"
+                  disabled={this.props.finishedTimeToBet}
+                  value={this.props.game.home_result}
+                  onChange={(e, game, type) =>
+                    this.props.handleChangedResult(e, this.props.game, "home")
+                  }
+                  style={{ width: 30 }}
+                />
               </div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div
-                style={{
-                  justifyContent: "space-around",
-                  display: "flex",
-                  flexFlow: "row nowrap",
-                  alignItems: "center"
-                }}
-              >
-                <div style={{ width: 3 }}>
-                  <TextField
-                    id={`${this.props.game.home_team}_away`}
-                    type="number"
-                    disabled={this.props.finishedTimeToBet}
-                    value={this.props.game.home_result}
-                    onChange={(e, game, type) =>
-                      this.props.handleChangedResult(e, this.props.game, "home")
-                    }
-                    style={{ width: 30 }}
-                  />
-                </div>
-                <div>x</div>
-                <div style={{ width: 3 }}>
-                  <TextField
-                    id={`${this.props.game.home_team}_away`}
-                    type="number"
-                    disabled={this.props.finishedTimeToBet}
-                    value={this.props.game.away_result}
-                    onChange={(e, game, type) =>
-                      this.props.handleChangedResult(e, this.props.game, "away")
-                    }
-                    style={{ width: 30 }}
-                  />
-                </div>
-              </div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div
-                style={{
-                  justifyContent: "flex-end",
-                  display: "flex",
-                  flexFlow: "row nowrap",
-                  alignItems: "center"
-                }}
-              >
-                <div>
-                  {" "}
-                  <Team id={game.away_team} isHomeTeam="false" />
-                </div>
-                <div>
-                  <Badge badgeContent={this.props.title.away} primary={true} />
-                </div>
+              <div>x</div>
+              <div style={{ width: 3 }}>
+                <TextField
+                  id={`${this.props.game.home_team}_away`}
+                  type="number"
+                  disabled={this.props.finishedTimeToBet}
+                  value={this.props.game.away_result}
+                  onChange={(e, game, type) =>
+                    this.props.handleChangedResult(e, this.props.game, "away")
+                  }
+                  style={{ width: 30 }}
+                />
               </div>
             </div>
           </div>
-        );
-      }
+          <div style={{ flex: 1 }}>
+            <div
+              style={{
+                justifyContent: "flex-end",
+                display: "flex",
+                flexFlow: "row nowrap",
+                alignItems: "center"
+              }}
+            >
+              <div>
+                {" "}
+                <Team id={game.away_team} isHomeTeam="false" />
+              </div>
+              {this.getDesktopContent('away')}
+            </div>
+          </div>
+        </div>
+      );
     }
   };
 
@@ -282,13 +212,7 @@ class Match extends Component {
               alignItems: "center"
             }}
           >
-
-            <div>
-              <Chip style={styles.chip}>{`Jogo: ${this.props.game.name}`}</Chip>
-            </div>
-            <div>
-              <Badge badgeContent={this.props.title.home} primary={true} />
-            </div>
+             {this.getDesktopContent('home')}
             <div
               onClick={this.chooseDrawWinnerHandler.bind(
                 this,
@@ -348,7 +272,7 @@ class Match extends Component {
               justifyContent: "flex-end",
               display: "flex",
               flexFlow: "row nowrap",
-              alignItems: 'center'
+              alignItems: "center"
             }}
           >
             <div
@@ -367,9 +291,7 @@ class Match extends Component {
                 )}
               />
             </div>
-            <div>
-              <Badge badgeContent={this.props.title.away} primary={true} />
-            </div>
+            {this.getDesktopContent('away')}
           </div>
         </div>
       </div>

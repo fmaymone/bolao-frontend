@@ -49,7 +49,7 @@ export const updateMatch = (match, pool, user) => {
       .ref(`/pools/${pool.key}/users/${user.uid}/matches/${id}/`)
       .set(match)
       .then(() => {
-        //console.log("writen match")
+        ////console.log("writen match")
       });
   };
 };
@@ -61,14 +61,14 @@ export const updateFinalResult = (match, pool, user) => {
       .ref(`/pools/${pool.key}/users/${user.uid}/matches/result/`)
       .set(match)
       .then(() => {
-        //console.log("writen match")
+        ////console.log("writen match")
       });
   };
 };
 
 export const updateTopScorer = (pool, user, data) => {
 
-  console.log('oi');
+  //console.log('oi');
 
   return dispatch => {
     firebase
@@ -76,7 +76,7 @@ export const updateTopScorer = (pool, user, data) => {
       .ref(`/pools/${pool.key}/users/${user.uid}/matches/topscorer/`)
       .set(data)
       .then(() => {
-        console.log("topscorer")
+        //console.log("topscorer")
       });
   };
 };
@@ -106,7 +106,7 @@ export const addUserToPool = (user, pool) => {
 };
 
 export const addUserPools = (user, pool) => {
-  console.log(user);
+  //console.log(user);
   return dispatch => {
     firebaseApp
       .database()
@@ -116,7 +116,7 @@ export const addUserPools = (user, pool) => {
 };
 
 export const removeUserPools = (user, pool) => {
-  console.log(user);
+  //console.log(user);
   return dispatch => {
     firebaseApp
       .database()

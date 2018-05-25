@@ -38,7 +38,7 @@ class MyPools extends Component {
 
   fetchPoolData = async id => {
     const { auth, firebaseApp } = this.props;
-    console.log(auth);
+    //console.log(auth);
 
     await firebaseApp
       .database()
@@ -54,7 +54,7 @@ class MyPools extends Component {
   };
   fecthUsersOfPooldata = async () => {
     const { auth, firebaseApp } = this.props;
-    console.log(auth);
+    //console.log(auth);
     if (auth.uid !== undefined) {
       await firebaseApp
         .database()

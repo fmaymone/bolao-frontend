@@ -45,7 +45,7 @@ class Dashboard extends Component {
   fetchPoolData = async (id) => {
 
     const { auth, firebaseApp } = this.props;
-    console.log(auth);
+    //console.log(auth);
 
     await firebaseApp
       .database()

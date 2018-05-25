@@ -102,7 +102,7 @@ class UsersOfPool extends Component {
 
   fetchUsersOfPoolData = async () => {
     let usersObjectsOfPool = [];
-    //console.log(this.state.allUsers);
+    ////console.log(this.state.allUsers);
   }
 
   handleClick = async (user, mode) => {
@@ -145,7 +145,7 @@ class UsersOfPool extends Component {
     if (this.state.isLoadingPool && this.state.isLoadingUsers) {
       return <Loader />
     } else {
-      //console.log('oi');
+      ////console.log('oi');
       this.state.pool.users === undefined ? keysFromUsersFromPool = [] : keysFromUsersFromPool = Object.keys(this.state.pool.users);
       return (
         <Activity title={this.state.pool.name}

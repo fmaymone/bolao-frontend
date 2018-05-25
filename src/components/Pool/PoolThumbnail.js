@@ -5,7 +5,7 @@ import IconButton from 'material-ui/IconButton';
 
 const PoolThumbnail = (props) => {
     const { pool, history, user } = props;
-    console.log(history);
+    //console.log(history);
     return (
         <GridTile
             key={pool.key}

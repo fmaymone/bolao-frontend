@@ -34,10 +34,10 @@ class PointsOfMatch extends Component {
       actualPoints += this.calculateKnockoutPoints(userMatch, outcomeMatch);
     } else {
       if (userMatch.first !== undefined) {
-        console.log("calculate champions");
+        //console.log("calculate champions");
       }
       if (userMatch.nameOfTopScorer !== undefined) {
-        console.log("calculate topScorer");
+        //console.log("calculate topScorer");
       }
     }
     this.setState({ points: actualPoints });
@@ -49,7 +49,7 @@ class PointsOfMatch extends Component {
       Math.sign(userMatch.home_result - userMatch.away_result) ===
       Math.sign(outcomeMatch.home_result - outcomeMatch.away_result)
     ) {
-      console.log("oi");
+      //console.log("oi");
       //draw
       if (Math.sign(userMatch.home_result - userMatch.away_result) === 0) {
         points += 4;
@@ -108,7 +108,7 @@ class PointsOfMatch extends Component {
   };
   renderCell = () => {
     const { userMatch, outcomeMatch } = this.props;
-    console.log("oi");
+    //console.log("oi");
     if (userMatch.name !== undefined) {
       return (
         <TableRow>
@@ -143,7 +143,7 @@ class PointsOfMatch extends Component {
     }
   };
   render() {
-    console.log("oi");
+    //console.log("oi");
     return this.renderCell();
   }
 }

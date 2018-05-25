@@ -221,9 +221,9 @@ export default About;
 //     .then(text => {
 //       this.setState({text: text})
 //     })
-//     console.log('World Cup ---------------------');
-//     console.log(WorldCup);
-//     console.log('World Cup ---------------------');
+//     //console.log('World Cup ---------------------');
+//     //console.log(WorldCup);
+//     //console.log('World Cup ---------------------');
 
 //   }
 

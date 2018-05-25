@@ -235,7 +235,9 @@ class MatchesBuilder extends Component {
   };
 
   render() {
-    const { intl } = this.props;
+    const { intl ,isGranted } = this.props;
+
+    //console.log(isGranted('administration'));
 
     if (this.state.isLoading === false) {
       return (

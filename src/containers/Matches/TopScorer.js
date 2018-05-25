@@ -36,7 +36,7 @@ class TopScorer extends Component {
   }
 
   render() {
-    console.log(this.props.matches);
+    //console.log(this.props.matches);
     const { topScorer } = this.props;
 
     return (

@@ -44,7 +44,7 @@ class Collection extends Component {
   handleDelete = (id) => {
     const { firebaseApp }= this.props
 
-    console.log(id);
+    //console.log(id);
 
     let firestore=firebaseApp.firestore()
 

@@ -6,16 +6,14 @@ import {
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn
+
 } from "material-ui/Table";
 import PointsOfMatch from "../Matches/PointsOfMatch";
 import {
   Card,
-  CardActions,
+
   CardHeader,
-  CardMedia,
-  CardTitle,
-  CardText
+ 
 } from "material-ui/Card";
 
 import {
@@ -49,7 +47,7 @@ class ClassificationOfUser extends Component {
     return 100;
   }
   updatePoints = (group, data) => {
-    console.log('mamae');
+    //console.log('mamae');
     this.setState({group: data});
   }
   renderPointsOfMatch = () => {
@@ -93,7 +91,7 @@ class ClassificationOfUser extends Component {
   render() {
     const { matchesOfUser, outcomeMatches } = this.props;
     if (matchesOfUser.length > 0 && outcomeMatches.length > 0) {
-      console.log("oi");
+      //console.log("oi");
       return (
         <div>
         <div>

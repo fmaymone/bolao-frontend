@@ -54,7 +54,7 @@ class UserList extends Component {
 
 
         return users.map((user, index) => {
-            console.log(user);
+            //console.log(user);
             let isUserFromPool = this.isUserFromPool(user.uid);
             let iconAddOrRemove;
             let mode = 'delete';

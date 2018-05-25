@@ -32,7 +32,7 @@ class ClassificationBuilder extends Component {
   };
 
   updateKnockoutPhase = async () => {
-    console.log("KnockoutPhase");
+    //console.log("KnockoutPhase");
   };
 
   updateGroupsPhase = async teams => {
@@ -151,7 +151,7 @@ class ClassificationBuilder extends Component {
   };
 
   render() {
-    console.log(this.props.matches);
+    //console.log(this.props.matches);
     const matches = this.props.matches;
     let sortedList = [];
 

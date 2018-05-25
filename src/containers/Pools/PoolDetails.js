@@ -40,7 +40,7 @@ class PoolDetails extends Component {
     );
     this.fetchOutcome();
     this.fetchMatches();
-    console.log(this.state.outcome);
+    //console.log(this.state.outcome);
   }
   fetchOutcome = async () => {
     //this is the place where the results will be stored

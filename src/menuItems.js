@@ -149,7 +149,7 @@ const getMenuItems = (props) => {
             leftIcon: <FontIcon className='material-icons' >group</FontIcon>
           },
           {
-            visible: isAuthorised, 
+            
             visible: isGranted('administration'),
             primaryText: intl.formatMessage({ id: 'roles' }),
             leftIcon: <FontIcon className='material-icons' >account_box</FontIcon>

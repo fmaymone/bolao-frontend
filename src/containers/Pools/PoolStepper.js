@@ -53,7 +53,7 @@ class PoolStepper extends Component {
   handleNext = async () => {
     const { stepIndex } = this.state;
     if (stepIndex === 2){
-      console.log('oi');
+      //console.log('oi');
       await this.props.addUserToPool(this.props.auth.uid, this.props.pool.key);
       await this.props.addUserPools(this.props.auth.uid, this.props.pool.key);
       await this.props.handleSetUserFromPool(true);

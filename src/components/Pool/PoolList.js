@@ -48,7 +48,7 @@ class PoolList extends Component {
         )
     }
     renderAllPools = () => {
-        console.log(this.props);
+        //console.log(this.props);
         return (
             <div style={styles.root}>
                 <GridList
