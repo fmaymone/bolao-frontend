@@ -12,6 +12,7 @@ import {
 import ClassifiedTeamsPhase from "../../components/Classification/ClassifiedTeamsPhase";
 import FinalResult from "../../components/Classification/FinalResult";
 import TopScorer from "../../components/Classification/TopScorer";
+import {calculatePoints} from '../../store/functions/general'
 
 class PointsOfClassifiedsTeams extends Component {
   constructor(props) {
@@ -22,6 +23,8 @@ class PointsOfClassifiedsTeams extends Component {
     };
   }
   componentDidMount() {
+    const {matchesOfUser, outcomeMatches} = this.props;
+    calculatePoints(matchesOfUser, outcomeMatches );
     this.fillClassifieds();
     
   }

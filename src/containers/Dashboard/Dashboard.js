@@ -24,7 +24,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    calculatePoints("olar", "mundo");
+//    calculatePoints("olar", "mundo");
     this.fetchPoolData();
   }
   snapshotToArray(snapshot) {
