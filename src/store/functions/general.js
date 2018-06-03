@@ -211,3 +211,33 @@ const getActualMatches = (matches, group) => {
 
     return filteredMatches;
 };
+
+
+const calculateRegularPoints = (userMatch, outcomeMatch) => {
+    let structuredReturn = {userMatch: userMatch, outcomeMatch: outcomeMatch, points:0}
+    let points = 0;
+
+    if (
+      Math.sign(userMatch.home_result - userMatch.away_result) ===
+      Math.sign(outcomeMatch.home_result - outcomeMatch.away_result)
+    ) {
+      //console.log("oi");
+      //draw
+      if (Math.sign(userMatch.home_result - userMatch.away_result) === 0) {
+        points += 4;
+        if (userMatch.home_result == outcomeMatch.home_result) {
+          points += 2;
+        }
+      } else {
+        points += 3;
+        if (userMatch.home_result == outcomeMatch.home_result) {
+          points += 1.5;
+        }
+        if (userMatch.away_result == outcomeMatch.away_result) {
+          points += 1.5;
+        }
+      }
+    }
+    structuredReturn.points = points;
+    return structuredReturn;
+  };
