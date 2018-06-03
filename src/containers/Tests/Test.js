@@ -21,37 +21,14 @@ class Test extends Component {
         }
     }
     
-    componentDidMount() {
-         const { firebaseApp, auth, watchList, pool } = this.props;
-          //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
-         // let ref = firebaseApp.database().ref(`/pools/${pool.key}/users/${auth.uid}/`);
-          //watchList(ref, "listMatches"); 
-    }
-        
-    handlerInitialState = ( ) =>{
-                
-        this.props.matchesInitialCreate(data);
-    }
-    handlerLoadState = () =>{
-        
-        this.props.matchesFetch();
-    }
-    handlerGetMatchesFromGroup = (group) =>{
-
-        this.props.getMatchesFromGroup('a');
-    }
     render() {
         const { pools, auth, pool } = this.props;
         
        
         return (
-            // <Activity
-            // ><PoolList pools={this.props.pools} history={this.props.history} />
-            
-                    
-            // </Activity>
+   
             <Activity>
-                <MatchesBuilder pool={this.props.pools[0]} user={auth} />
+               <h1>Hello World</h1>
             </Activity>
         
         )

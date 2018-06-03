@@ -1,31 +1,45 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 
-const CardExampleWithAvatar = () => (
-  <Card>
-    <CardHeader
-      title="URL Avatar"
-      subtitle="Subtitle"
-      avatar="images/jsa-128.jpg"
-    />
-    <CardMedia
-      overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
-    >
-      <img src="images/nature-600-337.jpg" alt="" />
-    </CardMedia>
-    <CardTitle title="Card title" subtitle="Card subtitle" />
-    <CardText>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-      Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-      Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-    </CardText>
-    <CardActions>
-      <FlatButton label="Action1" />
-      <FlatButton label="Action2" />
-    </CardActions>
-  </Card>
-);
+export default class HelloWorld extends React.Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired, // this is passed from the Rails view
+  };
 
-export default CardExampleWithAvatar;
+  /**
+   * @param props - Comes from your rails view.
+   */
+  constructor(props) {
+    super(props);
+
+    // How to set initial state in ES6 class syntax
+    // https://reactjs.org/docs/state-and-lifecycle.html#adding-local-state-to-a-class
+    this.state = { name: this.props.name };
+  }
+
+  updateName = (name) => {
+    this.setState({ name });
+  };
+
+  render() {
+    return (
+      <div>
+        <h3>
+          Hello, {this.state.name}!
+        </h3>
+        <hr />
+        <form >
+          <label htmlFor="name">
+            Say hello to:
+          </label>
+          <input
+            id="name"
+            type="text"
+            value={this.state.name}
+            onChange={(e) => this.updateName(e.target.value)}
+          />
+        </form>
+      </div>
+    );
+  }
+}
