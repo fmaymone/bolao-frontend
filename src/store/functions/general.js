@@ -29,10 +29,13 @@ export const calculatePoints = (userMatches, outcomeMatches) => {
     structuredReturn.ROUND_FINALS = getPointsOfClassifiedInRounds(ROUND_FINALS, userMatches, outcomeMatches);
     structuredReturn.ROUND_3x4 = getPointsOfClassifiedInRounds(ROUND_3x4, userMatches, outcomeMatches);
     structuredReturn.pointsOfMatches = getPointsOfMatches(userMatches,outcomeMatches);
+   
  
-    return structuredReturn;
+ 
  
 }
+
+
 const getPointsOfMatches = (matchesOfUser, outcomeMatches) => {
     let structuredReturn = {totalPoints:0, matches:[]};
     let totalPoints = 0;
@@ -213,31 +216,3 @@ const getActualMatches = (matches, group) => {
 };
 
 
-const calculateRegularPoints = (userMatch, outcomeMatch) => {
-    let structuredReturn = {userMatch: userMatch, outcomeMatch: outcomeMatch, points:0}
-    let points = 0;
-
-    if (
-      Math.sign(userMatch.home_result - userMatch.away_result) ===
-      Math.sign(outcomeMatch.home_result - outcomeMatch.away_result)
-    ) {
-      //console.log("oi");
-      //draw
-      if (Math.sign(userMatch.home_result - userMatch.away_result) === 0) {
-        points += 4;
-        if (userMatch.home_result == outcomeMatch.home_result) {
-          points += 2;
-        }
-      } else {
-        points += 3;
-        if (userMatch.home_result == outcomeMatch.home_result) {
-          points += 1.5;
-        }
-        if (userMatch.away_result == outcomeMatch.away_result) {
-          points += 1.5;
-        }
-      }
-    }
-    structuredReturn.points = points;
-    return structuredReturn;
-  };

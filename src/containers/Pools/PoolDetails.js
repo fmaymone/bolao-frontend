@@ -12,6 +12,7 @@ import UsersOfPool from "./UsersOfPool";
 import PoolStepper from "./PoolStepper";
 import ClassificationOfUser from "./ClassificationOfUser";
 import Loader from "../../components/UI/Loader";
+import ClassificationOfPool from "./ClassificationOfPool";
 
 const styles = {
   headline: {
@@ -123,7 +124,7 @@ class PoolDetails extends Component {
             </Tab>
             <Tab label="Classificação" value="b">
               <div>
-                <UsersOfPool />
+                <ClassificationOfPool outcomeMatches={this.state.outcomeMatches} />
               </div>
             </Tab>
             <Tab label="Meus Pontos" value="c">
