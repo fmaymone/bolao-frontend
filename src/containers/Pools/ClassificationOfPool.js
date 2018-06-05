@@ -27,61 +27,24 @@ import { calculatePoints } from "../../store/functions/general";
 class ClassificationOfPool extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      pool: {},
-      allUsers: [],
-      usersOfPool: [],
-      isLoadingPool: true,
-      isLoadingUsers: true
-    };
+    this.state = {};
   }
-  componentDidMount() {
-    this.fetchPoolData(this.props.match.params.uid);
-  }
+  
 
-  snapshotToArray(snapshot) {
-    var returnArr = [];
-
-    snapshot.forEach(function(childSnapshot) {
-      var item = childSnapshot.val();
-      item.key = childSnapshot.key;
-      returnArr.push(item);
-    });
-
-    return returnArr;
-  }
-
-  fetchPoolData = async id => {
-    const { history, match, firebaseApp } = this.props;
-
-    await firebaseApp
-      .database()
-      .ref(`/pools/${id}/users`)
-      .once("value")
-      .then(snapshot => {
-        this.setState({
-          pool: this.snapshotToArray(snapshot),
-          isLoadingPool: false
-        });
-      });
-  };
   render() {
     const { intl, history, muiTheme, outcomeMatches } = this.props;
     let allUserMatches = [];
 
-    if (this.state.isLoadingPool) {
-      return <Loader />;
-    } else {
-      this.state.pool.map(user => {
-        allUserMatches.push(calculatePoints(user.matches, outcomeMatches));
-      });
-      console.log(allUserMatches);
-      return (
-        <Activity title={this.state.pool.name}>
-          <Scrollbar />
-        </Activity>
-      );
-    }
+    this.props.poolData.map(user => {
+      const transformedUserMatches = Object.keys(user.matches).map(key => user.matches[key]);
+      allUserMatches.push(calculatePoints(transformedUserMatches, outcomeMatches));
+    });
+    console.log(allUserMatches);
+    return (
+      <Activity title={''}>
+        <Scrollbar />
+      </Activity>
+    );
   }
 }
 

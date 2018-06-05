@@ -31,7 +31,9 @@ class PoolDetails extends Component {
       isLoadingMatchesOfUser: true,
       isLoadingOutcomeMatches: true,
       outcomeMatches: [],
-      matchesOfUser: []
+      matchesOfUser: [],
+      poolData: [],
+      isLoadingPool: true
     };
   }
   componentDidMount() {
@@ -39,10 +41,25 @@ class PoolDetails extends Component {
       this.props.location.state.userOfPool,
       this.props.location.state.pool
     );
+    this.fetchPoolData();
     this.fetchOutcome();
     this.fetchMatches();
     //console.log(this.state.outcome);
   }
+  fetchPoolData = async () => {
+    const { firebaseApp } = this.props;
+
+    await firebaseApp
+      .database()
+      .ref(`/pools/${this.props.location.state.pool.key}/users`)
+      .once("value")
+      .then(snapshot => {
+        this.setState({
+          poolData: this.snapshotToArray(snapshot),
+          isLoadingPool: false
+        });
+      });
+  };
   fetchOutcome = async () => {
     //this is the place where the results will be stored
     const { firebaseApp } = this.props;
@@ -109,7 +126,8 @@ class PoolDetails extends Component {
   renderData = pool => {
     if (
       this.state.isLoadingMatchesOfUser === false &&
-      this.state.isLoadingOutcomeMatches === false
+      this.state.isLoadingOutcomeMatches === false &&
+      this.state.isLoadingPool === false
     ) {
       return (
         <Activity title={`${pool.name}`}>
@@ -124,7 +142,7 @@ class PoolDetails extends Component {
             </Tab>
             <Tab label="Classificação" value="b">
               <div>
-                <ClassificationOfPool outcomeMatches={this.state.outcomeMatches} />
+                <ClassificationOfPool poolData = {this.state.poolData} outcomeMatches={this.state.outcomeMatches} />
               </div>
             </Tab>
             <Tab label="Meus Pontos" value="c">
