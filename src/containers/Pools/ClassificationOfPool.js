@@ -37,7 +37,8 @@ class ClassificationOfPool extends Component {
 
     this.props.poolData.map(user => {
       const transformedUserMatches = Object.keys(user.matches).map(key => user.matches[key]);
-      allUserMatches.push(calculatePoints(transformedUserMatches, outcomeMatches));
+      const data = calculatePoints(transformedUserMatches, outcomeMatches);
+      allUserMatches.push({user: user.key, points: data});
     });
     console.log(allUserMatches);
     return (

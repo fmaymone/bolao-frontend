@@ -10,6 +10,7 @@ import {
 
 export const calculatePoints = (userMatches, outcomeMatches) => {
   let structuredReturn = {
+    totalPoints: 0,
     pointsOfMatches: {},
     ROUND_16: {},
     ROUND_8: {},
@@ -20,13 +21,14 @@ export const calculatePoints = (userMatches, outcomeMatches) => {
     FINAL_RESULT
   };
   
-  Object.keys(userMatches).map(key => userMatches[key])
+  let totalPoints = 0;
 
   if (userMatches !== undefined && userMatches !== null) {
     structuredReturn.FINAL_RESULT = getPointsOfFinalResult(
       userMatches,
       outcomeMatches
     );
+   
     structuredReturn.TOP_SCORER = getPointsTopScorer(
       userMatches,
       outcomeMatches
@@ -60,6 +62,18 @@ export const calculatePoints = (userMatches, outcomeMatches) => {
       userMatches,
       outcomeMatches
     );
+    
+    totalPoints = structuredReturn.FINAL_RESULT.points
+    + structuredReturn.TOP_SCORER.points 
+    + structuredReturn.ROUND_16.points
+    + structuredReturn.ROUND_8.points
+    + structuredReturn.ROUND_4.points
+    + structuredReturn.ROUND_FINALS.points
+    + structuredReturn.ROUND_3x4.points
+    + structuredReturn.pointsOfMatches.totalPoints;
+
+    structuredReturn.totalPoints = totalPoints;
+
     return structuredReturn;
   }
 };
@@ -73,11 +87,11 @@ const getPointsOfMatches = (matchesOfUser, outcomeMatches) => {
     const elementUser = matchesOfUser[index];
     const elementOutcome = outcomeMatches[index];
     let tempElement = { points: 0, match: elementUser };
-    if (elementOutcome.finished === true) {
+   
       const pointsCalculated = getPointsOfMatch(elementUser, elementOutcome);
       tempElement.points = pointsCalculated;
       totalPoints += pointsCalculated;
-    }
+    
     structuredReturn.matches.push(tempElement);
   }
   structuredReturn.totalPoints = totalPoints;
