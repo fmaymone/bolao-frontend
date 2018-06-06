@@ -37,6 +37,8 @@ class PoolDetails extends Component {
     };
   }
   componentDidMount() {
+    const { watchList, firebaseApp } = this.props
+
     this.isUserFromPool(
       this.props.location.state.userOfPool,
       this.props.location.state.pool
@@ -44,8 +46,11 @@ class PoolDetails extends Component {
     this.fetchPoolData();
     this.fetchOutcome();
     this.fetchMatches();
-    //console.log(this.state.outcome);
+    let ref = firebaseApp.database().ref('users');
+    watchList(ref)
   }
+    //console.log(this.state.outcome);
+  
   fetchPoolData = async () => {
     const { firebaseApp } = this.props;
 
@@ -142,7 +147,7 @@ class PoolDetails extends Component {
             </Tab>
             <Tab label="Classificação" value="b">
               <div>
-                <ClassificationOfPool poolData = {this.state.poolData} outcomeMatches={this.state.outcomeMatches} />
+                <ClassificationOfPool poolData = {this.state.poolData} outcomeMatches={this.state.outcomeMatches} users={this.props.users}/>
               </div>
             </Tab>
             <Tab label="Meus Pontos" value="c">
@@ -197,11 +202,13 @@ class PoolDetails extends Component {
 }
 
 const mapStateToProps = state => {
-  const { auth, browser } = state;
+  const { auth, browser, lists } = state;
 
   return {
     auth,
-    browser
+    browser, 
+    users: lists.users
+   
   };
 };
 
