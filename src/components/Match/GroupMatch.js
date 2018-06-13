@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import Team from "./Team";
-import { Row, Col } from "react-grid-system";
 import TextField from "material-ui/TextField";
+import Toggle from "material-ui/Toggle";
 
 const styles = {
   container: {
@@ -29,10 +28,38 @@ const styles = {
     display: "flex",
     flexFlow: "row nowrap",
     backgroundColor: "chartreuse1"
+  },
+  toggle: {
+    marginBottom: 16
   }
 };
 class GroupMatch extends Component {
-  renderMatch = () => {
+
+  handleToggle(value) {
+    this.props.handleChangedResult(null, this.props.game, 'finished', value)
+  }
+  renderMatch = isAdmin => {
+    let renderAdmin = "";
+
+    if (isAdmin) {
+      renderAdmin = (
+        <div style={{ flex: 1 }}>
+          <div
+            style={{
+              justifyContent: "flex-end",
+              display: "flex",
+              flexFlow: "row nowrap"
+            }}
+          >
+            <Toggle 
+            toggled={this.props.game.finished} 
+            style={styles.toggle} 
+            onToggle={  () => { this.handleToggle(!this.props.game.finished)} }
+            />
+          </div>
+        </div>
+      );
+    }
     return (
       <div
         style={{
@@ -43,8 +70,7 @@ class GroupMatch extends Component {
           margin: 10
         }}
       >
-        <div style={{  flex: 1 }}>
-     
+        <div style={{ flex: 1 }}>
           <div
             style={{
               justifyContent: "flex-start",
@@ -59,45 +85,39 @@ class GroupMatch extends Component {
             />
           </div>
         </div>
-        <div style={{  flex: 1 }}>
+        <div style={{ flex: 1 }}>
           <div
             style={{
               justifyContent: "space-around",
               display: "flex",
               flexFlow: "row nowrap",
-              alignItems: 'center'
+              alignItems: "center"
             }}
           >
-            <div  style={{width: 3}}>
-              
+            <div style={{ width: 3 }}>
               <TextField
                 id={`${this.props.game.home_team}_home`}
                 type="number"
-                disabled={this.props.finishedTimeToBet}
+                disabled={true}
                 value={this.props.game.home_result}
                 onChange={(e, game, type) =>
                   this.props.handleChangedResult(e, this.props.game, "home")
                 }
-                
-                style={{width:30}}
-                
+                style={{ width: 30 }}
               />
             </div>
             <div>x</div>
-            <div  style={{width: 3}}>
-              
+            <div style={{ width: 3 }}>
               <TextField
                 id={`${this.props.game.home_team}_away`}
                 type="number"
-                disabled={this.props.finishedTimeToBet}
+                disabled={true}
                 value={this.props.game.away_result}
                 onChange={(e, game, type) =>
                   this.props.handleChangedResult(e, this.props.game, "away")
                 }
-                
-                style={{width:30}}
+                style={{ width: 30 }}
               />
-              
             </div>
           </div>
         </div>
@@ -106,24 +126,24 @@ class GroupMatch extends Component {
             style={{
               justifyContent: "flex-end",
               display: "flex",
-              flexFlow: "row nowrap",
-              
+              flexFlow: "row nowrap"
             }}
           >
             <Team id={this.props.game.away_team} isHomeTeam="false" />
           </div>
-         
         </div>
+        {renderAdmin}
       </div>
-     
     );
   };
 
   render() {
-    const { game } = this.props;
+    const { game, isAdmin } = this.props;
+
+    console.log(isAdmin);
 
     if (game.type === "group") {
-      return this.renderMatch();
+      return this.renderMatch(isAdmin);
     } else {
       return <div />;
     }

@@ -45,6 +45,8 @@ class TopScorer extends Component {
           id="text-field-controlled"
           value={this.state.nameOfTopScorer}
           floatingLabelText="Nome do Artilheiro"
+          disabled={true}
+
           onChange={e => this.handleChangeNameTopScorer(e)}
         />
         <br />
@@ -52,6 +54,8 @@ class TopScorer extends Component {
           id="text-field-2"
           value={this.state.goals}
           floatingLabelText="Número de Gols"
+          disabled={true}
+
           onChange={e => this.handleChangeGoalsTopScorer(e)}
         />
         <br />

@@ -26,6 +26,9 @@ import Dialog from "material-ui/Dialog";
 import RaisedButton from "material-ui/RaisedButton";
 import FlatButton from "material-ui/FlatButton";
 
+const USER_ADMIN = '02b4c88iL0Olehf1KpeEeNUdBMX2';
+const POOL_ADMIN = '-LCmgkjj3PpQwwuQvKTA';
+
 class MatchesBuilder extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +38,8 @@ class MatchesBuilder extends Component {
       bettingStatus: FIRST_PHASE_STARTED,
       finishedTimeToBet: false,
       dialogHasOpened: false,
-      clicksDialogDraw: 0
+      clicksDialogDraw: 0, 
+      isAdmin: false
     };
   }
   handleChangeTopScorer = async value => {
@@ -91,6 +95,15 @@ class MatchesBuilder extends Component {
   componentDidMount() {
     this.checkLimitDate();
     this.fetchMatches();
+    this.checkAdmin();
+
+  }
+  checkAdmin = () => {
+    console.log('check');
+    if(this.props.pool.key === POOL_ADMIN  && this.props.user.uid === USER_ADMIN){
+      this.setState({isAdmin: true});
+    }
+
   }
   snapshotToArray(snapshot) {
     var returnArr = [];
@@ -184,6 +197,7 @@ class MatchesBuilder extends Component {
         updateMatches={this.updateMatches}
         finishedTimeToBet={this.state.finishedTimeToBet}
         user={this.props.user}
+        isAdmin={this.state.isAdmin}
       />
     );
   }
@@ -204,6 +218,7 @@ class MatchesBuilder extends Component {
           finishedTimeToBet={this.state.finishedTimeToBet}
           user={this.props.user}
           finalResult={finalResult}
+          isAdmin={this.state.isAdmin}
         />
       </div>
     );

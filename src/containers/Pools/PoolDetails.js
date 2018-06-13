@@ -8,11 +8,11 @@ import { withRouter } from "react-router-dom";
 import { Activity } from "rmw-shell";
 import Pool from "../../components/Pool/Pool";
 import MatchesBuilder from "../Matches/MatchesBuilder";
-import UsersOfPool from "./UsersOfPool";
 import PoolStepper from "./PoolStepper";
 import ClassificationOfUser from "./ClassificationOfUser";
 import Loader from "../../components/UI/Loader";
 import ClassificationOfPool from "./ClassificationOfPool";
+import MatchesOfTheDay from "./MatchesOfTheDay";
 
 const styles = {
   headline: {
@@ -37,7 +37,7 @@ class PoolDetails extends Component {
     };
   }
   componentDidMount() {
-    const { watchList, firebaseApp } = this.props
+    const { watchList, firebaseApp } = this.props;
 
     this.isUserFromPool(
       this.props.location.state.userOfPool,
@@ -46,11 +46,11 @@ class PoolDetails extends Component {
     this.fetchPoolData();
     this.fetchOutcome();
     this.fetchMatches();
-    let ref = firebaseApp.database().ref('users');
-    watchList(ref)
+    let ref = firebaseApp.database().ref("users");
+    watchList(ref);
   }
-    //console.log(this.state.outcome);
-  
+  //console.log(this.state.outcome);
+
   fetchPoolData = async () => {
     const { firebaseApp } = this.props;
 
@@ -137,6 +137,9 @@ class PoolDetails extends Component {
       return (
         <Activity title={`${pool.name}`}>
           <Tabs value={this.state.value} onChange={this.handleChange}>
+            {/* <Tab label="Hoje" value="a">
+              <MatchesOfTheDay  users={this.props.users} poolData={this.state.poolData}/>
+            </Tab> */}
             <Tab label="Minhas Apostas" value="a">
               <div>
                 <MatchesBuilder
@@ -147,7 +150,11 @@ class PoolDetails extends Component {
             </Tab>
             <Tab label="Classificação" value="b">
               <div>
-                <ClassificationOfPool poolData = {this.state.poolData} outcomeMatches={this.state.outcomeMatches} users={this.props.users}/>
+                <ClassificationOfPool
+                  poolData={this.state.poolData}
+                  outcomeMatches={this.state.outcomeMatches}
+                  users={this.props.users}
+                />
               </div>
             </Tab>
             <Tab label="Meus Pontos" value="c">
@@ -206,9 +213,8 @@ const mapStateToProps = state => {
 
   return {
     auth,
-    browser, 
+    browser,
     users: lists.users
-   
   };
 };
 

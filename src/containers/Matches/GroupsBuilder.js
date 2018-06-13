@@ -40,12 +40,20 @@ class GroupsBuilder extends Component {
     newGroupValue.currentGroup = tempGroup;
     changeStage(newGroupValue);
   };
-  handleChangedResult = async (e, game, type) => {
+
+  handleChangedResult = async (e, game, type, valueIsFinished) => {
     let gameToBeUpdated = { ...game };
+    if ((type === "finished")) {
+      
+        gameToBeUpdated.finished = valueIsFinished;
+     
+     
+    }else{
     type === "home"
       ? (gameToBeUpdated.home_result = e.target.value)
       : (gameToBeUpdated.away_result = e.target.value);
-
+    }
+    
     await this.props.updateMatch(
       gameToBeUpdated,
       this.props.pool,
@@ -100,6 +108,7 @@ class GroupsBuilder extends Component {
             handleChangedResult={this.handleChangedResult}
             finishedTimeToBet={this.props.finishedTimeToBet}
             user={this.props.user}
+            isAdmin={this.props.isAdmin}
           />
         </div>
         <div style={{}}> {this.groupsControls()}</div>
@@ -127,6 +136,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { changeStage, updateMatch })(
-  injectIntl(withRouter(withFirebase(muiThemeable()(GroupsBuilder))))
-);
+export default connect(
+  mapStateToProps,
+  { changeStage, updateMatch }
+)(injectIntl(withRouter(withFirebase(muiThemeable()(GroupsBuilder)))));

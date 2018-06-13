@@ -13,7 +13,7 @@ const AsyncPoolDetails = MyLoadable({ loader: () => import('./containers/Pools/P
 const AsyncPools = MyLoadable({ loader: () => import('./containers/Pools/Pools') }, [AsyncPool]);
 const AsyncMyPools = MyLoadable({ loader: () => import('./containers/Pools/MyPools') } );
 const AsyncUsersOfPool = MyLoadable({ loader: () => import('./containers/Pools/UsersOfPool') });
-
+const AsyncClassificationOfUser =  MyLoadable({ loader: () => import('./containers/Matches/MatchesOfUser') });
 
 const Routes = [
     <RestrictedRoute type='private' path="/" exact component={AsyncDashboard} />,
@@ -26,8 +26,9 @@ const Routes = [
     <RestrictedRoute type='private' path="/pools/create" exact component={AsyncPool} />,
     // <RestrictedRoute type='private' path="/matches" exact component={AsyncMatches} />,
     <RestrictedRoute type='private' path="/mypools" exact component={AsyncMyPools} />,
-    <RestrictedRoute type='private' path="/pools/edit/users/:uid" exact component={AsyncUsersOfPool} />
-    
+    <RestrictedRoute type='private' path="/pools/edit/users/:uid" exact component={AsyncUsersOfPool} />,
+    <RestrictedRoute type='private' path="/matches/show/:uid" exact component={AsyncClassificationOfUser} />
+
 ]
 
 export default Routes;

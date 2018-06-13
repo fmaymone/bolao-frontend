@@ -25,6 +25,7 @@ class Match extends Component {
           finishedTimeToBet={this.props.finishedTimeToBet}
           user={this.props.user}
           title = {dataFromMatch.title}
+          isAdmin={this.props.isAdmin}
         />
       );
     } else {
@@ -37,6 +38,7 @@ class Match extends Component {
           finishedTimeToBet={this.props.finishedTimeToBet}
           user={this.props.user}
           title = {dataFromMatch.title}
+          isAdmin={this.props.isAdmin}
 
         />
       );

@@ -45,24 +45,26 @@ class PointsOfMatch extends Component {
   calculateRegularPoints = (userMatch, outcomeMatch) => {
     let points = 0;
 
-    if (
-      Math.sign(userMatch.home_result - userMatch.away_result) ===
-      Math.sign(outcomeMatch.home_result - outcomeMatch.away_result)
-    ) {
-      //console.log("oi");
-      //draw
-      if (Math.sign(userMatch.home_result - userMatch.away_result) === 0) {
-        points += 4;
-        if (userMatch.home_result == outcomeMatch.home_result) {
-          points += 2;
-        }
-      } else {
-        points += 3;
-        if (userMatch.home_result == outcomeMatch.home_result) {
-          points += 1.5;
-        }
-        if (userMatch.away_result == outcomeMatch.away_result) {
-          points += 1.5;
+    if (outcomeMatch.finished === true) {
+      if (
+        Math.sign(userMatch.home_result - userMatch.away_result) ===
+        Math.sign(outcomeMatch.home_result - outcomeMatch.away_result)
+      ) {
+        //console.log("oi");
+        //draw
+        if (Math.sign(userMatch.home_result - userMatch.away_result) === 0) {
+          points += 4;
+          if (userMatch.home_result == outcomeMatch.home_result) {
+            points += 2;
+          }
+        } else {
+          points += 3;
+          if (userMatch.home_result == outcomeMatch.home_result) {
+            points += 1.5;
+          }
+          if (userMatch.away_result == outcomeMatch.away_result) {
+            points += 1.5;
+          }
         }
       }
     }
@@ -95,11 +97,11 @@ class PointsOfMatch extends Component {
       case ROUND_4:
         return { classified: 4, specificTeam: 8 };
       case ROUND_3x4:
-        return { classified: 4, specificTeam: 6 };
+        return { classified: 0, specificTeam: 8 };
       case ROUND_FINALS:
-        return { classified: 4, specificTeam: 8 };
+        return { classified: 0, specificTeam: 8 };
       case FINAL_RESULT:
-        return { specificTeam: 8, first: 15, second: 10, third: 7, forth: 5 };
+        return { first: 15, second: 10, third: 7, fourth: 5 };
       case TOP_SCORER:
         return { name: 12, goals: 5 };
       default:
@@ -138,7 +140,6 @@ class PointsOfMatch extends Component {
         </TableRow>
       );
     } else {
-      
       return <div />;
     }
   };
