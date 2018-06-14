@@ -72,7 +72,7 @@ class TopScorer extends Component {
   }
 }
 const mapStateToProps = state => {
-  const { intl, dialogs, playerDataReducer, lists } = state;
+  const { } = state;
 
   return {};
 };

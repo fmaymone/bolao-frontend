@@ -208,7 +208,7 @@ class MatchesBuilder extends Component {
     const finalResult = this.state.matches.find(k => k.group === "result");
     return (
       <div>
-        {this.openDialog()}
+        
 
         <KnockoutBuilder
           matches={this.getActualMatches()}
