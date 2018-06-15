@@ -98,7 +98,7 @@ class GroupMatch extends Component {
               <TextField
                 id={`${this.props.game.home_team}_home`}
                 type="number"
-                disabled={true}
+                
                 value={this.props.game.home_result}
                 onChange={(e, game, type) =>
                   this.props.handleChangedResult(e, this.props.game, "home")
@@ -111,7 +111,7 @@ class GroupMatch extends Component {
               <TextField
                 id={`${this.props.game.home_team}_away`}
                 type="number"
-                disabled={true}
+               
                 value={this.props.game.away_result}
                 onChange={(e, game, type) =>
                   this.props.handleChangedResult(e, this.props.game, "away")
