@@ -145,13 +145,11 @@ class ClassificationOfPool extends Component {
       <Table>
         <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
           <TableRow>
-            <TableHeaderColumn style={{ width: "10%" }}>
-                Apostas
-              </TableHeaderColumn>
-            <TableHeaderColumn style={{ width: "40%" }}>
+            
+            <TableHeaderColumn style={{ width: "70%" }}>
               Jogador
             </TableHeaderColumn>
-            <TableHeaderColumn style={{ width: "50%" }}>
+            <TableHeaderColumn style={{ width: "30%" }}>
               Pontos
             </TableHeaderColumn>
     
@@ -160,18 +158,11 @@ class ClassificationOfPool extends Component {
         <TableBody displayRowCheckbox={false}>
           {allUserMatches.map(user => (
             <TableRow>
-                <TableRowColumn style={{ width: "10%" }}>
-                  <FlatButton
-                    label="Ver"
-                    type="submit"
-                    primary
-                    onClick={() => {this.handleClick(user)}}
-                  />
-                </TableRowColumn>
-              <TableRowColumn style={{ width: "40%" }}>
+                
+              <TableRowColumn style={{ width: "70%" }}>
                 <User user={this.getUserByKey(user.user)} />
               </TableRowColumn>
-              <TableRowColumn style={{ width: "50%" }}>
+              <TableRowColumn style={{ width: "30%" }}>
                 {user.points.totalPoints}
               </TableRowColumn>
            
