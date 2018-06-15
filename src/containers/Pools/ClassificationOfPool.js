@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
+import { isMobile } from "../../device";
+
 
 import User from "../../components/User/User";
 
@@ -54,6 +56,7 @@ class ClassificationOfPool extends Component {
       if (a.points.totalPoints > b.points.totalPoints) return -1;
       return 0;
     }
+    if(!isMobile()){
     return (
       <Card>
         <CardHeader title="Classificação" />
@@ -135,6 +138,51 @@ class ClassificationOfPool extends Component {
         </Table>
       </Card>
     );
+    }else{
+      return(
+      <Card>
+      <CardHeader title="Classificação" />
+      <Table>
+        <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+          <TableRow>
+            <TableHeaderColumn style={{ width: "10%" }}>
+                Apostas
+              </TableHeaderColumn>
+            <TableHeaderColumn style={{ width: "40%" }}>
+              Jogador
+            </TableHeaderColumn>
+            <TableHeaderColumn style={{ width: "50%" }}>
+              Pontos
+            </TableHeaderColumn>
+    
+          </TableRow>
+        </TableHeader>
+        <TableBody displayRowCheckbox={false}>
+          {allUserMatches.map(user => (
+            <TableRow>
+                <TableRowColumn style={{ width: "10%" }}>
+                  <FlatButton
+                    label="Ver"
+                    type="submit"
+                    primary
+                    onClick={() => {this.handleClick(user)}}
+                  />
+                </TableRowColumn>
+              <TableRowColumn style={{ width: "40%" }}>
+                <User user={this.getUserByKey(user.user)} />
+              </TableRowColumn>
+              <TableRowColumn style={{ width: "50%" }}>
+                {user.points.totalPoints}
+              </TableRowColumn>
+           
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Card>
+      )
+
+    }
   };
 
   render() {
