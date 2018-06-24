@@ -137,14 +137,15 @@ class PoolDetails extends Component {
       return (
         <Activity title={`${pool.name}`}>
           <Tabs value={this.state.value} onChange={this.handleChange}>
-            {/* <Tab label="Hoje" value="a">
-              <MatchesOfTheDay  users={this.props.users} poolData={this.state.poolData}/>
-            </Tab> */}
+            <Tab label="Hoje" value="a">
+              <MatchesOfTheDay  users={this.props.users} poolData={this.state.poolData}  outcomeMatches={this.state.outcomeMatches}/>
+            </Tab>
             <Tab label="Minhas Apostas" value="a">
               <div>
                 <MatchesBuilder
                   pool={pool}
                   user={this.props.location.state.userOfPool}
+                  users={this.props.users}
                 />
               </div>
             </Tab>
@@ -166,6 +167,7 @@ class PoolDetails extends Component {
                 />
               </div>
             </Tab>
+           
           </Tabs>
         </Activity>
       );

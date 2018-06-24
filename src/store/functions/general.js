@@ -215,6 +215,8 @@ const getPointsTopScorer = (matchesOfUser, outcomeMatches) => {
   return structuredReturn;
 };
 
+
+
 const getPointsOfClassifiedInRounds = (
   group,
   matchesOfUser,
@@ -280,3 +282,5 @@ const getActualMatches = (matches, group) => {
 
   return filteredMatches;
 };
+
+

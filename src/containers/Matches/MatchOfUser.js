@@ -33,7 +33,7 @@ class MatchOfUser extends Component {
           <TableRowColumn style={{ width: "23%" }}>
             <div style={{ display: "inline-block" }}>
               <TeamClassification isHomeTeam={true} id={userMatch.home_team} />{" "}
-              <div style={{ display: "inline-block" }}>{" x "}</div>
+              <div style={{ display: "inline-block" }}>{" x "} {" "}</div>
               <TeamClassification isHomeTeam={true} id={userMatch.away_team} />
             </div>
           </TableRowColumn>
