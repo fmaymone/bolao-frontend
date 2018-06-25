@@ -201,6 +201,13 @@ class Match extends Component {
                   this.handleToggle(!this.props.game.finished);
                 }}
               />
+               <Toggle
+                toggled={this.props.game.countTeams}
+                style={styles.toggle}
+                onToggle={() => {
+                  this.handleToggleTeams(!this.props.game.countTeams);
+                }}
+              />
             </div>
           </div>
         </div>
