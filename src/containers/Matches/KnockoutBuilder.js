@@ -23,11 +23,22 @@ import {
 const groups = ["round_16", "round_8", "round_4", "3x4", "finals"];
 
 class KnockoutBuilder extends Component {
-  handleChangedResult = async (e, game, type) => {
+  handleChangedResult = async (e, game, type, value) => {
     let gameToBeUpdated = { ...game };
-    type === "home"
-      ? (gameToBeUpdated.home_result = e.target.value)
-      : (gameToBeUpdated.away_result = e.target.value);
+
+    if (type === "finished") {
+      gameToBeUpdated.finished = value;
+    } else {
+      if (type === "countTeams") {
+        gameToBeUpdated.countTeams = value;
+      }else{
+      type === "home"
+        ? (gameToBeUpdated.home_result = e.target.value)
+        : (gameToBeUpdated.away_result = e.target.value);
+      }
+    }
+  
+
     if (gameToBeUpdated.home_result > gameToBeUpdated.away_result) {
       gameToBeUpdated.winner = gameToBeUpdated.home_team;
       gameToBeUpdated.loser = gameToBeUpdated.away_team;
@@ -120,7 +131,7 @@ class KnockoutBuilder extends Component {
     const { matches } = this.props;
 
     matches.map(async match => {
-      await this.updateNextMatches(match);  
+      await this.updateNextMatches(match);
     });
     await this.props.updateMatches();
   };
@@ -239,8 +250,11 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {
-  changeStage,
-  updateMatch,
-  updateFinalResult
-})(injectIntl(withRouter(withFirebase(muiThemeable()(KnockoutBuilder)))));
+export default connect(
+  mapStateToProps,
+  {
+    changeStage,
+    updateMatch,
+    updateFinalResult
+  }
+)(injectIntl(withRouter(withFirebase(muiThemeable()(KnockoutBuilder)))));

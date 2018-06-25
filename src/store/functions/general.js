@@ -196,10 +196,9 @@ const numberPointsKnockoutMatches = group => {
 };
 
 const getPointsTopScorer = (matchesOfUser, outcomeMatches) => {
-
   const userFinalResult = matchesOfUser.find(k => k.group === TOP_SCORER);
   const outcomeFinalResult = outcomeMatches.find(k => k.group === TOP_SCORER);
-  let structuredReturn = { total: 0, scorer: 0, goals: 0 , points: 0};
+  let structuredReturn = { total: 0, scorer: 0, goals: 0, points: 0 };
 
   if (outcomeFinalResult.finished === true) {
     if (
@@ -230,11 +229,10 @@ const getPointsOfClassifiedInRounds = (
   const actualMatchesOfUser = getActualMatches(matchesOfUser, group);
   const actualMatchesOutcome = getActualMatches(outcomeMatches, group);
 
-  if (actualMatchesOutcome[0].finished === true) {
-    for (let index = 0; index < actualMatchesOfUser.length; index++) {
-      const elementUser = actualMatchesOfUser[index];
-      const elementOutcome = actualMatchesOutcome[index];
-
+  for (let index = 0; index < actualMatchesOfUser.length; index++) {
+    const elementUser = actualMatchesOfUser[index];
+    const elementOutcome = actualMatchesOutcome[index];
+    if (elementOutcome.countTeams === true) {
       teamsOfUser.push(elementUser.away_team);
       teamsOfUser.push(elementUser.home_team);
       teamsOutcome.push(elementOutcome.away_team);
@@ -246,26 +244,25 @@ const getPointsOfClassifiedInRounds = (
         teamsSpecificPosition.push(elementUser.home_team);
       }
     }
+  }
 
-    for (let index = 0; index < teamsOfUser.length; index++) {
-      const element = teamsOfUser[index];
-      if (teamsOutcome.includes(element)) {
+  for (let index = 0; index < teamsOfUser.length; index++) {
+    const element = teamsOfUser[index];
+    if (teamsOutcome.includes(element)) {
+      structuredReturn.points += numberPointsKnockoutMatches(group).classified;
+      if (teamsSpecificPosition.includes(element)) {
+        structuredReturn.teams.push({ id: element, type: "specific" });
         structuredReturn.points += numberPointsKnockoutMatches(
           group
-        ).classified;
-        if (teamsSpecificPosition.includes(element)) {
-          structuredReturn.teams.push({ id: element, type: "specific" });
-          structuredReturn.points += numberPointsKnockoutMatches(
-            group
-          ).specificTeam;
-        } else {
-          structuredReturn.teams.push({ id: element, type: "included" });
-        }
+        ).specificTeam;
       } else {
-        structuredReturn.teams.push({ id: element, type: "not_included" });
+        structuredReturn.teams.push({ id: element, type: "included" });
       }
+    } else {
+      structuredReturn.teams.push({ id: element, type: "not_included" });
     }
   }
+
   return structuredReturn;
 };
 

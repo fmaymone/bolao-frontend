@@ -10,8 +10,7 @@ import { change, submit } from "redux-form";
 import isGranted from "rmw-shell/lib/utils/auth";
 import Badge from "material-ui/Badge";
 import Chip from "material-ui/Chip";
-import { blue300, indigo900 } from "material-ui/styles/colors";
-
+import Toggle from "material-ui/Toggle";
 import TextField from "material-ui/TextField";
 import { updateMatch } from "../../store/actions/bolaoActions";
 import { isMobile } from "../../device";
@@ -51,6 +50,12 @@ const styles = {
   }
 };
 class Match extends Component {
+  handleToggle(value) {
+    this.props.handleChangedResult(null, this.props.game, "finished", value);
+  }
+  handleToggleTeams(value){
+    this.props.handleChangedResult(null, this.props.game, "countTeams", value);
+  }
   getDesktopContent = type => {
     if (!isMobile()) {
       if (type === "home") {
@@ -67,7 +72,6 @@ class Match extends Component {
       } else {
         return (
           <div>
-            
             <div>
               <Badge badgeContent={this.props.title.away} primary={true} />
             </div>
@@ -122,7 +126,7 @@ class Match extends Component {
                 alignItems: "center"
               }}
             >
-             {this.getDesktopContent('home')}
+              {this.getDesktopContent("home")}
               <div>
                 <Team
                   id={game.home_team}
@@ -179,7 +183,24 @@ class Match extends Component {
                 {" "}
                 <Team id={game.away_team} isHomeTeam="false" />
               </div>
-              {this.getDesktopContent('away')}
+              {this.getDesktopContent("away")}
+            </div>
+          </div>
+          <div style={{ flex: 1 }}>
+            <div
+              style={{
+                justifyContent: "flex-end",
+                display: "flex",
+                flexFlow: "row nowrap"
+              }}
+            >
+              <Toggle
+                toggled={this.props.game.finished}
+                style={styles.toggle}
+                onToggle={() => {
+                  this.handleToggle(!this.props.game.finished);
+                }}
+              />
             </div>
           </div>
         </div>
@@ -210,7 +231,7 @@ class Match extends Component {
               alignItems: "center"
             }}
           >
-             {this.getDesktopContent('home')}
+            {this.getDesktopContent("home")}
             <div
               onClick={this.chooseDrawWinnerHandler.bind(
                 this,
@@ -287,9 +308,34 @@ class Match extends Component {
                 )}
               />
             </div>
-            {this.getDesktopContent('away')}
+            {this.getDesktopContent("away")}
           </div>
+          
         </div>
+        <div style={{ flex: 1 }}>
+            <div
+              style={{
+                justifyContent: "flex-end",
+                display: "flex",
+                flexFlow: "row nowrap"
+              }}
+            >
+              <Toggle
+                toggled={this.props.game.finished}
+                style={styles.toggle}
+                onToggle={() => {
+                  this.handleToggle(!this.props.game.finished);
+                }}
+              />
+               <Toggle
+                toggled={this.props.game.countTeams}
+                style={styles.toggle}
+                onToggle={() => {
+                  this.handleToggleTeams(!this.props.game.countTeams);
+                }}
+              />
+            </div>
+          </div>
       </div>
     );
   };
@@ -312,12 +358,15 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {
-  setDialogIsOpen,
-  change,
-  submit,
-  updateMatch
-})(injectIntl(withRouter(withFirebase(muiThemeable()(Match)))));
+export default connect(
+  mapStateToProps,
+  {
+    setDialogIsOpen,
+    change,
+    submit,
+    updateMatch
+  }
+)(injectIntl(withRouter(withFirebase(muiThemeable()(Match)))));
 
 Match.propTypes = {
   // name: PropTypes.string,
