@@ -140,7 +140,7 @@ class PoolDetails extends Component {
             <Tab label="Hoje" value="a">
               <MatchesOfTheDay  users={this.props.users} poolData={this.state.poolData}  outcomeMatches={this.state.outcomeMatches}/>
             </Tab>
-            <Tab label="Minhas Apostas" value="a">
+            {/* <Tab label="Minhas Apostas" value="a">
               <div>
                 <MatchesBuilder
                   pool={pool}
@@ -148,7 +148,7 @@ class PoolDetails extends Component {
                   users={this.props.users}
                 />
               </div>
-            </Tab>
+            </Tab> */}
             <Tab label="Classificação" value="b">
               <div>
                 <ClassificationOfPool
@@ -198,12 +198,7 @@ class PoolDetails extends Component {
     } else {
       return (
         <Activity title={`${pool.name}`}>
-          <PoolStepper
-            handleSetUserFromPool={this.handleSetUserFromPool}
-            pool={pool}
-            auth={auth}
-            history={history}
-          />
+         <h1>Não lembra qual login fez o jogo? Te vira fera!!!!</h1>
         </Activity>
       );
     }
