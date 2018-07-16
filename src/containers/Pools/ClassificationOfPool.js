@@ -63,6 +63,9 @@ class ClassificationOfPool extends Component {
                 <TableHeaderColumn style={{ width: "10%" }}>
                   Apostas
                 </TableHeaderColumn>
+                <TableHeaderColumn style={{ width: "10%" }}>
+                  Colocação
+                </TableHeaderColumn>
                 <TableHeaderColumn style={{ width: "30%" }}>
                   Jogador
                 </TableHeaderColumn>
@@ -75,7 +78,7 @@ class ClassificationOfPool extends Component {
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
-              {allUserMatches.map(user => (
+              {allUserMatches.map((user,index) => (
                 <TableRow>
                   <TableRowColumn style={{ width: "10%" }}>
                     <FlatButton
@@ -86,6 +89,9 @@ class ClassificationOfPool extends Component {
                         this.handleClick(user);
                       }}
                     />
+                  </TableRowColumn>
+                  <TableRowColumn style={{ width: "10%" }}>
+                    <h2>{index + 1}</h2>
                   </TableRowColumn>
                   <TableRowColumn style={{ width: "30%" }}>
                     <User user={this.getUserByKey(user.user)} />
@@ -132,15 +138,7 @@ class ClassificationOfPool extends Component {
                         position="fourth"
                       />
                     </TableRowColumn>
-                    <TableRowColumn >
-                    <h2>
-                      {/* {user.matches.find(k => k.key === 'topscorer')
-                        .nameOfTopScorer +
-                        " Gols:" +
-                        user.matches.find(k =>k.key === 'topscorer').goals} */}
-                        'Olar'
-                        </h2>
-                    </TableRowColumn>
+ 
                   </TableRowColumn>
                 </TableRow>
               ))}

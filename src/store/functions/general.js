@@ -139,22 +139,22 @@ const getPointsOfFinalResult = (matchesOfUser, outcomeMatches) => {
       points: 0,
       first: {
         id: userFinalResult.first,
-        type: userFinalResult.first === outcomeFinalResult.first
+        type: userFinalResult.first == outcomeFinalResult.first
       },
       second: {
         id: userFinalResult.second,
-        type: userFinalResult.second === outcomeFinalResult.second
+        type: userFinalResult.second == outcomeFinalResult.second
       },
       third: {
         id: userFinalResult.third,
-        type: userFinalResult.third === outcomeFinalResult.third
+        type: userFinalResult.third == outcomeFinalResult.third
       },
       fourth: {
         id: userFinalResult.fourth,
-        type: userFinalResult.fourth === outcomeFinalResult.fourth
+        type: userFinalResult.fourth == outcomeFinalResult.fourth
       }
     };
-    if (outcomeFinalResult.finished === true) {
+
       points +=
         structuredReturn.first.type *
         numberPointsKnockoutMatches(FINAL_RESULT).first;
@@ -167,7 +167,7 @@ const getPointsOfFinalResult = (matchesOfUser, outcomeMatches) => {
       points +=
         structuredReturn.fourth.type *
         numberPointsKnockoutMatches(FINAL_RESULT).fourth;
-    }
+    
 
     structuredReturn.points = points;
   }
@@ -200,17 +200,17 @@ const getPointsTopScorer = (matchesOfUser, outcomeMatches) => {
   const outcomeFinalResult = outcomeMatches.find(k => k.group === TOP_SCORER);
   let structuredReturn = { total: 0, scorer: 0, goals: 0, points: 0 };
 
-  if (outcomeFinalResult.finished === true) {
+
     if (
       userFinalResult.nameOfTopScorer === outcomeFinalResult.nameOfTopScorer
     ) {
       structuredReturn.scorer += numberPointsKnockoutMatches(TOP_SCORER).name;
     }
-    if (userFinalResult.goals === outcomeFinalResult.goals) {
+    if (userFinalResult.goals == outcomeFinalResult.goals) {
       structuredReturn.goals += numberPointsKnockoutMatches(TOP_SCORER).goals;
     }
     structuredReturn.points = structuredReturn.scorer + structuredReturn.goals;
-  }
+  
   return structuredReturn;
 };
 
@@ -232,7 +232,7 @@ const getPointsOfClassifiedInRounds = (
   for (let index = 0; index < actualMatchesOfUser.length; index++) {
     const elementUser = actualMatchesOfUser[index];
     const elementOutcome = actualMatchesOutcome[index];
-    if (elementOutcome.countTeams === true) {
+
       teamsOfUser.push(elementUser.away_team);
       teamsOfUser.push(elementUser.home_team);
       teamsOutcome.push(elementOutcome.away_team);
@@ -243,7 +243,7 @@ const getPointsOfClassifiedInRounds = (
       if (elementUser.home_team === elementOutcome.home_team) {
         teamsSpecificPosition.push(elementUser.home_team);
       }
-    }
+    
   }
 
   for (let index = 0; index < teamsOfUser.length; index++) {
