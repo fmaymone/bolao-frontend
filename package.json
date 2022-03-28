@@ -74,6 +74,9 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
+  "engines": {
+    "node": "11.x"
+  },
   "author": "Fernando Maymone",
   "homepage": "https://fmaymone.github.io/bolao-frontend",
   "license": "MIT",
