@@ -75,7 +75,7 @@
     "deploy": "gh-pages -d build"
   },
   "engines": {
-    "node": "4.x"
+    "node": "10.x"
   },
   "author": "Fernando Maymone",
   "homepage": "https://fmaymone.github.io/bolao-frontend",
