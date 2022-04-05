@@ -67,7 +67,7 @@ class Match extends Component {
       } else {
         return (
           <div>
-            
+
             <div>
               <Badge badgeContent={this.props.title.away} primary={true} />
             </div>
@@ -122,7 +122,7 @@ class Match extends Component {
                 alignItems: "center"
               }}
             >
-             {this.getDesktopContent('home')}
+              {this.getDesktopContent('home')}
               <div>
                 <Team
                   id={game.home_team}
@@ -145,7 +145,6 @@ class Match extends Component {
                 <TextField
                   id={`${this.props.game.home_team}_away`}
                   type="number"
-                  disabled={true}
                   value={this.props.game.home_result}
                   onChange={(e, game, type) =>
                     this.props.handleChangedResult(e, this.props.game, "home")
@@ -158,7 +157,6 @@ class Match extends Component {
                 <TextField
                   id={`${this.props.game.home_team}_away`}
                   type="number"
-                  disabled={true}
                   value={this.props.game.away_result}
                   onChange={(e, game, type) =>
                     this.props.handleChangedResult(e, this.props.game, "away")
@@ -212,7 +210,7 @@ class Match extends Component {
               alignItems: "center"
             }}
           >
-             {this.getDesktopContent('home')}
+            {this.getDesktopContent('home')}
             <div
               onClick={this.chooseDrawWinnerHandler.bind(
                 this,

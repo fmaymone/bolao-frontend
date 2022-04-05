@@ -23,33 +23,33 @@ import { change, submit } from "redux-form";
 import Match from "./Match";
 import { Container, Row, Col } from "react-grid-system";
 import Classification from './Classification'
-import {changeStage}  from '../../store/actions/bolaoActions'
+import { changeStage } from '../../store/actions/bolaoActions'
 
 class MatchList extends Component {
 
-  
-render() {
-  
-  
-  const {
-    matches,
-    stage
+
+  render() {
+
+
+    const {
+      matches,
+      stage
     } = this.props;
-  
+
     return (
-      
-        <div>
+
+      <div>
         {matches.map(match => (
           <div key={match.name}>
-            <Match game={match}  user={this.props.user} pool = {this.props.pool} chooseDrawWinnerHandler={this.props.chooseDrawWinnerHandler} 
-             isAdmin={this.props.isAdmin} handleChangedResult={this.props.handleChangedResult} finishedTimeToBet={this.props.finishedTimeToBet}/>
+            <Match game={match} user={this.props.user} pool={this.props.pool} chooseDrawWinnerHandler={this.props.chooseDrawWinnerHandler}
+              isAdmin={this.props.isAdmin} handleChangedResult={this.props.handleChangedResult} finishedTimeToBet={this.props.finishedTimeToBet} />
           </div>
         ))}
-        </div>  
-      
+      </div>
+
 
     );
-  } 
+  }
 }
 
 export default MatchList;

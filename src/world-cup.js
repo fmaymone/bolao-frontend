@@ -88,163 +88,163 @@ const data = {
   teams: [
     {
       id: 1,
-      name: "Russia",
-      iso2: "ru"
+      name: "Catar",
+      iso2: "qa"
     },
     {
       id: 2,
-      name: "Arabia Saudita",
-      iso2: "sa"
+      name: "Equador",
+      iso2: "ec"
     },
     {
       id: 3,
-      name: "Egito",
-      iso2: "eg"
-    },
-    {
-      id: 4,
-      name: "Uruguai",
-      iso2: "uy"
-    },
-    {
-      id: 5,
-      name: "Portugal",
-      iso2: "pt"
-    },
-    {
-      id: 6,
-      name: "Espanha",
-      iso2: "es"
-    },
-    {
-      id: 7,
-      name: "Marrocos",
-      iso2: "ma"
-    },
-    {
-      id: 8,
-      name: "Irã",
-      iso2: "ir"
-    },
-    {
-      id: 9,
-      name: "França",
-      iso2: "fr"
-    },
-    {
-      id: 10,
-      name: "Austrália",
-      iso2: "au"
-    },
-    {
-      id: 11,
-      name: "Peru",
-      iso2: "pe"
-    },
-    {
-      id: 12,
-      name: "Dinamarca",
-      iso2: "dk"
-    },
-    {
-      id: 13,
-      name: "Argentina",
-      iso2: "ar"
-    },
-    {
-      id: 14,
-      name: "Islândia",
-      iso2: "is"
-    },
-    {
-      id: 15,
-      name: "Croácia",
-      iso2: "hr"
-    },
-    {
-      id: 16,
-      name: "Nigéria",
-      iso2: "ng"
-    },
-    {
-      id: 17,
-      name: "Brasil",
-      iso2: "br"
-    },
-    {
-      id: 18,
-      name: "Suiça",
-      iso2: "ch"
-    },
-    {
-      id: 19,
-      name: "Costa Rica",
-      iso2: "cr"
-    },
-    {
-      id: 20,
-      name: "Sérvia",
-      iso2: "rs"
-    },
-    {
-      id: 21,
-      name: "Alemanha",
-      iso2: "de"
-    },
-    {
-      id: 22,
-      name: "México",
-      iso2: "mx"
-    },
-    {
-      id: 23,
-      name: "Suécia",
-      iso2: "se"
-    },
-    {
-      id: 24,
-      name: "Coréia do Sul",
-      iso2: "kr"
-    },
-    {
-      id: 25,
-      name: "Bélgica",
-      iso2: "be"
-    },
-    {
-      id: 26,
-      name: "Panamá",
-      iso2: "pa"
-    },
-    {
-      id: 27,
-      name: "Tunísia",
-      iso2: "tn"
-    },
-    {
-      id: 28,
-      name: "Inglaterra",
-      iso2: "gb"
-    },
-    {
-      id: 29,
-      name: "Polônia",
-      iso2: "pl"
-    },
-    {
-      id: 30,
       name: "Senegal",
       iso2: "sn"
     },
     {
+      id: 4,
+      name: "Holanda",
+      iso2: "nl"
+    },
+    {
+      id: 5,
+      name: "Inglaterra",
+      iso2: "gb-eng"
+    },
+    {
+      id: 6,
+      name: "Irã",
+      iso2: "ir"
+    },
+    {
+      id: 7,
+      name: "Estados Unidos",
+      iso2: "us"
+    },
+    {
+      id: 8,
+      name: "Gales/Escocia/Pol",
+      iso2: "ir"
+    },
+    {
+      id: 9,
+      name: "Argentina",
+      iso2: "ar"
+    },
+    {
+      id: 10,
+      name: "Arabia Saudita",
+      iso2: "sa"
+    },
+    {
+      id: 11,
+      name: "México",
+      iso2: "mx"
+    },
+    {
+      id: 12,
+      name: "Polônia",
+      iso2: "pl"
+    },
+    {
+      id: 13,
+      name: "França",
+      iso2: "fr"
+    },
+    {
+      id: 14,
+      name: "Peru",
+      iso2: "pe"
+    },
+    {
+      id: 15,
+      name: "Dinamarca",
+      iso2: "dk"
+    },
+    {
+      id: 16,
+      name: "Tunísia",
+      iso2: "tn"
+    },
+    {
+      id: 17,
+      name: "Espanha",
+      iso2: "es"
+    },
+    {
+      id: 18,
+      name: "Costa Rica",
+      iso2: "cr"
+    },
+    {
+      id: 19,
+      name: "Alemanha",
+      iso2: "de"
+    },
+    {
+      id: 20,
+      name: "Japão",
+      iso2: "jp"
+    },
+    {
+      id: 21,
+      name: "Bélgica",
+      iso2: "be"
+    },
+    {
+      id: 22,
+      name: "Canadá",
+      iso2: "ca"
+    },
+    {
+      id: 23,
+      name: "Marrocos",
+      iso2: "ma"
+    },
+    {
+      id: 24,
+      name: "Croácia",
+      iso2: "hr"
+    },
+    {
+      id: 25,
+      name: "Brasil",
+      iso2: "br"
+    },
+    {
+      id: 26,
+      name: "Sérvia",
+      iso2: "rs"
+    },
+    {
+      id: 27,
+      name: "Suiça",
+      iso2: "ch"
+    },
+    {
+      id: 28,
+      name: "Camarões",
+      iso2: "cm"
+    },
+    {
+      id: 29,
+      name: "Portugal",
+      iso2: "pt"
+    },
+    {
+      id: 30,
+      name: "Gana",
+      iso2: "gh"
+    },
+    {
       id: 31,
-      name: "Colômbia",
-      iso2: "co"
+      name: "Uruguai",
+      iso2: "uy"
     },
     {
       id: 32,
-      name: "Japão",
-      iso2: "jp"
+      name: "Coréia do Sul",
+      iso2: "kr"
     }
   ],
   matches: {
@@ -889,7 +889,7 @@ const data = {
       finished: false,
       group: ROUND_16,
       isKnockout: true,
-      title:{home:'1A', away:'2B'}
+      title: { home: '1A', away: '2B' }
     },
     50: {
       name: 50,
@@ -907,7 +907,7 @@ const data = {
       finished: false,
       group: ROUND_16,
       isKnockout: true,
-      title:{home:'1C', away:'2D'}
+      title: { home: '1C', away: '2D' }
     },
     51: {
       name: 51,
@@ -925,7 +925,7 @@ const data = {
       finished: false,
       group: ROUND_16,
       isKnockout: true,
-      title:{home:'1B', away:'2A'}
+      title: { home: '1B', away: '2A' }
     },
     52: {
       name: 52,
@@ -943,7 +943,7 @@ const data = {
       finished: false,
       group: ROUND_16,
       isKnockout: true,
-      title:{home:'1D', away:'2C'}
+      title: { home: '1D', away: '2C' }
     },
     53: {
       name: 53,
@@ -961,7 +961,7 @@ const data = {
       finished: false,
       group: ROUND_16,
       isKnockout: true,
-      title:{home:'1E', away:'2F'}
+      title: { home: '1E', away: '2F' }
     },
     54: {
       name: 54,
@@ -979,7 +979,7 @@ const data = {
       finished: false,
       group: ROUND_16,
       isKnockout: true,
-      title:{home:'1G', away:'2H'}
+      title: { home: '1G', away: '2H' }
     },
     55: {
       name: 55,
@@ -997,7 +997,7 @@ const data = {
       finished: false,
       group: ROUND_16,
       isKnockout: true,
-      title:{home:'1F', away:'2E'}
+      title: { home: '1F', away: '2E' }
     },
     56: {
       name: 56,
@@ -1015,7 +1015,7 @@ const data = {
       finished: false,
       group: ROUND_16,
       isKnockout: true,
-      title:{home:'1H', away:'2G'}
+      title: { home: '1H', away: '2G' }
     },
     57: {
       name: 57,
@@ -1033,7 +1033,7 @@ const data = {
       finished: false,
       group: ROUND_8,
       isKnockout: true,
-      title:{home:'V49', away:'V50'}
+      title: { home: 'V49', away: 'V50' }
     },
     58: {
       name: 58,
@@ -1051,7 +1051,7 @@ const data = {
       finished: false,
       group: ROUND_8,
       isKnockout: true,
-      title:{home:'V53', away:'V54'}
+      title: { home: 'V53', away: 'V54' }
     },
     59: {
       name: 59,
@@ -1069,7 +1069,7 @@ const data = {
       finished: false,
       group: ROUND_8,
       isKnockout: true,
-      title:{home:'V51', away:'V52'}
+      title: { home: 'V51', away: 'V52' }
     },
     60: {
       name: 60,
@@ -1087,7 +1087,7 @@ const data = {
       finished: false,
       group: ROUND_8,
       isKnockout: true,
-      title:{home:'V55', away:'V56'}
+      title: { home: 'V55', away: 'V56' }
     },
     61: {
       name: 61,
@@ -1105,7 +1105,7 @@ const data = {
       finished: false,
       group: ROUND_4,
       isKnockout: true,
-      title:{home:'V57', away:'V58'}
+      title: { home: 'V57', away: 'V58' }
     },
     62: {
       name: 62,
@@ -1123,7 +1123,7 @@ const data = {
       finished: false,
       group: ROUND_4,
       isKnockout: true,
-      title:{home:'V59', away:'V60'}
+      title: { home: 'V59', away: 'V60' }
     },
     63: {
       name: 63,
@@ -1141,7 +1141,7 @@ const data = {
       finished: false,
       group: ROUND_3x4,
       isKnockout: true,
-      title:{home:'P61', away:'P62'}
+      title: { home: 'P61', away: 'P62' }
     },
     64: {
       name: 64,
@@ -1159,9 +1159,9 @@ const data = {
       finished: false,
       group: ROUND_FINALS,
       isKnockout: true,
-      title:{home:'V61', away:'V62'}
+      title: { home: 'V61', away: 'V62' }
     },
-    'result' : {
+    'result': {
       first: NOT_CHOSEN,
       second: NOT_CHOSEN,
       third: NOT_CHOSEN,
