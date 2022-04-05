@@ -6,22 +6,27 @@ import IconButton from 'material-ui/IconButton';
 const PoolThumbnail = (props) => {
     const { pool, history, user } = props;
     //console.log(history);
-    return (
-        <GridTile
-            key={pool.key}
-            title={pool.name}
-            subtitle={<span>Criado por: <b>{pool.userName}</b></span>}
-            actionIcon={<IconButton></IconButton>}
-            onClick={() => {
-                history.push({
-                    pathname: `/pools/show/${pool.key}`,
-                    state: { userOfPool: user , pool: pool},
-                    
-                })
-            }}
-        >
-            <img src={pool.photoURL} />
-        </GridTile>
-    )
+    if (pool) {
+        return (
+            <GridTile
+                key={pool.key}
+                title={pool.name}
+                subtitle={<span>Criado por: <b>{pool.userName}</b></span>}
+                actionIcon={<IconButton></IconButton>}
+                onClick={() => {
+                    history.push({
+                        pathname: `/pools/show/${pool.key}`,
+                        state: { userOfPool: user, pool: pool },
+
+                    })
+                }}
+            >
+                <img src={pool.photoURL} />
+            </GridTile>
+        )
+    }
+    else {
+        return (<div />)
+    }
 }
 export default PoolThumbnail

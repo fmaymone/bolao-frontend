@@ -38,7 +38,7 @@ class MatchesBuilder extends Component {
       bettingStatus: FIRST_PHASE_STARTED,
       finishedTimeToBet: false,
       dialogHasOpened: false,
-      clicksDialogDraw: 0, 
+      clicksDialogDraw: 0,
       isAdmin: false
     };
   }
@@ -81,7 +81,7 @@ class MatchesBuilder extends Component {
   };
 
   checkLimitDate = () => {
-    const limitDate = new Date(2018, 6, 13, 18);
+    const limitDate = new Date(2022, 11, 22, 18);
     let now = new Date();
 
     if (now > limitDate) {
@@ -100,15 +100,15 @@ class MatchesBuilder extends Component {
   }
   checkAdmin = () => {
     console.log('check');
-    if(this.props.pool.key === POOL_ADMIN  && this.props.user.uid === USER_ADMIN){
-      this.setState({isAdmin: true});
+    if (this.props.pool.key === POOL_ADMIN && this.props.user.uid === USER_ADMIN) {
+      this.setState({ isAdmin: true });
     }
 
   }
   snapshotToArray(snapshot) {
     var returnArr = [];
 
-    snapshot.forEach(function(childSnapshot) {
+    snapshot.forEach(function (childSnapshot) {
       var item = childSnapshot.val();
       item.key = childSnapshot.key;
       returnArr.push(item);
@@ -208,7 +208,7 @@ class MatchesBuilder extends Component {
     const finalResult = this.state.matches.find(k => k.group === "result");
     return (
       <div>
-        
+
 
         <KnockoutBuilder
           matches={this.getActualMatches()}
@@ -250,7 +250,7 @@ class MatchesBuilder extends Component {
   };
 
   render() {
-    const { intl ,isGranted } = this.props;
+    const { intl, isGranted } = this.props;
 
     //console.log(isGranted('administration'));
 
