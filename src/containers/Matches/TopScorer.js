@@ -14,26 +14,24 @@ class TopScorer extends Component {
 
     this.state = {
       nameOfTopScorer: "",
-      goals: 0
+      goals: 0,
     };
   }
-  componentDidMount(){
-
+  componentDidMount() {
     this.setState(this.props.topScorer);
-
   }
-  handleChangeNameTopScorer = async event => {
+  handleChangeNameTopScorer = async (event) => {
     const { topScorer } = this.props;
     //let value = { ...topScorer, nameOfTopScorer: event.target.value };
-    this.setState({nameOfTopScorer:event.target.value});
+    this.setState({ nameOfTopScorer: event.target.value });
   };
-  handleChangeGoalsTopScorer = async event => {
+  handleChangeGoalsTopScorer = async (event) => {
     const { topScorer } = this.props;
-    this.setState({goals:event.target.value});
+    this.setState({ goals: event.target.value });
   };
   saveTopScorer = () => {
     this.props.handleChangeTopScorer(this.state);
-  }
+  };
 
   render() {
     //console.log(this.props.matches);
@@ -45,34 +43,34 @@ class TopScorer extends Component {
           id="text-field-controlled"
           value={this.state.nameOfTopScorer}
           floatingLabelText="Nome do Artilheiro"
-          disabled={true}
-
-          onChange={e => this.handleChangeNameTopScorer(e)}
+          disabled={false}
+          onChange={(e) => this.handleChangeNameTopScorer(e)}
         />
         <br />
         <TextField
           id="text-field-2"
           value={this.state.goals}
           floatingLabelText="Número de Gols"
-          disabled={true}
-
-          onChange={e => this.handleChangeGoalsTopScorer(e)}
+          disabled={false}
+          onChange={(e) => this.handleChangeGoalsTopScorer(e)}
         />
         <br />
         <div>
-        <RaisedButton
-          onClick={() => { this.saveTopScorer() }}
-          label="Salvar Artilheiro"
-          primary={true}
-          style={{ margin: 12, marginLeft: 0 }}
-        />
-      </div>
+          <RaisedButton
+            onClick={() => {
+              this.saveTopScorer();
+            }}
+            label="Salvar Artilheiro"
+            primary={true}
+            style={{ margin: 12, marginLeft: 0 }}
+          />
+        </div>
       </div>
     );
   }
 }
-const mapStateToProps = state => {
-  const { } = state;
+const mapStateToProps = (state) => {
+  const {} = state;
 
   return {};
 };
