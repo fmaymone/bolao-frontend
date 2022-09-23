@@ -13,7 +13,7 @@ import {
   SECOND_PHASE_STARTED,
   SECOND_PHASE_FINISHED,
   NOT_CHOSEN,
-  TOP_SCORER
+  TOP_SCORER,
 } from "../../store/actions/types";
 import { changeStage, updateTopScorer } from "../../store/actions/bolaoActions";
 import { Container, Row, Col } from "react-grid-system";
@@ -26,8 +26,8 @@ import Dialog from "material-ui/Dialog";
 import RaisedButton from "material-ui/RaisedButton";
 import FlatButton from "material-ui/FlatButton";
 
-const USER_ADMIN = '02b4c88iL0Olehf1KpeEeNUdBMX2';
-const POOL_ADMIN = '-LCmgkjj3PpQwwuQvKTA';
+const USER_ADMIN = "02b4c88iL0Olehf1KpeEeNUdBMX2";
+const POOL_ADMIN = "-LCmgkjj3PpQwwuQvKTA";
 
 class MatchesBuilder extends Component {
   constructor(props) {
@@ -39,10 +39,10 @@ class MatchesBuilder extends Component {
       finishedTimeToBet: false,
       dialogHasOpened: false,
       clicksDialogDraw: 0,
-      isAdmin: false
+      isAdmin: false,
     };
   }
-  handleChangeTopScorer = async value => {
+  handleChangeTopScorer = async (value) => {
     await this.props.updateTopScorer(this.props.pool, this.props.user, value);
     this.updateMatches();
   };
@@ -61,7 +61,7 @@ class MatchesBuilder extends Component {
         primary={true}
         keyboardFocused={true}
         onClick={this.handleDialogClose}
-      />
+      />,
     ];
     return (
       <div>
@@ -84,27 +84,28 @@ class MatchesBuilder extends Component {
     const limitDate = new Date(2022, 11, 22, 18);
     let now = new Date();
 
-    if (now > limitDate) {
-      this.setState({ finishedTimeToBet: true });
-    }
+    // if (now > limitDate) {
+    //   this.setState({ finishedTimeToBet: true });
+    // }
   };
 
-  handleChange = async value => {
+  handleChange = async (value) => {
     await this.handleChangeKnockout(value);
   };
   componentDidMount() {
     this.checkLimitDate();
     this.fetchMatches();
     this.checkAdmin();
-
   }
   checkAdmin = () => {
-    console.log('check');
-    if (this.props.pool.key === POOL_ADMIN && this.props.user.uid === USER_ADMIN) {
+    console.log("check");
+    if (
+      this.props.pool.key === POOL_ADMIN &&
+      this.props.user.uid === USER_ADMIN
+    ) {
       this.setState({ isAdmin: true });
     }
-
-  }
+  };
   snapshotToArray(snapshot) {
     var returnArr = [];
 
@@ -122,10 +123,10 @@ class MatchesBuilder extends Component {
     await firebaseApp
       .database()
       .ref(`/pools/${this.props.pool.key}/users/${user.uid}/matches`)
-      .on("value", snapshot => {
+      .on("value", (snapshot) => {
         this.setState({
           matches: this.snapshotToArray(snapshot),
-          isLoading: false
+          isLoading: false,
         });
       });
 
@@ -139,7 +140,7 @@ class MatchesBuilder extends Component {
       if (this.state.bettingStatus === FIRST_PHASE_STARTED) {
         for (let index = 0; index < matchesIdToSearch.length; index++) {
           const idToSearch = matchesIdToSearch[index];
-          const match = this.state.matches.find(k => k.name == idToSearch);
+          const match = this.state.matches.find((k) => k.name == idToSearch);
           if (!this.matchHasBeenAlocated(match)) {
             findMatchNotAllocated = true;
           }
@@ -154,7 +155,7 @@ class MatchesBuilder extends Component {
         }
       }
       //check if he finishes the finals and 3rd matches
-      const finalResult = this.state.matches.find(k => k.key === "result");
+      const finalResult = this.state.matches.find((k) => k.key === "result");
       if (
         finalResult.first !== NOT_CHOSEN &&
         finalResult.second !== NOT_CHOSEN &&
@@ -166,7 +167,7 @@ class MatchesBuilder extends Component {
     }
   };
   //check if a match have teams alocated. Used on the Status of the Matches Builder
-  matchHasBeenAlocated = match => {
+  matchHasBeenAlocated = (match) => {
     let answer = true;
     if (match.away_team === NOT_CHOSEN || match.home_team === NOT_CHOSEN) {
       answer = false;
@@ -178,7 +179,7 @@ class MatchesBuilder extends Component {
     //this.fetchMatches();
   };
 
-  filterFromGroup = value => {
+  filterFromGroup = (value) => {
     return value.group === this.props.playerDataReducer.currentGroup;
   };
   getActualMatches = () => {
@@ -205,11 +206,9 @@ class MatchesBuilder extends Component {
   renderKnockoutStage() {
     if (this.state.matches.length < 0) return <div />;
 
-    const finalResult = this.state.matches.find(k => k.group === "result");
+    const finalResult = this.state.matches.find((k) => k.group === "result");
     return (
       <div>
-
-
         <KnockoutBuilder
           matches={this.getActualMatches()}
           pool={this.props.pool}
@@ -227,7 +226,7 @@ class MatchesBuilder extends Component {
     if (this.state.matches.length < 1) {
       return <div />;
     } else {
-      const topScorer = this.state.matches.find(k => k.group === TOP_SCORER);
+      const topScorer = this.state.matches.find((k) => k.group === TOP_SCORER);
 
       return (
         <TopScorer
@@ -237,14 +236,14 @@ class MatchesBuilder extends Component {
       );
     }
   }
-  handleChangeKnockout = async phase => {
+  handleChangeKnockout = async (phase) => {
     let group = "round_16";
     if (phase === GROUPS_STAGE) {
       group = "a";
     }
     const data = {
       currentGroup: group,
-      currentPhase: phase
+      currentPhase: phase,
     };
     await this.props.changeStage(data);
   };
@@ -315,14 +314,14 @@ class MatchesBuilder extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { intl, dialogs, playerDataReducer, lists } = state;
 
   return {
     intl,
     dialogs,
     playerDataReducer: playerDataReducer,
-    matches: lists.listMatches
+    matches: lists.listMatches,
   };
 };
 

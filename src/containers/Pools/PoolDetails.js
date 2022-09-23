@@ -8,19 +8,17 @@ import { withRouter } from "react-router-dom";
 import { Activity } from "rmw-shell";
 import Pool from "../../components/Pool/Pool";
 import MatchesBuilder from "../Matches/MatchesBuilder";
-import PoolStepper from "./PoolStepper";
 import ClassificationOfUser from "./ClassificationOfUser";
 import Loader from "../../components/UI/Loader";
 import ClassificationOfPool from "./ClassificationOfPool";
-import MatchesOfTheDay from "./MatchesOfTheDay";
 
 const styles = {
   headline: {
     fontSize: 24,
     paddingTop: 16,
     marginBottom: 12,
-    fontWeight: 400
-  }
+    fontWeight: 400,
+  },
 };
 
 class PoolDetails extends Component {
@@ -33,7 +31,7 @@ class PoolDetails extends Component {
       outcomeMatches: [],
       matchesOfUser: [],
       poolData: [],
-      isLoadingPool: true
+      isLoadingPool: true,
     };
   }
   componentDidMount() {
@@ -58,10 +56,10 @@ class PoolDetails extends Component {
       .database()
       .ref(`/pools/${this.props.location.state.pool.key}/users`)
       .once("value")
-      .then(snapshot => {
+      .then((snapshot) => {
         this.setState({
           poolData: this.snapshotToArray(snapshot),
-          isLoadingPool: false
+          isLoadingPool: false,
         });
       });
   };
@@ -73,10 +71,10 @@ class PoolDetails extends Component {
     await firebaseApp
       .database()
       .ref(`/pools/${outcomePoolId}/users/${outcomeUserId}/matches`)
-      .on("value", snapshot => {
+      .on("value", (snapshot) => {
         this.setState({
           outcomeMatches: this.snapshotToArray(snapshot),
-          isLoadingOutcomeMatches: false
+          isLoadingOutcomeMatches: false,
         });
       });
   };
@@ -88,10 +86,10 @@ class PoolDetails extends Component {
     await firebaseApp
       .database()
       .ref(`/pools/${pool.key}/users/${user.uid}/matches`)
-      .on("value", snapshot => {
+      .on("value", (snapshot) => {
         this.setState({
           matchesOfUser: this.snapshotToArray(snapshot),
-          isLoadingMatchesOfUser: false
+          isLoadingMatchesOfUser: false,
         });
       });
   };
@@ -106,7 +104,7 @@ class PoolDetails extends Component {
 
     return returnArr;
   }
-  handleSetUserFromPool = async param => {
+  handleSetUserFromPool = async (param) => {
     this.setState({ isUserFromPool: param });
   };
 
@@ -117,7 +115,7 @@ class PoolDetails extends Component {
       answer = false;
     } else {
       const keys = Object.keys(pool.users);
-      const object = keys.find(k => k === user.uid);
+      const object = keys.find((k) => k === user.uid);
       if (object === undefined) {
         answer = false;
         this.setState({ isUserFromPool: false });
@@ -128,7 +126,7 @@ class PoolDetails extends Component {
     }
     return answer;
   };
-  renderData = pool => {
+  renderData = (pool) => {
     if (
       this.state.isLoadingMatchesOfUser === false &&
       this.state.isLoadingOutcomeMatches === false &&
@@ -167,7 +165,6 @@ class PoolDetails extends Component {
                 />
               </div>
             </Tab>
-
           </Tabs>
         </Activity>
       );
@@ -175,7 +172,7 @@ class PoolDetails extends Component {
       return <Loader />;
     }
   };
-  renderPool = pool => {
+  renderPool = (pool) => {
     return <Pool pool={pool} user={this.props.auth} />;
   };
 
@@ -205,13 +202,13 @@ class PoolDetails extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { auth, browser, lists } = state;
 
   return {
     auth,
     browser,
-    users: lists.users
+    users: lists.users,
   };
 };
 
