@@ -16,7 +16,7 @@ import {
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
-import { FINAL_RESULT, TOP_SCORER } from "../../store/actions/types";
+import { FINAL_RESULT } from "../../store/actions/types";
 import { Card, CardHeader } from "material-ui/Card";
 import Loader from "../../components/UI/Loader";
 import { calculatePoints } from "../../store/functions/general";
@@ -78,7 +78,7 @@ class ClassificationOfPool extends Component {
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
-              {allUserMatches.map((user,index) => (
+              {allUserMatches.map((user, index) => (
                 <TableRow>
                   <TableRowColumn style={{ width: "10%" }}>
                     <FlatButton
@@ -138,7 +138,7 @@ class ClassificationOfPool extends Component {
                         position="fourth"
                       />
                     </TableRowColumn>
- 
+
                   </TableRowColumn>
                 </TableRow>
               ))}
@@ -204,7 +204,7 @@ class ClassificationOfPool extends Component {
   }
 }
 
-const mapStateToProps = state => {};
+const mapStateToProps = state => { };
 export default connect(
   mapStateToProps,
   {}

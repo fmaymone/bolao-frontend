@@ -148,13 +148,13 @@ class PoolDetails extends Component {
               </div>
             </Tab>
             <Tab label="Classificação" value="b">
-              <div>
+              {/* <div>
                 <ClassificationOfPool
                   poolData={this.state.poolData}
                   outcomeMatches={this.state.outcomeMatches}
                   users={this.props.users}
                 />
-              </div>
+              </div> */}
             </Tab>
             <Tab label="Meus Pontos" value="c">
               <div>
