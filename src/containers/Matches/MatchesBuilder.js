@@ -23,7 +23,6 @@ import MatchesStepper from "./MatchesStepper";
 import { cyan700 } from "material-ui/styles/colors";
 import TopScorer from "./TopScorer";
 import Dialog from "material-ui/Dialog";
-import RaisedButton from "material-ui/RaisedButton";
 import FlatButton from "material-ui/FlatButton";
 
 const USER_ADMIN = "02b4c88iL0Olehf1KpeEeNUdBMX2";
@@ -84,9 +83,9 @@ class MatchesBuilder extends Component {
     const limitDate = new Date(2022, 11, 22, 18);
     let now = new Date();
 
-    // if (now > limitDate) {
-    //   this.setState({ finishedTimeToBet: true });
-    // }
+    if (now > limitDate) {
+      this.setState({ finishedTimeToBet: true });
+    }
   };
 
   handleChange = async (value) => {

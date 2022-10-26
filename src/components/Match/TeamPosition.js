@@ -32,7 +32,7 @@ class TeamPosition extends Component {
   renderHomeTeam = team => {
     return (
       <Row align="center">
-        
+
         <Col>
           <Flag code={team.iso2} height="16" />
         </Col>
@@ -43,10 +43,9 @@ class TeamPosition extends Component {
 
   renderTeam = team => {
     const teamValues = this.props.team;
-    //id: match.val.home_team, points: 0, win: 0, lost: 0, draw: 0, gc: 0, gp: 0 }
     return (
       <TableRow>
-        <TableRowColumn style={{width: '30%'}}>{team.name}</TableRowColumn>
+        <TableRowColumn style={{ width: '30%' }}>{team.name}</TableRowColumn>
         <TableRowColumn>{teamValues.points}</TableRowColumn>
         <TableRowColumn>{teamValues.win}</TableRowColumn>
         <TableRowColumn>{teamValues.lost}</TableRowColumn>
@@ -59,10 +58,10 @@ class TeamPosition extends Component {
   };
   render() {
     const isHomeTeam = this.props.isHomeTeam;
-    const teamEntity = this.props.worldCupData.teams.find(k=>k.id==this.props.team.id);
+    const teamEntity = this.props.worldCupData.teams.find(k => k.id == this.props.team.id);
     if (teamEntity) {
-      return(this.renderTeam(teamEntity));
-     
+      return (this.renderTeam(teamEntity));
+
     } else {
       return "Olar";
     }
