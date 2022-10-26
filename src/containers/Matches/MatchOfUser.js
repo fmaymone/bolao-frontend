@@ -1,29 +1,16 @@
 import React, { Component } from "react";
 import {
-  ROUND_4,
-  ROUND_8,
-  TOP_SCORER,
-  ROUND_16,
-  ROUND_FINALS,
-  ROUND_3x4,
-  FINAL_RESULT
-} from "../../store/actions/types";
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
 import TeamClassification from "../../components/Match/TeamClassification";
 
 class MatchOfUser extends Component {
-  
-  
+
+
   renderCell = () => {
     const { userMatch } = this.props;
-  
+
     if (userMatch.name !== undefined) {
       return (
         <TableRow>
@@ -49,7 +36,6 @@ class MatchOfUser extends Component {
     }
   };
   render() {
- 
     return this.renderCell();
   }
 }
