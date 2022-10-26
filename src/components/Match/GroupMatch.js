@@ -99,9 +99,10 @@ class GroupMatch extends Component {
                 id={`${this.props.game.home_team}_home`}
                 type="number"
                 value={this.props.game.home_result}
-                onChange={(e, game, type) =>
+                onChange={(e) =>
                   this.props.handleChangedResult(e, this.props.game, "home")
                 }
+                disabled={this.props.finishedTimeToBet}
                 style={{ width: 30 }}
               />
             </div>
@@ -111,9 +112,10 @@ class GroupMatch extends Component {
                 id={`${this.props.game.home_team}_away`}
                 type="number"
                 value={this.props.game.away_result}
-                onChange={(e, game, type) =>
+                onChange={(e) =>
                   this.props.handleChangedResult(e, this.props.game, "away")
                 }
+                disabled={this.props.finishedTimeToBet}
                 style={{ width: 30 }}
               />
             </div>
