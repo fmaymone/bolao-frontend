@@ -195,7 +195,7 @@ class PoolDetails extends Component {
     } else {
       return (
         <Activity title={`${pool.name}`}>
-          <h1>Não lembra qual login fez o jogo? Te vira fera!!!!</h1>
+          <h1>Tu num é do grupo. Pede pra alguem te adicionar ou vaza!!!!</h1>
         </Activity>
       );
     }

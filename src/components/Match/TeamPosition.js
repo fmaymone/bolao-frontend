@@ -43,6 +43,7 @@ class TeamPosition extends Component {
 
   renderTeam = team => {
     const teamValues = this.props.team;
+    //id: match.val.home_team, points: 0, win: 0, lost: 0, draw: 0, gc: 0, gp: 0 }
     return (
       <TableRow>
         <TableRowColumn style={{ width: '30%' }}>{team.name}</TableRowColumn>

@@ -239,7 +239,7 @@ class Match extends Component {
               <TextField
                 id={`${this.props.game.home_team}_away`}
                 type="number"
-                disabled={true}
+                disabled={this.props.finishedTimeToBet}
                 value={this.props.game.home_result}
                 onChange={(e, game, type) =>
                   this.props.handleChangedResult(e, this.props.game, "home")
@@ -254,7 +254,7 @@ class Match extends Component {
                 id={`${this.props.game.home_team}_away`}
                 type="number"
                 value={this.props.game.away_result}
-                disabled={true}
+                disabled={this.props.finishedTimeToBet}
                 onChange={(e, game, type) =>
                   this.props.handleChangedResult(e, this.props.game, "away")
                 }
