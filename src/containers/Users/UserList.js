@@ -83,7 +83,7 @@ class UserList extends Component {
                             />
                         }
                         key={index}
-                        primaryText={user.displayName}
+                        primaryText={user.displayName + " / " + user.email}
                         id={index}
                         rightIcon={iconAddOrRemove}
                         secondaryText={secondaryText}

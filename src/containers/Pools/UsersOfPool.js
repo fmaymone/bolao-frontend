@@ -162,10 +162,7 @@ class UsersOfPool extends Component {
         >
         <Scrollbar>
         <div style={{ overflow: 'none', backgroundColor: muiTheme.palette.convasColor }}>
-        
-         
             <UserList usersOfPool={keysFromUsersFromPool} users={this.state.users} handleClick={this.handleClick} mode='delete' />
-          
         </div>
         </Scrollbar>
         </Activity>
