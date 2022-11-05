@@ -66,7 +66,7 @@ class About extends Component {
             alignItems: "center"
           }}
         >
-          <h1>Taxa de Inscrição: R$ 100,00 por aposta</h1>
+          <h1>Taxa de Inscrição: R$ 150,00 por aposta</h1>
           {this.renderPremiacao()}
           <h1>Regulamento</h1>
           <p>
@@ -74,7 +74,7 @@ class About extends Component {
             devidamente preenchidos para até a final. Lembrar que em caso de
             empate em jogos de mata-mata, o jogador deve clicar em cima do time
             que ele julga que se classificará (ou será campeão no caso da final)
-            até o dia 13/06/2018, bem como, fazer o pagamento até este mesmo
+            até o dia 22/11/2022, bem como, fazer o pagamento até este mesmo
             dia, em mãos, para um dos representantes da comissão organizadora,
             sem prorrogação. Para aqueles que se encontram morando fora de
             Recife, entrar em contato para realizar o pagamento através de
