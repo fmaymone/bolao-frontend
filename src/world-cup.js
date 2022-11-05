@@ -153,8 +153,8 @@ const data = {
     },
     {
       id: 14,
-      name: "Peru",
-      iso2: "pe"
+      name: "Australia",
+      iso2: "au"
     },
     {
       id: 15,
