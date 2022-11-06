@@ -9,12 +9,9 @@ import { Activity } from "rmw-shell";
 import Pool from "../../components/Pool/Pool";
 import MatchesBuilder from "../Matches/MatchesBuilder";
 import ClassificationOfUser from "./ClassificationOfUser";
-import ClassificationOfPool from "./ClassificationOfPool";
 import Loader from "../../components/UI/Loader";
-import usersData from "./users";
-import poolData from "./pools";
 
-class PoolDetails extends Component {
+class PoolDetailsConsolidated extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,35 +34,17 @@ class PoolDetails extends Component {
     this.fetchPoolData();
     this.fetchOutcome();
     this.fetchMatches();
-    this.fetchAsyncPoolData();
-    this.fetchAsyncUserData();
     let ref = firebaseApp.database().ref("users");
     watchList(ref);
   }
-  fetchAsyncPoolData = () => {
-    const pools = poolData;
-    const currentMatchesFromPool =
-      pools[this.props.location.state.pool.key].users;
-    let arr = [];
-
-    Object.keys(currentMatchesFromPool).map((key) =>
-      arr.push({ key: key, matches: currentMatchesFromPool[key].matches })
-    );
-    this.setState({
-      poolData: arr,
-      isLoadingPool: false,
-    });
-  };
-
-  fetchAsyncUserData = () => {
-    const user = this.props.location.state.userOfPool;
-    const pool = this.props.location.state.pool;
-    const users = usersData;
-    console.log("buceta");
-  };
 
   fetchPoolData = async () => {
     const { firebaseApp } = this.props;
+    
+    fetch("../../store/offline/users.json")
+      .then((response) => response.json())
+      .then((json) => console.log(json));
+
     await firebaseApp
       .database()
       .ref(`/pools/${this.props.location.state.pool.key}/users`)
@@ -146,7 +125,6 @@ class PoolDetails extends Component {
       this.state.isLoadingOutcomeMatches === false &&
       this.state.isLoadingPool === false
     ) {
-      console.log(this.state.poolData);
       return (
         <Activity title={`${pool.name}`}>
           <Tabs value={this.state.value} onChange={this.handleChange}>
@@ -163,13 +141,13 @@ class PoolDetails extends Component {
               </div>
             </Tab>
             <Tab label="Classificação" value="b">
-              <div>
+              {/* <div>
                 <ClassificationOfPool
                   poolData={this.state.poolData}
                   outcomeMatches={this.state.outcomeMatches}
                   users={this.props.users}
                 />
-              </div>
+              </div> */}
             </Tab>
             <Tab label="Meus Pontos" value="c">
               <div>
@@ -192,8 +170,10 @@ class PoolDetails extends Component {
   };
 
   render() {
+    const { match, auth, history } = this.props;
+
     const pool = this.props.location.state.pool;
-    console.log(this.state);
+
     if (this.state.isUserFromPool) {
       if (pool !== undefined) {
         return this.renderData(pool);
@@ -225,5 +205,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(
-  injectIntl(muiThemeable()(withRouter(withFirebase(PoolDetails))))
+  injectIntl(muiThemeable()(withRouter(withFirebase(PoolDetailsConsolidated))))
 );
