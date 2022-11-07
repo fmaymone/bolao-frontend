@@ -11,6 +11,8 @@ import MatchesBuilder from "../Matches/MatchesBuilder";
 import ClassificationOfUser from "./ClassificationOfUser";
 import Loader from "../../components/UI/Loader";
 import ClassificationOfPool from "./ClassificationOfPool";
+import userCachedData from "./users";
+import poolCachedData from "./poolCachedData";
 
 const styles = {
   headline: {
@@ -32,6 +34,7 @@ class PoolDetails extends Component {
       matchesOfUser: [],
       poolData: [],
       isLoadingPool: true,
+      finishedTimeToBet: false,
     };
   }
   componentDidMount() {
@@ -41,13 +44,40 @@ class PoolDetails extends Component {
       this.props.location.state.userOfPool,
       this.props.location.state.pool
     );
-    this.fetchPoolData();
+    if (this.state.finishedTimeToBet) {
+      this.fetchPoolDataCached();
+      this.fetchMatchesDataCached();
+    } else {
+      this.fetchPoolData();
+    }
+
     this.fetchOutcome();
     this.fetchMatches();
-    let ref = firebaseApp.database().ref("users");
-    watchList(ref);
+    const limitDate = new Date(2022, 11, 22, 18);
+    let now = new Date();
+
+    if (now > limitDate) {
+      this.setState({ finishedTimeToBet: true });
+    }
+    //let ref = firebaseApp.database().ref("users");
+    //watchList(ref);
   }
-  //console.log(this.state.outcome);
+
+  fetchPoolDataCached = () => {
+    let dataAsArray = [];
+    const currentPool =
+      poolCachedData[this.props.location.state.pool.key].users;
+    Object.keys(currentPool).forEach((value) => {
+      dataAsArray.push({
+        key: value,
+        matches: currentPool[value].matches,
+      });
+    });
+    this.setState({
+      poolData: dataAsArray,
+      isLoadingPool: false,
+    });
+  };
 
   fetchPoolData = async () => {
     const { firebaseApp } = this.props;
@@ -93,6 +123,23 @@ class PoolDetails extends Component {
         });
       });
   };
+
+  fetchMatchesDataCached = async () => {
+    const user = this.props.location.state.userOfPool;
+    const pool = this.props.location.state.pool;
+
+    const poolData = poolCachedData;
+
+    let dataAsArray = [];
+    const matchesOfUser =
+      poolData[this.props.location.state.pool.key].users[user.uid].matches;
+
+    this.setState({
+      matchesOfUser: matchesOfUser,
+      isLoadingMatchesOfUser: false,
+    });
+  };
+
   snapshotToArray(snapshot) {
     var returnArr = [];
 
@@ -147,24 +194,28 @@ class PoolDetails extends Component {
                 />
               </div>
             </Tab>
-            <Tab label="Classificação" value="b">
-              {/* <div>
-                <ClassificationOfPool
-                  poolData={this.state.poolData}
-                  outcomeMatches={this.state.outcomeMatches}
-                  users={this.props.users}
-                />
-              </div> */}
-            </Tab>
-            <Tab label="Meus Pontos" value="c">
-              <div>
-                <ClassificationOfUser
-                  user={this.props.auth}
-                  matchesOfUser={this.state.matchesOfUser}
-                  outcomeMatches={this.state.outcomeMatches}
-                />
-              </div>
-            </Tab>
+            {this.state.finishedTimeToBet && (
+              <Tab label="Classificação" value="b">
+                <div>
+                  <ClassificationOfPool
+                    poolData={this.state.poolData}
+                    outcomeMatches={this.state.outcomeMatches}
+                    users={this.props.users}
+                  />
+                </div>
+              </Tab>
+            )}
+            {this.state.finishedTimeToBet && (
+              <Tab label="Meus Pontos" value="c">
+                <div>
+                  <ClassificationOfUser
+                    user={this.props.auth}
+                    matchesOfUser={this.state.matchesOfUser}
+                    outcomeMatches={this.state.outcomeMatches}
+                  />
+                </div>
+              </Tab>
+            )}
           </Tabs>
         </Activity>
       );
