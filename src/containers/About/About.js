@@ -22,31 +22,31 @@ class About extends Component {
           <TableRow>
             <TableRowColumn>1</TableRowColumn>
             <TableRowColumn>
-              50% do dinheiro arrecadado (Nº Apostadores x R$100,00)
+              50% do dinheiro arrecadado (Nº Apostadores x R$150,00)
             </TableRowColumn>
           </TableRow>
           <TableRow>
             <TableRowColumn>2</TableRowColumn>
             <TableRowColumn>
-              20% do dinheiro arrecadado (Nº Apostadores x R$100,00)
+              20% do dinheiro arrecadado (Nº Apostadores x R$150,00)
             </TableRowColumn>
           </TableRow>
           <TableRow>
             <TableRowColumn>3</TableRowColumn>
             <TableRowColumn>
-              15% do dinheiro arrecadado (Nº Apostadores x R$100,00)
+              15% do dinheiro arrecadado (Nº Apostadores x R$150,00)
             </TableRowColumn>
           </TableRow>
           <TableRow>
             <TableRowColumn>4</TableRowColumn>
             <TableRowColumn>
-              10% do dinheiro arrecadado (Nº Apostadores x R$100,00)
+              10% do dinheiro arrecadado (Nº Apostadores x R$150,00)
             </TableRowColumn>
           </TableRow>
           <TableRow>
             <TableRowColumn>5</TableRowColumn>
             <TableRowColumn>
-              05% do dinheiro arrecadado (Nº Apostadores x R$100,00)
+              05% do dinheiro arrecadado (Nº Apostadores x R$150,00)
             </TableRowColumn>
           </TableRow>
         </TableBody>
@@ -89,10 +89,10 @@ class About extends Component {
           <p>
             A premiação será paga na primeira semana após a final da Copa. Os
             cinco últimos colocados serão penalizados e pagarão a quantia de R$
-            100,00 - R$ 80,00 – R$ 60,00 – R$ 40,00 – R$ 20,00. Sendo R$ 100,00
+            150,00 - R$ 130,00 – R$ 110,00 – R$ 90,00 – R$ 70,00. Sendo R$ 150,00
             para o último colocado, R$ 80,00 para o penúltimo colocado e assim
-            sucessivamente. Este dinheiro arrecadado será utilizado para pagar a
-            conta da cachaça do final do Bolão onde serão entregues os prêmios
+            sucessivamente. Este dinheiro arrecadado será utilizado para pagar o custo
+            dos servidores do bolao, e o restante em caso de sobrar saldo, da conta da cachaça do final do Bolão onde serão entregues os prêmios
             para os ganhadores.
           </p>
           <p>
