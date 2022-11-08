@@ -2,23 +2,23 @@ import React, { Component } from "react";
 import Classification from "../../components/Match/Classification";
 import { withFirebase } from "firekit-provider";
 import { connect } from "react-redux";
-import {
-  KNOCKOUT_STAGE,
-} from "../../store/actions/types";
+import { KNOCKOUT_STAGE } from "../../store/actions/types";
 import {
   updateClassification,
-  updateMatch
+  updateMatch,
 } from "../../store/actions/bolaoActions";
 
 class ClassificationBuilder extends Component {
   componentDidMount() {
     const { firebaseApp, watchList } = this.props;
     //firebaseApp.database().ref(`/users/${auth.uid}/matches`);
-    let ref = firebaseApp.database().ref(`/users/${this.props.user.uid}/matches`);
+    let ref = firebaseApp
+      .database()
+      .ref(`/users/${this.props.user.uid}/matches`);
     watchList(ref, "listMatches"); //Here we started watching a list
   }
 
-  updateKnockoutStage = async teams => {
+  updateKnockoutStage = async (teams) => {
     const stage = this.props.stage;
     try {
       if (stage.currentPhase === KNOCKOUT_STAGE) {
@@ -35,41 +35,49 @@ class ClassificationBuilder extends Component {
     //console.log("KnockoutPhase");
   };
 
-  updateGroupsPhase = async teams => {
+  updateGroupsPhase = async (teams) => {
     await this.update16Phase(teams);
     await this.updateClassificationDb(teams);
   };
 
-  updateClassificationDb = async teams => {
+  updateClassificationDb = async (teams) => {
     const group = this.props.stage.currentGroup;
-    this.props.updateClassification(group, teams, this.props.pool, this.props.user);
+    this.props.updateClassification(
+      group,
+      teams,
+      this.props.pool,
+      this.props.user
+    );
   };
 
-  update16Phase = async teams => {
+  update16Phase = async (teams) => {
     const group = this.props.stage.currentGroup;
     let firstOfGroup = teams[0];
     let secondOfGroup = teams[1];
     let actualMatches = this.props.referenceMatches;
-    const matchesToUpdate = this.props.worldCupData.knockout_crossings.ROUND_16.find(
-      k => k.id == group
+    const matchesToUpdate =
+      this.props.worldCupData.knockout_crossings.ROUND_16.find(
+        (k) => k.id == group
+      );
+    let firstMatch = actualMatches.find(
+      (k) => k.key == matchesToUpdate.homeTeam
     );
-    let firstMatch = actualMatches.find(k => k.key == matchesToUpdate.homeTeam);
     let secondMatch = actualMatches.find(
-      k => k.key == matchesToUpdate.awayTeam
+      (k) => k.key == matchesToUpdate.awayTeam
     );
-   // if (!firstMatch === undefined && !secondMatch === undefined) {
-      firstMatch.home_team = firstOfGroup.id;
-      secondMatch.away_team = secondOfGroup.id;
-      this.props.updateMatch(firstMatch, this.props.pool, this.props.user);
-      this.props.updateMatch(secondMatch, this.props.pool, this.props.user);
+    // if (!firstMatch === undefined && !secondMatch === undefined) {
+    firstMatch.home_team = firstOfGroup.id;
+    secondMatch.away_team = secondOfGroup.id;
+    this.props.updateMatch(firstMatch, this.props.pool, this.props.user);
+    this.props.updateMatch(secondMatch, this.props.pool, this.props.user);
     //}
   };
 
-  fillClassificationGroups = matches => {
+  fillClassificationGroups = (matches) => {
     let classification = [];
 
     for (let match of matches) {
-      if (!classification.find(k => k.id == match.away_team)) {
+      if (!classification.find((k) => k.id == match.away_team)) {
         let element = {
           id: match.away_team,
           points: 0,
@@ -77,11 +85,11 @@ class ClassificationBuilder extends Component {
           lost: 0,
           draw: 0,
           gc: 0,
-          gp: 0
+          gp: 0,
         };
         classification.push(element);
       }
-      if (!classification.find(k => k.id == match.home_team)) {
+      if (!classification.find((k) => k.id == match.home_team)) {
         let element = {
           id: match.home_team,
           points: 0,
@@ -89,17 +97,17 @@ class ClassificationBuilder extends Component {
           lost: 0,
           draw: 0,
           gc: 0,
-          gp: 0
+          gp: 0,
         };
         classification.push(element);
       }
     }
     for (let match of matches) {
-      let teamHome = classification.find(k => k.id == match.home_team);
-      let teamAway = classification.find(k => k.id == match.away_team);
+      let teamHome = classification.find((k) => k.id == match.home_team);
+      let teamAway = classification.find((k) => k.id == match.away_team);
 
-      let home_result = parseInt(match.home_result);
-      let away_result = parseInt(match.away_result);
+      let home_result = parseInt(match.home_result) || 0;
+      let away_result = parseInt(match.away_result) || 0;
 
       teamHome.gp += home_result;
       teamHome.gc += away_result;
@@ -165,15 +173,15 @@ class ClassificationBuilder extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { intl, dialogs,  lists, player, worldCupData } = state;
+const mapStateToProps = (state) => {
+  const { intl, dialogs, lists, player, worldCupData } = state;
 
   return {
     intl,
     dialogs,
-    
+
     worldCupData,
-    userMatches: lists.listMatches
+    userMatches: lists.listMatches,
   };
 };
 
