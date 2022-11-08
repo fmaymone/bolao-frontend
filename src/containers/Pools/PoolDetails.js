@@ -29,11 +29,11 @@ class PoolDetails extends Component {
     this.state = {
       isUserFromPool: false,
       isLoadingMatchesOfUser: true,
-      isLoadingOutcomeMatches: true,
+      isLoadingOutcomeMatches: false,
+      isLoadingPool: false,
       outcomeMatches: [],
       matchesOfUser: [],
       poolData: [],
-      isLoadingPool: true,
       finishedTimeToBet: false,
     };
   }
@@ -45,22 +45,19 @@ class PoolDetails extends Component {
       this.props.location.state.pool
     );
     if (this.state.finishedTimeToBet) {
-      this.fetchPoolDataCached();
       this.fetchMatchesDataCached();
-    } else {
-      this.fetchPoolData();
+      this.fetchPoolDataCached();
+      this.fetchOutcome();
+      //this.fetchPoolData();
     }
-
-    this.fetchOutcome();
     this.fetchMatches();
+
     const limitDate = new Date(2022, 11, 22, 18);
     let now = new Date();
 
     if (now > limitDate) {
       this.setState({ finishedTimeToBet: true });
     }
-    //let ref = firebaseApp.database().ref("users");
-    //watchList(ref);
   }
 
   fetchPoolDataCached = () => {
