@@ -5,7 +5,7 @@ import {
   ROUND_FINALS,
   ROUND_3x4,
   FINAL_RESULT,
-  TOP_SCORER
+  TOP_SCORER,
 } from "../actions/types";
 
 export const calculatePoints = (userMatches, outcomeMatches) => {
@@ -18,7 +18,7 @@ export const calculatePoints = (userMatches, outcomeMatches) => {
     ROUND_FINALS,
     ROUND_3x4,
     TOP_SCORER,
-    FINAL_RESULT
+    FINAL_RESULT,
   };
 
   let totalPoints = 0;
@@ -83,8 +83,6 @@ const getPointsOfMatches = (matchesOfUser, outcomeMatches) => {
   let structuredReturn = { totalPoints: 0, matches: [] };
   let totalPoints = 0;
   for (let index = 0; index < matchesOfUser.length; index++) {
-    let points = 0;
-
     const elementUser = matchesOfUser[index];
     const elementOutcome = outcomeMatches[index];
     let tempElement = { points: 0, match: elementUser };
@@ -109,15 +107,15 @@ const getPointsOfMatch = (userMatch, outcomeMatch) => {
     ) {
       if (Math.sign(userMatch.home_result - userMatch.away_result) === 0) {
         points += 4;
-        if (userMatch.home_result == outcomeMatch.home_result) {
+        if (userMatch.home_result === outcomeMatch.home_result) {
           points += 2;
         }
       } else {
         points += 3;
-        if (userMatch.home_result == outcomeMatch.home_result) {
+        if (userMatch.home_result === outcomeMatch.home_result) {
           points += 1.5;
         }
-        if (userMatch.away_result == outcomeMatch.away_result) {
+        if (userMatch.away_result === outcomeMatch.away_result) {
           points += 1.5;
         }
       }
@@ -131,50 +129,49 @@ const getPointsOfFinalResult = (matchesOfUser, outcomeMatches) => {
   let structuredReturn;
 
   if (matchesOfUser !== undefined && outcomeMatches !== undefined) {
-    const userFinalResult = matchesOfUser.find(k => k.group === FINAL_RESULT);
+    const userFinalResult = matchesOfUser.find((k) => k.group === FINAL_RESULT);
     const outcomeFinalResult = outcomeMatches.find(
-      k => k.group === FINAL_RESULT
+      (k) => k.group === FINAL_RESULT
     );
     structuredReturn = {
       points: 0,
       first: {
         id: userFinalResult.first,
-        type: userFinalResult.first == outcomeFinalResult.first
+        type: userFinalResult.first === outcomeFinalResult.first,
       },
       second: {
         id: userFinalResult.second,
-        type: userFinalResult.second == outcomeFinalResult.second
+        type: userFinalResult.second === outcomeFinalResult.second,
       },
       third: {
         id: userFinalResult.third,
-        type: userFinalResult.third == outcomeFinalResult.third
+        type: userFinalResult.third === outcomeFinalResult.third,
       },
       fourth: {
         id: userFinalResult.fourth,
-        type: userFinalResult.fourth == outcomeFinalResult.fourth
-      }
+        type: userFinalResult.fourth === outcomeFinalResult.fourth,
+      },
     };
 
-      points +=
-        structuredReturn.first.type *
-        numberPointsKnockoutMatches(FINAL_RESULT).first;
-      points +=
-        structuredReturn.second.type *
-        numberPointsKnockoutMatches(FINAL_RESULT).second;
-      points +=
-        structuredReturn.third.type *
-        numberPointsKnockoutMatches(FINAL_RESULT).third;
-      points +=
-        structuredReturn.fourth.type *
-        numberPointsKnockoutMatches(FINAL_RESULT).fourth;
-    
+    points +=
+      structuredReturn.first.type *
+      numberPointsKnockoutMatches(FINAL_RESULT).first;
+    points +=
+      structuredReturn.second.type *
+      numberPointsKnockoutMatches(FINAL_RESULT).second;
+    points +=
+      structuredReturn.third.type *
+      numberPointsKnockoutMatches(FINAL_RESULT).third;
+    points +=
+      structuredReturn.fourth.type *
+      numberPointsKnockoutMatches(FINAL_RESULT).fourth;
 
     structuredReturn.points = points;
   }
   return structuredReturn;
 };
 
-const numberPointsKnockoutMatches = group => {
+const numberPointsKnockoutMatches = (group) => {
   switch (group) {
     case ROUND_16:
       return { classified: 4, specificTeam: 6 };
@@ -196,21 +193,18 @@ const numberPointsKnockoutMatches = group => {
 };
 
 const getPointsTopScorer = (matchesOfUser, outcomeMatches) => {
-  const userFinalResult = matchesOfUser.find(k => k.group === TOP_SCORER);
-  const outcomeFinalResult = outcomeMatches.find(k => k.group === TOP_SCORER);
+  const userFinalResult = matchesOfUser.find((k) => k.group === TOP_SCORER);
+  const outcomeFinalResult = outcomeMatches.find((k) => k.group === TOP_SCORER);
   let structuredReturn = { total: 0, scorer: 0, goals: 0, points: 0 };
 
+  if (userFinalResult.nameOfTopScorer === outcomeFinalResult.nameOfTopScorer) {
+    structuredReturn.scorer += numberPointsKnockoutMatches(TOP_SCORER).name;
+  }
+  if (userFinalResult.goals === outcomeFinalResult.goals) {
+    structuredReturn.goals += numberPointsKnockoutMatches(TOP_SCORER).goals;
+  }
+  structuredReturn.points = structuredReturn.scorer + structuredReturn.goals;
 
-    if (
-      userFinalResult.nameOfTopScorer === outcomeFinalResult.nameOfTopScorer
-    ) {
-      structuredReturn.scorer += numberPointsKnockoutMatches(TOP_SCORER).name;
-    }
-    if (userFinalResult.goals == outcomeFinalResult.goals) {
-      structuredReturn.goals += numberPointsKnockoutMatches(TOP_SCORER).goals;
-    }
-    structuredReturn.points = structuredReturn.scorer + structuredReturn.goals;
-  
   return structuredReturn;
 };
 
@@ -224,7 +218,7 @@ const getPointsOfClassifiedInRounds = (
   let teamsSpecificPosition = [];
   let structuredReturn = {
     points: 0,
-    teams: []
+    teams: [],
   };
   const actualMatchesOfUser = getActualMatches(matchesOfUser, group);
   const actualMatchesOutcome = getActualMatches(outcomeMatches, group);
@@ -233,17 +227,16 @@ const getPointsOfClassifiedInRounds = (
     const elementUser = actualMatchesOfUser[index];
     const elementOutcome = actualMatchesOutcome[index];
 
-      teamsOfUser.push(elementUser.away_team);
-      teamsOfUser.push(elementUser.home_team);
-      teamsOutcome.push(elementOutcome.away_team);
-      teamsOutcome.push(elementOutcome.home_team);
-      if (elementUser.away_team === elementOutcome.away_team) {
-        teamsSpecificPosition.push(elementUser.away_team);
-      }
-      if (elementUser.home_team === elementOutcome.home_team) {
-        teamsSpecificPosition.push(elementUser.home_team);
-      }
-    
+    teamsOfUser.push(elementUser.away_team);
+    teamsOfUser.push(elementUser.home_team);
+    teamsOutcome.push(elementOutcome.away_team);
+    teamsOutcome.push(elementOutcome.home_team);
+    if (elementUser.away_team === elementOutcome.away_team) {
+      teamsSpecificPosition.push(elementUser.away_team);
+    }
+    if (elementUser.home_team === elementOutcome.home_team) {
+      teamsSpecificPosition.push(elementUser.home_team);
+    }
   }
 
   for (let index = 0; index < teamsOfUser.length; index++) {
@@ -252,9 +245,8 @@ const getPointsOfClassifiedInRounds = (
       structuredReturn.points += numberPointsKnockoutMatches(group).classified;
       if (teamsSpecificPosition.includes(element)) {
         structuredReturn.teams.push({ id: element, type: "specific" });
-        structuredReturn.points += numberPointsKnockoutMatches(
-          group
-        ).specificTeam;
+        structuredReturn.points +=
+          numberPointsKnockoutMatches(group).specificTeam;
       } else {
         structuredReturn.teams.push({ id: element, type: "included" });
       }
@@ -271,7 +263,7 @@ const getPointsOfClassifiedInRounds = (
 //   };
 
 const getActualMatches = (matches, group) => {
-  const filteredMatches = matches.filter(function(elem, i, array) {
+  const filteredMatches = matches.filter(function (elem, i, array) {
     return elem.group === group;
   });
 

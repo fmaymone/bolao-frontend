@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import Loader from "../../components/UI/Loader";
 import {
   Table,
   TableBody,
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn
+  TableRowColumn,
 } from "material-ui/Table";
 import TeamClassification from "../../components/Match/TeamClassification";
 
@@ -16,7 +15,7 @@ class FinalResult extends Component {
     this.state = {};
   }
   renderList = () => {
-      const {finalResult} = this.props;
+    const { finalResult } = this.props;
     return (
       <Table>
         <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
@@ -36,16 +35,32 @@ class FinalResult extends Component {
         <TableBody displayRowCheckbox={false}>
           <TableRow>
             <TableRowColumn style={{ width: "25%" }}>
-              <TeamClassification id={finalResult.first} isChip={true} position='first' />
+              <TeamClassification
+                id={finalResult.first || "N/A"}
+                isChip={true}
+                position="first"
+              />
             </TableRowColumn>
             <TableRowColumn style={{ width: "25%" }}>
-              <TeamClassification id={finalResult.second}  isChip={true} position='second'/>
+              <TeamClassification
+                id={finalResult.second || "N/A"}
+                isChip={true}
+                position="second"
+              />
             </TableRowColumn>
             <TableRowColumn style={{ width: "25%" }}>
-              <TeamClassification id={finalResult.third}  isChip={true} position='third'/>
+              <TeamClassification
+                id={finalResult.third || "N/A"}
+                isChip={true}
+                position="third"
+              />
             </TableRowColumn>
             <TableRowColumn style={{ width: "25%" }}>
-              <TeamClassification id={finalResult.fourth}  isChip={true} position='fourth'/>
+              <TeamClassification
+                id={finalResult.fourth || "N/A"}
+                isChip={true}
+                position="fourth"
+              />
             </TableRowColumn>
           </TableRow>
         </TableBody>

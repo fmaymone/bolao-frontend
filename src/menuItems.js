@@ -1,72 +1,85 @@
-import React from 'react'
-import FontIcon from 'material-ui/FontIcon'
-import Toggle from 'material-ui/Toggle'
-import allLocales from './locales'
-import allThemes from './themes'
+import React from "react";
+import FontIcon from "material-ui/FontIcon";
+import Toggle from "material-ui/Toggle";
+import allLocales from "./locales";
+import allThemes from "./themes";
 
 const getMenuItems = (props) => {
   const {
     responsiveDrawer,
-        setResponsive,
-        theme,
-        locale,
-        updateTheme,
-        updateLocale,
-        intl,
-        muiTheme,
-        auth,
-        isGranted
-  } = props
+    setResponsive,
+    theme,
+    locale,
+    updateTheme,
+    updateLocale,
+    intl,
+    muiTheme,
+    auth,
+    isGranted,
+  } = props;
 
-  const isAuthorised = auth.isAuthorised
-  //const isAuthorised = true
+  const isAuthorised = auth.isAuthorised;
 
   const themeItems = allThemes.map((t) => {
     return {
-        value: undefined,
-        visible: true,
-        primaryText: intl.formatMessage({ id: t.id }),
-        onClick: () => { updateTheme(t.id) },
-        rightIcon: <FontIcon
-            className='material-icons'
-            color={t.id === theme ? muiTheme.palette.primary1Color : undefined}>
-                style
-      </FontIcon>
-      }
-  })
+      value: undefined,
+      visible: true,
+      primaryText: intl.formatMessage({ id: t.id }),
+      onClick: () => {
+        updateTheme(t.id);
+      },
+      rightIcon: (
+        <FontIcon
+          className="material-icons"
+          color={t.id === theme ? muiTheme.palette.primary1Color : undefined}
+        >
+          style
+        </FontIcon>
+      ),
+    };
+  });
 
   const localeItems = allLocales.map((l) => {
     return {
-        value: undefined,
-        visible: true,
-        primaryText: intl.formatMessage({ id: l.locale }),
-        onClick: () => { updateLocale(l.locale) },
-        rightIcon: <FontIcon
-            className='material-icons'
-            color={l.locale === locale ? muiTheme.palette.primary1Color : undefined}>
-                language
-      </FontIcon>
-      }
-  })
+      value: undefined,
+      visible: true,
+      primaryText: intl.formatMessage({ id: l.locale }),
+      onClick: () => {
+        updateLocale(l.locale);
+      },
+      rightIcon: (
+        <FontIcon
+          className="material-icons"
+          color={
+            l.locale === locale ? muiTheme.palette.primary1Color : undefined
+          }
+        >
+          language
+        </FontIcon>
+      ),
+    };
+  });
 
   return [
     {
-      value: '/home',
+      value: "/home",
       visible: isAuthorised,
-      primaryText: intl.formatMessage({ id: 'dashboard' }),
-      leftIcon: <FontIcon className='material-icons' >home</FontIcon>
+      primaryText: intl.formatMessage({ id: "dashboard" }),
+      leftIcon: <FontIcon className="material-icons">home</FontIcon>,
     },
     {
-      value: '/pools',
-      visible: isGranted('administration'),
-      primaryText: intl.formatMessage({ id: 'pools' }),
-      leftIcon: <FontIcon className='material-icons' >apps</FontIcon>
+      value: "/pools",
+      visible: isGranted("administration"),
+      primaryText: intl.formatMessage({ id: "pools" }),
+      leftIcon: <FontIcon className="material-icons">apps</FontIcon>,
     },
     {
-      value: '/mypools',
+      value: "/mypools",
       visible: isAuthorised,
-      primaryText: intl.formatMessage({ id: 'my_pools' }),
-      leftIcon: <FontIcon className='material-icons' >sentiment_satisfied_alt</FontIcon>
+      primaryText: intl.formatMessage({ id: "my_pools" }),
+      leftIcon: (
+        <FontIcon className="material-icons">sentiment_satisfied_alt</FontIcon>
+      ),
     },
     // {
     //   value: '/matches',
@@ -131,67 +144,70 @@ const getMenuItems = (props) => {
     //     ]
     // },
     {
-      value: '/about',
+      value: "/about",
       visible: isAuthorised,
-      primaryText: intl.formatMessage({ id: 'about' }),
-      leftIcon: <FontIcon className='material-icons' >info_outline</FontIcon>
+      primaryText: intl.formatMessage({ id: "about" }),
+      leftIcon: <FontIcon className="material-icons">info_outline</FontIcon>,
     },
     {
-      visible: isGranted('administration'), // In prod: isGranted('administration'),
+      visible: isGranted("administration"), // In prod: isGranted('administration'),
       primaryTogglesNestedList: true,
-      primaryText: intl.formatMessage({ id: 'administration' }),
-      leftIcon: <FontIcon className='material-icons' >security</FontIcon>,
+      primaryText: intl.formatMessage({ id: "administration" }),
+      leftIcon: <FontIcon className="material-icons">security</FontIcon>,
       nestedItems: [
-          {
-            value: '/users',
-            visible: isGranted('administration'),  // In prod: isGranted('read_users'),
-            primaryText: intl.formatMessage({ id: 'users' }),
-            leftIcon: <FontIcon className='material-icons' >group</FontIcon>
-          },
-          {
-            
-            visible: isGranted('administration'),
-            primaryText: intl.formatMessage({ id: 'roles' }),
-            leftIcon: <FontIcon className='material-icons' >account_box</FontIcon>
-          }
-        ]
+        {
+          value: "/users",
+          visible: isGranted("administration"), // In prod: isGranted('read_users'),
+          primaryText: intl.formatMessage({ id: "users" }),
+          leftIcon: <FontIcon className="material-icons">group</FontIcon>,
+        },
+        {
+          visible: isGranted("administration"),
+          primaryText: intl.formatMessage({ id: "roles" }),
+          leftIcon: <FontIcon className="material-icons">account_box</FontIcon>,
+        },
+      ],
     },
     {
       divider: true,
-      visible: isAuthorised
+      visible: isAuthorised,
     },
     {
-      primaryText: intl.formatMessage({ id: 'settings' }),
+      primaryText: intl.formatMessage({ id: "settings" }),
       primaryTogglesNestedList: true,
-      leftIcon: <FontIcon className='material-icons' >settings</FontIcon>,
+      leftIcon: <FontIcon className="material-icons">settings</FontIcon>,
       nestedItems: [
-          {
-            primaryText: intl.formatMessage({ id: 'theme' }),
-            secondaryText: intl.formatMessage({ id: theme }),
-            primaryTogglesNestedList: true,
-            leftIcon: <FontIcon className='material-icons' >style</FontIcon>,
-            nestedItems: themeItems
-          },
-          {
-            primaryText: intl.formatMessage({ id: 'language' }),
-            secondaryText: intl.formatMessage({ id: locale }),
-            primaryTogglesNestedList: true,
-            leftIcon: <FontIcon className='material-icons' >language</FontIcon>,
-            nestedItems: localeItems
-          },
-          {
-            primaryText: intl.formatMessage({ id: 'responsive' }),
-            leftIcon: <FontIcon className='material-icons' >chrome_reader_mode</FontIcon>,
-            rightToggle: <Toggle
-                  toggled={responsiveDrawer.responsive}
-                  onToggle={
-                            () => { setResponsive(!responsiveDrawer.responsive) }
-                        }
-                    />
-          }
-        ]
-    }
-  ]
-}
+        {
+          primaryText: intl.formatMessage({ id: "theme" }),
+          secondaryText: intl.formatMessage({ id: theme }),
+          primaryTogglesNestedList: true,
+          leftIcon: <FontIcon className="material-icons">style</FontIcon>,
+          nestedItems: themeItems,
+        },
+        {
+          primaryText: intl.formatMessage({ id: "language" }),
+          secondaryText: intl.formatMessage({ id: locale }),
+          primaryTogglesNestedList: true,
+          leftIcon: <FontIcon className="material-icons">language</FontIcon>,
+          nestedItems: localeItems,
+        },
+        {
+          primaryText: intl.formatMessage({ id: "responsive" }),
+          leftIcon: (
+            <FontIcon className="material-icons">chrome_reader_mode</FontIcon>
+          ),
+          rightToggle: (
+            <Toggle
+              toggled={responsiveDrawer.responsive}
+              onToggle={() => {
+                setResponsive(!responsiveDrawer.responsive);
+              }}
+            />
+          ),
+        },
+      ],
+    },
+  ];
+};
 
-export default getMenuItems
+export default getMenuItems;

@@ -6,71 +6,59 @@ import {
   MATCHES_FETCH_SUCCESS,
   MATCH_SAVE_SUCCESS,
   MATCHES_INITIAL_CREATE,
-  ADD_USER_TO_POOL
+  ADD_USER_TO_POOL,
 } from "./types";
 
 import { firebaseApp } from "../../firebase";
 import firebase from "firebase";
 import initialData from "../../world-cup";
 
-export const changeStage = group => {
+export const changeStage = (group) => {
   return {
     type: CHANGE_CURRENT_STAGE,
-    payload: group
+    payload: group,
   };
 };
 
 export const getCurrentStage = () => {
   return {
-    type: GET_CURRENT_STAGE
+    type: GET_CURRENT_STAGE,
   };
 };
 export const matchUpdate = ({ prop, value }) => {
   return {
     type: MATCH_UPDATE,
-    payload: { prop, value }
+    payload: { prop, value },
   };
 };
 
-
 export const updateMatch = (match, pool, user) => {
-  
   const id = match.name;
 
   // if(match.home_result !== match.away_result){
   //   match.home_score > match.away_score ? match.winner = match.home_team : match.winner = match.away_team
   // }
 
-  
-
-  return dispatch => {
+  return () => {
     firebase
       .database()
       .ref(`/pools/${pool.key}/users/${user.uid}/matches/${id}/`)
-      .set(match)
-      .then(() => {
-        ////console.log("writen match")
-      });
+      .set(match);
   };
 };
 export const updateFinalResult = (match, pool, user) => {
-
-  return dispatch => {
+  return () => {
     firebase
       .database()
       .ref(`/pools/${pool.key}/users/${user.uid}/matches/result/`)
-      .set(match)
-      .then(() => {
-        ////console.log("writen match")
-      });
+      .set(match);
   };
 };
 
 export const updateTopScorer = (pool, user, data) => {
-
   //console.log('oi');
 
-  return dispatch => {
+  return (dispatch) => {
     firebase
       .database()
       .ref(`/pools/${pool.key}/users/${user.uid}/matches/topscorer/`)
@@ -82,22 +70,18 @@ export const updateTopScorer = (pool, user, data) => {
 };
 
 export const updateClassification = (group, data, pool, user) => {
-
-
-  return dispatch => {
+  return (dispatch) => {
     if (user) {
       firebase
         .database()
-        .ref(
-          `/pools/${pool.key}/users/${user.uid}/classification/${group}`
-        )
+        .ref(`/pools/${pool.key}/users/${user.uid}/classification/${group}`)
         .set(data);
     }
   };
 };
 
 export const addUserToPool = (user, pool) => {
-  return dispatch => {
+  return (dispatch) => {
     firebaseApp
       .database()
       .ref(`/pools/${pool}/users/${user}/matches/`)
@@ -107,41 +91,30 @@ export const addUserToPool = (user, pool) => {
 
 export const addUserPools = (user, pool) => {
   //console.log(user);
-  return dispatch => {
-    firebaseApp
-      .database()
-      .ref(`/users/${user}/pools/${pool}`)
-      .set(pool);
+  return (dispatch) => {
+    firebaseApp.database().ref(`/users/${user}/pools/${pool}`).set(pool);
   };
 };
 
 export const removeUserPools = (user, pool) => {
   //console.log(user);
-  return dispatch => {
-    firebaseApp
-      .database()
-      .ref(`/users/${user}/pools/`)
-      .child(pool)
-      .remove();
+  return (dispatch) => {
+    firebaseApp.database().ref(`/users/${user}/pools/`).child(pool).remove();
   };
 };
 
 export const removeUserOfPool = (user, pool) => {
-  return dispatch => {
-    firebaseApp
-      .database()
-      .ref(`/pools/${pool}/users/`)
-      .child(user)
-      .remove();
+  return (dispatch) => {
+    firebaseApp.database().ref(`/pools/${pool}/users/`).child(user).remove();
   };
 };
 
-export const fetchUserData = uid => {
-  return dispatch => {
+export const fetchUserData = (uid) => {
+  return (dispatch) => {
     firebaseApp
       .database()
       .ref(`/users/${uid}`)
-      .on("value", snapshot => {
+      .on("value", (snapshot) => {
         return snapshot.val();
       });
   };

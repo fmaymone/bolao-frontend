@@ -52,7 +52,7 @@ class PoolDetails extends Component {
     }
     this.fetchMatches();
 
-    const limitDate = new Date(2022, 11, 22, 18);
+    const limitDate = new Date(2021, 11, 22, 18);
     let now = new Date();
 
     if (now > limitDate) {
@@ -127,7 +127,6 @@ class PoolDetails extends Component {
 
     const poolData = poolCachedData;
 
-    let dataAsArray = [];
     const matchesOfUser =
       poolData[this.props.location.state.pool.key].users[user.uid].matches;
 
