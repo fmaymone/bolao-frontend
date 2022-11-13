@@ -43,17 +43,14 @@ class GroupsBuilder extends Component {
 
   handleChangedResult = async (e, game, type, valueIsFinished) => {
     let gameToBeUpdated = { ...game };
-    if ((type === "finished")) {
-      
-        gameToBeUpdated.finished = valueIsFinished;
-     
-     
-    }else{
-    type === "home"
-      ? (gameToBeUpdated.home_result = e.target.value)
-      : (gameToBeUpdated.away_result = e.target.value);
+    if (type === "finished") {
+      gameToBeUpdated.finished = valueIsFinished;
+    } else {
+      type === "home"
+        ? (gameToBeUpdated.home_result = e.target.value)
+        : (gameToBeUpdated.away_result = e.target.value);
     }
-    
+
     await this.props.updateMatch(
       gameToBeUpdated,
       this.props.pool,
@@ -69,7 +66,7 @@ class GroupsBuilder extends Component {
           flex: 1,
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
         }}
       >
         <div style={{}}>
@@ -96,7 +93,7 @@ class GroupsBuilder extends Component {
       <div
         style={{
           display: "flex",
-          flexDirection: "column"
+          flexDirection: "column",
         }}
       >
         <div style={{}}>
@@ -126,17 +123,16 @@ class GroupsBuilder extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { intl, dialogs, playerDataReducer } = state;
 
   return {
     intl,
     dialogs,
-    playerDataReducer: playerDataReducer
+    playerDataReducer: playerDataReducer,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { changeStage, updateMatch }
-)(injectIntl(withRouter(withFirebase(muiThemeable()(GroupsBuilder)))));
+export default connect(mapStateToProps, { changeStage, updateMatch })(
+  injectIntl(withRouter(withFirebase(muiThemeable()(GroupsBuilder))))
+);

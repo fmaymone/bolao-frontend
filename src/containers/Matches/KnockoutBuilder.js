@@ -13,38 +13,35 @@ import {
   updateMatch,
   updateFinalResult,
 } from "../../store/actions/bolaoActions";
-import { Container, Row, Col } from "react-grid-system";
-import {
-  GROUPS_STAGE,
-  KNOCKOUT_STAGE,
-  OTHERS,
-} from "../../store/actions/types";
+import { KNOCKOUT_STAGE } from "../../store/actions/types";
 
 const groups = ["round_16", "round_8", "round_4", "3x4", "finals"];
 
 class KnockoutBuilder extends Component {
   handleChangedResult = async (e, game, type) => {
-    let gameToBeUpdated = { ...game };
-    type === "home"
-      ? (gameToBeUpdated.home_result = e.target.value)
-      : (gameToBeUpdated.away_result = e.target.value);
-    if (gameToBeUpdated.home_result > gameToBeUpdated.away_result) {
-      gameToBeUpdated.winner = gameToBeUpdated.home_team;
-      gameToBeUpdated.loser = gameToBeUpdated.away_team;
+    if (!this.props.finishedTimeToBet) {
+      let gameToBeUpdated = { ...game };
+      type === "home"
+        ? (gameToBeUpdated.home_result = e.target.value)
+        : (gameToBeUpdated.away_result = e.target.value);
+      if (gameToBeUpdated.home_result > gameToBeUpdated.away_result) {
+        gameToBeUpdated.winner = gameToBeUpdated.home_team;
+        gameToBeUpdated.loser = gameToBeUpdated.away_team;
+      }
+      if (gameToBeUpdated.home_result < gameToBeUpdated.away_result) {
+        gameToBeUpdated.winner = gameToBeUpdated.away_team;
+        gameToBeUpdated.loser = gameToBeUpdated.home_team;
+      }
+      await this.props.updateMatch(
+        gameToBeUpdated,
+        this.props.pool,
+        this.props.user
+      );
+      await this.updateNextMatches(gameToBeUpdated);
+      await this.props.updateMatches();
+      //need to check the fucking match it it isnt semi-final (matches 61,62) or
+      // the matches of the final and 3rd place (63)
     }
-    if (gameToBeUpdated.home_result < gameToBeUpdated.away_result) {
-      gameToBeUpdated.winner = gameToBeUpdated.away_team;
-      gameToBeUpdated.loser = gameToBeUpdated.home_team;
-    }
-    await this.props.updateMatch(
-      gameToBeUpdated,
-      this.props.pool,
-      this.props.user
-    );
-    await this.updateNextMatches(gameToBeUpdated);
-    await this.props.updateMatches();
-    //need to check the fucking match it it isnt semi-final (matches 61,62) or
-    // the matches of the final and 3rd place (63)
   };
   updateSemiFinals = async (game) => {
     //the game 60 updates the winner goes to final (64) as home
@@ -94,40 +91,44 @@ class KnockoutBuilder extends Component {
   };
 
   updateNextMatches = async (game) => {
-    if (game.name <= 60) {
-      let gameToBeUpdated;
-      let gameTarget = this.props.worldCupData.knockout_crossings.OTHERS.find(
-        (k) => k.id == game.name
-      );
-
-      if (gameTarget.classified === "winner") {
-        gameToBeUpdated = this.props.referenceMatches.find(
-          (k) => k.key == gameTarget.target
+    if (!this.props.finishedTimeToBet) {
+      if (game.name <= 60) {
+        let gameToBeUpdated;
+        let gameTarget = this.props.worldCupData.knockout_crossings.OTHERS.find(
+          (k) => k.id == game.name
         );
-        if (gameTarget.type === "home") {
-          gameToBeUpdated.home_team = game.winner;
-        } else {
-          gameToBeUpdated.away_team = game.winner;
+
+        if (gameTarget.classified === "winner") {
+          gameToBeUpdated = this.props.referenceMatches.find(
+            (k) => k.key == gameTarget.target
+          );
+          if (gameTarget.type === "home") {
+            gameToBeUpdated.home_team = game.winner;
+          } else {
+            gameToBeUpdated.away_team = game.winner;
+          }
         }
-      }
-      await this.props.updateMatch(
-        gameToBeUpdated,
-        this.props.pool,
-        this.props.user
-      );
-    } else {
-      if (game.name == "61" || game.name == "62") {
-        await this.updateSemiFinals(game);
-      }
-      if (game.name == "63" || game.name == "64") {
-        await this.updateFinals(game);
+        await this.props.updateMatch(
+          gameToBeUpdated,
+          this.props.pool,
+          this.props.user
+        );
+      } else {
+        if (game.name == "61" || game.name == "62") {
+          await this.updateSemiFinals(game);
+        }
+        if (game.name == "63" || game.name == "64") {
+          await this.updateFinals(game);
+        }
       }
     }
   };
 
   chooseDrawWinnerHandler = async (gameToBeUpdated) => {
-    await this.updateNextMatches(gameToBeUpdated);
-    await this.props.updateMatches();
+    if (!this.props.finishedTimeToBet) {
+      await this.updateNextMatches(gameToBeUpdated);
+      await this.props.updateMatches();
+    }
   };
 
   updateAllNextMatches = async () => {
@@ -221,6 +222,7 @@ class KnockoutBuilder extends Component {
             stage={this.props.playerDataReducer}
             title={intl.formatMessage({ id: currentGroup })}
             handleChangedResult={this.handleChangedResult}
+            finishedTimeToBet={this.props.finishedTimeToBet}
             pool={this.props.pool}
             user={this.props.user}
           />

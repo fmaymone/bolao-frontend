@@ -24,7 +24,7 @@ class Match extends Component {
           handleChangedResult={this.props.handleChangedResult}
           finishedTimeToBet={this.props.finishedTimeToBet}
           user={this.props.user}
-          title = {dataFromMatch.title}
+          title={dataFromMatch.title}
           isAdmin={this.props.isAdmin}
         />
       );
@@ -37,16 +37,15 @@ class Match extends Component {
           handleChangedResult={this.props.handleChangedResult}
           finishedTimeToBet={this.props.finishedTimeToBet}
           user={this.props.user}
-          title = {dataFromMatch.title}
+          title={dataFromMatch.title}
           isAdmin={this.props.isAdmin}
-
         />
       );
     }
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { intl, dialogs, auth, worldCupData } = state;
 
   return {
@@ -54,12 +53,12 @@ const mapStateToProps = state => {
     dialogs,
     auth,
     worldCupData,
-    isGranted: grant => isGranted(state, grant)
+    isGranted: (grant) => isGranted(state, grant),
   };
 };
 
 export default connect(mapStateToProps, {
   setDialogIsOpen,
   change,
-  submit
+  submit,
 })(withRouter(withFirebase(muiThemeable()(Match))));

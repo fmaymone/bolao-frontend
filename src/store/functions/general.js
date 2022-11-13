@@ -23,7 +23,11 @@ export const calculatePoints = (userMatches, outcomeMatches) => {
 
   let totalPoints = 0;
 
-  if (userMatches !== undefined && userMatches !== null) {
+  if (
+    userMatches !== undefined &&
+    userMatches !== null &&
+    outcomeMatches.length > 0
+  ) {
     structuredReturn.FINAL_RESULT = getPointsOfFinalResult(
       userMatches,
       outcomeMatches
@@ -257,10 +261,6 @@ const getPointsOfClassifiedInRounds = (
 
   return structuredReturn;
 };
-
-//   const filterFromGroup = (value) => {
-//     return value.group === group;
-//   };
 
 const getActualMatches = (matches, group) => {
   const filteredMatches = matches.filter(function (elem, i, array) {

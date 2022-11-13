@@ -28,36 +28,32 @@ class PoolDetails extends Component {
     super(props);
     this.state = {
       isUserFromPool: false,
-      isLoadingMatchesOfUser: true,
+      isLoadingMatchesOfUser: false,
       isLoadingOutcomeMatches: false,
       isLoadingPool: false,
       outcomeMatches: [],
       matchesOfUser: [],
       poolData: [],
       finishedTimeToBet: false,
+      status: {},
     };
   }
-  componentDidMount() {
-    const { watchList, firebaseApp } = this.props;
+  async componentDidMount() {
+    const limitDate = new Date(2022, 11, 22, 8);
+    let now = new Date();
 
     this.isUserFromPool(
       this.props.location.state.userOfPool,
       this.props.location.state.pool
     );
-    if (this.state.finishedTimeToBet) {
-      this.fetchMatchesDataCached();
-      this.fetchPoolDataCached();
-      this.fetchOutcome();
-      //this.fetchPoolData();
-    }
-    this.fetchMatches();
-
-    const limitDate = new Date(2021, 11, 22, 18);
-    let now = new Date();
-
     if (now > limitDate) {
       this.setState({ finishedTimeToBet: true });
+      this.fetchMatchesDataCached();
+      this.fetchPoolDataCached();
+      await this.fetchOutcome();
+      //this.fetchPoolData();
     }
+    await this.fetchMatches();
   }
 
   fetchPoolDataCached = () => {
@@ -92,6 +88,7 @@ class PoolDetails extends Component {
   };
   fetchOutcome = async () => {
     //this is the place where the results will be stored
+    this.setState({ isLoadingOutcomeMatches: true });
     const { firebaseApp } = this.props;
     const outcomePoolId = "-LCmgkjj3PpQwwuQvKTA";
     const outcomeUserId = "02b4c88iL0Olehf1KpeEeNUdBMX2";
@@ -216,7 +213,13 @@ class PoolDetails extends Component {
         </Activity>
       );
     } else {
-      return <Loader />;
+      return (
+        <div>
+          <Activity title={`${pool.name}`}>
+            <Loader />
+          </Activity>
+        </div>
+      );
     }
   };
   renderPool = (pool) => {
@@ -224,9 +227,6 @@ class PoolDetails extends Component {
   };
 
   render() {
-    const { match, auth, history } = this.props;
-
-    const user = this.props.location.state.userOfPool;
     const pool = this.props.location.state.pool;
 
     if (this.state.isUserFromPool) {

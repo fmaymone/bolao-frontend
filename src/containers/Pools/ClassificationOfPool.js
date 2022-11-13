@@ -14,7 +14,7 @@ import {
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn
+  TableRowColumn,
 } from "material-ui/Table";
 import { FINAL_RESULT } from "../../store/actions/types";
 import { Card, CardHeader } from "material-ui/Card";
@@ -28,25 +28,26 @@ class ClassificationOfPool extends Component {
     super(props);
     this.state = {};
   }
-  handleClick = user => {
+  handleClick = (user) => {
     this.props.history.push({
       pathname: `/matches/show/${user.user}`,
       state: {
         user: user,
         outcomeMatches: this.props.outcomeMatches,
-        profile: this.getUserByKey(user.user)
-      }
+        profile: this.getUserByKey(user.user),
+      },
     });
   };
 
-  getUserByKey = key => {
-    const a = this.props.users.find(k => k.key === key);
-    return a.val;
+  getUserByKey = (key) => {
+    const currentUser = this.props.users.find((k) => k.key === key);
+    if (currentUser) {
+      return currentUser.val;
+    }
   };
 
-  renderClassification = allUserMatches => {
+  renderClassification = (allUserMatches) => {
     allUserMatches.sort(compare);
-    console.log(allUserMatches);
 
     function compare(a, b) {
       if (a.points.totalPoints < b.points.totalPoints) return 1;
@@ -100,45 +101,46 @@ class ClassificationOfPool extends Component {
                     {user.points.totalPoints}
                   </TableRowColumn>
                   <TableRowColumn style={{ width: "50%" }}>
-                    <TableRowColumn >
+                    <TableRowColumn>
                       <TeamClassification
                         id={
-                          user.matches.find(k => k.group === FINAL_RESULT).first
+                          user.matches.find((k) => k.group === FINAL_RESULT)
+                            .first
                         }
                         isChip={true}
                         position="first"
                       />
                     </TableRowColumn>
-                    <TableRowColumn >
+                    <TableRowColumn>
                       <TeamClassification
                         id={
-                          user.matches.find(k => k.group === FINAL_RESULT)
+                          user.matches.find((k) => k.group === FINAL_RESULT)
                             .second
                         }
                         isChip={true}
                         position="second"
                       />
                     </TableRowColumn>
-                    <TableRowColumn >
+                    <TableRowColumn>
                       <TeamClassification
                         id={
-                          user.matches.find(k => k.group === FINAL_RESULT).third
+                          user.matches.find((k) => k.group === FINAL_RESULT)
+                            .third
                         }
                         isChip={true}
                         position="third"
                       />
                     </TableRowColumn>
-                    <TableRowColumn >
+                    <TableRowColumn>
                       <TeamClassification
                         id={
-                          user.matches.find(k => k.group === FINAL_RESULT)
+                          user.matches.find((k) => k.group === FINAL_RESULT)
                             .fourth
                         }
                         isChip={true}
                         position="fourth"
                       />
                     </TableRowColumn>
-
                   </TableRowColumn>
                 </TableRow>
               ))}
@@ -162,7 +164,7 @@ class ClassificationOfPool extends Component {
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
-              {allUserMatches.map(user => (
+              {allUserMatches.map((user) => (
                 <TableRow>
                   <TableRowColumn style={{ width: "70%" }}>
                     <User user={this.getUserByKey(user.user)} />
@@ -183,18 +185,17 @@ class ClassificationOfPool extends Component {
     const { outcomeMatches, users } = this.props;
     let allUserMatches = [];
 
-    this.props.poolData.map(user => {
+    this.props.poolData.map((user) => {
       const transformedUserMatches = Object.keys(user.matches).map(
-        key => user.matches[key]
+        (key) => user.matches[key]
       );
       const data = calculatePoints(transformedUserMatches, outcomeMatches);
       allUserMatches.push({
         user: user.key,
         points: data,
-        matches: transformedUserMatches
+        matches: transformedUserMatches,
       });
     });
-    console.log(allUserMatches);
 
     if (users !== undefined) {
       return <div>{this.renderClassification(allUserMatches)}</div>;
@@ -204,7 +205,7 @@ class ClassificationOfPool extends Component {
   }
 }
 
-const mapStateToProps = state => { };
+const mapStateToProps = (state) => {};
 export default connect(
   mapStateToProps,
   {}

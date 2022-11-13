@@ -9,36 +9,35 @@ const styles = {
     flexFlow: "row nowrap",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    backgroundColor: "aquamarine1"
+    backgroundColor: "aquamarine1",
   },
   team_home: {
     justifyContent: "flex-start",
     display: "flex",
     flexFlow: "row nowrap",
-    backgroundColor: "aquamarine1"
+    backgroundColor: "aquamarine1",
   },
   inputs: {
     justifyContent: "center",
     display: "flex",
     flexFlow: "row nowrap",
-    backgroundColor: "brown3"
+    backgroundColor: "brown3",
   },
   team_away: {
     justifyContent: "flex-end",
     display: "flex",
     flexFlow: "row nowrap",
-    backgroundColor: "chartreuse1"
+    backgroundColor: "chartreuse1",
   },
   toggle: {
-    marginBottom: 16
-  }
+    marginBottom: 16,
+  },
 };
 class GroupMatch extends Component {
-
   handleToggle(value) {
-    this.props.handleChangedResult(null, this.props.game, 'finished', value)
+    this.props.handleChangedResult(null, this.props.game, "finished", value);
   }
-  renderMatch = isAdmin => {
+  renderMatch = (isAdmin) => {
     let renderAdmin = "";
 
     if (isAdmin) {
@@ -48,13 +47,15 @@ class GroupMatch extends Component {
             style={{
               justifyContent: "flex-end",
               display: "flex",
-              flexFlow: "row nowrap"
+              flexFlow: "row nowrap",
             }}
           >
             <Toggle
               toggled={this.props.game.finished}
               style={styles.toggle}
-              onToggle={() => { this.handleToggle(!this.props.game.finished) }}
+              onToggle={() => {
+                this.handleToggle(!this.props.game.finished);
+              }}
             />
           </div>
         </div>
@@ -67,7 +68,7 @@ class GroupMatch extends Component {
           flexFlow: "row nowrap",
           justifyContent: "space-around",
           alignItems: "center",
-          margin: 10
+          margin: 10,
         }}
       >
         <div style={{ flex: 1 }}>
@@ -75,7 +76,7 @@ class GroupMatch extends Component {
             style={{
               justifyContent: "flex-start",
               display: "flex",
-              flexFlow: "row nowrap"
+              flexFlow: "row nowrap",
             }}
           >
             <Team
@@ -91,7 +92,7 @@ class GroupMatch extends Component {
               justifyContent: "space-around",
               display: "flex",
               flexFlow: "row nowrap",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <div style={{ width: 3 }}>
@@ -126,7 +127,7 @@ class GroupMatch extends Component {
             style={{
               justifyContent: "flex-end",
               display: "flex",
-              flexFlow: "row nowrap"
+              flexFlow: "row nowrap",
             }}
           >
             <Team id={this.props.game.away_team} isHomeTeam="false" />
@@ -139,8 +140,6 @@ class GroupMatch extends Component {
 
   render() {
     const { game, isAdmin } = this.props;
-
-    console.log(isAdmin);
 
     if (game.type === "group") {
       return this.renderMatch(isAdmin);

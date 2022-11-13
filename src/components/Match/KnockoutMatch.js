@@ -10,7 +10,6 @@ import { change, submit } from "redux-form";
 import isGranted from "rmw-shell/lib/utils/auth";
 import Badge from "material-ui/Badge";
 import Chip from "material-ui/Chip";
-import { blue300, indigo900 } from "material-ui/styles/colors";
 
 import TextField from "material-ui/TextField";
 import { updateMatch } from "../../store/actions/bolaoActions";
@@ -21,37 +20,37 @@ const styles = {
     flexFlow: "row nowrap",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    backgroundColor: "aquamarine1"
+    backgroundColor: "aquamarine1",
   },
   team_home: {
     justifyContent: "flex-start",
     display: "flex",
     flexFlow: "row nowrap",
-    backgroundColor: "aquamarine1"
+    backgroundColor: "aquamarine1",
   },
   inputs: {
     justifyContent: "center",
     display: "flex",
     flexFlow: "row nowrap",
-    backgroundColor: "brown3"
+    backgroundColor: "brown3",
   },
   team_away: {
     justifyContent: "flex-end",
     display: "flex",
     flexFlow: "row nowrap",
-    backgroundColor: "chartreuse1"
+    backgroundColor: "chartreuse1",
   },
 
   chip: {
-    margin: 4
+    margin: 4,
   },
   wrapper: {
     display: "flex",
-    flexWrap: "wrap"
-  }
+    flexWrap: "wrap",
+  },
 };
 class Match extends Component {
-  getDesktopContent = type => {
+  getDesktopContent = (type) => {
     if (!isMobile()) {
       if (type === "home") {
         return (
@@ -67,7 +66,6 @@ class Match extends Component {
       } else {
         return (
           <div>
-
             <div>
               <Badge badgeContent={this.props.title.away} primary={true} />
             </div>
@@ -78,22 +76,24 @@ class Match extends Component {
       return <div />;
     }
   };
-  chooseDrawWinnerHandler = async id => {
-    if (this.props) {
-      let gameToBeUpdated = { ...this.props.game };
-      gameToBeUpdated.winner = id;
-      //if the game needed to be updated is home, the loser is the away
-      if (gameToBeUpdated.home_team == id) {
-        gameToBeUpdated.loser = gameToBeUpdated.away_team;
-      } else {
-        gameToBeUpdated.loser = gameToBeUpdated.home_team;
+  chooseDrawWinnerHandler = async (id) => {
+    if (!this.props.finishedTimeToBet) {
+      if (this.props) {
+        let gameToBeUpdated = { ...this.props.game };
+        gameToBeUpdated.winner = id;
+        //if the game needed to be updated is home, the loser is the away
+        if (gameToBeUpdated.home_team == id) {
+          gameToBeUpdated.loser = gameToBeUpdated.away_team;
+        } else {
+          gameToBeUpdated.loser = gameToBeUpdated.home_team;
+        }
+        await this.props.updateMatch(
+          gameToBeUpdated,
+          this.props.pool,
+          this.props.user
+        );
+        await this.props.chooseDrawWinnerHandler(gameToBeUpdated);
       }
-      await this.props.updateMatch(
-        gameToBeUpdated,
-        this.props.pool,
-        this.props.user
-      );
-      await this.props.chooseDrawWinnerHandler(gameToBeUpdated);
     }
   };
 
@@ -110,7 +110,7 @@ class Match extends Component {
             flexFlow: "row nowrap",
             justifyContent: "space-around",
             alignItems: "center",
-            margin: 10
+            margin: 10,
           }}
         >
           <div style={{ flex: 1 }}>
@@ -119,10 +119,10 @@ class Match extends Component {
                 justifyContent: "flex-start",
                 display: "flex",
                 flexFlow: "row nowrap",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
-              {this.getDesktopContent('home')}
+              {this.getDesktopContent("home")}
               <div>
                 <Team
                   id={game.home_team}
@@ -138,7 +138,7 @@ class Match extends Component {
                 justifyContent: "space-around",
                 display: "flex",
                 flexFlow: "row nowrap",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               <div style={{ width: 3 }}>
@@ -149,6 +149,7 @@ class Match extends Component {
                   onChange={(e, game, type) =>
                     this.props.handleChangedResult(e, this.props.game, "home")
                   }
+                  disabled={this.props.finishedTimeToBet}
                   style={{ width: 30 }}
                 />
               </div>
@@ -162,6 +163,7 @@ class Match extends Component {
                     this.props.handleChangedResult(e, this.props.game, "away")
                   }
                   style={{ width: 30 }}
+                  disabled={this.props.finishedTimeToBet}
                 />
               </div>
             </div>
@@ -172,14 +174,14 @@ class Match extends Component {
                 justifyContent: "flex-end",
                 display: "flex",
                 flexFlow: "row nowrap",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               <div>
                 {" "}
                 <Team id={game.away_team} isHomeTeam="false" />
               </div>
-              {this.getDesktopContent('away')}
+              {this.getDesktopContent("away")}
             </div>
           </div>
         </div>
@@ -198,7 +200,7 @@ class Match extends Component {
           alignItems: "center",
           margin: 10,
           borderStyle: "groove",
-          borderRadius: 10
+          borderRadius: 10,
         }}
       >
         <div style={{ flex: 1 }}>
@@ -207,10 +209,10 @@ class Match extends Component {
               justifyContent: "flex-start",
               display: "flex",
               flexFlow: "row nowrap",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
-            {this.getDesktopContent('home')}
+            {this.getDesktopContent("home")}
             <div
               onClick={this.chooseDrawWinnerHandler.bind(
                 this,
@@ -232,7 +234,7 @@ class Match extends Component {
               justifyContent: "space-around",
               display: "flex",
               flexFlow: "row nowrap",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <div style={{ width: 3 }}>
@@ -255,7 +257,7 @@ class Match extends Component {
                 type="number"
                 value={this.props.game.away_result}
                 disabled={this.props.finishedTimeToBet}
-                onChange={(e, game, type) =>
+                onChange={(e) =>
                   this.props.handleChangedResult(e, this.props.game, "away")
                 }
                 //
@@ -270,7 +272,7 @@ class Match extends Component {
               justifyContent: "flex-end",
               display: "flex",
               flexFlow: "row nowrap",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <div
@@ -289,7 +291,7 @@ class Match extends Component {
                 )}
               />
             </div>
-            {this.getDesktopContent('away')}
+            {this.getDesktopContent("away")}
           </div>
         </div>
       </div>
@@ -301,7 +303,7 @@ class Match extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { intl, dialogs, auth, worldCupData, lists } = state;
 
   return {
@@ -310,7 +312,7 @@ const mapStateToProps = state => {
     auth,
     worldCupData,
     matches: lists.listMatches,
-    isGranted: grant => isGranted(state, grant)
+    isGranted: (grant) => isGranted(state, grant),
   };
 };
 
@@ -318,7 +320,7 @@ export default connect(mapStateToProps, {
   setDialogIsOpen,
   change,
   submit,
-  updateMatch
+  updateMatch,
 })(injectIntl(withRouter(withFirebase(muiThemeable()(Match)))));
 
 Match.propTypes = {
