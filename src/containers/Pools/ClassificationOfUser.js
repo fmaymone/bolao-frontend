@@ -6,15 +6,9 @@ import {
   TableHeader,
   TableHeaderColumn,
   TableRow,
-
 } from "material-ui/Table";
 import PointsOfMatch from "../Matches/PointsOfMatch";
-import {
-  Card,
-
-  CardHeader,
- 
-} from "material-ui/Card";
+import { Card, CardHeader } from "material-ui/Card";
 
 import {
   ROUND_16,
@@ -23,11 +17,11 @@ import {
   ROUND_FINALS,
   ROUND_3x4,
   FINAL_RESULT,
-  TOP_SCORER
+  TOP_SCORER,
+  ALL_GROUPS_CONSTANTS,
 } from "../../store/actions/types";
 
 import PointsOfClassifiedsTeams from "../Matches/PointsOfClassifiedsTeams";
-
 
 class ClassificationOfUser extends Component {
   constructor(props) {
@@ -40,16 +34,15 @@ class ClassificationOfUser extends Component {
       ROUND_FINALS: 0,
       ROUND_3x4: 0,
       FINAL_RESULT: 0,
-      TOP_SCORER: 0
+      TOP_SCORER: 0,
     };
   }
-  getAllPoints = () =>{
+  getAllPoints = () => {
     return 100;
-  }
+  };
   updatePoints = (group, data) => {
-    //console.log('mamae');
-    this.setState({group: data});
-  }
+    this.setState({ group: data });
+  };
   renderPointsOfMatch = () => {
     return (
       <Card>
@@ -75,11 +68,11 @@ class ClassificationOfUser extends Component {
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
-            {this.props.matchesOfUser.map(userMatch => (
+            {this.props.matchesOfUser.map((userMatch) => (
               <PointsOfMatch
                 userMatch={userMatch}
                 outcomeMatch={this.props.outcomeMatches.find(
-                  k => k.name === userMatch.name
+                  (k) => k.name === userMatch.name
                 )}
               />
             ))}
@@ -88,63 +81,29 @@ class ClassificationOfUser extends Component {
       </Card>
     );
   };
+  renderPointsOfGroups = () => {
+    const { matchesOfUser, outcomeMatches } = this.props;
+    return ALL_GROUPS_CONSTANTS.map((round) => {
+      return (
+        <PointsOfClassifiedsTeams
+          matchesOfUser={matchesOfUser}
+          outcomeMatches={outcomeMatches}
+          group={round}
+          updatePoints={this.updatePoints}
+        />
+      );
+    });
+  };
+
   render() {
     const { matchesOfUser, outcomeMatches } = this.props;
     if (matchesOfUser.length > 0 && outcomeMatches.length > 0) {
-      //console.log("oi");
       return (
         <div>
-        <div>
-          {this.renderPointsOfMatch()}
-        </div>
-        <div>
-          <PointsOfClassifiedsTeams
-            matchesOfUser={matchesOfUser}
-            outcomeMatches={outcomeMatches}
-            group={ROUND_16}
-            updatePoints={this.updatePoints}
-          />
-          <PointsOfClassifiedsTeams
-            matchesOfUser={matchesOfUser}
-            outcomeMatches={outcomeMatches}
-            group={ROUND_8}
-            updatePoints={this.updatePoints}
-          />
-          <PointsOfClassifiedsTeams
-            matchesOfUser={matchesOfUser}
-            outcomeMatches={outcomeMatches}
-            group={ROUND_4}
-            updatePoints={this.updatePoints}
-          />
-          <PointsOfClassifiedsTeams
-            matchesOfUser={matchesOfUser}
-            outcomeMatches={outcomeMatches}
-            group={ROUND_3x4}
-            updatePoints={this.updatePoints}
-          />
-          <PointsOfClassifiedsTeams
-            matchesOfUser={matchesOfUser}
-            outcomeMatches={outcomeMatches}
-            group={ROUND_FINALS}
-            updatePoints={this.updatePoints}
-          />
-           <PointsOfClassifiedsTeams
-            matchesOfUser={matchesOfUser}
-            outcomeMatches={outcomeMatches}
-            group={FINAL_RESULT}
-            updatePoints={this.updatePoints}
-          />
-           <PointsOfClassifiedsTeams
-            matchesOfUser={matchesOfUser}
-            outcomeMatches={outcomeMatches}
-            group={TOP_SCORER}
-            updatePoints={this.updatePoints}
-          />
-        </div>
+          <div>{this.renderPointsOfMatch()}</div>
+          <div>{this.renderPointsOfGroups()}</div>
         </div>
       );
-
-      //return this.renderList();
     } else {
       return <Loader />;
     }

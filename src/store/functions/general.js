@@ -8,7 +8,7 @@ import {
   TOP_SCORER,
 } from "../actions/types";
 
-export const calculatePoints = (userMatches, outcomeMatches) => {
+export const calculatePoints = (userMatches, outcomeMatches, status) => {
   let structuredReturn = {
     totalPoints: 0,
     pointsOfMatches: {},
@@ -26,42 +26,36 @@ export const calculatePoints = (userMatches, outcomeMatches) => {
   if (
     userMatches !== undefined &&
     userMatches !== null &&
-    outcomeMatches.length > 0
+    outcomeMatches.length > 0 &&
+    status !== undefined
   ) {
-    structuredReturn.FINAL_RESULT = getPointsOfFinalResult(
-      userMatches,
-      outcomeMatches
-    );
+    structuredReturn.FINAL_RESULT = status.FINAL_RESULT
+      ? getPointsOfFinalResult(userMatches, outcomeMatches)
+      : { points: 0 };
 
-    structuredReturn.TOP_SCORER = getPointsTopScorer(
-      userMatches,
-      outcomeMatches
-    );
-    structuredReturn.ROUND_16 = getPointsOfClassifiedInRounds(
-      ROUND_16,
-      userMatches,
-      outcomeMatches
-    );
-    structuredReturn.ROUND_8 = getPointsOfClassifiedInRounds(
-      ROUND_8,
-      userMatches,
-      outcomeMatches
-    );
-    structuredReturn.ROUND_4 = getPointsOfClassifiedInRounds(
-      ROUND_4,
-      userMatches,
-      outcomeMatches
-    );
-    structuredReturn.ROUND_FINALS = getPointsOfClassifiedInRounds(
-      ROUND_FINALS,
-      userMatches,
-      outcomeMatches
-    );
-    structuredReturn.ROUND_3x4 = getPointsOfClassifiedInRounds(
-      ROUND_3x4,
-      userMatches,
-      outcomeMatches
-    );
+    structuredReturn.TOP_SCORER = status.TOP_SCORER
+      ? getPointsTopScorer(userMatches, outcomeMatches)
+      : { points: 0 };
+
+    structuredReturn.ROUND_16 = status.ROUND_16
+      ? getPointsOfClassifiedInRounds(ROUND_16, userMatches, outcomeMatches)
+      : { points: 0 };
+
+    structuredReturn.ROUND_8 = status.ROUND_8
+      ? getPointsOfClassifiedInRounds(ROUND_8, userMatches, outcomeMatches)
+      : { points: 0 };
+
+    structuredReturn.ROUND_4 = status.ROUND_4
+      ? getPointsOfClassifiedInRounds(ROUND_4, userMatches, outcomeMatches)
+      : { points: 0 };
+    structuredReturn.ROUND_FINALS = status.ROUND_FINALS
+      ? getPointsOfClassifiedInRounds(ROUND_FINALS, userMatches, outcomeMatches)
+      : { points: 0 };
+
+    structuredReturn.ROUND_3x4 = status.ROUND_FINALS
+      ? getPointsOfClassifiedInRounds(ROUND_3x4, userMatches, outcomeMatches)
+      : { points: 0 };
+
     structuredReturn.pointsOfMatches = getPointsOfMatches(
       userMatches,
       outcomeMatches
