@@ -1,10 +1,14 @@
 const usersData = {
   "02b4c88iL0Olehf1KpeEeNUdBMX2": {
+    connections: {
+      "-NGuveTZXG5XxJVvPHD1": true,
+    },
     displayName: "Gabarito Bolao",
     email: "gabaritobolao@gmail.com",
     emailVerified: true,
     isAnonymous: false,
     notificationTokens: {
+      "d-pEmcg-rSE:APA91bGbgmjXSMoDorYcYUz3bZ-MXxT2BtnTWNMkTbFa6p4vBOrUzj_3wIT2EsGhcpvKKGgwiiWuJnUiqx83LTPYc9NaPqR9pAM6i88Nvn8ueAIwWgPBeJyVbKsJF-G4obTERbq2IDS7": true,
       "dz--6Xy_Zxo:APA91bEIQdYla9pIbShu8wSnW2tFBmXQXBc36nSqhWzy5KDhsKcbx0fIYlCKIdVbTQJQTBYOr0qRzTfSD8E2KZ3Jv77c7UPV8ujA_PK8QM6aTL6wp6oPiZcGf_NL-aSKW4tJFFHW9hMT": true,
       "eGtP5-1qoLM:APA91bExF-omRzLA7BOUFh6hKi-9Vf8gpGh0Me9okQfMuVr-vgoCPMwBu7oYWrKMXd7PJhwfNQuQopWDHQmphJeIl-4gcSsqar4jelbVCgzaFC_vepBKin7JImQC05qZAJUe3I1MTDm2": true,
       "erb1dAeEXAY:APA91bFn_1ljr6b2BmgHBGE_sekd1-f_Ml5UVlfF-kE8fDoY_xu7rfXP8O2fPbsCu-lP-zyeY2EnpJU64M-gLMwqqzBl9srl4BSKhXc3m1K8RHZ2fiwfznwS4heqzT5sTY5iSnXtCLoH": true,
@@ -87,9 +91,6 @@ const usersData = {
     isAnonymous: false,
     photoURL:
       "https://lh5.googleusercontent.com/-SU_lMJLboOc/AAAAAAAAAAI/AAAAAAAAAAA/DE19jq_yWSE/photo.jpg",
-    pools: {
-      "-LD3ttKfMMUnZTO6BM2v": "-LD3ttKfMMUnZTO6BM2v",
-    },
     providerData: [
       {
         displayName: "Manoel Leite",
@@ -146,7 +147,7 @@ const usersData = {
         displayName: "Gustavo LEÃO FILHO",
         email: "gustavofilhocedire@gmail.com",
         photoURL:
-          "https://lh4.googleusercontent.com/-ExcHeVH7Wuw/AAAAAAAAAAI/AAAAAAAAAAA/AAnnY7rauQnpwsNwksPjZOBIvRXaqrp2XA/mo/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu3xYrkJl4vAiMDscVg3vTFJBPYq_o9bwR1WFN0v=s96-c",
         providerId: "google.com",
         uid: "101727554804332300123",
       },
@@ -243,9 +244,10 @@ const usersData = {
   "2mwV1mmGAtMPMZsKmnSNTOrBNlJ2": {
     displayName: "Paulo Murilo Albuquerque Filho",
     email: "pmcbaf@gmail.com",
-    emailVerified: false,
+    emailVerified: true,
     isAnonymous: false,
-    photoURL: "https://graph.facebook.com/1558615690927017/picture",
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu1lcTBCuYUA0qqkVm0GBlMAbUIVeB6F9-kRtiVx=s96-c",
     pools: {
       "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
     },
@@ -253,9 +255,10 @@ const usersData = {
       {
         displayName: "Paulo Murilo Albuquerque Filho",
         email: "pmcbaf@gmail.com",
-        photoURL: "https://graph.facebook.com/1558615690927017/picture",
-        providerId: "facebook.com",
-        uid: "1558615690927017",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu1lcTBCuYUA0qqkVm0GBlMAbUIVeB6F9-kRtiVx=s96-c",
+        providerId: "google.com",
+        uid: "109323183362838057812",
       },
     ],
     uid: "2mwV1mmGAtMPMZsKmnSNTOrBNlJ2",
@@ -279,6 +282,28 @@ const usersData = {
     ],
     uid: "35azVBgeGEZuahEX8lBei4IZTPs2",
   },
+  "3EVkGx6qNSOCvXdMXEAT5aZ5Qek2": {
+    displayName: "Minarte Filho",
+    email: "minartefilho@gmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu2RHoQhrFi1JCwwkyGCt1hIxTeCTKTdq8wIVbA5=s96-c",
+    pools: {
+      "-LD2GTSQyZYF8eIylbCg": "-LD2GTSQyZYF8eIylbCg",
+    },
+    providerData: [
+      {
+        displayName: "Minarte Filho",
+        email: "minartefilho@gmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu2RHoQhrFi1JCwwkyGCt1hIxTeCTKTdq8wIVbA5=s96-c",
+        providerId: "google.com",
+        uid: "114703354985046861878",
+      },
+    ],
+    uid: "3EVkGx6qNSOCvXdMXEAT5aZ5Qek2",
+  },
   "3cUM5imqeUNTew02Kv56YqasKZl1": {
     connections: {
       "-LEL5hqB6PkH0m4bLy1Q": true,
@@ -300,12 +325,59 @@ const usersData = {
         displayName: "Pedro Henrique",
         email: "pedrohsilvaaa@gmail.com",
         photoURL:
-          "https://lh4.googleusercontent.com/-B9iriu_Pe3Y/AAAAAAAAAAI/AAAAAAAAAao/2k7ZNBfwSk4/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu1gN9pLcpPzijjw_j2-DTnb2P53hqZLO4o7AmnC4w=s96-c",
         providerId: "google.com",
         uid: "114127913479956870642",
       },
     ],
     uid: "3cUM5imqeUNTew02Kv56YqasKZl1",
+  },
+  "40prZmj2EGUVOdn1GZhan1yvNcv2": {
+    displayName: "Tatiana Borges",
+    email: "tatiana.maymone@gmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu3E1sefNfsa2fYIV915DOz_de9d9gSfXDPne2dYeWk=s96-c",
+    pools: {
+      "-LD2GTSQyZYF8eIylbCg": "-LD2GTSQyZYF8eIylbCg",
+    },
+    providerData: [
+      {
+        displayName: "Tatiana Borges",
+        email: "tatiana.maymone@gmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu3E1sefNfsa2fYIV915DOz_de9d9gSfXDPne2dYeWk=s96-c",
+        providerId: "google.com",
+        uid: "112300017457151897550",
+      },
+    ],
+    uid: "40prZmj2EGUVOdn1GZhan1yvNcv2",
+  },
+  "499XZdsnfBURffun1W4jB6uJrDI3": {
+    displayName: "Artur Lins",
+    email: "arturorlandolins76@gmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    notificationTokens: {
+      "difrTM5D2-8:APA91bEvgT8x4INSF6JfwD2qpD5hAgNAkmT1EWOQdKh5HqfoTuUtX_MQgC3b80B6WZs8eKQxVrL0pVQ6G7GKomSh0q2ICOz5mIJ9JUI_2QJDo9oNDMQg-rDerxC1MMVo3U7rsbmb39GE": true,
+    },
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu0oMzJPtv-GP-Lp5um-1KXtmPM_GXKPVEkrZhhw=s96-c",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
+    providerData: [
+      {
+        displayName: "Artur Lins",
+        email: "arturorlandolins76@gmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu0oMzJPtv-GP-Lp5um-1KXtmPM_GXKPVEkrZhhw=s96-c",
+        providerId: "google.com",
+        uid: "103451607858229311108",
+      },
+    ],
+    uid: "499XZdsnfBURffun1W4jB6uJrDI3",
   },
   "4G3zEjRTvgUzW03DmZafVs2H9Qg1": {
     displayName: "Biro Biro",
@@ -488,6 +560,28 @@ const usersData = {
     ],
     uid: "5zXacIQNzyPSpxGGrSmWIJFdk033",
   },
+  "6EI5rIg954gEa8LMKSGvlRC9n4O2": {
+    displayName: "Ilana Mello",
+    email: "ilanamello.adv@gmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu2ZWNVEkl8yRwkhqv1Ak3adgmMZO33O-i0ikluz=s96-c",
+    pools: {
+      "-LD2GTSQyZYF8eIylbCg": "-LD2GTSQyZYF8eIylbCg",
+    },
+    providerData: [
+      {
+        displayName: "Ilana Mello",
+        email: "ilanamello.adv@gmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu2ZWNVEkl8yRwkhqv1Ak3adgmMZO33O-i0ikluz=s96-c",
+        providerId: "google.com",
+        uid: "115759613624210676981",
+      },
+    ],
+    uid: "6EI5rIg954gEa8LMKSGvlRC9n4O2",
+  },
   "6PWqg2LCPRMUPzlJMTj7jpDWhim2": {
     displayName: "Kleber Amaral",
     email: "kleberamaral01@hotmail.com",
@@ -571,12 +665,34 @@ const usersData = {
         displayName: "Bruno Branco",
         email: "castelobrancobruno@gmail.com",
         photoURL:
-          "https://lh4.googleusercontent.com/-A-dCVb4yo7c/AAAAAAAAAAI/AAAAAAAAAMw/hgkMz3bZjs8/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu2I7L955y3AVdYBpsx-XiSrHIEsBZ5DJ9-deOZFkQ=s96-c",
         providerId: "google.com",
         uid: "114838078598660668393",
       },
     ],
     uid: "7apPHU9OrNR5sV2t182vfXpQGjD3",
+  },
+  "7m4brUhzR2To7swrocsqv4wlfUE2": {
+    displayName: "Fabricio",
+    email: "fabriciobb@hotmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu2O1TA52sCFpaxQoLbQgcsdsc7PEr-q2lKZLiMu=s96-c",
+    pools: {
+      "-LD2GTSQyZYF8eIylbCg": "-LD2GTSQyZYF8eIylbCg",
+    },
+    providerData: [
+      {
+        displayName: "Fabricio",
+        email: "fabriciobb@hotmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu2O1TA52sCFpaxQoLbQgcsdsc7PEr-q2lKZLiMu=s96-c",
+        providerId: "google.com",
+        uid: "108905452476048133246",
+      },
+    ],
+    uid: "7m4brUhzR2To7swrocsqv4wlfUE2",
   },
   "8914baQ5A9a7jaUm07bRCw82RZQ2": {
     displayName: "marina maymone",
@@ -802,6 +918,9 @@ const usersData = {
     isAnonymous: false,
     photoURL:
       "https://lh6.googleusercontent.com/-ncSwbBxZwCs/AAAAAAAAAAI/AAAAAAAAAI0/stIxJCnvVc4/photo.jpg",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
     providerData: [
       {
         displayName: "Lucas Ribeiro",
@@ -976,6 +1095,9 @@ const usersData = {
     emailVerified: false,
     isAnonymous: false,
     photoURL: "https://graph.facebook.com/2007648755953990/picture",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
     providerData: [
       {
         displayName: "Irlane Luna Asfura",
@@ -1006,7 +1128,7 @@ const usersData = {
         displayName: "Givaldo Freitas Filho",
         email: "givaldo.sentryportaria@gmail.com",
         photoURL:
-          "https://lh5.googleusercontent.com/-hoXsZHQ3JVs/AAAAAAAAAAI/AAAAAAAAAAA/AB6qoq05yFquw1-bEl2IPo6S7SzDuK5GqA/mo/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu3zQM3PYOCEwJ0cvB9BjWD8wbxhnXJsV_E60dPW=s96-c",
         providerId: "google.com",
         uid: "111308603602981601271",
       },
@@ -1130,9 +1252,6 @@ const usersData = {
     },
     photoURL:
       "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
-    pools: {
-      "-LD3ttKfMMUnZTO6BM2v": "-LD3ttKfMMUnZTO6BM2v",
-    },
     providerData: [
       {
         displayName: "Filipe Barroso",
@@ -1249,13 +1368,14 @@ const usersData = {
       "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
     pools: {
       "-LD2GTSQyZYF8eIylbCg": "-LD2GTSQyZYF8eIylbCg",
+      "-NGMNPs_wp7FJ79mpsLx": "-NGMNPs_wp7FJ79mpsLx",
     },
     providerData: [
       {
         displayName: "Ricardo Borges",
         email: "zericardo.ita@gmail.com",
         photoURL:
-          "https://lh4.googleusercontent.com/-ARHlqe-37dU/AAAAAAAAAAI/AAAAAAAAAAA/AAnnY7oMJH5VfEfTaFgmj7EjOuS_aV1Mew/mo/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu1kmZ6cz126hm2WEDgqmTFmLl5yRozGt5HSgyKX=s96-c",
         providerId: "google.com",
         uid: "116612373987563804960",
       },
@@ -1341,6 +1461,28 @@ const usersData = {
     ],
     uid: "IDbZOeDbTRT9Biv0RRjdS6VCO3y1",
   },
+  IH6HVFJjawPj1XhElEg3IfmcxSJ2: {
+    displayName: "Guga Lopes",
+    email: "leolopesml@gmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu1BNwjtD578eGRR6PXO_YeqHSO_OgqB4-JRasEY=s96-c",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
+    providerData: [
+      {
+        displayName: "Leo Lopes",
+        email: "leolopesml@gmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu1BNwjtD578eGRR6PXO_YeqHSO_OgqB4-JRasEY=s96-c",
+        providerId: "google.com",
+        uid: "110569282344896833273",
+      },
+    ],
+    uid: "IH6HVFJjawPj1XhElEg3IfmcxSJ2",
+  },
   ILeoQdO6oDZQiqtHkxFX2M2KQw52: {
     displayName: "Bruno Viga",
     email: "brunoclviga@gmail.com",
@@ -1360,7 +1502,7 @@ const usersData = {
         displayName: "Bruno Carneiro Leão",
         email: "brunoclviga@gmail.com",
         photoURL:
-          "https://lh5.googleusercontent.com/-Ef4LbvXVuM8/AAAAAAAAAAI/AAAAAAAAAGI/P46mn4gxnBw/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu0uF_IhKr_BYhFLXHFsBXGVyg6JFR44MkzA3Pyg=s96-c",
         providerId: "google.com",
         uid: "108168092403496605388",
       },
@@ -1551,9 +1693,10 @@ const usersData = {
   LZK0qCRyHGQ9T3exZiKtRf8ImOb2: {
     displayName: "Fernando Andrade",
     email: "fernando.neto@gmail.com",
-    emailVerified: false,
+    emailVerified: true,
     isAnonymous: false,
-    photoURL: "https://graph.facebook.com/10155193923590216/picture",
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu0rnv0c9b90ZbcSZB7_fMsI5WUxhNP1d_XUuDLL9Q=s96-c",
     pools: {
       "-LD3ttKfMMUnZTO6BM2v": "-LD3ttKfMMUnZTO6BM2v",
     },
@@ -1561,9 +1704,10 @@ const usersData = {
       {
         displayName: "Fernando Andrade",
         email: "fernando.neto@gmail.com",
-        photoURL: "https://graph.facebook.com/10155193923590216/picture",
-        providerId: "facebook.com",
-        uid: "10155193923590216",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu0rnv0c9b90ZbcSZB7_fMsI5WUxhNP1d_XUuDLL9Q=s96-c",
+        providerId: "google.com",
+        uid: "104497809916117834178",
       },
     ],
     uid: "LZK0qCRyHGQ9T3exZiKtRf8ImOb2",
@@ -1614,6 +1758,9 @@ const usersData = {
     isAnonymous: false,
     photoURL:
       "https://lh5.googleusercontent.com/-P3rb-8NqkAg/AAAAAAAAAAI/AAAAAAAADzk/3mrM7PhypFA/photo.jpg",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
     providerData: [
       {
         displayName: "Renato Carneiro",
@@ -1632,6 +1779,9 @@ const usersData = {
     emailVerified: false,
     isAnonymous: false,
     photoURL: "https://graph.facebook.com/225780244684798/picture",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
     providerData: [
       {
         displayName: "Gustavo Monteiro",
@@ -1743,7 +1893,7 @@ const usersData = {
         displayName: "Jose Carlos Cordeiro Jr",
         email: "zecacordeiro1@gmail.com",
         photoURL:
-          "https://lh5.googleusercontent.com/-Ng64KVO_huE/AAAAAAAAAAI/AAAAAAAAAAA/AB6qoq25fd_nLxoU7xQhQHPWPkmkjFX_tA/mo/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu3VwbdXl6rN6YBnaJT3BvCJowABh06PY8tukMQ5=s96-c",
         providerId: "google.com",
         uid: "106275551800571028408",
       },
@@ -1947,7 +2097,6 @@ const usersData = {
     photoURL:
       "https://lh5.googleusercontent.com/-TJoykMCeb0g/AAAAAAAAAAI/AAAAAAAAAJQ/XEr1PCEqIFo/photo.jpg",
     pools: {
-      "-LCmgkjj3PpQwwuQvKTA": "-LCmgkjj3PpQwwuQvKTA",
       "-LD3ttKfMMUnZTO6BM2v": "-LD3ttKfMMUnZTO6BM2v",
     },
     providerData: [
@@ -2060,7 +2209,7 @@ const usersData = {
         displayName: "Pedro Bandeira",
         email: "pedrobcleao@gmail.com",
         photoURL:
-          "https://lh6.googleusercontent.com/-wV08wGUep4Y/AAAAAAAAAAI/AAAAAAAAAAA/AB6qoq0PtuAoJO-AzVSThBpgcKIEixJVHA/mo/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu0Czm4D3-1A79baNviKzIkhZRIvHtxltw7Ji6la=s96-c",
         providerId: "google.com",
         uid: "101953523496499467485",
       },
@@ -2102,6 +2251,8 @@ const usersData = {
     isAnonymous: false,
     notificationTokens: {
       "cyy5igi4Dgw:APA91bFDrlyubHmUofjC7nQ9h8-n6fiuLSDf89li5our4kENSRKbVlrUF5WlpKhXP31mjTubrBdjfGsy87t8d-4QK0rkHei0j04VfyaXgiLh-k4I7gvQN0AKM8dEwiE7rQwg-KVsL0vd": true,
+      "dzgr2uzf-Zk:APA91bEIotJYgcMZZJgx7c8_A0jkSxX-I6r-r_SnWUwM8PYHou6zzWy0v-KecLxdpC4x4pg5_S4tauf-Wx1IO3CaEb6yuFpSeXlhMwcC4di2gNhdoSSN4mr4f0ZjV3AiCHHRVn1r6hiq": true,
+      "fHyDwZswT3M:APA91bFN3RYrUgWq6X2ndZGx7xMDSdbDxsnkvYluWXBz48knYv7p8Qv39JX2P533q3HGAODYZeR7LRk59zy1wfA0EM0cDVxSXUgPRU7O6zowPoWygvEEWB-WPdBYDjEZrh4n1TA1gp5p": true,
     },
     photoURL:
       "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
@@ -2367,6 +2518,28 @@ const usersData = {
     ],
     uid: "U2B5zE0Q2YdfnfiJE1TaohO700q2",
   },
+  UP2tAQgcJ8PEZXR4NhlEDlDgXak1: {
+    displayName: "João Henrique Benevides",
+    email: "jhbenevides@gmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu0guS5PUYUnhS8IPGDabFBoQcrJLmqHSDJrZapkeg=s96-c",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
+    providerData: [
+      {
+        displayName: "João Henrique Benevides",
+        email: "jhbenevides@gmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu0guS5PUYUnhS8IPGDabFBoQcrJLmqHSDJrZapkeg=s96-c",
+        providerId: "google.com",
+        uid: "103156459763683340705",
+      },
+    ],
+    uid: "UP2tAQgcJ8PEZXR4NhlEDlDgXak1",
+  },
   UqsDie5z1nUQPB8bUBBNCV3PZwT2: {
     displayName: "Moaça",
     email: "moacircl@hotmail.com",
@@ -2553,6 +2726,7 @@ const usersData = {
     emailVerified: true,
     isAnonymous: false,
     notificationTokens: {
+      "dpAwTRj_xMc:APA91bFNKgR8QqsjmTX7jQsX7EqVnN0syJU1UIQcKMHw9hKp9un1LyAu-p5FQkqj2KHqsao2yQYbkiAj-bg8mtJVGmnGmI1JLQ9PI9k3T0u_rozPBeOMdrrYf71uve_aCS9glk4SrqnG": true,
       "eKDufkrjXvc:APA91bF5GraGhTDConcKung1m1aAgtzMjN1V0fNryRBgKhj4QU2jRwhE7KFjgLgb-ktvWoGEekIuzIOQvFf2RKBYd2Xl2G_twYiJxkBXzBw4raCN5Jpwd51l-Vkkl986g8nXmqYxa26z": true,
       "ewhn_avzjzM:APA91bFetrvPozEcEFfp4_U6B3UzpCyOQ7_m4WOzwzPtYGpAn0yFbD15EiMlqZzdy3B6F97EubT8CWhuhl6CY4sBtoiidW0VK_z9O3HRcjit8KlF50dL9gs69AElzRJhSU330lIE1f99": true,
       "fHb_dQo-CXA:APA91bHGhaDQzqfZ_R-M0hz996ltaPu5LRICKLYFA8TnjUcnVbn__9D2afhAbRUYDBOk4T1u_6s2Rk8CHybJYGk-GsEOKgG_Oksrp6AbFd2JeGqebU9SD4YddSXq84AFaEgvzXsxlg6F": true,
@@ -2568,7 +2742,7 @@ const usersData = {
         displayName: "leorec75 Lopes",
         email: "leolopes75@gmail.com",
         photoURL:
-          "https://lh3.googleusercontent.com/-Husr48wNdAI/AAAAAAAAAAI/AAAAAAAAAAA/AB6qoq0O5cweLOvkuRcPqGDrF8OwxjtmsA/mo/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu0J4tJ0PaTQbiCIlS5ccYJSqOPfR93BEzmmsccw=s96-c",
         providerId: "google.com",
         uid: "100321509273603531320",
       },
@@ -2582,9 +2756,6 @@ const usersData = {
     isAnonymous: false,
     photoURL:
       "https://lh6.googleusercontent.com/-SQhOtln2VV4/AAAAAAAAAAI/AAAAAAAAAAA/AB6qoq1YmLc8W4XTdupdL6osF5vjd56Vjw/mo/photo.jpg",
-    pools: {
-      "-LD3ttKfMMUnZTO6BM2v": "-LD3ttKfMMUnZTO6BM2v",
-    },
     providerData: [
       {
         displayName: "Pneus Cunha",
@@ -2782,7 +2953,7 @@ const usersData = {
         displayName: "Jose Pinto",
         email: "jrbpinto4@gmail.com",
         photoURL:
-          "https://lh5.googleusercontent.com/-WWhzVh7FHOY/AAAAAAAAAAI/AAAAAAAAAAA/AAnnY7oD2vdNjsaJzrtdPYXUPcQlAHZQ9w/mo/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu3v9EuVKpDMf11LQGuRdXgWJpFaYjHKt-HDN9yH=s96-c",
         providerId: "google.com",
         uid: "111015344244282345299",
       },
@@ -2795,6 +2966,9 @@ const usersData = {
     emailVerified: false,
     isAnonymous: false,
     photoURL: "https://graph.facebook.com/2002964746411724/picture",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
     providerData: [
       {
         displayName: "Leonardo Vieira",
@@ -2947,13 +3121,14 @@ const usersData = {
       "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
     pools: {
       "-LD2GTSQyZYF8eIylbCg": "-LD2GTSQyZYF8eIylbCg",
+      "-LD3ttKfMMUnZTO6BM2v": "-LD3ttKfMMUnZTO6BM2v",
     },
     providerData: [
       {
         displayName: "Marcelo Maymone",
         email: "marcelomaymone01@gmail.com",
         photoURL:
-          "https://lh6.googleusercontent.com/-vTZg1hoWiOQ/AAAAAAAAAAI/AAAAAAAAAAA/AAnnY7qWXkI5KBaqXCS1b-5eMaBy2y2IPA/mo/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu2QsXCq1fzN4Jf_RFdskuPoErqlTFnNoTdxQ9rN=s96-c",
         providerId: "google.com",
         uid: "106005760212647437399",
       },
@@ -2978,10 +3153,10 @@ const usersData = {
     },
     providerData: [
       {
-        displayName: "Milvernes Cruz Lima Neto",
+        displayName: "Milvernes Neto",
         email: "neto@btsgestao.com",
         photoURL:
-          "https://lh5.googleusercontent.com/-AEP7nIfwRro/AAAAAAAAAAI/AAAAAAAAAAA/NanNvLDB9jI/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu2FEZpcIQmXgduHMR5FTmGJDxsGKVVoJwOmrAMt=s96-c",
         providerId: "google.com",
         uid: "110382543270765832881",
       },
@@ -3099,15 +3274,38 @@ const usersData = {
     ],
     uid: "eaw6rwi7myfl3aZBDOwfEX79bJq1",
   },
+  evC0ppN0k6X7BlMO3fknQHRHxoa2: {
+    displayName: "Gustavo Zloccowick",
+    email: "ghzsilva21@gmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu2rSYK4mZZBgBKA53MTlYy_U1U4ooiDFA30zUYOZg=s96-c",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
+    providerData: [
+      {
+        displayName: "Gustavo Zloccowick",
+        email: "ghzsilva21@gmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu2rSYK4mZZBgBKA53MTlYy_U1U4ooiDFA30zUYOZg=s96-c",
+        providerId: "google.com",
+        uid: "113819131675230061787",
+      },
+    ],
+    uid: "evC0ppN0k6X7BlMO3fknQHRHxoa2",
+  },
   eyn6bCswRnZ5qIJZ4ZiC98rTe4n2: {
     connections: {
-      "-NGCJzOSCFT1oHtUdd3W": true,
+      "-NGuvWqnoRydEuGeIqE7": true,
     },
     displayName: "Nando Coração",
     email: "fmaymone@gmail.com",
     emailVerified: true,
     isAnonymous: false,
     notificationTokens: {
+      "c8UzdVOWCJo:APA91bFiH1qCT_w-Et4wPh4nerhfmu1KAp0UROXyDre2Vg6s61FJevUlC7Y_B-wNMTMyxM4Xj3wpN7JsWlbnyElp3H41xhmfR25mH7_AOlnkwGHuR_POKm3opPRex7GxY9Yst__dyxpZ": true,
       "cOOMs0_7BBI:APA91bGgTKnGERloCoVqw1mov8bbO0MB4VoPkX_jD9mxTN0mTL3amWGO6PS7XNZVQjyhluwXzbekjp_nPB5SjHX5Rx5CuVsCRv0jDq79FHBj0wS-rtagmm2EdWJWirOvp8RErBCdfMV1": true,
       "cwlk_XWDMpw:APA91bFFDZHmL3oEKjJytKdNYrVeR0kglLgIyV0QKE8jKlBt1j3j7GFtGQeNK3p9hVoR9cN2xSadtin9wr43KCEsu7n8knepP5GIheprTrGNcjYtTrGUTKV3khEI6mzWKpTNxBgHchNM": true,
       "d-pEmcg-rSE:APA91bGbgmjXSMoDorYcYUz3bZ-MXxT2BtnTWNMkTbFa6p4vBOrUzj_3wIT2EsGhcpvKKGgwiiWuJnUiqx83LTPYc9NaPqR9pAM6i88Nvn8ueAIwWgPBeJyVbKsJF-G4obTERbq2IDS7": true,
@@ -3367,6 +3565,28 @@ const usersData = {
       },
     ],
     uid: "iJQYEsxtZfWYqncQvyMuhxFHhWR2",
+  },
+  ig4wZKS6mlUNb1Jr0ulvNxGbgHH2: {
+    displayName: "Geraldo Ferraz",
+    email: "geraldoferraz876@gmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu2I0QaqRWSFjhGDJcxefoI8630wInJwp8us6bS7=s96-c",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
+    providerData: [
+      {
+        displayName: "Geraldo Ferraz",
+        email: "geraldoferraz876@gmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu2I0QaqRWSFjhGDJcxefoI8630wInJwp8us6bS7=s96-c",
+        providerId: "google.com",
+        uid: "116364719464925102303",
+      },
+    ],
+    uid: "ig4wZKS6mlUNb1Jr0ulvNxGbgHH2",
   },
   jf4zto9i2OMc2E9EFrLv12T0gWz2: {
     displayName: "Paulo Roberto do Amaral Leitão",
@@ -3654,6 +3874,28 @@ const usersData = {
     ],
     uid: "mLapSaNOB3MMPNNKdEebKYfp9vG2",
   },
+  mPptlwxQKaZjKTgTtdcZBBzKKHr1: {
+    displayName: "Belmiro Araujo",
+    email: "belmirofaraujo@gmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu2DB1EGStQfjRPmYKTx3LU8vbtUsWW6Z4o4EbARRDw=s96-c",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
+    providerData: [
+      {
+        displayName: "Belmiro Araujo",
+        email: "belmirofaraujo@gmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu2DB1EGStQfjRPmYKTx3LU8vbtUsWW6Z4o4EbARRDw=s96-c",
+        providerId: "google.com",
+        uid: "116826520445512571385",
+      },
+    ],
+    uid: "mPptlwxQKaZjKTgTtdcZBBzKKHr1",
+  },
   mj9oKJsqHDbDWjFAwEA57j8jkRi2: {
     connections: {
       "-LFxgRXfBMjKwhAx5H7o": true,
@@ -3672,7 +3914,7 @@ const usersData = {
         displayName: "Diogo Danda",
         email: "diogo.danda1976@gmail.com",
         photoURL:
-          "https://lh6.googleusercontent.com/-byKQgaozmGg/AAAAAAAAAAI/AAAAAAAAAAA/AAnnY7ret-WBJ3wrSWmXk-cUmaANC4gPyw/mo/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu0QIdRMHbyZBmCPKWUtRn8pbSeydWAqoyf0ugy8=s96-c",
         providerId: "google.com",
         uid: "115016031059596727091",
       },
@@ -3686,6 +3928,9 @@ const usersData = {
     isAnonymous: false,
     photoURL:
       "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
     providerData: [
       {
         displayName: "Ilomar Ferreira",
@@ -3752,6 +3997,9 @@ const usersData = {
     emailVerified: false,
     isAnonymous: false,
     photoURL: "https://graph.facebook.com/10156807277365715/picture",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
     providerData: [
       {
         displayName: "Daniel Cavalcanti",
@@ -3763,6 +4011,28 @@ const usersData = {
     ],
     uid: "nJ6qMCaKGAOuRmNdrH1enJQ9CBT2",
   },
+  nL1Iat0C24VpXcJPdrjeG9Yxiro1: {
+    displayName: "Moacir",
+    email: "moacircavalcanteneto@gmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu0xoUDhA0tL7jHGo-ZDihGN6RRIXMCATVdzY2ue=s96-c",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
+    providerData: [
+      {
+        displayName: "Moacir",
+        email: "moacircavalcanteneto@gmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu0xoUDhA0tL7jHGo-ZDihGN6RRIXMCATVdzY2ue=s96-c",
+        providerId: "google.com",
+        uid: "111825205687419893687",
+      },
+    ],
+    uid: "nL1Iat0C24VpXcJPdrjeG9Yxiro1",
+  },
   o0ZdNA2iclbmfMiRd4eP5kkVgAc2: {
     displayName: "Alberto Pereira",
     email: "albertopfilho@gmail.com",
@@ -3771,6 +4041,7 @@ const usersData = {
     photoURL:
       "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
     pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
       "-LD3ttKfMMUnZTO6BM2v": "-LD3ttKfMMUnZTO6BM2v",
     },
     providerData: [
@@ -3803,6 +4074,7 @@ const usersData = {
     photoURL:
       "https://lh4.googleusercontent.com/-Ey6nD6KwWKI/AAAAAAAAAAI/AAAAAAAAAAA/yAmx8TTQtPM/photo.jpg",
     pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
       "-LD3ttKfMMUnZTO6BM2v": "-LD3ttKfMMUnZTO6BM2v",
     },
     providerData: [
@@ -3810,12 +4082,34 @@ const usersData = {
         displayName: "Tiago Pereira",
         email: "tiagomelopereira@gmail.com",
         photoURL:
-          "https://lh4.googleusercontent.com/-Ey6nD6KwWKI/AAAAAAAAAAI/AAAAAAAAAAA/yAmx8TTQtPM/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu2J-sTySbgsnP2wGP1cIHtbMLODBKTvY9KcExLVNg=s96-c",
         providerId: "google.com",
         uid: "112548995634791377294",
       },
     ],
     uid: "pfMNjfsPAoP7jVjjxZ51paA7NYk2",
+  },
+  pjT2QJcP16cuWOmR6at5SmYJ87t1: {
+    displayName: "Rogério BASTO",
+    email: "rcbasto76@gmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu1AEUKVj1WcoictZDTsUFXwhukUKvW-7uI5dGM6eg=s96-c",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
+    providerData: [
+      {
+        displayName: "Rogério BASTO",
+        email: "rcbasto76@gmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu1AEUKVj1WcoictZDTsUFXwhukUKvW-7uI5dGM6eg=s96-c",
+        providerId: "google.com",
+        uid: "106630870772920756951",
+      },
+    ],
+    uid: "pjT2QJcP16cuWOmR6at5SmYJ87t1",
   },
   plraMeNOGcVqSFp0upOFy0iCpWE2: {
     connections: {
@@ -3889,6 +4183,28 @@ const usersData = {
       },
     ],
     uid: "rSNaEWJivwhafGgJuIMlN6nyOqA2",
+  },
+  rZGLll2Fy4YcyOya47WNFN8GRWz2: {
+    displayName: "Artur Sabino",
+    email: "artursabino056@gmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu1-kssqMQEYUNcUyg-CcVFbkLBM4uGdOs_OuRb0=s96-c",
+    pools: {
+      "-LD2GTSQyZYF8eIylbCg": "-LD2GTSQyZYF8eIylbCg",
+    },
+    providerData: [
+      {
+        displayName: "Artur Sabino",
+        email: "artursabino056@gmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu1-kssqMQEYUNcUyg-CcVFbkLBM4uGdOs_OuRb0=s96-c",
+        providerId: "google.com",
+        uid: "112357839636227330646",
+      },
+    ],
+    uid: "rZGLll2Fy4YcyOya47WNFN8GRWz2",
   },
   rlCUXFqmKXMjTOOpSUYjT8anbop2: {
     connections: {
@@ -4061,7 +4377,7 @@ const usersData = {
         displayName: "Midian Maymone",
         email: "midianmaymone@gmail.com",
         photoURL:
-          "https://lh5.googleusercontent.com/-DN1oTl0s2aw/AAAAAAAAAAI/AAAAAAAAAAA/AB6qoq2ggGpj7HkXBmSxFVk3vLYc_KqoXw/mo/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu0mMgT3f-8xovK3Yn_48rC9dMaKOzfL6W1wSL9V=s96-c",
         providerId: "google.com",
         uid: "114118798584497365765",
       },
@@ -4069,18 +4385,23 @@ const usersData = {
     uid: "uR59Z1ibspTht6XtbtcSp12Tgny2",
   },
   usvPUEgzWsXkRZxu8Z2fGDZo9823: {
-    displayName: "Rodrigo Costa Patu",
+    displayName: "Rodrigo Patu",
     email: "rocospa@gmail.com",
-    emailVerified: false,
+    emailVerified: true,
     isAnonymous: false,
-    photoURL: "https://graph.facebook.com/2097969090451983/picture",
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu1bvVHG2__XfyR_RNPutWBk58wvmATN3X0ljvW9=s96-c",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
     providerData: [
       {
-        displayName: "Rodrigo Costa Patu",
+        displayName: "Rodrigo Patu",
         email: "rocospa@gmail.com",
-        photoURL: "https://graph.facebook.com/2097969090451983/picture",
-        providerId: "facebook.com",
-        uid: "2097969090451983",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu1bvVHG2__XfyR_RNPutWBk58wvmATN3X0ljvW9=s96-c",
+        providerId: "google.com",
+        uid: "105082957311642470591",
       },
     ],
     uid: "usvPUEgzWsXkRZxu8Z2fGDZo9823",
@@ -4153,6 +4474,31 @@ const usersData = {
     ],
     uid: "vFfUuOvr4RX9zmUgssvxd4ZN4Lo2",
   },
+  vmmWbw3IYZXz66f60dywlSu6JKl2: {
+    displayName: "Gustavo Silva",
+    email: "coordinacion@cursoapffutbolplaya2020.page",
+    emailVerified: true,
+    isAnonymous: false,
+    notificationTokens: {
+      "d73JVJZ1ReE:APA91bH9hZYHH-buVenAYD2cs5Zs2zUJcm55_NLQxkNktbUP9jTKHOhr93LN43z3w3TFPGJP_QEcAqw4nKGr73cwji6siMCU58BJsLkSYWnBWeb37PGswVPO3ftwGXLqihMBQlBRdoB1": true,
+    },
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu0dQe-6vdrJ94OB0szzFKn-nCq2pCcFhrFLcedZ=s96-c",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
+    providerData: [
+      {
+        displayName: "Gustavo Silva",
+        email: "coordinacion@cursoapffutbolplaya2020.page",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu0dQe-6vdrJ94OB0szzFKn-nCq2pCcFhrFLcedZ=s96-c",
+        providerId: "google.com",
+        uid: "106416973854890388521",
+      },
+    ],
+    uid: "vmmWbw3IYZXz66f60dywlSu6JKl2",
+  },
   vr8ZOKr2EEgDzHxOgLAKiUcKW6G2: {
     connections: {
       "-LFjCBDSGzEiK7woM--W": true,
@@ -4183,6 +4529,7 @@ const usersData = {
     emailVerified: true,
     isAnonymous: false,
     notificationTokens: {
+      "cIYzNRMGVEY:APA91bEgRLZ-fpw2H0eKNxV1ar-isJWfgTRyDiifxPWcVlZ9l20joVsKqyiE8uXZiSUDhabMTV-TQ26PwHAPjWsqvAPmwnABvyMJU0i-nAAPJyFziKRkq3U9P5L5Zm9oOMwsVdkzRnt_": true,
       "dpvkJ0To6M8:APA91bEdd9Arb5SOtJXAsfTqqHWUZWnRyXbrC-WYeav6o14MANy6t0bkA5B260AcW7Oe3Do-Zx98jYDC2U2huvmZcLPXQduGEpau7Avowrmo3r1i5WgxeqL5tE8atXD_FqTHflLEMIFA": true,
     },
     photoURL:
@@ -4195,7 +4542,7 @@ const usersData = {
         displayName: "Sandra Maymone",
         email: "smaymone0@gmail.com",
         photoURL:
-          "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
+          "https://lh3.googleusercontent.com/a/ALm5wu2xydu3IXwZNaOsXOl6FmAXaoOfGk3cOImsvYG4xv8=s96-c",
         providerId: "google.com",
         uid: "106455564812028518519",
       },
@@ -4288,6 +4635,28 @@ const usersData = {
       },
     ],
     uid: "xZyNVhiAsmVk299keJMti85VtI93",
+  },
+  xwepQHtsy7WDJqrzInjZmiRvAHi2: {
+    displayName: "Daniel Belo",
+    email: "danielsbelo76@gmail.com",
+    emailVerified: true,
+    isAnonymous: false,
+    photoURL:
+      "https://lh3.googleusercontent.com/a/ALm5wu3Q4Ak_wGFOgqJGrqxHPbDIqSESQrFo_3hewjelCQ=s96-c",
+    pools: {
+      "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1",
+    },
+    providerData: [
+      {
+        displayName: "Daniel Belo",
+        email: "danielsbelo76@gmail.com",
+        photoURL:
+          "https://lh3.googleusercontent.com/a/ALm5wu3Q4Ak_wGFOgqJGrqxHPbDIqSESQrFo_3hewjelCQ=s96-c",
+        providerId: "google.com",
+        uid: "115809537911574051074",
+      },
+    ],
+    uid: "xwepQHtsy7WDJqrzInjZmiRvAHi2",
   },
   xyuFRGCCXchBV6lAlZHl4Pf51i22: {
     displayName: "Marcus Brunno",

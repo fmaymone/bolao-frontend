@@ -11,17 +11,9 @@ import MatchesBuilder from "../Matches/MatchesBuilder";
 import ClassificationOfUser from "./ClassificationOfUser";
 import Loader from "../../components/UI/Loader";
 import ClassificationOfPool from "./ClassificationOfPool";
-import userCachedData from "./users";
-import poolCachedData from "./poolCachedData";
-
-const styles = {
-  headline: {
-    fontSize: 24,
-    paddingTop: 16,
-    marginBottom: 12,
-    fontWeight: 400,
-  },
-};
+import userCachedData from "./cached/users";
+import poolCachedData from "./cached/pools";
+import MatchesOfTheDay from "./MatchesOfTheDay";
 
 class PoolDetails extends Component {
   constructor(props) {
@@ -40,8 +32,8 @@ class PoolDetails extends Component {
     };
   }
   async componentDidMount() {
-    const limitDate = new Date(2021, 11, 22, 8);
-    let now = new Date();
+    const limitDate = new Date(2022, 11, 22, 8);
+    const now = new Date();
 
     this.isUserFromPool(
       this.props.location.state.userOfPool,
@@ -193,9 +185,15 @@ class PoolDetails extends Component {
       return (
         <Activity title={`${pool.name}`}>
           <Tabs value={this.state.value} onChange={this.handleChange}>
-            {/* <Tab label="Hoje" value="a">
-              <MatchesOfTheDay users={userCachedData} poolData={this.state.poolData} outcomeMatches={this.state.outcomeMatches} />
-            </Tab> */}
+            {this.state.finishedTimeToBet && (
+              <Tab label="Hoje" value="a">
+                <MatchesOfTheDay
+                  users={userCachedData}
+                  poolData={this.state.poolData}
+                  outcomeMatches={this.state.outcomeMatches}
+                />
+              </Tab>
+            )}
             <Tab label="Minhas Apostas" value="a">
               <div>
                 <MatchesBuilder

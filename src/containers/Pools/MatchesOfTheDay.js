@@ -5,7 +5,7 @@ import {
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn
+  TableRowColumn,
 } from "material-ui/Table";
 import TeamClassification from "../../components/Match/TeamClassification";
 import User from "../../components/User/User";
@@ -13,23 +13,23 @@ import User from "../../components/User/User";
 import { Card } from "material-ui/Card";
 
 class MatchesOfTheDay extends Component {
-  getMatchesOfDay = () => {
-    let current = new Date();
+  getUserByKey = (key) => {
+    return this.props.users[key];
   };
-  getUserByKey = key => {
-    const a = this.props.users.find(k => k.key === key);
-    return a.val;
-  };
-  renderUserMatches = user => {
-    let matchesToday = Object.keys(user.matches).map(key => user.matches[key]);
-    let filteredMatches = matchesToday.filter(this.filterMatches);
+  renderUserMatches = (user, filteredMatchesIds) => {
+    let matchesToday = Object.keys(user.matches).map(
+      (key) => user.matches[key]
+    );
+    let filteredMatches = matchesToday.filter((value) =>
+      filteredMatchesIds.includes(value.name)
+    );
     return (
       <TableRow>
         <TableRowColumn style={{ width: "30%" }}>
           <User user={this.getUserByKey(user.key)} />
         </TableRowColumn>
-        {filteredMatches.map(userMatch => (
-          <TableRowColumn style={{ width: "15%" }}>
+        {filteredMatches.map((userMatch) => (
+          <TableRowColumn style={{ width: "10%" }}>
             {userMatch.home_result + " x " + userMatch.away_result}
           </TableRowColumn>
         ))}
@@ -37,15 +37,15 @@ class MatchesOfTheDay extends Component {
     );
   };
 
-  renderHeader = matches => {
+  renderHeader = (matches) => {
     return (
       <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
         <TableRow>
           <TableHeaderColumn style={{ width: "30%" }}>
             Jogador
           </TableHeaderColumn>
-          {matches.map(match => (
-            <TableHeaderColumn style={{ width: "15%" }}>
+          {matches.map((match) => (
+            <TableHeaderColumn style={{ width: "10%" }}>
               <div style={{ display: "inline-block" }}>
                 <TeamClassification isHomeTeam={true} id={match.home_team} />{" "}
                 <div style={{ display: "inline-block" }}>{" x "} </div>
@@ -58,23 +58,25 @@ class MatchesOfTheDay extends Component {
     );
   };
 
-  filterMatches = value => {
+  filterMatches = (value) => {
     const now = new Date();
     const dateToCompare = new Date(value.date);
     return dateToCompare.getDate() === now.getDate();
   };
 
   render() {
-    const { outcomeMatches, users, poolData } = this.props;
+    const { outcomeMatches, poolData } = this.props;
 
-    let matchesToday = Object.keys(outcomeMatches).map(
-      key => outcomeMatches[key]
+    const matchesToday = Object.keys(outcomeMatches).map(
+      (key) => outcomeMatches[key]
     );
-    let filteredMatches = matchesToday.filter(this.filterMatches);
+    const filteredMatches = matchesToday.filter(this.filterMatches);
 
-    //console.log(filteredMatches);
+    const filteredMatchesIds = filteredMatches.map((value) => value.name);
 
-    const renderData = poolData.map(user => this.renderUserMatches(user));
+    const renderData = poolData.map((user) =>
+      this.renderUserMatches(user, filteredMatchesIds)
+    );
 
     return (
       <Card>

@@ -31,47 +31,55 @@ export const calculatePoints = (userMatches, outcomeMatches, status) => {
   ) {
     structuredReturn.FINAL_RESULT = getPointsOfFinalResult(
       userMatches,
-      outcomeMatches
+      outcomeMatches,
+      status
     );
 
     structuredReturn.TOP_SCORER = getPointsTopScorer(
       userMatches,
-      outcomeMatches
+      outcomeMatches,
+      status
     );
 
     structuredReturn.ROUND_16 = getPointsOfClassifiedInRounds(
       ROUND_16,
       userMatches,
-      outcomeMatches
+      outcomeMatches,
+      status
     );
 
     structuredReturn.ROUND_8 = getPointsOfClassifiedInRounds(
       ROUND_8,
       userMatches,
-      outcomeMatches
+      outcomeMatches,
+      status
     );
 
     structuredReturn.ROUND_4 = getPointsOfClassifiedInRounds(
       ROUND_4,
       userMatches,
-      outcomeMatches
+      outcomeMatches,
+      status
     );
 
     structuredReturn.ROUND_FINALS = getPointsOfClassifiedInRounds(
       ROUND_FINALS,
       userMatches,
-      outcomeMatches
+      outcomeMatches,
+      status
     );
 
     structuredReturn.ROUND_3x4 = getPointsOfClassifiedInRounds(
       ROUND_3x4,
       userMatches,
-      outcomeMatches
+      outcomeMatches,
+      status
     );
 
     structuredReturn.pointsOfMatches = getPointsOfMatches(
       userMatches,
-      outcomeMatches
+      outcomeMatches,
+      status
     );
 
     totalPoints =
@@ -135,7 +143,7 @@ const getPointsOfMatch = (userMatch, outcomeMatch) => {
   return points;
 };
 
-const getPointsOfFinalResult = (matchesOfUser, outcomeMatches) => {
+const getPointsOfFinalResult = (matchesOfUser, outcomeMatches, status) => {
   let points = 0;
   let structuredReturn;
 
@@ -163,21 +171,22 @@ const getPointsOfFinalResult = (matchesOfUser, outcomeMatches) => {
         type: userFinalResult.fourth === outcomeFinalResult.fourth,
       },
     };
+    if (status.FINAL_RESULT) {
+      points +=
+        structuredReturn.first.type *
+        numberPointsKnockoutMatches(FINAL_RESULT).first;
+      points +=
+        structuredReturn.second.type *
+        numberPointsKnockoutMatches(FINAL_RESULT).second;
+      points +=
+        structuredReturn.third.type *
+        numberPointsKnockoutMatches(FINAL_RESULT).third;
+      points +=
+        structuredReturn.fourth.type *
+        numberPointsKnockoutMatches(FINAL_RESULT).fourth;
 
-    points +=
-      structuredReturn.first.type *
-      numberPointsKnockoutMatches(FINAL_RESULT).first;
-    points +=
-      structuredReturn.second.type *
-      numberPointsKnockoutMatches(FINAL_RESULT).second;
-    points +=
-      structuredReturn.third.type *
-      numberPointsKnockoutMatches(FINAL_RESULT).third;
-    points +=
-      structuredReturn.fourth.type *
-      numberPointsKnockoutMatches(FINAL_RESULT).fourth;
-
-    structuredReturn.points = points;
+      structuredReturn.points = points;
+    }
   }
   return structuredReturn;
 };
@@ -203,7 +212,7 @@ const numberPointsKnockoutMatches = (group) => {
   }
 };
 
-const getPointsTopScorer = (matchesOfUser, outcomeMatches) => {
+const getPointsTopScorer = (matchesOfUser, outcomeMatches, status) => {
   const userFinalResult = matchesOfUser.find((k) => k.group === TOP_SCORER);
   const outcomeFinalResult = outcomeMatches.find((k) => k.group === TOP_SCORER);
   let structuredReturn = { total: 0, scorer: 0, goals: 0, points: 0 };
@@ -214,7 +223,9 @@ const getPointsTopScorer = (matchesOfUser, outcomeMatches) => {
   if (userFinalResult.goals === outcomeFinalResult.goals) {
     structuredReturn.goals += numberPointsKnockoutMatches(TOP_SCORER).goals;
   }
-  structuredReturn.points = structuredReturn.scorer + structuredReturn.goals;
+  if (status.TOP_SCORER) {
+    structuredReturn.points = structuredReturn.scorer + structuredReturn.goals;
+  }
 
   return structuredReturn;
 };
@@ -222,7 +233,8 @@ const getPointsTopScorer = (matchesOfUser, outcomeMatches) => {
 const getPointsOfClassifiedInRounds = (
   group,
   matchesOfUser,
-  outcomeMatches
+  outcomeMatches,
+  status
 ) => {
   let teamsOfUser = [];
   let teamsOutcome = [];
@@ -266,6 +278,9 @@ const getPointsOfClassifiedInRounds = (
     }
   }
 
+  if (!status[group]) {
+    structuredReturn.points = 0;
+  }
   return structuredReturn;
 };
 

@@ -18,7 +18,6 @@ import {
   ROUND_3x4,
   FINAL_RESULT,
   TOP_SCORER,
-  ALL_GROUPS_CONSTANTS,
 } from "../../store/actions/types";
 
 import PointsOfClassifiedsTeams from "../Matches/PointsOfClassifiedsTeams";
@@ -41,6 +40,7 @@ class ClassificationOfUser extends Component {
     return 100;
   };
   updatePoints = (group, data) => {
+    //console.log('mamae');
     this.setState({ group: data });
   };
   renderPointsOfMatch = () => {
@@ -81,29 +81,61 @@ class ClassificationOfUser extends Component {
       </Card>
     );
   };
-  renderPointsOfGroups = () => {
-    const { matchesOfUser, outcomeMatches } = this.props;
-    return ALL_GROUPS_CONSTANTS.map((round) => {
-      return (
-        <PointsOfClassifiedsTeams
-          matchesOfUser={matchesOfUser}
-          outcomeMatches={outcomeMatches}
-          group={round}
-          updatePoints={this.updatePoints}
-        />
-      );
-    });
-  };
-
   render() {
     const { matchesOfUser, outcomeMatches } = this.props;
     if (matchesOfUser.length > 0 && outcomeMatches.length > 0) {
+      //console.log("oi");
       return (
         <div>
           <div>{this.renderPointsOfMatch()}</div>
-          <div>{this.renderPointsOfGroups()}</div>
+          <div>
+            <PointsOfClassifiedsTeams
+              matchesOfUser={matchesOfUser}
+              outcomeMatches={outcomeMatches}
+              group={ROUND_16}
+              updatePoints={this.updatePoints}
+            />
+            <PointsOfClassifiedsTeams
+              matchesOfUser={matchesOfUser}
+              outcomeMatches={outcomeMatches}
+              group={ROUND_8}
+              updatePoints={this.updatePoints}
+            />
+            <PointsOfClassifiedsTeams
+              matchesOfUser={matchesOfUser}
+              outcomeMatches={outcomeMatches}
+              group={ROUND_4}
+              updatePoints={this.updatePoints}
+            />
+            <PointsOfClassifiedsTeams
+              matchesOfUser={matchesOfUser}
+              outcomeMatches={outcomeMatches}
+              group={ROUND_3x4}
+              updatePoints={this.updatePoints}
+            />
+            <PointsOfClassifiedsTeams
+              matchesOfUser={matchesOfUser}
+              outcomeMatches={outcomeMatches}
+              group={ROUND_FINALS}
+              updatePoints={this.updatePoints}
+            />
+            <PointsOfClassifiedsTeams
+              matchesOfUser={matchesOfUser}
+              outcomeMatches={outcomeMatches}
+              group={FINAL_RESULT}
+              updatePoints={this.updatePoints}
+            />
+            <PointsOfClassifiedsTeams
+              matchesOfUser={matchesOfUser}
+              outcomeMatches={outcomeMatches}
+              group={TOP_SCORER}
+              updatePoints={this.updatePoints}
+            />
+          </div>
         </div>
       );
+
+      //return this.renderList();
     } else {
       return <Loader />;
     }
