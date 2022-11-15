@@ -81,7 +81,7 @@ class MatchesBuilder extends Component {
 
   checkLimitDate = () => {
     const limitDate = new Date(2022, 11, 22, 8);
-    let now = new Date();
+    const now = new Date();
 
     if (now > limitDate) {
       this.setState({ finishedTimeToBet: true });

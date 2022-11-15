@@ -11,17 +11,9 @@ import MatchesBuilder from "../Matches/MatchesBuilder";
 import ClassificationOfUser from "./ClassificationOfUser";
 import Loader from "../../components/UI/Loader";
 import ClassificationOfPool from "./ClassificationOfPool";
-import userCachedData from "./users";
-import poolCachedData from "./poolCachedData";
-
-const styles = {
-  headline: {
-    fontSize: 24,
-    paddingTop: 16,
-    marginBottom: 12,
-    fontWeight: 400,
-  },
-};
+import userCachedData from "./cached/users";
+import poolCachedData from "./cached/pools";
+import MatchesOfTheDay from "./MatchesOfTheDay";
 
 class PoolDetails extends Component {
   constructor(props) {
@@ -31,6 +23,7 @@ class PoolDetails extends Component {
       isLoadingMatchesOfUser: false,
       isLoadingOutcomeMatches: false,
       isLoadingPool: false,
+      isLoadingStatus: false,
       outcomeMatches: [],
       matchesOfUser: [],
       poolData: [],
@@ -40,7 +33,7 @@ class PoolDetails extends Component {
   }
   async componentDidMount() {
     const limitDate = new Date(2022, 11, 22, 8);
-    let now = new Date();
+    const now = new Date();
 
     this.isUserFromPool(
       this.props.location.state.userOfPool,
@@ -51,6 +44,7 @@ class PoolDetails extends Component {
       this.fetchMatchesDataCached();
       this.fetchPoolDataCached();
       await this.fetchOutcome();
+      await this.fetchStatus();
       //this.fetchPoolData();
     }
     await this.fetchMatches();
@@ -99,6 +93,21 @@ class PoolDetails extends Component {
         this.setState({
           outcomeMatches: this.snapshotToArray(snapshot),
           isLoadingOutcomeMatches: false,
+        });
+      });
+  };
+  fetchStatus = async () => {
+    this.setState({ isLoadingStatus: true });
+    const { firebaseApp } = this.props;
+    const outcomePoolId = "-LCmgkjj3PpQwwuQvKTA";
+    const outcomeUserId = "02b4c88iL0Olehf1KpeEeNUdBMX2";
+    await firebaseApp
+      .database()
+      .ref(`/pools/${outcomePoolId}/users/${outcomeUserId}/status`)
+      .on("value", (snapshot) => {
+        this.setState({
+          status: snapshot.val(),
+          isLoadingStatus: false,
         });
       });
   };
@@ -170,20 +179,27 @@ class PoolDetails extends Component {
     if (
       this.state.isLoadingMatchesOfUser === false &&
       this.state.isLoadingOutcomeMatches === false &&
-      this.state.isLoadingPool === false
+      this.state.isLoadingPool === false &&
+      this.state.isLoadingStatus === false
     ) {
       return (
         <Activity title={`${pool.name}`}>
           <Tabs value={this.state.value} onChange={this.handleChange}>
-            {/* <Tab label="Hoje" value="a">
-              <MatchesOfTheDay users={this.props.users} poolData={this.state.poolData} outcomeMatches={this.state.outcomeMatches} />
-            </Tab> */}
+            {this.state.finishedTimeToBet && (
+              <Tab label="Hoje" value="a">
+                <MatchesOfTheDay
+                  users={userCachedData}
+                  poolData={this.state.poolData}
+                  outcomeMatches={this.state.outcomeMatches}
+                />
+              </Tab>
+            )}
             <Tab label="Minhas Apostas" value="a">
               <div>
                 <MatchesBuilder
                   pool={pool}
                   user={this.props.location.state.userOfPool}
-                  users={this.props.users}
+                  users={userCachedData}
                 />
               </div>
             </Tab>
@@ -193,7 +209,8 @@ class PoolDetails extends Component {
                   <ClassificationOfPool
                     poolData={this.state.poolData}
                     outcomeMatches={this.state.outcomeMatches}
-                    users={this.props.users}
+                    users={userCachedData}
+                    status={this.state.status}
                   />
                 </div>
               </Tab>
@@ -205,6 +222,7 @@ class PoolDetails extends Component {
                     user={this.props.auth}
                     matchesOfUser={this.state.matchesOfUser}
                     outcomeMatches={this.state.outcomeMatches}
+                    status={this.state.status}
                   />
                 </div>
               </Tab>

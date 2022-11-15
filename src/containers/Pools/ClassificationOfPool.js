@@ -40,10 +40,7 @@ class ClassificationOfPool extends Component {
   };
 
   getUserByKey = (key) => {
-    const currentUser = this.props.users.find((k) => k.key === key);
-    if (currentUser) {
-      return currentUser.val;
-    }
+    return this.props.users[key];
   };
 
   renderClassification = (allUserMatches) => {
@@ -182,14 +179,18 @@ class ClassificationOfPool extends Component {
   };
 
   render() {
-    const { outcomeMatches, users } = this.props;
+    const { outcomeMatches, users, status } = this.props;
     let allUserMatches = [];
 
     this.props.poolData.map((user) => {
       const transformedUserMatches = Object.keys(user.matches).map(
         (key) => user.matches[key]
       );
-      const data = calculatePoints(transformedUserMatches, outcomeMatches);
+      const data = calculatePoints(
+        transformedUserMatches,
+        outcomeMatches,
+        status
+      );
       allUserMatches.push({
         user: user.key,
         points: data,
