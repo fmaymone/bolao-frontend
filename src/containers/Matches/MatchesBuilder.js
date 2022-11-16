@@ -127,9 +127,8 @@ class MatchesBuilder extends Component {
           matches: this.snapshotToArray(snapshot),
           isLoading: false,
         });
+        this.checkBettingStatus();
       });
-
-    await this.checkBettingStatus();
   };
 
   checkBettingStatus = async () => {
