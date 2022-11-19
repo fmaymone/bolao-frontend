@@ -11,9 +11,10 @@ import MatchesBuilder from "../Matches/MatchesBuilder";
 import ClassificationOfUser from "./ClassificationOfUser";
 import Loader from "../../components/UI/Loader";
 import ClassificationOfPool from "./ClassificationOfPool";
-import userCachedData from "./cached/users";
-import poolCachedData from "./cached/pools";
 import MatchesOfTheDay from "./MatchesOfTheDay";
+
+const poolCachedData = require("./cached/pools.json");
+const userCachedData = require("./cached/users.json");
 
 class PoolDetails extends Component {
   constructor(props) {
@@ -34,7 +35,6 @@ class PoolDetails extends Component {
   async componentDidMount() {
     const limitDate = new Date(2022, 11, 22, 8);
     const now = new Date();
-
     this.isUserFromPool(
       this.props.location.state.userOfPool,
       this.props.location.state.pool
