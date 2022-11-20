@@ -30,6 +30,7 @@ class PoolDetails extends Component {
       poolData: [],
       finishedTimeToBet: false,
       status: {},
+      pool: {},
     };
   }
   async componentDidMount() {
@@ -245,24 +246,33 @@ class PoolDetails extends Component {
   };
 
   render() {
-    const pool = this.props.location.state.pool;
+    if (
+      this.state.isLoadingMatchesOfUser === false &&
+      this.state.isLoadingOutcomeMatches === false &&
+      this.state.isLoadingPool === false &&
+      this.state.isLoadingStatus === false
+    ) {
+      const pool = this.props.location.state.pool;
 
-    if (this.state.isUserFromPool) {
-      if (pool !== undefined) {
-        return this.renderData(pool);
+      if (this.state.isUserFromPool) {
+        if (pool !== undefined) {
+          return this.renderData(pool);
+        } else {
+          return (
+            <Activity>
+              <h1>Erro</h1>
+            </Activity>
+          );
+        }
       } else {
         return (
-          <Activity>
-            <h1>Erro</h1>
+          <Activity title={`${pool.name}`}>
+            <h1>Tu num é do grupo. Pede pra alguem te adicionar ou vaza!!!!</h1>
           </Activity>
         );
       }
     } else {
-      return (
-        <Activity title={`${pool.name}`}>
-          <h1>Tu num é do grupo. Pede pra alguem te adicionar ou vaza!!!!</h1>
-        </Activity>
-      );
+      return <Loader />;
     }
   }
 }
