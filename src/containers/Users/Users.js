@@ -13,13 +13,13 @@ import Avatar from "material-ui/Avatar";
 import { withFirebase } from "firekit-provider";
 import isGranted from "rmw-shell/lib/utils/auth";
 import Scrollbar from "rmw-shell/lib/components/Scrollbar/Scrollbar";
-import BounceLoader from 'react-spinners'
+import BounceLoader from "react-spinners";
 import {
   addUserToPool,
   fetchUserData,
   removeUserOfPool,
   addUserPools,
-  removeUserPools
+  removeUserPools,
 } from "../../store/actions/bolaoActions";
 
 class Users extends Component {
@@ -31,11 +31,11 @@ class Users extends Component {
     watchList(ref);
   }
 
-  getUserData = async uid => {
+  getUserData = async (uid) => {
     return this.props.fetchUserData(uid);
   };
 
-  renderList = users => {
+  renderList = (users) => {
     const { history } = this.props;
 
     if (users === undefined) {
@@ -44,7 +44,7 @@ class Users extends Component {
 
     return users.map((user, index) => {
       if (user === undefined) {
-      return (<div></div>) ;
+        return <div></div>;
       } else {
         return (
           <div key={index}>
@@ -63,7 +63,6 @@ class Users extends Component {
               id={index}
               //secondaryText={user.val.full_name}
               onClick={() => this.props.handleClick(user, this.props.mode)}
-              //this.props.addUserToPool(this.props.pool, user.val.userId);
             />
             <Divider inset />
           </div>
@@ -81,13 +80,13 @@ class Users extends Component {
         <div
           style={{
             overflow: "none",
-            backgroundColor: muiTheme.palette.convasColor
+            backgroundColor: muiTheme.palette.convasColor,
           }}
         >
           <List
             id="test"
             style={{ height: "100%" }}
-            ref={field => {
+            ref={(field) => {
               this.list = field;
             }}
           >
@@ -102,16 +101,16 @@ class Users extends Component {
 Users.propTypes = {
   users: PropTypes.array,
   history: PropTypes.object,
-  isGranted: PropTypes.func.isRequired
+  isGranted: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { auth, browser, lists } = state;
 
   return {
     auth,
     browser,
-    isGranted: grant => isGranted(state, grant)
+    isGranted: (grant) => isGranted(state, grant),
   };
 };
 
@@ -120,5 +119,5 @@ export default connect(mapStateToProps, {
   fetchUserData,
   removeUserOfPool,
   addUserPools,
-  removeUserPools
+  removeUserPools,
 })(injectIntl(muiThemeable()(withRouter(withFirebase(Users)))));

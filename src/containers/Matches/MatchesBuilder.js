@@ -80,7 +80,7 @@ class MatchesBuilder extends Component {
   };
 
   checkLimitDate = () => {
-    const limitDate = new Date(2022, 11, 22, 8);
+    const limitDate = new Date(2021, 11, 22, 8);
     const now = new Date();
 
     if (now > limitDate) {
@@ -228,6 +228,7 @@ class MatchesBuilder extends Component {
 
       return (
         <TopScorer
+          finishedTimeToBet={this.state.finishedTimeToBet}
           topScorer={topScorer}
           handleChangeTopScorer={this.handleChangeTopScorer}
         />

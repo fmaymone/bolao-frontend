@@ -22,6 +22,13 @@ import Loader from "../../components/UI/Loader";
 import { calculatePoints } from "../../store/functions/general";
 import TeamClassification from "../../components/Match/TeamClassification";
 import FlatButton from "material-ui/FlatButton";
+import {
+  addUserToPool,
+  fetchUserData,
+  removeUserOfPool,
+  addUserPools,
+  removeUserPools,
+} from "../../store/actions/bolaoActions";
 
 class ClassificationOfPool extends Component {
   constructor(props) {
@@ -37,6 +44,7 @@ class ClassificationOfPool extends Component {
         profile: this.getUserByKey(user.user),
       },
     });
+    //this.props.removeUserOfPool(user.user, this.props.match.params.uid);
   };
 
   getUserByKey = (key) => {
@@ -49,9 +57,9 @@ class ClassificationOfPool extends Component {
     function compare(a, b) {
       if (a.points.totalPoints === b.points.totalPoints) {
         if (Number.isInteger(a.matches[64].first)) {
-          return 1;
-        } else {
           return -1;
+        } else {
+          return 1;
         }
       }
       if (a.points.totalPoints < b.points.totalPoints) return 1;
@@ -214,7 +222,6 @@ class ClassificationOfPool extends Component {
 }
 
 const mapStateToProps = (state) => {};
-export default connect(
-  mapStateToProps,
-  {}
-)(injectIntl(withRouter(withFirebase(muiThemeable()(ClassificationOfPool)))));
+export default connect(mapStateToProps, { removeUserOfPool })(
+  injectIntl(withRouter(withFirebase(muiThemeable()(ClassificationOfPool))))
+);
