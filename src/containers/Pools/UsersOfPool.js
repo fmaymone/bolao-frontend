@@ -43,7 +43,6 @@ class UsersOfPool extends Component {
   componentDidMount() {
     this.fetchPoolData(this.props.match.params.uid);
     this.fetchUsersData();
-    //this.updateUsersOfPool();
   }
   snapshotToArray(snapshot) {
     var returnArr = [];
@@ -57,7 +56,7 @@ class UsersOfPool extends Component {
     return returnArr;
   }
   fetchPoolData = async (id) => {
-    const { history, match, firebaseApp } = this.props;
+    const { firebaseApp } = this.props;
 
     await firebaseApp
       .database()
@@ -166,7 +165,7 @@ class UsersOfPool extends Component {
             >
               <UserList
                 usersOfPool={keysFromUsersFromPool}
-                users={this.state.users}
+                users={this.state.users.filter}
                 handleClick={this.handleClick}
                 mode="delete"
               />

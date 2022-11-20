@@ -33,7 +33,7 @@ class PoolDetails extends Component {
     };
   }
   async componentDidMount() {
-    const limitDate = new Date(2022, 11, 22, 8);
+    const limitDate = new Date(2021, 11, 22, 8);
     const now = new Date();
     this.isUserFromPool(
       this.props.location.state.userOfPool,

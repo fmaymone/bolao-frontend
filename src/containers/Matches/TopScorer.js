@@ -43,7 +43,7 @@ class TopScorer extends Component {
           id="text-field-controlled"
           value={this.state.nameOfTopScorer}
           floatingLabelText="Nome do Artilheiro"
-          disabled={false}
+          disabled={this.props.finishedTimeToBet}
           onChange={(e) => this.handleChangeNameTopScorer(e)}
         />
         <br />
@@ -51,19 +51,21 @@ class TopScorer extends Component {
           id="text-field-2"
           value={this.state.goals}
           floatingLabelText="Número de Gols"
-          disabled={false}
+          disabled={this.props.finishedTimeToBet}
           onChange={(e) => this.handleChangeGoalsTopScorer(e)}
         />
         <br />
         <div>
-          <RaisedButton
-            onClick={() => {
-              this.saveTopScorer();
-            }}
-            label="Salvar Artilheiro"
-            primary={true}
-            style={{ margin: 12, marginLeft: 0 }}
-          />
+          {!this.props.finishedTimeToBet && (
+            <RaisedButton
+              onClick={() => {
+                this.saveTopScorer();
+              }}
+              label="Salvar Artilheiro"
+              primary={true}
+              style={{ margin: 12, marginLeft: 0 }}
+            />
+          )}
         </div>
       </div>
     );
