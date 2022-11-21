@@ -165,7 +165,7 @@ class UsersOfPool extends Component {
             >
               <UserList
                 usersOfPool={keysFromUsersFromPool}
-                users={this.state.users.filter}
+                users={this.state.users}
                 handleClick={this.handleClick}
                 mode="delete"
               />

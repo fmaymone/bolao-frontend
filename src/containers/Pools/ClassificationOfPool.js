@@ -55,13 +55,6 @@ class ClassificationOfPool extends Component {
     allUserMatches.sort(compare);
 
     function compare(a, b) {
-      if (a.points.totalPoints === b.points.totalPoints) {
-        if (Number.isInteger(a.matches[64].first)) {
-          return -1;
-        } else {
-          return 1;
-        }
-      }
       if (a.points.totalPoints < b.points.totalPoints) return 1;
       if (a.points.totalPoints > b.points.totalPoints) return -1;
       return 0;
