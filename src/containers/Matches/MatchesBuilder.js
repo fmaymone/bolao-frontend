@@ -97,12 +97,11 @@ class MatchesBuilder extends Component {
     this.checkAdmin();
   }
   checkAdmin = () => {
-    console.log("check");
     if (
       this.props.pool.key === POOL_ADMIN &&
       this.props.user.uid === USER_ADMIN
     ) {
-      this.setState({ isAdmin: true });
+      this.setState({ isAdmin: true, finishedTimeToBet: false });
     }
   };
   snapshotToArray(snapshot) {

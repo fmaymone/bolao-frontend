@@ -52,7 +52,7 @@
       "-LF34L6KG_nnl0a3Il44": true,
       "-LFDELxpE-j8r9Z-_HIT": true
     },
-    "displayName": "Paulo Murilo Albuquerque Neto",
+    "displayName": "Paulo Murilo Neto",
     "email": "pmcban06@gmail.com",
     "emailVerified": true,
     "isAnonymous": false,
@@ -134,6 +134,7 @@
     "emailVerified": true,
     "isAnonymous": false,
     "notificationTokens": {
+      "cV-dq1KxM2U:APA91bFO3pPUyZhh3XatFI3IUozz1TSH73tZ1f2Habe_-2dftvb-Z-dBrHY31UTQ1HEJ6WN7WXyPFrIpAIiQhFnhXs1DFK8btopyU9Qlvi0-hVc6ZkzYnfOfJtbPfZ309n_irHRfae8c": true,
       "cqOZtKgJUDU:APA91bF_V5yWgO9Z5-WexUOXUy-2OQbHx8t8-1_q-cclTQAajdvL-i1uhW6B_lVAPrawWMfm8Ymy88FaTNi05jMq7fG344RY8jF50mdVLgeLLe3MPiXylbkc1ODa46JzcJ0MXTO70mor": true,
       "cv0zipqMdAA:APA91bHdZK31cuhOBYfuIGy1jo-Bxw9RhBbO3O68tapSEpjHhOVJax9-QU7gYV-UvoduCq4tISUDLvmGSHhiZpu_Nx4YbVzJykIO0jdrsLUoih0hFaGb8RGZPpEjD6ZyJlBuLxZnpj-M": true,
       "d0T0bK6-4Dk:APA91bH0WXmwwsdsf-eEu-4xfT8EeAP4Sd5kp80tEvsoVUZRPVax_nF-yPevkLSQrDcL_ZEGuggGPBfUBFJOWDyuae8qldgReut1mABaiWLhqkaXdb_yqF1HATLVbTDsd7w0BabnMfSa": true,
@@ -239,7 +240,7 @@
     "uid": "2Ttun8m8tdMplCD2NgrB92nEwFG2"
   },
   "2mwV1mmGAtMPMZsKmnSNTOrBNlJ2": {
-    "displayName": "Paulo Murilo Albuquerque Filho",
+    "displayName": "Paulo Murilo Pai",
     "email": "pmcbaf@gmail.com",
     "emailVerified": true,
     "isAnonymous": false,
@@ -277,7 +278,9 @@
   },
   "3EVkGx6qNSOCvXdMXEAT5aZ5Qek2": {
     "connections": {
-      "-NHJfkTH0WI47XzVI5-F": true
+      "-NHKqB4Dgh6gKTZSbxHF": true,
+      "-NHKqRmphlxGRYiLFSg1": true,
+      "-NHKuLL9O5RSCBQUN1E5": true
     },
     "displayName": "Minarte Filho",
     "email": "minartefilho@gmail.com",
@@ -702,6 +705,9 @@
     "email": "leomelopereira@gmail.com",
     "emailVerified": true,
     "isAnonymous": false,
+    "notificationTokens": {
+      "fNrlnodZwBA:APA91bGyfpQbf17tyRcf23vo133TKdH0t6Ss6JJ3G4-EI2NhY6a1bs0HYYmGy00spPk3Ys97gdxIXtgK7RRNget54QMR34FHdDVt69qu16B9WPQgr_P12qhYJOrQsRlr-I75u7nF1bSU": true
+    },
     "photoURL": "https://lh3.googleusercontent.com/a/ALm5wu3XuX28e3-hThmma6zSy7pAWfffagnoAJ28wJZT=s96-c",
     "pools": {
       "-LD3ttKfMMUnZTO6BM2v": "-LD3ttKfMMUnZTO6BM2v"
@@ -761,10 +767,6 @@
     "uid": "77R5AdmUpxcdrqARoythU6an8Ag2"
   },
   "7apPHU9OrNR5sV2t182vfXpQGjD3": {
-    "connections": {
-      "-LFITRO_koKzHObM72R9": true,
-      "-LH2UJqLDxXSHf918642": true
-    },
     "displayName": "Pelúria",
     "email": "castelobrancobruno@gmail.com",
     "emailVerified": true,
@@ -949,6 +951,23 @@
       }
     ],
     "uid": "A82Cb0dhmbW5BnjiRR851mxYA3y1"
+  },
+  "AFEAlTWeZAV0xBC4iNLwHNgU3i33": {
+    "displayName": "Roberto Pimentel",
+    "email": "robertopimentelteixeira@gmail.com",
+    "emailVerified": true,
+    "isAnonymous": false,
+    "photoURL": "https://lh3.googleusercontent.com/a/ALm5wu0QNXUIJbPaaTJwdhMkWJtDiE2bV4ZmYT1E3RHxGA=s96-c",
+    "providerData": [
+      {
+        "displayName": "Roberto Pimentel",
+        "email": "robertopimentelteixeira@gmail.com",
+        "photoURL": "https://lh3.googleusercontent.com/a/ALm5wu0QNXUIJbPaaTJwdhMkWJtDiE2bV4ZmYT1E3RHxGA=s96-c",
+        "providerId": "google.com",
+        "uid": "103407381173878615040"
+      }
+    ],
+    "uid": "AFEAlTWeZAV0xBC4iNLwHNgU3i33"
   },
   "AOYW1KguvRayRPEtlRJHhGWwfIv2": {
     "displayName": "Gustavo Silva",
@@ -1278,6 +1297,7 @@
     "emailVerified": true,
     "isAnonymous": false,
     "notificationTokens": {
+      "dlpSdFOp91Y:APA91bFdy8HnlxLCrtEU7RzC4ncI_NA9QtfSKSWYbF4oeKZinbn3RB0sPelDjnmcAC2GRe8-0x9Z19Tqn93dEt2gJ4eI4uMlY6VYl_xsZPGysaQYK0iiAfhzpmlerpPiE5b8W8kVSV6b": true,
       "fBghS2ij5vA:APA91bEhhpTYtQqZ3WKay-OkE3m6WfWnA7VteNSlZjpqFbk-E4Q00st9xSMXDyrZ_bB8TCug8e0nBJRktMv6CtRKEr-3qNMc_057d5odPwuNGgQ7OIxRyTcHeaaao4S7Ov05U7z58Tnz": true
     },
     "photoURL": "https://lh5.googleusercontent.com/-l1wweBmWNec/AAAAAAAAAAI/AAAAAAAACE4/co7LTHW-_fw/photo.jpg",
@@ -1300,6 +1320,9 @@
     "email": "alexandre.bittencourtlmarques@gmail.com",
     "emailVerified": true,
     "isAnonymous": false,
+    "notificationTokens": {
+      "dNDtAH_xC1A:APA91bFyoVzxfyDiOmCBLpLyB2__nxSc0NyFyeQ3IOmdpfO-E-QpIjZmJSrc0oaA-A79Vtu2pWJ12c5nIzG1m1bNiye5-5Dn5NJGqk5JhMYMOzBLji0Zs8Oov7cDzQvQMGeyJuhoqLqQ": true
+    },
     "photoURL": "https://lh3.googleusercontent.com/a/ALm5wu3iVPUYCxXUjmqd_PHrQ9PfLQfVG8_cCQavJQcb=s96-c",
     "pools": {
       "-LD2GTSQyZYF8eIylbCg": "-LD2GTSQyZYF8eIylbCg"
@@ -1320,6 +1343,9 @@
     "email": "renan1501@gmail.com",
     "emailVerified": true,
     "isAnonymous": false,
+    "notificationTokens": {
+      "eZkpowjhukg:APA91bFFembiBy8xa9fp0DeVRKcBKnfckpjx8u3GvqEEbn7SzrO8c-6ajxR5KjqoLfU3NIXBm-OlrR9Vca5HKWEwIvVuuWZ2cPnMWm3FleU8HHGPFT3MsHRnOVlLQYJgQPDSJyK5pIB6": true
+    },
     "photoURL": "https://lh3.googleusercontent.com/a/ALm5wu1vwDXSoZntZ-rY2mNMTs86GxLsATaZWLare2MI=s96-c",
     "pools": {
       "-LD3ttKfMMUnZTO6BM2v": "-LD3ttKfMMUnZTO6BM2v"
@@ -1858,6 +1884,9 @@
     "email": "rodrigofulco@thepokepipa.com",
     "emailVerified": true,
     "isAnonymous": false,
+    "notificationTokens": {
+      "caRqVAZ-K1M:APA91bFsm_w3rWFx4uNaKdHFue11Jed3fkkCyS4VCdtjHcrqzxl6mmM4WYSXIBrA5kTnukKoaDbtID2ov07s5Qt3Hi3vQlLcTysSE2LMhcRUE7SamcCGwTeykZxpwxHkctmz7dfQ_P3m": true
+    },
     "photoURL": "https://lh3.googleusercontent.com/a/ALm5wu36Kdn9CP_QYmxXZUxtL4JNUqFmOsmmmT33CzIo=s96-c",
     "pools": {
       "-LCdeMFExiPZOaIqreL1": "-LCdeMFExiPZOaIqreL1"
@@ -3416,7 +3445,7 @@
     "uid": "citDO2tfWyaqkfKPDxujNi1zTmN2"
   },
   "cwylgOL0FwPSPm6ULUXW0HDQBA13": {
-    "displayName": "Vitor Melo",
+    "displayName": "Outro Nível",
     "email": "vimaymone@gmail.com",
     "emailVerified": true,
     "isAnonymous": false,
@@ -3622,7 +3651,7 @@
   },
   "eyn6bCswRnZ5qIJZ4ZiC98rTe4n2": {
     "connections": {
-      "-NHJfO3Ts3Mt0Bg1Jn43": true
+      "-NHOcpXMs2O-az3qr249": true
     },
     "displayName": "Nando Neymar Florence",
     "email": "fmaymone@gmail.com",
@@ -4123,7 +4152,7 @@
       {
         "displayName": "Gustavo Leao",
         "email": "gustavo.carneiroleao22@gmail.com",
-        "photoURL": "https://lh5.googleusercontent.com/-W1oXGIyM5Fs/AAAAAAAAAAI/AAAAAAAAABE/A2yhAQ5uaj8/photo.jpg",
+        "photoURL": "https://lh3.googleusercontent.com/a/ALm5wu3tVu3OW6GxjSnMtm91Igy4iW3QoW5UDiemJeDQL44=s96-c",
         "providerId": "google.com",
         "uid": "114947349588406319280"
       }

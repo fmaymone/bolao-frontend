@@ -81,6 +81,7 @@ class PoolDetails extends Component {
         });
       });
   };
+  
   fetchOutcome = async () => {
     //this is the place where the results will be stored
     this.setState({ isLoadingOutcomeMatches: true });
