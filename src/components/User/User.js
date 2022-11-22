@@ -13,8 +13,8 @@ class User extends Component {
             leftAvatar={
               <Avatar
                 src={user.photoURL}
-                alt="bussines"
-                icon={<FontIcon className="material-icons">business</FontIcon>}
+                alt=""
+                icon={<FontIcon className="material-icons" />}
                 referrerPolicy="no-referrer"
               />
             }

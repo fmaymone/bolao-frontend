@@ -80,7 +80,7 @@ class MatchesOfTheDay extends Component {
 
     return (
       <Card>
-        <Table>
+        <Table className="table-matches-day">
           {this.renderHeader(filteredMatches)}
           <TableBody displayRowCheckbox={false}>{renderData}</TableBody>
         </Table>

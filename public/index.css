@@ -40,3 +40,13 @@ html, body, #root{
 .oscilloscope {
   border-radius: 30px;
 }
+
+
+.table-matches-day {
+  background-color: black;
+}
+
+.table-matches-day img {
+  width: 32px;
+  height: 32px;
+}
