@@ -15,6 +15,7 @@ class User extends Component {
                 src={user.photoURL}
                 alt="bussines"
                 icon={<FontIcon className="material-icons">business</FontIcon>}
+                referrerPolicy="no-referrer"
               />
             }
             key={user.uid}
