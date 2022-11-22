@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('docker front-end image') {
       steps {
-        sh 'docker build --build-arg REACT_APP_ENV=$REACT_PROFILE_ACTIVE front/. -t bolao-bebados-front:latest'
+        sh 'docker build --build-arg REACT_APP_ENV=$REACT_PROFILE_ACTIVE . -t bolao-bebados-front:latest'
       }
     }
 
