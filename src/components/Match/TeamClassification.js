@@ -14,13 +14,12 @@ import {
   green500,
   yellow500,
   blue500,
-  pink500
+  pink500,
 } from "material-ui/styles/colors";
 
 const style = {
-  margin: 20,
-  textAlign: "center",
-  display: "inline-block"
+  display: "block",
+  whiteSpace: "break-spaces",
 };
 
 class Team extends Component {
@@ -28,22 +27,23 @@ class Team extends Component {
     super(props);
     this.state = {};
   }
-  renderHomeTeam = team => {
+  renderHomeTeam = (team) => {
     let fontWeight = "normal";
     if (this.props.isWinner == team.id) {
       fontWeight = "bold";
     }
-    return <div style={{ display: "inline-block" }}>{team.name}</div>;
+    return <span style={style}>{team.name}</span>;
   };
 
-  renderAwayTeam = team => {
+  renderAwayTeam = (team) => {
     let fontWeight = "normal";
     if (this.props.isWinner == team.id) {
       fontWeight = "bold";
     }
 
-    return <div style={{ display: "inline-block" }}>{team.name}</div>;
+    return <span style={style}>{team.name}</span>;
   };
+
   getColourOfChip(position) {
     switch (position) {
       case "first":
@@ -64,20 +64,39 @@ class Team extends Component {
         break;
     }
   }
-  renderChipTeam = team => {
-    return <Chip
-    backgroundColor={this.getColourOfChip(this.props.position)}
-    >{team.name}</Chip>;
+  renderChipTeam = (team) => {
+    return (
+      <Chip backgroundColor={this.getColourOfChip(this.props.position)}>
+        {team.name}
+      </Chip>
+    );
   };
+
+  renderBothTeams = () => {
+    const homeEntity = this.props.worldCupData.teams.find(
+      (k) => k.id == this.props.home
+    );
+
+    const awayEntity = this.props.worldCupData.teams.find(
+      (k) => k.id == this.props.away
+    );
+
+    return `${homeEntity.name} x ${awayEntity.name}`;
+  };
+
   render() {
     const isHomeTeam = this.props.isHomeTeam;
     const teamEntity = this.props.worldCupData.teams.find(
-      k => k.id == this.props.id
+      (k) => k.id == this.props.id
     );
-    if (teamEntity) {
+
+    if (this.props.bothTeams) {
+      return this.renderBothTeams();
+    } else if (teamEntity) {
       if (this.props.isChip) {
         return this.renderChipTeam(teamEntity);
       }
+
       if (isHomeTeam == "true") {
         return this.renderHomeTeam(teamEntity);
       } else {
@@ -90,11 +109,11 @@ class Team extends Component {
 }
 
 const styles = {};
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { auth, browser, lists, worldCupData } = state;
 
   return {
-    worldCupData: worldCupData
+    worldCupData: worldCupData,
   };
 };
 
@@ -104,5 +123,5 @@ export default connect(mapStateToProps)(
 
 Team.propTypes = {
   name: PropTypes.string,
-  code: PropTypes.string
+  code: PropTypes.string,
 };

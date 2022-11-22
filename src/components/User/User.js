@@ -8,20 +8,20 @@ class User extends Component {
     const { user } = this.props;
     if (user) {
       return (
-        <div key={user.uid}>
-          <ListItem
-            leftAvatar={
-              <Avatar
-                src={user.photoURL}
-                alt=""
-                icon={<FontIcon className="material-icons" />}
-                referrerPolicy="no-referrer"
-              />
-            }
-            key={user.uid}
-            primaryText={user.displayName}
-            id={user.uid}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Avatar
+            src={user.photoURL}
+            alt=""
+            icon={<FontIcon className="material-icons" />}
+            referrerPolicy="no-referrer"
+            size={32}
+            style={{ margin: "0 auto" }}
           />
+          <span
+            style={{ marginTop: "4px", fontSize: "12px", textAlign: "center" }}
+          >
+            {user.displayName}
+          </span>
         </div>
       );
     } else {

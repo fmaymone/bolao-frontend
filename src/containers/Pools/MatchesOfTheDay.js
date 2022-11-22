@@ -24,12 +24,14 @@ class MatchesOfTheDay extends Component {
       filteredMatchesIds.includes(value.name)
     );
     return (
-      <TableRow>
-        <TableRowColumn style={{ width: "30%" }}>
+      <TableRow style={{ height: "64px" }}>
+        <TableRowColumn style={{ width: "20%", padding: 0 }}>
           <User user={this.getUserByKey(user.key)} />
         </TableRowColumn>
         {filteredMatches.map((userMatch) => (
-          <TableRowColumn style={{ width: "10%" }}>
+          <TableRowColumn
+            style={{ width: "20%", textAlign: "center", padding: 0 }}
+          >
             {userMatch.home_result + " x " + userMatch.away_result}
           </TableRowColumn>
         ))}
@@ -41,16 +43,23 @@ class MatchesOfTheDay extends Component {
     return (
       <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
         <TableRow>
-          <TableHeaderColumn style={{ width: "30%" }}>
+          <TableHeaderColumn style={{ width: "20%", padding: 0 }}>
             Jogador
           </TableHeaderColumn>
           {matches.map((match) => (
-            <TableHeaderColumn style={{ width: "10%" }}>
-              <div style={{ display: "inline-block" }}>
-                <TeamClassification isHomeTeam={true} id={match.home_team} />{" "}
-                <div style={{ display: "inline-block" }}>{" x "} </div>
-                <TeamClassification isHomeTeam={true} id={match.away_team} />
-              </div>
+            <TableHeaderColumn
+              style={{
+                width: "20%",
+                textAlign: "center",
+                whiteSpace: "break-spaces",
+                padding: 0,
+              }}
+            >
+              <TeamClassification
+                bothTeams={true}
+                home={match.home_team}
+                away={match.away_team}
+              />
             </TableHeaderColumn>
           ))}
         </TableRow>
