@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import muiThemeable from "material-ui/styles/muiThemeable";
 import { isMobile } from "../../device";
 
-import User from "../../components/User/User";
+import UserClassification from "../../components/User/UserClassification";
 
 import {
   Table,
@@ -100,7 +100,7 @@ class ClassificationOfPool extends Component {
                     <h2>{index + 1}</h2>
                   </TableRowColumn>
                   <TableRowColumn style={{ width: "30%" }}>
-                    <User user={this.getUserByKey(user.user)} />
+                    <UserClassification user={this.getUserByKey(user.user)} />
                   </TableRowColumn>
                   <TableRowColumn style={{ width: "10%" }}>
                     {user.points.totalPoints}
@@ -172,7 +172,7 @@ class ClassificationOfPool extends Component {
               {allUserMatches.map((user) => (
                 <TableRow>
                   <TableRowColumn style={{ width: "70%" }}>
-                    <User user={this.getUserByKey(user.user)} />
+                    <UserClassification user={this.getUserByKey(user.user)} />
                   </TableRowColumn>
                   <TableRowColumn style={{ width: "30%" }}>
                     {user.points.totalPoints}

@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import Paper from "material-ui/Paper";
-//import Flag from "react-flags";
-import Flag from "react-world-flags";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
