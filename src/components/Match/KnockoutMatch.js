@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import Team from "./Team";
+import Team, { getTeamDetails } from "./Team";
 import { injectIntl } from "react-intl";
 import muiThemeable from "material-ui/styles/muiThemeable";
 import { setDialogIsOpen } from "rmw-shell/lib/store/dialogs/actions";
@@ -104,197 +104,114 @@ class Match extends Component {
       return this.renderDrawMatch();
     } else {
       return (
-        <div
-          style={{
-            display: "flex",
-            flexFlow: "row nowrap",
-            justifyContent: "space-around",
-            alignItems: "center",
-            margin: 10,
-          }}
-        >
-          <div style={{ flex: 1 }}>
-            <div
-              style={{
-                justifyContent: "flex-start",
-                display: "flex",
-                flexFlow: "row nowrap",
-                alignItems: "center",
-              }}
-            >
-              {this.getDesktopContent("home")}
-              <div>
-                <Team
-                  id={game.home_team}
-                  isHomeTeam="true"
-                  style={styles.team_home}
-                />
-              </div>
-            </div>
-          </div>
-          <div style={{ flex: 1 }}>
-            <div
-              style={{
-                justifyContent: "space-around",
-                display: "flex",
-                flexFlow: "row nowrap",
-                alignItems: "center",
-              }}
-            >
-              <div style={{ width: 3 }}>
-                <TextField
-                  id={`${this.props.game.home_team}_away`}
-                  type="number"
-                  value={this.props.game.home_result}
-                  onChange={(e, game, type) =>
-                    this.props.handleChangedResult(e, this.props.game, "home")
-                  }
-                  disabled={this.props.finishedTimeToBet}
-                  style={{ width: 30 }}
-                />
-              </div>
-              <div>x</div>
-              <div style={{ width: 3 }}>
-                <TextField
-                  id={`${this.props.game.home_team}_away`}
-                  type="number"
-                  value={this.props.game.away_result}
-                  onChange={(e, game, type) =>
-                    this.props.handleChangedResult(e, this.props.game, "away")
-                  }
-                  style={{ width: 30 }}
-                  disabled={this.props.finishedTimeToBet}
-                />
-              </div>
-            </div>
-          </div>
-          <div style={{ flex: 1 }}>
-            <div
-              style={{
-                justifyContent: "flex-end",
-                display: "flex",
-                flexFlow: "row nowrap",
-                alignItems: "center",
-              }}
-            >
-              <div>
-                {" "}
-                <Team id={game.away_team} isHomeTeam="false" />
-              </div>
-              {this.getDesktopContent("away")}
-            </div>
-          </div>
-        </div>
+        <Fragment>
+          <tr>
+            {getTeamDetails(
+              this.props.worldCupData,
+              this.props.game.home_team,
+              true,
+              false
+            )}
+            <td className="match-score">
+              <TextField
+                id={`${this.props.game.home_team}_home`}
+                type="number"
+                value={this.props.game.home_result}
+                onChange={(e) =>
+                  this.props.handleChangedResult(e, this.props.game, "home")
+                }
+                disabled={this.props.finishedTimeToBet}
+                style={{ width: 30 }}
+              />
+            </td>
+            <td>x</td>
+            <td className="match-score">
+              <TextField
+                id={`${this.props.game.home_team}_away`}
+                type="number"
+                value={this.props.game.away_result}
+                onChange={(e) =>
+                  this.props.handleChangedResult(e, this.props.game, "away")
+                }
+                disabled={this.props.finishedTimeToBet}
+                style={{ width: 30 }}
+              />
+            </td>
+            {getTeamDetails(
+              this.props.worldCupData,
+              this.props.game.away_team,
+              false,
+              false
+            )}
+          </tr>
+        </Fragment>
       );
     }
   };
 
   renderDrawMatch = () => {
     return (
-      <div
-        key={this.props.game.name}
-        style={{
-          display: "flex",
-          flexFlow: "row nowrap",
-          justifyContent: "space-around",
-          alignItems: "center",
-          margin: 10,
-          borderStyle: "groove",
-          borderRadius: 10,
-        }}
-      >
-        <div style={{ flex: 1 }}>
-          <div
-            style={{
-              justifyContent: "flex-start",
-              display: "flex",
-              flexFlow: "row nowrap",
-              alignItems: "center",
-            }}
+      <Fragment>
+        <tr
+          style={{
+            borderStyle: "groove",
+            borderRadius: 10,
+            border: "1px solid #e1e0de",
+          }}
+        >
+          <Fragment
+            onClick={this.chooseDrawWinnerHandler.bind(
+              this,
+              this.props.game.home_team
+            )}
           >
-            {this.getDesktopContent("home")}
-            <div
-              onClick={this.chooseDrawWinnerHandler.bind(
-                this,
-                this.props.game.home_team
-              )}
-            >
-              <Team
-                id={this.props.game.home_team}
-                isHomeTeam="true"
-                isWinner={this.props.game.winner}
-                style={styles.team_home}
-              />
-            </div>
-          </div>
-        </div>
-        <div style={{ flex: 1 }}>
-          <div
-            style={{
-              justifyContent: "space-around",
-              display: "flex",
-              flexFlow: "row nowrap",
-              alignItems: "center",
-            }}
+            {getTeamDetails(
+              this.props.worldCupData,
+              this.props.game.home_team,
+              true,
+              this.props.game.winner
+            )}
+          </Fragment>
+          <td className="match-score">
+            <TextField
+              id={`${this.props.game.home_team}_home`}
+              type="number"
+              value={this.props.game.home_result}
+              onChange={(e) =>
+                this.props.handleChangedResult(e, this.props.game, "home")
+              }
+              disabled={this.props.finishedTimeToBet}
+              style={{ width: 30 }}
+            />
+          </td>
+          <td>x</td>
+          <td className="match-score">
+            <TextField
+              id={`${this.props.game.home_team}_away`}
+              type="number"
+              value={this.props.game.away_result}
+              onChange={(e) =>
+                this.props.handleChangedResult(e, this.props.game, "away")
+              }
+              disabled={this.props.finishedTimeToBet}
+              style={{ width: 30 }}
+            />
+          </td>
+          <Fragment
+            onClick={this.chooseDrawWinnerHandler.bind(
+              this,
+              this.props.game.away_team
+            )}
           >
-            <div style={{ width: 3 }}>
-              <TextField
-                id={`${this.props.game.home_team}_away`}
-                type="number"
-                disabled={this.props.finishedTimeToBet}
-                value={this.props.game.home_result}
-                onChange={(e, game, type) =>
-                  this.props.handleChangedResult(e, this.props.game, "home")
-                }
-                //
-                style={{ width: 30 }}
-              />
-            </div>
-            <div>x</div>
-            <div style={{ width: 3 }}>
-              <TextField
-                id={`${this.props.game.home_team}_away`}
-                type="number"
-                value={this.props.game.away_result}
-                disabled={this.props.finishedTimeToBet}
-                onChange={(e) =>
-                  this.props.handleChangedResult(e, this.props.game, "away")
-                }
-                //
-                style={{ width: 30 }}
-              />
-            </div>
-          </div>
-        </div>
-        <div style={{ flex: 1 }}>
-          <div
-            style={{
-              justifyContent: "flex-end",
-              display: "flex",
-              flexFlow: "row nowrap",
-              alignItems: "center",
-            }}
-          >
-            <div
-              onClick={this.chooseDrawWinnerHandler.bind(
-                this,
-                this.props.game.away_team
-              )}
-            >
-              <Team
-                id={this.props.game.away_team}
-                isHomeTeam="false"
-                isWinner={this.props.game.winner}
-                onClick={this.chooseDrawWinnerHandler.bind(
-                  this,
-                  this.props.game.away_team
-                )}
-              />
-            </div>
-            {this.getDesktopContent("away")}
-          </div>
-        </div>
-      </div>
+            {getTeamDetails(
+              this.props.worldCupData,
+              this.props.game.away_team,
+              false,
+              this.props.game.winner
+            )}
+          </Fragment>
+        </tr>
+      </Fragment>
     );
   };
 

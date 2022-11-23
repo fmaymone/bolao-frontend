@@ -1,7 +1,11 @@
-import React, { Component } from "react";
-import Team from "./Team";
+import React, { Component, Fragment } from "react";
+import Team, { getTeamDetails } from "./Team";
 import TextField from "material-ui/TextField";
 import Toggle from "material-ui/Toggle";
+import { injectIntl } from "react-intl";
+import muiThemeable from "material-ui/styles/muiThemeable";
+import { withRouter } from "react-router";
+import { connect } from "react-redux";
 
 const styles = {
   container: {
@@ -34,6 +38,11 @@ const styles = {
   },
 };
 class GroupMatch extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   handleToggle(value) {
     this.props.handleChangedResult(null, this.props.game, "finished", value);
   }
@@ -62,79 +71,48 @@ class GroupMatch extends Component {
       );
     }
     return (
-      <div
-        style={{
-          display: "flex",
-          flexFlow: "row nowrap",
-          justifyContent: "space-around",
-          alignItems: "center",
-          margin: 10,
-        }}
-      >
-        <div style={{ flex: 1 }}>
-          <div
-            style={{
-              justifyContent: "flex-start",
-              display: "flex",
-              flexFlow: "row nowrap",
-            }}
-          >
-            <Team
-              id={this.props.game.home_team}
-              isHomeTeam="true"
-              style={styles.team_home}
+      <Fragment>
+        <tr>
+          {getTeamDetails(
+            this.props.worldCupData,
+            this.props.game.home_team,
+            true,
+            false
+          )}
+          <td className="match-score">
+            <TextField
+              id={`${this.props.game.home_team}_home`}
+              type="number"
+              value={this.props.game.home_result}
+              onChange={(e) =>
+                this.props.handleChangedResult(e, this.props.game, "home")
+              }
+              disabled={this.props.finishedTimeToBet}
+              style={{ width: 30 }}
             />
-          </div>
-        </div>
-        <div style={{ flex: 1 }}>
-          <div
-            style={{
-              justifyContent: "space-around",
-              display: "flex",
-              flexFlow: "row nowrap",
-              alignItems: "center",
-            }}
-          >
-            <div style={{ width: 3 }}>
-              <TextField
-                id={`${this.props.game.home_team}_home`}
-                type="number"
-                value={this.props.game.home_result}
-                onChange={(e) =>
-                  this.props.handleChangedResult(e, this.props.game, "home")
-                }
-                disabled={this.props.finishedTimeToBet}
-                style={{ width: 30 }}
-              />
-            </div>
-            <div>x</div>
-            <div style={{ width: 3 }}>
-              <TextField
-                id={`${this.props.game.home_team}_away`}
-                type="number"
-                value={this.props.game.away_result}
-                onChange={(e) =>
-                  this.props.handleChangedResult(e, this.props.game, "away")
-                }
-                disabled={this.props.finishedTimeToBet}
-                style={{ width: 30 }}
-              />
-            </div>
-          </div>
-        </div>
-        <div style={{ flex: 1 }}>
-          <div
-            style={{
-              justifyContent: "flex-end",
-              display: "flex",
-              flexFlow: "row nowrap",
-            }}
-          >
-            <Team id={this.props.game.away_team} isHomeTeam="false" />
-          </div>
-        </div>
-        {renderAdmin}
-      </div>
+          </td>
+          <td>x</td>
+          <td className="match-score">
+            <TextField
+              id={`${this.props.game.home_team}_away`}
+              type="number"
+              value={this.props.game.away_result}
+              onChange={(e) =>
+                this.props.handleChangedResult(e, this.props.game, "away")
+              }
+              disabled={this.props.finishedTimeToBet}
+              style={{ width: 30 }}
+            />
+          </td>
+          {getTeamDetails(
+            this.props.worldCupData,
+            this.props.game.away_team,
+            false,
+            false
+          )}
+        </tr>
+        <tr>{renderAdmin}</tr>
+      </Fragment>
     );
   };
 
@@ -149,4 +127,14 @@ class GroupMatch extends Component {
   }
 }
 
-export default GroupMatch;
+const mapStateToProps = (state) => {
+  const { worldCupData } = state;
+
+  return {
+    worldCupData: worldCupData,
+  };
+};
+
+export default connect(mapStateToProps)(
+  injectIntl(muiThemeable()(withRouter(GroupMatch)))
+);

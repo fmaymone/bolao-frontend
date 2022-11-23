@@ -99,7 +99,7 @@ class GroupsBuilder extends Component {
         <div style={{}}>
           <h1>{"Grupo " + currentGroup.toUpperCase()}</h1>
         </div>
-        <div style={{}}>
+        <div style={{ justifyContent: "center", display: "flex" }}>
           <MatchList
             matches={this.props.matches}
             handleChangedResult={this.handleChangedResult}

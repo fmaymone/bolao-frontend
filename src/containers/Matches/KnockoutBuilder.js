@@ -215,7 +215,12 @@ class KnockoutBuilder extends Component {
         <div style={{}}>
           <h1>{intl.formatMessage({ id: currentGroup })}</h1>
         </div>
-        <div style={{}}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <MatchList
             matches={this.props.matches}
             chooseDrawWinnerHandler={this.chooseDrawWinnerHandler}

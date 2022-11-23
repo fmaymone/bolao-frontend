@@ -263,11 +263,13 @@ class MatchesBuilder extends Component {
             value={GROUPS_STAGE}
           >
             <Container>
-              <Row>
-                <Col sm={12}>
-                  <MatchesStepper bettingStatus={this.state.bettingStatus} />
-                </Col>
-              </Row>
+              {!this.state.finishedTimeToBet && (
+                <Row>
+                  <Col sm={12}>
+                    <MatchesStepper bettingStatus={this.state.bettingStatus} />
+                  </Col>
+                </Row>
+              )}
               <Row>
                 <Col sm={2} />
                 <Col sm={8}>{this.renderGroupsStage()}</Col>
@@ -281,11 +283,13 @@ class MatchesBuilder extends Component {
             value={KNOCKOUT_STAGE}
           >
             <Container>
-              <Row>
-                <Col sm={12}>
-                  <MatchesStepper bettingStatus={this.state.bettingStatus} />
-                </Col>
-              </Row>
+              {!this.state.finishedTimeToBet && (
+                <Row>
+                  <Col sm={12}>
+                    <MatchesStepper bettingStatus={this.state.bettingStatus} />
+                  </Col>
+                </Row>
+              )}
               <Row>
                 <Col sm={2} />
                 <Col sm={8}> {this.renderKnockoutStage()}</Col>

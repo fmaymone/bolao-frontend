@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Match from "./Match";
 
 class MatchList extends Component {
@@ -6,21 +6,23 @@ class MatchList extends Component {
     const { matches, stage } = this.props;
 
     return (
-      <div>
-        {matches.map((match) => (
-          <div key={match.name}>
-            <Match
-              game={match}
-              user={this.props.user}
-              pool={this.props.pool}
-              chooseDrawWinnerHandler={this.props.chooseDrawWinnerHandler}
-              isAdmin={this.props.isAdmin}
-              handleChangedResult={this.props.handleChangedResult}
-              finishedTimeToBet={this.props.finishedTimeToBet}
-            />
-          </div>
-        ))}
-      </div>
+      <table style={{ borderCollapse: "collapse", borderSpacing: "4px" }}>
+        <tbody>
+          {matches.map((match) => (
+            <Fragment key={match.name}>
+              <Match
+                game={match}
+                user={this.props.user}
+                pool={this.props.pool}
+                chooseDrawWinnerHandler={this.props.chooseDrawWinnerHandler}
+                isAdmin={this.props.isAdmin}
+                handleChangedResult={this.props.handleChangedResult}
+                finishedTimeToBet={this.props.finishedTimeToBet}
+              />
+            </Fragment>
+          ))}
+        </tbody>
+      </table>
     );
   }
 }

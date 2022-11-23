@@ -109,7 +109,7 @@ const data = {
     {
       id: 5,
       name: "Inglaterra",
-      iso2: "gb-eng",
+      iso2: "_england",
     },
     {
       id: 6,
@@ -123,8 +123,8 @@ const data = {
     },
     {
       id: 8,
-      name: "Gales",
-      iso2: "gb-wls",
+      name: "País de Gales",
+      iso2: "_wales",
     },
     {
       id: 9,
@@ -133,7 +133,7 @@ const data = {
     },
     {
       id: 10,
-      name: "Arabia Saudita",
+      name: "Arábia Saudita",
       iso2: "sa",
     },
     {
