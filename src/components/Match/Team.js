@@ -38,7 +38,7 @@ const styles = {
 };
 
 export const getTeamDetails = (worldCupData, id, home, winner) => {
-  const teamEntity = worldCupData.teams.find((k) => k.id == id);
+  const teamEntity = worldCupData.teams.find((k) => k.id === id);
 
   if (home) {
     const thisStyle = {
@@ -46,17 +46,19 @@ export const getTeamDetails = (worldCupData, id, home, winner) => {
       fontWeight: winner === id ? "bold" : "normal",
     };
     return (
-      <Fragment>
-        <td style={thisStyle}>{teamEntity.name}</td>
-        <td className="flag-column" style={{ paddingRight: "16px" }}>
-          <Flag
-            country={teamEntity.iso2}
-            format="svg"
-            basePath="/images/flags"
-            height={16}
-          />
-        </td>
-      </Fragment>
+      teamEntity && (
+        <Fragment>
+          <td style={thisStyle}>{teamEntity.name}</td>
+          <td className="flag-column" style={{ paddingRight: "16px" }}>
+            <Flag
+              country={teamEntity.iso2}
+              format="svg"
+              basePath="/images/flags"
+              height={16}
+            />
+          </td>
+        </Fragment>
+      )
     );
   } else {
     const thisStyle = {
@@ -64,17 +66,19 @@ export const getTeamDetails = (worldCupData, id, home, winner) => {
       fontWeight: winner === id ? "bold" : "normal",
     };
     return (
-      <Fragment>
-        <td className="flag-column" style={{ paddingLeft: "16px" }}>
-          <Flag
-            country={teamEntity.iso2}
-            format="svg"
-            basePath="/images/flags"
-            height={16}
-          />
-        </td>
-        <td style={thisStyle}>{teamEntity.name}</td>
-      </Fragment>
+      teamEntity && (
+        <Fragment>
+          <td className="flag-column" style={{ paddingLeft: "16px" }}>
+            <Flag
+              country={teamEntity.iso2}
+              format="svg"
+              basePath="/images/flags"
+              height={16}
+            />
+          </td>
+          <td style={thisStyle}>{teamEntity.name}</td>
+        </Fragment>
+      )
     );
   }
 };
@@ -86,7 +90,7 @@ class Team extends Component {
   }
   renderHomeTeam = (team) => {
     let fontWeight = "normal";
-    if (this.props.isWinner == team.id) {
+    if (this.props.isWinner === team.id) {
       fontWeight = "bold";
     }
     return (
@@ -131,7 +135,7 @@ class Team extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { auth, browser, lists, worldCupData } = state;
+  const { worldCupData } = state;
 
   return {
     worldCupData: worldCupData,
