@@ -28615,12 +28615,12 @@
             "winner": 9
           },
           "result": {
-            "first": 9,
+            "first": 25,
             "fourth": 13,
             "group": "result",
             "key": "result",
             "second": 21,
-            "third": 25
+            "third": 9
           },
           "topscorer": {
             "goals": "5",
