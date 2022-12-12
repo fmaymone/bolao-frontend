@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn
+  TableRowColumn,
 } from "material-ui/Table";
 class About extends Component {
   renderPremiacao = () => {
@@ -63,7 +63,7 @@ class About extends Component {
             display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <h1>Taxa de Inscrição: R$ 150,00 por aposta</h1>
@@ -89,99 +89,160 @@ class About extends Component {
           <p>
             A premiação será paga na primeira semana após a final da Copa. Os
             cinco últimos colocados serão penalizados e pagarão a quantia de R$
-            150,00 - R$ 130,00 – R$ 110,00 – R$ 90,00 – R$ 70,00. Sendo R$ 150,00
-            para o último colocado, R$ 80,00 para o penúltimo colocado e assim
-            sucessivamente. Este dinheiro arrecadado será utilizado para pagar o custo
-            dos servidores do bolao, e o restante em caso de sobrar saldo, da conta da cachaça do final do Bolão onde serão entregues os prêmios
-            para os ganhadores.
+            150,00 - R$ 130,00 – R$ 110,00 – R$ 90,00 – R$ 70,00. Sendo R$
+            150,00 para o último colocado, R$ 130,00 para o penúltimo colocado e
+            assim sucessivamente. Este dinheiro arrecadado será utilizado para
+            pagar o custo dos servidores do bolao, e o restante em caso de
+            sobrar saldo, da conta da cachaça do final do Bolão onde serão
+            entregues os prêmios para os ganhadores.
           </p>
           <p>
-            <b>Pontuação (Primeira Fase):</b> <br />Acertando o vencedor: + 3
-            pontos <br />Acertando o placar do ganhador: + 1,5 pontos <br />Acertando
-            o placar do perdedor: + 1,5 pontos <br />Acertando o empate: + 4
-            pontos <br />Acertando o placar do empate: + 2 pontos <br />Acertando
-            os times que se classificam em cada grupo: + 4 pontos por time
+            <b>Pontuação (Primeira Fase):</b> <br />
+            Acertando o vencedor: + 3 pontos <br />
+            Acertando o placar do ganhador: + 1,5 pontos <br />
+            Acertando o placar do perdedor: + 1,5 pontos <br />
+            Acertando o empate: + 4 pontos <br />
+            Acertando o placar do empate: + 2 pontos <br />
+            Acertando os times que se classificam em cada grupo: + 4 pontos por
+            time
           </p>
           <br />
           <p>
-            <b>Exemplo:</b> Os palpites foram: <br />Apostador A: Brasil 3 x 1 Croácia
-            <br />Apostador B: Brasil 2 x 0 Croácia
-            <br />Apostador C: Brasil 1 x 1 Croácia
-            <br />Apostador D: Brasil 3 x 0 Croácia 
-            <br />Apostador E: Brasil 4 x 2 Croácia
-            <br /> Apostador F: Brasil 0 x 0 Croácia 
-            <br /> Apostador G: Brasil 3 x 4 Croácia  
+            <b>Exemplo:</b> Os palpites foram: <br />
+            Apostador A: Brasil 3 x 1 Croácia
+            <br />
+            Apostador B: Brasil 2 x 0 Croácia
+            <br />
+            Apostador C: Brasil 1 x 1 Croácia
+            <br />
+            Apostador D: Brasil 3 x 0 Croácia
+            <br />
+            Apostador E: Brasil 4 x 2 Croácia
+            <br /> Apostador F: Brasil 0 x 0 Croácia
+            <br /> Apostador G: Brasil 3 x 4 Croácia
             <br /> <br />
             Sendo o placar real = Brasil 3 x 0 Croácia, então a pontuação
-            ficaria assim: 
+            ficaria assim:
             <br />
-            <br />Apostador A = (3+1,5) = 4,5 pontos 
-            <br />Apostador B = (3+1,5) = 4,5 pontos 
-            <br />Apostador C = (0) = 0 pontos 
+            <br />
+            Apostador A = (3+1,5) = 4,5 pontos
+            <br />
+            Apostador B = (3+1,5) = 4,5 pontos
+            <br />
+            Apostador C = (0) = 0 pontos
             <br /> Apostador D = (3+1,5+1,5) = 6 pontos
-            <br />Apostador E = (3)
-            = 3 pontos 
-            
-            <br />Apostador F = (0) = 0
-            pontos 
-           
-            <br />Apostador G = (0) = 0 pontos
             <br />
-            <br />Se o placar real fosse = Brasil
-            0 x 0 Croácia, então a pontuação ficaria assim: 
+            Apostador E = (3) = 3 pontos
             <br />
-             <br />Apostador A = (0) =
-            0 pontos  
-            <br />Apostador B = (0) = 0 pontos
-            <br />Apostador C = (4) = 4 pontos
-            <br />Apostador D = (0) = 0 pontos
-            <br />Apostador E = (0) = 0 pontos  
-            <br />Apostador F = (4+2) = 6 pontos 
-            <br /> Apostador G = (0) = 0 pontos 
-            
+            Apostador F = (0) = 0 pontos
+            <br />
+            Apostador G = (0) = 0 pontos
+            <br />
+            <br />
+            Se o placar real fosse = Brasil 0 x 0 Croácia, então a pontuação
+            ficaria assim:
+            <br />
+            <br />
+            Apostador A = (0) = 0 pontos
+            <br />
+            Apostador B = (0) = 0 pontos
+            <br />
+            Apostador C = (4) = 4 pontos
+            <br />
+            Apostador D = (0) = 0 pontos
+            <br />
+            Apostador E = (0) = 0 pontos
+            <br />
+            Apostador F = (4+2) = 6 pontos
+            <br /> Apostador G = (0) = 0 pontos
           </p>
           <p>
-          Pontuação (Oitavas-de-final) <br /><br />
-Acertando as equipes do jogo: + 6 pontos por time<br />
-Acertando o vencedor: + 3 pontos<br />
-Acertando o placar do ganhador: + 1,5 pontos<br />
-Acertando o placar do perdedor: + 1,5 pontos<br />
-Acertando o empate: + 4 pontos<br />
-Acertando o placar do empate: + 2 pontos<br />
-Acertando os times que se classificam para as Quartas-de-final: + 4 pontos por time<br /><br />
-
-Pontuação (Quartas-de-final)<br /><br />
-Acertando as equipes do jogo: + 6 pontos por time<br />
-Acertando o vencedor: + 3 pontos<br />
-Acertando o placar do ganhador: + 1,5 pontos<br />
-Acertando o placar do perdedor: + 1,5 pontos<br />
-Acertando o empate: + 4 pontos<br />
-Acertando o placar do empate: + 2 pontos<br />
-Acertando os times que se classificam para as Semi-finais: + 4 pontos por time<br /><br />
-
-Pontuação (Semi-final)<br /><br />
-Acertando as equipes do jogo: + 8 pontos por time<br />
-Acertando o vencedor: + 3 pontos<br />
-Acertando o placar do ganhador: + 1,5 pontos<br />
-Acertando o placar do perdedor: + 1,5 pontos<br />
-Acertando o empate: + 4 pontos<br />
-Acertando o placar do empate: + 2 pontos<br /><br />
-
-Pontuação (Fase-final)<br /><br />
-Acertando as equipes do jogo: + 8 pontos por time<br />
-Acertando o vencedor: + 3 pontos<br />
-Acertando o placar do ganhador: + 1,5 pontos<br />
-Acertando o placar do perdedor: + 1,5 pontos<br />
-Acertando o empate: + 4 pontos<br />
-Acertando o placar do empate: + 2 pontos<br />
-Acertando o Campeão: + 15 pontos<br />
-Acertando o Vice-Campeão: + 10 pontos<br />
-Acertando o 3º Colocado: + 7 pontos<br />
-Acertando o 4º Colocado: + 5 pontos<br />
-Acertando o Artilheiro: + 12 pontos<br />
-Acertando o número de gols do artilheiro: + 5 pontos<br /><br /><br />
-
-<b>OBS: Ocorrendo mais de um artilheiro, ganhará pontos todo apostador que escolher algum dos artilheiros.</b>
+            Pontuação (Oitavas-de-final) <br />
+            <br />
+            Acertando as equipes do jogo: + 6 pontos por time
+            <br />
+            Acertando o vencedor: + 3 pontos
+            <br />
+            Acertando o placar do ganhador: + 1,5 pontos
+            <br />
+            Acertando o placar do perdedor: + 1,5 pontos
+            <br />
+            Acertando o empate: + 4 pontos
+            <br />
+            Acertando o placar do empate: + 2 pontos
+            <br />
+            Acertando os times que se classificam para as Quartas-de-final: + 4
+            pontos por time
+            <br />
+            <br />
+            Pontuação (Quartas-de-final)
+            <br />
+            <br />
+            Acertando as equipes do jogo: + 6 pontos por time
+            <br />
+            Acertando o vencedor: + 3 pontos
+            <br />
+            Acertando o placar do ganhador: + 1,5 pontos
+            <br />
+            Acertando o placar do perdedor: + 1,5 pontos
+            <br />
+            Acertando o empate: + 4 pontos
+            <br />
+            Acertando o placar do empate: + 2 pontos
+            <br />
+            Acertando os times que se classificam para as Semi-finais: + 4
+            pontos por time
+            <br />
+            <br />
+            Pontuação (Semi-final)
+            <br />
+            <br />
+            Acertando as equipes do jogo: + 8 pontos por time
+            <br />
+            Acertando o vencedor: + 3 pontos
+            <br />
+            Acertando o placar do ganhador: + 1,5 pontos
+            <br />
+            Acertando o placar do perdedor: + 1,5 pontos
+            <br />
+            Acertando o empate: + 4 pontos
+            <br />
+            Acertando o placar do empate: + 2 pontos
+            <br />
+            <br />
+            Pontuação (Fase-final)
+            <br />
+            <br />
+            Acertando as equipes do jogo: + 8 pontos por time
+            <br />
+            Acertando o vencedor: + 3 pontos
+            <br />
+            Acertando o placar do ganhador: + 1,5 pontos
+            <br />
+            Acertando o placar do perdedor: + 1,5 pontos
+            <br />
+            Acertando o empate: + 4 pontos
+            <br />
+            Acertando o placar do empate: + 2 pontos
+            <br />
+            Acertando o Campeão: + 15 pontos
+            <br />
+            Acertando o Vice-Campeão: + 10 pontos
+            <br />
+            Acertando o 3º Colocado: + 7 pontos
+            <br />
+            Acertando o 4º Colocado: + 5 pontos
+            <br />
+            Acertando o Artilheiro: + 12 pontos
+            <br />
+            Acertando o número de gols do artilheiro: + 5 pontos
+            <br />
+            <br />
+            <br />
+            <b>
+              OBS: Ocorrendo mais de um artilheiro, ganhará pontos todo
+              apostador que escolher algum dos artilheiros.
+            </b>
           </p>
         </div>
 
