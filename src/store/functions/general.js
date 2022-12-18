@@ -222,9 +222,8 @@ const getPointsTopScorer = (matchesOfUser, outcomeMatches, status) => {
   if (userFinalResult.goals === outcomeFinalResult.goals) {
     structuredReturn.goals += numberPointsKnockoutMatches(TOP_SCORER).goals;
   }
-  if (status.TOP_SCORER) {
-    structuredReturn.points = structuredReturn.scorer + structuredReturn.goals;
-  }
+ 
+  structuredReturn.points = structuredReturn.scorer + structuredReturn.goals;
 
   return structuredReturn;
 };
