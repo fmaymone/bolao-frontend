@@ -16,7 +16,7 @@ import {
   TableRow,
   TableRowColumn,
 } from "material-ui/Table";
-import { FINAL_RESULT } from "../../store/actions/types";
+import { FINAL_RESULT, TOP_SCORER } from "../../store/actions/types";
 import { Card, CardHeader } from "material-ui/Card";
 import Loader from "../../components/UI/Loader";
 import { calculatePoints } from "../../store/functions/general";
@@ -78,7 +78,10 @@ class ClassificationOfPool extends Component {
                 <TableHeaderColumn style={{ width: "10%" }}>
                   Pontos
                 </TableHeaderColumn>
-                <TableHeaderColumn style={{ width: "50%" }}>
+                <TableHeaderColumn style={{ width: "20%" }}>
+                  Artilheiro
+                </TableHeaderColumn>
+                <TableHeaderColumn style={{ width: "30%" }}>
                   Resultado-Final
                 </TableHeaderColumn>
               </TableRow>
@@ -105,7 +108,12 @@ class ClassificationOfPool extends Component {
                   <TableRowColumn style={{ width: "10%" }}>
                     {user.points.totalPoints}
                   </TableRowColumn>
-                  <TableRowColumn style={{ width: "50%" }}>
+                  <TableRowColumn style={{ width: "20%" }}>
+                    {user.matches.find((k) => k.group === TOP_SCORER)
+                      .nameOfTopScorer + " - "}
+                    {user.matches.find((k) => k.group === TOP_SCORER).goals}
+                  </TableRowColumn>
+                  <TableRowColumn style={{ width: "30%" }}>
                     <TableRowColumn>
                       <TeamClassification
                         id={
