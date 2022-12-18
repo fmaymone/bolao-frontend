@@ -171,22 +171,21 @@ const getPointsOfFinalResult = (matchesOfUser, outcomeMatches, status) => {
         type: userFinalResult.fourth === outcomeFinalResult.fourth,
       },
     };
-    if (status.FINAL_RESULT) {
-      points +=
-        structuredReturn.first.type *
-        numberPointsKnockoutMatches(FINAL_RESULT).first;
-      points +=
-        structuredReturn.second.type *
-        numberPointsKnockoutMatches(FINAL_RESULT).second;
-      points +=
-        structuredReturn.third.type *
-        numberPointsKnockoutMatches(FINAL_RESULT).third;
-      points +=
-        structuredReturn.fourth.type *
-        numberPointsKnockoutMatches(FINAL_RESULT).fourth;
 
-      structuredReturn.points = points;
-    }
+    points +=
+      structuredReturn.first.type *
+      numberPointsKnockoutMatches(FINAL_RESULT).first;
+    points +=
+      structuredReturn.second.type *
+      numberPointsKnockoutMatches(FINAL_RESULT).second;
+    points +=
+      structuredReturn.third.type *
+      numberPointsKnockoutMatches(FINAL_RESULT).third;
+    points +=
+      structuredReturn.fourth.type *
+      numberPointsKnockoutMatches(FINAL_RESULT).fourth;
+
+    structuredReturn.points = points;
   }
   return structuredReturn;
 };
@@ -200,7 +199,7 @@ const numberPointsKnockoutMatches = (group) => {
     case ROUND_4:
       return { classified: 4, specificTeam: 8 };
     case ROUND_3x4:
-      return { classified: 0, specificTeam: 8 };
+      return { classified: 4, specificTeam: 8 };
     case ROUND_FINALS:
       return { classified: 0, specificTeam: 8 };
     case FINAL_RESULT:
