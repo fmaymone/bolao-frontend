@@ -13,8 +13,6 @@ class Match extends Component {
   render() {
     const { game, worldCupData } = this.props;
 
-    //console.log(worldCupData);
-
     const dataFromMatch = worldCupData.matches[game.name];
 
     if (game.type === "group") {

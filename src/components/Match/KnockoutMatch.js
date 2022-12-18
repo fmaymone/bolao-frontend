@@ -10,6 +10,7 @@ import { change, submit } from "redux-form";
 import isGranted from "rmw-shell/lib/utils/auth";
 import Badge from "material-ui/Badge";
 import Chip from "material-ui/Chip";
+import Toggle from "material-ui/Toggle";
 
 import TextField from "material-ui/TextField";
 import { updateMatch } from "../../store/actions/bolaoActions";
@@ -50,6 +51,10 @@ const styles = {
   },
 };
 class Match extends Component {
+  handleToggle(value) {
+    this.props.handleChangedResult(null, this.props.game, "finished", value);
+  }
+
   getDesktopContent = (type) => {
     if (!isMobile()) {
       if (type === "home") {
@@ -97,8 +102,31 @@ class Match extends Component {
     }
   };
 
+  renderAdmin = () => {
+    return (
+      <div style={{ flex: 1 }}>
+        <div
+          style={{
+            justifyContent: "flex-end",
+            display: "flex",
+            flexFlow: "row nowrap",
+          }}
+        >
+          <Toggle
+            toggled={this.props.game.finished}
+            style={styles.toggle}
+            onToggle={() => {
+              this.handleToggle(!this.props.game.finished);
+            }}
+          />
+        </div>
+      </div>
+    );
+  };
+
   renderKnockoutMatch = () => {
     const game = this.props.game;
+
     //if the game is a draw, the user needs to choose the winner
     if (game.home_result == game.away_result) {
       return this.renderDrawMatch();
@@ -144,6 +172,7 @@ class Match extends Component {
               false
             )}
           </tr>
+          <tr>{this.renderAdmin}</tr>
         </Fragment>
       );
     }
