@@ -199,7 +199,7 @@ const numberPointsKnockoutMatches = (group) => {
     case ROUND_4:
       return { classified: 4, specificTeam: 8 };
     case ROUND_3x4:
-      return { classified: 4, specificTeam: 8 };
+      return { classified: 0, specificTeam: 8 };
     case ROUND_FINALS:
       return { classified: 0, specificTeam: 8 };
     case FINAL_RESULT:
